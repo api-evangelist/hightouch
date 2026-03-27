@@ -1,0 +1,44 @@
+aid: hightouch
+name: Hightouch
+description: >-
+  Hightouch is a data activation platform providing reverse ETL and unified
+  audience management by syncing data warehouse data to SaaS tools.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Unified API
+  - Reverse ETL
+  - Data Activation
+  - CDP
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/hightouch/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: hightouch:hightouch
+    name: Hightouch
+    description: >-
+      Hightouch is a data activation platform providing reverse ETL and
+      unified audience management by syncing data warehouse data to SaaS
+      tools.
+    humanURL: https://hightouch.com/
+    tags:
+      - Unified API
+      - Reverse ETL
+      - Data Activation
+    properties:
+      - type: Documentation
+        url: https://hightouch.com/docs
+      - type: Getting Started
+        url: https://hightouch.com/docs/getting-started
+common:
+  - type: Website
+    url: https://hightouch.com/
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: GitHub Organization
+    url: https://github.com/hightouchio
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
