@@ -6,10 +6,10 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Unified API
-  - Reverse ETL
-  - Data Activation
   - CDP
+  - Data Activation
+  - Reverse ETL
+  - Unified API
 url: >-
   https://raw.githubusercontent.com/api-evangelist/hightouch/refs/heads/main/apis.yml
 created: '2026-03-27'
@@ -24,9 +24,9 @@ apis:
       tools.
     humanURL: https://hightouch.com/
     tags:
-      - Unified API
-      - Reverse ETL
       - Data Activation
+      - Reverse ETL
+      - Unified API
     properties:
       - type: Documentation
         url: https://hightouch.com/docs
