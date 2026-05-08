@@ -44,6 +44,8 @@ apis:
         url: https://hightouch.com/docs/getting-started
       - type: API Reference
         url: https://hightouch.com/docs/api-reference
+      - type: OpenAPI
+        url: openapi/hightouch-openapi.yml
 common:
   - type: Website
     url: https://hightouch.com/
