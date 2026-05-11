@@ -61,6 +61,10 @@ common:
     url: https://app.hightouch.com/signup
   - type: GitHub Organization
     url: https://github.com/hightouchio
+  - type: Integrations
+    url: https://hightouch.com/integrations
+integrations:
+  - name: California Consumer Privacy Act (CCPA) Opt-Out
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
