@@ -40,9 +40,9 @@ apis:
     properties:
       - type: Documentation
         url: https://hightouch.com/docs
-      - type: Getting Started
+      - type: GettingStarted
         url: https://hightouch.com/docs/getting-started
-      - type: API Reference
+      - type: APIReference
         url: https://hightouch.com/docs/api-reference
       - type: OpenAPI
         url: openapi/hightouch-openapi.yml
@@ -51,15 +51,15 @@ common:
     url: https://hightouch.com/
   - type: Documentation
     url: https://hightouch.com/docs
-  - type: API Reference
+  - type: APIReference
     url: https://hightouch.com/docs/api-reference
   - type: Pricing
     url: https://hightouch.com/pricing
   - type: Blog
     url: https://hightouch.com/blog
-  - type: Sign Up
+  - type: SignUp
     url: https://app.hightouch.com/signup
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/hightouchio
   - type: Integrations
     url: https://hightouch.com/integrations
