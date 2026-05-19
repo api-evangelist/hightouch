@@ -1,0 +1,146 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Hightouch Management API — Models
+  description: 'Hightouch Management API — Models. 3 operations. Lead operation: List models. Self-contained Naftiko capability
+    covering one Hightouch business surface.'
+  tags:
+  - Hightouch
+  - Models
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIGHTOUCH_API_KEY: HIGHTOUCH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: hightouch-models
+    baseUri: https://api.hightouch.com
+    description: Hightouch Management API — Models business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-models
+      path: /api/v1/models
+      operations:
+      - name: listmodels
+        method: GET
+        description: List models
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createmodel
+        method: POST
+        description: Create a model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-models-id
+      path: /api/v1/models/{id}
+      operations:
+      - name: getmodel
+        method: GET
+        description: Get a model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.HIGHTOUCH_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: hightouch-models-rest
+    port: 8080
+    description: REST adapter for Hightouch Management API — Models. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/models
+      name: api-v1-models
+      description: REST surface for api-v1-models.
+      operations:
+      - method: GET
+        name: listmodels
+        description: List models
+        call: hightouch-models.listmodels
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createmodel
+        description: Create a model
+        call: hightouch-models.createmodel
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/models/{id}
+      name: api-v1-models-id
+      description: REST surface for api-v1-models-id.
+      operations:
+      - method: GET
+        name: getmodel
+        description: Get a model
+        call: hightouch-models.getmodel
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: hightouch-models-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Hightouch Management API — Models. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-models
+      description: List models
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hightouch-models.listmodels
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-model
+      description: Create a model
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hightouch-models.createmodel
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-model
+      description: Get a model
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hightouch-models.getmodel
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
