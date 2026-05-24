@@ -65,6 +65,8 @@ common:
   url: https://github.com/hightouchio
 - type: Integrations
   url: https://hightouch.com/integrations
+- type: LLMsTxt
+  url: https://hightouch.com/llms.txt
 integrations:
 - name: California Consumer Privacy Act (CCPA) Opt-Out
 maintainers:
