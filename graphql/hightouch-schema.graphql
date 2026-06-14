@@ -1,0 +1,1668 @@
+"""
+Hightouch GraphQL Schema (Conceptual)
+Derived from the Hightouch REST API, product documentation, and feature surface.
+Hightouch is a composable CDP and data activation platform supporting Reverse ETL,
+audience segmentation, identity resolution, real-time personalization, AI Decisioning,
+first-party event collection, and ad campaign management.
+No public GraphQL endpoint exists; this schema represents the underlying data model.
+Reference: https://hightouch.com/docs/api-reference
+"""
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+# ─── Root Types ───────────────────────────────────────────────────────────────
+
+type Query {
+  workspace(id: ID!): Workspace
+  workspaces: [Workspace!]!
+
+  source(id: ID!): Source
+  sources(workspaceId: ID, type: String, page: Int, limit: Int): SourceConnection!
+
+  destination(id: ID!): Destination
+  destinations(workspaceId: ID, type: String, page: Int, limit: Int): DestinationConnection!
+
+  model(id: ID!): Model
+  models(workspaceId: ID, sourceId: ID, page: Int, limit: Int): ModelConnection!
+
+  sync(id: ID!): Sync
+  syncs(workspaceId: ID, modelId: ID, destinationId: ID, status: SyncStatusEnum, page: Int, limit: Int): SyncConnection!
+
+  syncRun(id: ID!): SyncRun
+  syncRuns(syncId: ID!, page: Int, limit: Int): SyncRunConnection!
+
+  segment(id: ID!): Segment
+  segments(workspaceId: ID, page: Int, limit: Int): SegmentConnection!
+
+  audience(id: ID!): Audience
+  audiences(workspaceId: ID, segmentId: ID, page: Int, limit: Int): AudienceConnection!
+
+  event(id: ID!): Event
+  events(workspaceId: ID, page: Int, limit: Int): EventConnection!
+
+  identity(id: ID!): Identity
+  identities(workspaceId: ID, page: Int, limit: Int): IdentityConnection!
+
+  journey(id: ID!): Journey
+  journeys(workspaceId: ID, page: Int, limit: Int): JourneyConnection!
+
+  splitTest(id: ID!): SplitTest
+  splitTests(workspaceId: ID, page: Int, limit: Int): SplitTestConnection!
+
+  decisionEngine(id: ID!): DecisionEngine
+  decisionEngines(workspaceId: ID, page: Int, limit: Int): DecisionEngineConnection!
+
+  schema(id: ID!): SchemaDefinition
+  schemas(workspaceId: ID, page: Int, limit: Int): SchemaDefinitionConnection!
+
+  alertRule(id: ID!): AlertRule
+  alertRules(workspaceId: ID, page: Int, limit: Int): AlertRuleConnection!
+
+  webhook(id: ID!): Webhook
+  webhooks(workspaceId: ID, page: Int, limit: Int): WebhookConnection!
+
+  apiKey(id: ID!): APIKey
+  apiKeys(workspaceId: ID): [APIKey!]!
+
+  user(id: ID!): User
+  users(workspaceId: ID): [User!]!
+
+  usage(workspaceId: ID!, period: UsagePeriodInput!): Usage!
+
+  runMetrics(syncId: ID!, runId: ID!): RunMetrics!
+
+  sourceTypes: [SourceType!]!
+  destinationTypes: [DestinationType!]!
+}
+
+type Mutation {
+  createSource(input: CreateSourceInput!): Source!
+  updateSource(id: ID!, input: UpdateSourceInput!): Source!
+  deleteSource(id: ID!): DeleteResult!
+  testSourceConnection(id: ID!): ConnectionTestResult!
+
+  createDestination(input: CreateDestinationInput!): Destination!
+  updateDestination(id: ID!, input: UpdateDestinationInput!): Destination!
+  deleteDestination(id: ID!): DeleteResult!
+  testDestinationConnection(id: ID!): ConnectionTestResult!
+
+  createModel(input: CreateModelInput!): Model!
+  updateModel(id: ID!, input: UpdateModelInput!): Model!
+  deleteModel(id: ID!): DeleteResult!
+
+  createSync(input: CreateSyncInput!): Sync!
+  updateSync(id: ID!, input: UpdateSyncInput!): Sync!
+  deleteSync(id: ID!): DeleteResult!
+  triggerSync(id: ID!, fullResync: Boolean): SyncRun!
+  pauseSync(id: ID!): Sync!
+  resumeSync(id: ID!): Sync!
+  cancelSyncRun(syncId: ID!, runId: ID!): SyncRun!
+
+  createSegment(input: CreateSegmentInput!): Segment!
+  updateSegment(id: ID!, input: UpdateSegmentInput!): Segment!
+  deleteSegment(id: ID!): DeleteResult!
+
+  createAudience(input: CreateAudienceInput!): Audience!
+  updateAudience(id: ID!, input: UpdateAudienceInput!): Audience!
+  deleteAudience(id: ID!): DeleteResult!
+  refreshAudience(id: ID!): Audience!
+
+  createEvent(input: CreateEventInput!): Event!
+  updateEvent(id: ID!, input: UpdateEventInput!): Event!
+  deleteEvent(id: ID!): DeleteResult!
+
+  createJourney(input: CreateJourneyInput!): Journey!
+  updateJourney(id: ID!, input: UpdateJourneyInput!): Journey!
+  deleteJourney(id: ID!): DeleteResult!
+  activateJourney(id: ID!): Journey!
+  pauseJourney(id: ID!): Journey!
+
+  createSplitTest(input: CreateSplitTestInput!): SplitTest!
+  updateSplitTest(id: ID!, input: UpdateSplitTestInput!): SplitTest!
+  deleteSplitTest(id: ID!): DeleteResult!
+
+  createAlertRule(input: CreateAlertRuleInput!): AlertRule!
+  updateAlertRule(id: ID!, input: UpdateAlertRuleInput!): AlertRule!
+  deleteAlertRule(id: ID!): DeleteResult!
+
+  createWebhook(input: CreateWebhookInput!): Webhook!
+  updateWebhook(id: ID!, input: UpdateWebhookInput!): Webhook!
+  deleteWebhook(id: ID!): DeleteResult!
+
+  createAPIKey(input: CreateAPIKeyInput!): APIKey!
+  revokeAPIKey(id: ID!): DeleteResult!
+
+  inviteUser(input: InviteUserInput!): WorkspaceInvite!
+  removeUser(workspaceId: ID!, userId: ID!): DeleteResult!
+  updateUserRole(workspaceId: ID!, userId: ID!, role: WorkspaceRole!): WorkspaceMember!
+}
+
+type Subscription {
+  syncRunUpdated(syncId: ID!): SyncRun!
+  syncStatusChanged(syncId: ID!): Sync!
+  audienceRefreshed(audienceId: ID!): Audience!
+  journeyActivated(journeyId: ID!): Journey!
+}
+
+# ─── Workspace ────────────────────────────────────────────────────────────────
+
+"""A Hightouch workspace containing all resources for an organization or team."""
+type Workspace {
+  id: ID!
+  name: String!
+  slug: String!
+  region: String
+  plan: WorkspacePlan
+  members: [WorkspaceMember!]!
+  invites: [WorkspaceInvite!]!
+  settings: WorkspaceSettings!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type WorkspaceMember {
+  id: ID!
+  user: User!
+  role: WorkspaceRole!
+  joinedAt: String!
+}
+
+type WorkspaceInvite {
+  id: ID!
+  email: String!
+  role: WorkspaceRole!
+  status: InviteStatus!
+  invitedBy: User
+  expiresAt: String
+  createdAt: String!
+}
+
+type WorkspaceSettings {
+  gitSyncEnabled: Boolean!
+  approvalWorkflowEnabled: Boolean!
+  ssoEnabled: Boolean!
+  dataResidency: String
+}
+
+type WorkspacePlan {
+  name: String!
+  tier: PlanTier!
+  rowLimit: Int
+  destinationLimit: Int
+  syncFrequencyMinimum: Int
+}
+
+enum WorkspaceRole {
+  OWNER
+  ADMIN
+  EDITOR
+  VIEWER
+  ANALYST
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  REVOKED
+}
+
+enum PlanTier {
+  FREE
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+# ─── User ─────────────────────────────────────────────────────────────────────
+
+"""A Hightouch platform user."""
+type User {
+  id: ID!
+  email: String!
+  firstName: String
+  lastName: String
+  name: String
+  avatarUrl: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+# ─── Source ───────────────────────────────────────────────────────────────────
+
+"""A data source (warehouse or database) connected to Hightouch."""
+type Source {
+  id: ID!
+  name: String!
+  slug: String!
+  type: SourceType!
+  credentials: SourceCredential
+  status: ConnectionStatus!
+  workspace: Workspace!
+  models: [Model!]!
+  configuration: JSON
+  createdAt: String!
+  updatedAt: String!
+  lastTestedAt: String
+  tags: [String!]
+}
+
+"""A supported source connector type."""
+type SourceType {
+  name: String!
+  slug: String!
+  displayName: String!
+  category: String
+  iconUrl: String
+  supportsSchemaDiscovery: Boolean!
+  documentationUrl: String
+}
+
+"""Credentials configuration for a data source connection."""
+type SourceCredential {
+  id: ID!
+  type: String!
+  maskedConfig: JSON
+  lastRotatedAt: String
+}
+
+"""A SQL query or table reference scoped to a source."""
+type SourceQuery {
+  id: ID!
+  source: Source!
+  sql: String
+  tableName: String
+  queryType: SourceQueryType!
+  previewRows: Int
+  createdAt: String!
+  updatedAt: String!
+}
+
+enum SourceQueryType {
+  SQL
+  TABLE
+  DBT_MODEL
+  LOOKER_LOOK
+}
+
+enum ConnectionStatus {
+  CONNECTED
+  DISCONNECTED
+  ERROR
+  PENDING
+  TESTING
+}
+
+input CreateSourceInput {
+  name: String!
+  workspaceId: ID!
+  type: String!
+  configuration: JSON!
+}
+
+input UpdateSourceInput {
+  name: String
+  configuration: JSON
+}
+
+# ─── Destination ──────────────────────────────────────────────────────────────
+
+"""A downstream destination where synced data is sent."""
+type Destination {
+  id: ID!
+  name: String!
+  slug: String!
+  type: DestinationType!
+  config: DestinationConfig
+  status: ConnectionStatus!
+  workspace: Workspace!
+  syncs: [Sync!]!
+  createdAt: String!
+  updatedAt: String!
+  lastTestedAt: String
+  tags: [String!]
+}
+
+"""A supported destination connector type."""
+type DestinationType {
+  name: String!
+  slug: String!
+  displayName: String!
+  category: DestinationCategory!
+  iconUrl: String
+  supportsDelete: Boolean!
+  supportsUpsert: Boolean!
+  documentationUrl: String
+}
+
+"""Configuration details for a destination connection."""
+type DestinationConfig {
+  id: ID!
+  type: String!
+  maskedConfig: JSON
+  objectTypes: [String!]
+  fieldConfig: JSON
+}
+
+enum DestinationCategory {
+  CRM
+  MARKETING_AUTOMATION
+  ADVERTISING
+  ANALYTICS
+  DATA_WAREHOUSE
+  CUSTOMER_SUCCESS
+  COMMUNICATION
+  SUPPORT
+  COLLABORATION
+  CUSTOM
+}
+
+input CreateDestinationInput {
+  name: String!
+  workspaceId: ID!
+  type: String!
+  configuration: JSON!
+}
+
+input UpdateDestinationInput {
+  name: String
+  configuration: JSON
+}
+
+# ─── Model ────────────────────────────────────────────────────────────────────
+
+"""A data model defining the query or table powering a sync or audience."""
+type Model {
+  id: ID!
+  name: String!
+  slug: String!
+  source: Source!
+  queryType: SourceQueryType!
+  sql: String
+  tableName: String
+  dbtModelName: String
+  primaryKey: String
+  fields: [ModelField!]!
+  filters: [ModelFilter!]!
+  syncs: [Sync!]!
+  previewRows: Int
+  workspace: Workspace!
+  isSchema: Boolean!
+  schemaDefinition: SchemaDefinition
+  createdAt: String!
+  updatedAt: String!
+  createdBy: User
+  tags: [String!]
+}
+
+"""A field (column) within a model."""
+type ModelField {
+  name: String!
+  type: FieldType!
+  nullable: Boolean!
+  isPrimaryKey: Boolean!
+  description: String
+  sampleValues: [String!]
+}
+
+"""A filter applied to a model query."""
+type ModelFilter {
+  id: ID!
+  field: String!
+  operator: FilterOperator!
+  value: JSON
+  valueType: FieldType
+}
+
+enum FieldType {
+  STRING
+  NUMBER
+  BOOLEAN
+  DATE
+  DATETIME
+  ARRAY
+  OBJECT
+  JSON
+  NULL
+}
+
+enum FilterOperator {
+  EQUALS
+  NOT_EQUALS
+  GREATER_THAN
+  LESS_THAN
+  GREATER_THAN_OR_EQUAL
+  LESS_THAN_OR_EQUAL
+  CONTAINS
+  NOT_CONTAINS
+  STARTS_WITH
+  ENDS_WITH
+  IS_NULL
+  IS_NOT_NULL
+  IN
+  NOT_IN
+  BETWEEN
+}
+
+input CreateModelInput {
+  name: String!
+  workspaceId: ID!
+  sourceId: ID!
+  queryType: SourceQueryType!
+  sql: String
+  tableName: String
+  primaryKey: String!
+  filters: [ModelFilterInput!]
+}
+
+input UpdateModelInput {
+  name: String
+  sql: String
+  tableName: String
+  primaryKey: String
+  filters: [ModelFilterInput!]
+}
+
+input ModelFilterInput {
+  field: String!
+  operator: FilterOperator!
+  value: JSON
+}
+
+# ─── Sync ─────────────────────────────────────────────────────────────────────
+
+"""A sync that sends model data to a destination on a schedule."""
+type Sync {
+  id: ID!
+  name: String!
+  slug: String!
+  model: Model!
+  destination: Destination!
+  status: SyncStatus!
+  schedule: SyncSchedule
+  config: SyncConfig!
+  mappingRules: [MappingRule!]!
+  runs: [SyncRun!]!
+  lastRun: SyncRun
+  paused: Boolean!
+  fullResyncOnFirst: Boolean!
+  workspace: Workspace!
+  priority: Priority
+  tags: [String!]
+  gitConfig: GitConfig
+  approvalStatus: ApprovalStatus
+  createdAt: String!
+  updatedAt: String!
+  createdBy: User
+}
+
+"""Current operational status of a sync."""
+type SyncStatus {
+  state: SyncStatusEnum!
+  message: String
+  lastSucceededAt: String
+  lastFailedAt: String
+  consecutiveFailures: Int
+}
+
+"""Scheduling configuration for a sync."""
+type SyncSchedule {
+  type: ScheduleType!
+  cron: String
+  intervalSeconds: Int
+  timezone: String
+  startAt: String
+  dbtCloudJobId: String
+}
+
+"""Behavioral and object-mapping configuration for a sync."""
+type SyncConfig {
+  id: ID!
+  objectType: String
+  mode: SyncMode!
+  deleteMode: DeleteMode
+  batchSize: Int
+  retryCount: Int
+  customConfig: JSON
+}
+
+enum SyncStatusEnum {
+  IDLE
+  RUNNING
+  SUCCEEDED
+  FAILED
+  WARNING
+  INTERRUPTED
+  PAUSED
+  PENDING
+  QUEUED
+}
+
+enum ScheduleType {
+  MANUAL
+  INTERVAL
+  CRON
+  DBT_CLOUD
+  AIRFLOW
+  REAL_TIME
+}
+
+enum SyncMode {
+  UPSERT
+  UPDATE
+  CREATE
+  MIRROR
+  APPEND
+  DELETE
+}
+
+enum DeleteMode {
+  DISABLE
+  ARCHIVE
+  HARD_DELETE
+}
+
+enum Priority {
+  HIGH
+  NORMAL
+  LOW
+}
+
+enum ApprovalStatus {
+  DRAFT
+  PENDING_APPROVAL
+  APPROVED
+  REJECTED
+}
+
+input CreateSyncInput {
+  name: String!
+  workspaceId: ID!
+  modelId: ID!
+  destinationId: ID!
+  schedule: SyncScheduleInput
+  config: SyncConfigInput!
+  mappingRules: [MappingRuleInput!]
+  fullResyncOnFirst: Boolean
+  priority: Priority
+}
+
+input UpdateSyncInput {
+  name: String
+  schedule: SyncScheduleInput
+  config: SyncConfigInput
+  mappingRules: [MappingRuleInput!]
+  priority: Priority
+  paused: Boolean
+}
+
+input SyncScheduleInput {
+  type: ScheduleType!
+  cron: String
+  intervalSeconds: Int
+  timezone: String
+}
+
+input SyncConfigInput {
+  objectType: String
+  mode: SyncMode!
+  deleteMode: DeleteMode
+  batchSize: Int
+}
+
+# ─── Sync Run ─────────────────────────────────────────────────────────────────
+
+"""An individual execution of a sync."""
+type SyncRun {
+  id: ID!
+  sync: Sync!
+  status: SyncRunStatus!
+  startedAt: String
+  completedAt: String
+  duration: Int
+  metrics: RunMetrics
+  error: SyncRunError
+  triggeredBy: TriggerSource
+  isFullResync: Boolean!
+  plannedRows: Int
+  processedRows: Int
+  succeededRows: Int
+  failedRows: Int
+  createdAt: String!
+}
+
+"""Status details for a sync run."""
+type SyncRunStatus {
+  state: SyncRunState!
+  phase: String
+  progress: Float
+}
+
+"""Error information for a failed sync run."""
+type SyncRunError {
+  code: String
+  message: String!
+  details: JSON
+  rowSampleErrors: [RowError!]
+}
+
+"""A row-level error encountered during a sync run."""
+type RowError {
+  rowId: String
+  field: String
+  message: String!
+  rawRecord: JSON
+}
+
+enum SyncRunState {
+  QUEUED
+  RUNNING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+  INTERRUPTED
+}
+
+enum TriggerSource {
+  SCHEDULE
+  MANUAL
+  API
+  AIRFLOW
+  DBT_CLOUD
+  WEBHOOK
+}
+
+# ─── Metrics ──────────────────────────────────────────────────────────────────
+
+"""Aggregated performance metrics for a sync run."""
+type RunMetrics {
+  totalRows: Int!
+  addedRows: Int!
+  updatedRows: Int!
+  deletedRows: Int!
+  failedRows: Int!
+  skippedRows: Int!
+  durationSeconds: Float
+  queryDurationSeconds: Float
+  destinationDurationSeconds: Float
+  rowsPerSecond: Float
+}
+
+"""Platform usage statistics for a workspace over a given period."""
+type Usage {
+  workspaceId: ID!
+  period: UsagePeriod!
+  totalSyncRuns: Int!
+  totalRowsSynced: Int!
+  activeSyncs: Int!
+  activeDestinations: Int!
+  activeModels: Int!
+  audiencesRefreshed: Int!
+  eventsCollected: Int!
+}
+
+type UsagePeriod {
+  startDate: String!
+  endDate: String!
+}
+
+input UsagePeriodInput {
+  startDate: String!
+  endDate: String!
+}
+
+# ─── Mapping ──────────────────────────────────────────────────────────────────
+
+"""A rule mapping a model field to a destination field."""
+type MappingRule {
+  id: ID!
+  sync: Sync!
+  type: MappingType!
+  sourceField: String
+  destinationField: String!
+  defaultValue: JSON
+  isIdentifier: Boolean!
+  transform: FieldTransform
+}
+
+"""Transforms applied to a field value before syncing."""
+type FieldTransform {
+  type: TransformType!
+  expression: String
+  lookup: JSON
+}
+
+"""A field-level mapping from model to destination."""
+type FieldMapping {
+  id: ID!
+  sourceField: ModelField
+  destinationFieldName: String!
+  defaultValue: JSON
+  transform: FieldTransform
+  required: Boolean!
+}
+
+"""An identity mapping used to resolve records across source and destination."""
+type IdentityMapping {
+  id: ID!
+  sourceField: String!
+  destinationIdentifier: String!
+  matchType: IdentityMatchType!
+}
+
+enum MappingType {
+  FIELD
+  CONSTANT
+  TEMPLATE
+  LOOKUP
+}
+
+enum TransformType {
+  EXPRESSION
+  LOOKUP_TABLE
+  FORMAT_DATE
+  FORMAT_NUMBER
+  SPLIT
+  JOIN
+  UPPER
+  LOWER
+  TRIM
+}
+
+enum IdentityMatchType {
+  EXACT
+  FUZZY
+  EMAIL
+  PHONE
+}
+
+input MappingRuleInput {
+  type: MappingType!
+  sourceField: String
+  destinationField: String!
+  defaultValue: JSON
+  isIdentifier: Boolean
+  transform: FieldTransformInput
+}
+
+input FieldTransformInput {
+  type: TransformType!
+  expression: String
+  lookup: JSON
+}
+
+# ─── Segment ──────────────────────────────────────────────────────────────────
+
+"""A reusable audience filter set defining a customer cohort."""
+type Segment {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  model: Model
+  filters: [SegmentFilter!]!
+  audiences: [Audience!]!
+  memberCount: Int
+  memberCountUpdatedAt: String
+  workspace: Workspace!
+  createdAt: String!
+  updatedAt: String!
+  createdBy: User
+  tags: [String!]
+}
+
+"""A filter condition group within a segment definition."""
+type SegmentFilter {
+  id: ID!
+  logicalOperator: LogicalOperator!
+  conditions: [FilterCondition!]!
+}
+
+"""An individual filter condition applied to a segment."""
+type FilterCondition {
+  id: ID!
+  field: String!
+  operator: FilterOperator!
+  value: JSON
+  valueType: FieldType
+  eventCondition: EventFilterCondition
+}
+
+"""A filter condition targeting event behavior."""
+type EventFilterCondition {
+  eventType: String!
+  timeWindow: TimeWindow
+  countOperator: FilterOperator
+  countValue: Int
+  propertyFilters: [FilterCondition!]
+}
+
+"""A time window specification for event-based filters."""
+type TimeWindow {
+  unit: TimeUnit!
+  value: Int!
+  anchor: TimeAnchor
+}
+
+enum LogicalOperator {
+  AND
+  OR
+}
+
+enum TimeUnit {
+  MINUTES
+  HOURS
+  DAYS
+  WEEKS
+  MONTHS
+  YEARS
+}
+
+enum TimeAnchor {
+  NOW
+  START_OF_DAY
+  START_OF_WEEK
+  START_OF_MONTH
+}
+
+input CreateSegmentInput {
+  name: String!
+  workspaceId: ID!
+  modelId: ID
+  filters: [SegmentFilterInput!]!
+  description: String
+}
+
+input UpdateSegmentInput {
+  name: String
+  filters: [SegmentFilterInput!]
+  description: String
+}
+
+input SegmentFilterInput {
+  logicalOperator: LogicalOperator!
+  conditions: [FilterConditionInput!]!
+}
+
+input FilterConditionInput {
+  field: String!
+  operator: FilterOperator!
+  value: JSON
+  valueType: FieldType
+}
+
+# ─── Audience ─────────────────────────────────────────────────────────────────
+
+"""A customer audience derived from one or more segments."""
+type Audience {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  segments: [Segment!]!
+  segmentLogic: LogicalOperator!
+  versions: [AudienceVersion!]!
+  currentVersion: AudienceVersion
+  memberCount: Int
+  memberCountUpdatedAt: String
+  syncs: [Sync!]!
+  workspace: Workspace!
+  createdAt: String!
+  updatedAt: String!
+  createdBy: User
+  tags: [String!]
+}
+
+"""A point-in-time snapshot of an audience membership count."""
+type AudienceVersion {
+  id: ID!
+  audience: Audience!
+  version: Int!
+  memberCount: Int!
+  computedAt: String!
+  status: AudienceVersionStatus!
+}
+
+enum AudienceVersionStatus {
+  COMPUTING
+  READY
+  FAILED
+  STALE
+}
+
+input CreateAudienceInput {
+  name: String!
+  workspaceId: ID!
+  segmentIds: [ID!]!
+  segmentLogic: LogicalOperator
+  description: String
+}
+
+input UpdateAudienceInput {
+  name: String
+  segmentIds: [ID!]
+  segmentLogic: LogicalOperator
+  description: String
+}
+
+# ─── Event ────────────────────────────────────────────────────────────────────
+
+"""A tracked behavioral event type for first-party collection."""
+type Event {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  config: EventConfig!
+  destinations: [EventDestination!]!
+  schema: EventSchema
+  workspace: Workspace!
+  isDraft: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  createdBy: User
+  tags: [String!]
+}
+
+"""Configuration for event collection and routing."""
+type EventConfig {
+  id: ID!
+  trackingPlan: String
+  enrichments: [EventEnrichment!]
+  transformations: [EventTransformation!]
+  governanceContract: EventContract
+  validationEnabled: Boolean!
+}
+
+"""A destination endpoint for routed events."""
+type EventDestination {
+  id: ID!
+  event: Event!
+  destination: Destination!
+  mappingRules: [MappingRule!]!
+  filterRules: [SegmentFilter!]
+  enabled: Boolean!
+  createdAt: String!
+}
+
+"""Schema definition for an event's expected properties."""
+type EventSchema {
+  properties: [EventProperty!]!
+  requiredProperties: [String!]!
+}
+
+"""A property definition within an event schema."""
+type EventProperty {
+  name: String!
+  type: FieldType!
+  required: Boolean!
+  description: String
+  exampleValues: [JSON]
+}
+
+"""An enrichment step applied to incoming events."""
+type EventEnrichment {
+  type: String!
+  config: JSON!
+}
+
+"""A transformation applied to event data before routing."""
+type EventTransformation {
+  field: String!
+  transform: FieldTransform!
+}
+
+"""A data governance contract specifying event quality rules."""
+type EventContract {
+  name: String!
+  version: String
+  requiredProperties: [String!]!
+  blockedOnViolation: Boolean!
+}
+
+"""A draft event definition not yet activated."""
+type DraftEvent {
+  id: ID!
+  name: String!
+  config: EventConfig
+  schema: EventSchema
+  workspace: Workspace!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input CreateEventInput {
+  name: String!
+  workspaceId: ID!
+  description: String
+  config: EventConfigInput!
+}
+
+input UpdateEventInput {
+  name: String
+  description: String
+  config: EventConfigInput
+}
+
+input EventConfigInput {
+  validationEnabled: Boolean
+  enrichments: [JSON]
+  transformations: [JSON]
+}
+
+# ─── Identity Resolution ──────────────────────────────────────────────────────
+
+"""An identity graph linking customer identifiers across sources."""
+type Identity {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  graphs: [IdentityGraph!]!
+  rules: [IdentityRule!]!
+  workspace: Workspace!
+  resolvedProfileCount: Int
+  createdAt: String!
+  updatedAt: String!
+}
+
+"""A resolved identity graph merging fragmented profiles."""
+type IdentityGraph {
+  id: ID!
+  identity: Identity!
+  profileCount: Int!
+  linkageRate: Float
+  lastComputedAt: String
+  status: IdentityGraphStatus!
+}
+
+"""A rule defining how identifiers are matched for resolution."""
+type IdentityRule {
+  id: ID!
+  sourceIdentifier: String!
+  matchType: IdentityMatchType!
+  priority: Int!
+  deterministicOnly: Boolean!
+}
+
+enum IdentityGraphStatus {
+  BUILDING
+  READY
+  FAILED
+  STALE
+}
+
+# ─── Journey ──────────────────────────────────────────────────────────────────
+
+"""A multi-step customer journey orchestration flow."""
+type Journey {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  entryCondition: SegmentFilter
+  steps: [JourneyStep!]!
+  status: JourneyStatus!
+  splitTests: [SplitTest!]!
+  workspace: Workspace!
+  activeEnrollments: Int
+  totalEnrollments: Int
+  createdAt: String!
+  updatedAt: String!
+  createdBy: User
+  tags: [String!]
+}
+
+"""A step within a customer journey."""
+type JourneyStep {
+  id: ID!
+  journey: Journey!
+  type: JourneyStepType!
+  name: String!
+  config: JSON!
+  nextSteps: [JourneyStepEdge!]!
+  delay: TimeWindow
+  position: StepPosition
+}
+
+"""An edge connecting two journey steps with optional conditions."""
+type JourneyStepEdge {
+  fromStep: JourneyStep!
+  toStep: JourneyStep!
+  condition: FilterCondition
+  label: String
+}
+
+"""Visual position of a journey step in the canvas."""
+type StepPosition {
+  x: Float!
+  y: Float!
+}
+
+enum JourneyStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+  ARCHIVED
+}
+
+enum JourneyStepType {
+  ENTRY
+  WAIT
+  CONDITION
+  SEND_MESSAGE
+  ADD_TO_AUDIENCE
+  REMOVE_FROM_AUDIENCE
+  TRIGGER_SYNC
+  SPLIT_TEST
+  EXIT
+}
+
+input CreateJourneyInput {
+  name: String!
+  workspaceId: ID!
+  description: String
+  entryCondition: SegmentFilterInput
+  steps: [JourneyStepInput!]
+}
+
+input UpdateJourneyInput {
+  name: String
+  description: String
+  entryCondition: SegmentFilterInput
+  steps: [JourneyStepInput!]
+}
+
+input JourneyStepInput {
+  type: JourneyStepType!
+  name: String!
+  config: JSON!
+  delay: TimeWindowInput
+}
+
+input TimeWindowInput {
+  unit: TimeUnit!
+  value: Int!
+}
+
+# ─── Split Test ───────────────────────────────────────────────────────────────
+
+"""An A/B or multivariate split test for audiences or journeys."""
+type SplitTest {
+  id: ID!
+  name: String!
+  description: String
+  arms: [SplitTestArm!]!
+  status: SplitTestStatus!
+  winnerArm: SplitTestArm
+  startedAt: String
+  endedAt: String
+  workspace: Workspace!
+  createdAt: String!
+  updatedAt: String!
+  createdBy: User
+}
+
+"""A single variant arm within a split test."""
+type SplitTestArm {
+  id: ID!
+  splitTest: SplitTest!
+  name: String!
+  trafficPercent: Float!
+  audienceId: ID
+  syncId: ID
+  metrics: SplitTestArmMetrics
+  isControl: Boolean!
+}
+
+"""Performance metrics for a single split test arm."""
+type SplitTestArmMetrics {
+  enrollments: Int!
+  conversionRate: Float
+  revenuePerUser: Float
+  statisticalSignificance: Float
+}
+
+enum SplitTestStatus {
+  DRAFT
+  RUNNING
+  PAUSED
+  COMPLETED
+  ARCHIVED
+}
+
+input CreateSplitTestInput {
+  name: String!
+  workspaceId: ID!
+  description: String
+  arms: [SplitTestArmInput!]!
+}
+
+input UpdateSplitTestInput {
+  name: String
+  description: String
+  arms: [SplitTestArmInput!]
+}
+
+input SplitTestArmInput {
+  name: String!
+  trafficPercent: Float!
+  isControl: Boolean
+}
+
+# ─── AI Decisioning ───────────────────────────────────────────────────────────
+
+"""A reinforcement learning decision engine for 1:1 personalization."""
+type DecisionEngine {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  objectiveMetric: String!
+  actions: [DecisionAction!]!
+  explorationRate: Float
+  status: DecisionEngineStatus!
+  workspace: Workspace!
+  createdAt: String!
+  updatedAt: String!
+}
+
+"""An action option available to the decision engine."""
+type DecisionAction {
+  id: ID!
+  engine: DecisionEngine!
+  name: String!
+  payload: JSON
+  eligibilityFilter: SegmentFilter
+  selectionRate: Float
+  conversionRate: Float
+}
+
+enum DecisionEngineStatus {
+  TRAINING
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+# ─── Schema Definition ────────────────────────────────────────────────────────
+
+"""A warehouse schema definition registered in Hightouch."""
+type SchemaDefinition {
+  id: ID!
+  name: String!
+  source: Source!
+  fields: [SchemaField!]!
+  relationships: [SchemaRelationship!]!
+  workspace: Workspace!
+  createdAt: String!
+  updatedAt: String!
+}
+
+"""A field within a warehouse schema definition."""
+type SchemaField {
+  name: String!
+  type: FieldType!
+  nullable: Boolean!
+  isPrimaryKey: Boolean!
+  isForeignKey: Boolean!
+  references: SchemaFieldReference
+  description: String
+}
+
+"""A foreign key reference within a schema field."""
+type SchemaFieldReference {
+  schema: SchemaDefinition!
+  field: String!
+}
+
+"""A relationship between two schema definitions."""
+type SchemaRelationship {
+  id: ID!
+  fromSchema: SchemaDefinition!
+  fromField: String!
+  toSchema: SchemaDefinition!
+  toField: String!
+  type: RelationshipType!
+}
+
+enum RelationshipType {
+  ONE_TO_ONE
+  ONE_TO_MANY
+  MANY_TO_ONE
+  MANY_TO_MANY
+}
+
+# ─── Alerting ─────────────────────────────────────────────────────────────────
+
+"""An alert rule that triggers notifications on platform events."""
+type AlertRule {
+  id: ID!
+  name: String!
+  description: String
+  triggerType: AlertTriggerType!
+  conditions: AlertConditions!
+  channels: [AlertChannel!]!
+  enabled: Boolean!
+  workspace: Workspace!
+  syncs: [Sync!]
+  createdAt: String!
+  updatedAt: String!
+}
+
+"""Threshold and condition config for an alert rule."""
+type AlertConditions {
+  syncFailed: Boolean
+  syncWarning: Boolean
+  failureThresholdPercent: Float
+  consecutiveFailures: Int
+  runDurationThresholdSeconds: Int
+}
+
+"""A notification delivery channel for alerts."""
+type AlertChannel {
+  type: AlertChannelType!
+  config: JSON!
+}
+
+"""A notification instance generated by an alert rule."""
+type Notification {
+  id: ID!
+  alertRule: AlertRule!
+  triggeredAt: String!
+  message: String!
+  severity: NotificationSeverity!
+  resolvedAt: String
+  sync: Sync
+  run: SyncRun
+}
+
+enum AlertTriggerType {
+  SYNC_FAILURE
+  SYNC_WARNING
+  SYNC_SUCCESS
+  ROW_FAILURE_THRESHOLD
+  RUN_DURATION
+  CONSECUTIVE_FAILURES
+}
+
+enum AlertChannelType {
+  EMAIL
+  SLACK
+  PAGERDUTY
+  WEBHOOK
+  SMS
+}
+
+enum NotificationSeverity {
+  INFO
+  WARNING
+  ERROR
+  CRITICAL
+}
+
+input CreateAlertRuleInput {
+  name: String!
+  workspaceId: ID!
+  triggerType: AlertTriggerType!
+  conditions: AlertConditionsInput!
+  channels: [AlertChannelInput!]!
+  syncIds: [ID!]
+}
+
+input UpdateAlertRuleInput {
+  name: String
+  conditions: AlertConditionsInput
+  channels: [AlertChannelInput!]
+  enabled: Boolean
+  syncIds: [ID!]
+}
+
+input AlertConditionsInput {
+  syncFailed: Boolean
+  syncWarning: Boolean
+  failureThresholdPercent: Float
+  consecutiveFailures: Int
+  runDurationThresholdSeconds: Int
+}
+
+input AlertChannelInput {
+  type: AlertChannelType!
+  config: JSON!
+}
+
+# ─── Webhook ──────────────────────────────────────────────────────────────────
+
+"""An outbound webhook delivering platform events to an external URL."""
+type Webhook {
+  id: ID!
+  name: String!
+  url: String!
+  secret: String
+  events: [WebhookEventType!]!
+  enabled: Boolean!
+  workspace: Workspace!
+  lastDeliveredAt: String
+  deliveryStatus: WebhookDeliveryStatus
+  createdAt: String!
+  updatedAt: String!
+}
+
+enum WebhookEventType {
+  SYNC_RUN_STARTED
+  SYNC_RUN_COMPLETED
+  SYNC_RUN_FAILED
+  AUDIENCE_REFRESHED
+  JOURNEY_ACTIVATED
+  ALERT_TRIGGERED
+}
+
+enum WebhookDeliveryStatus {
+  SUCCESS
+  FAILED
+  PENDING
+}
+
+input CreateWebhookInput {
+  name: String!
+  workspaceId: ID!
+  url: String!
+  secret: String
+  events: [WebhookEventType!]!
+}
+
+input UpdateWebhookInput {
+  name: String
+  url: String
+  secret: String
+  events: [WebhookEventType!]
+  enabled: Boolean
+}
+
+# ─── API Key ──────────────────────────────────────────────────────────────────
+
+"""A programmatic API key for authenticating Hightouch API requests."""
+type APIKey {
+  id: ID!
+  name: String!
+  maskedKey: String!
+  scopes: [APIKeyScope!]!
+  workspace: Workspace!
+  lastUsedAt: String
+  expiresAt: String
+  createdBy: User
+  createdAt: String!
+}
+
+enum APIKeyScope {
+  READ
+  WRITE
+  ADMIN
+  SYNC_TRIGGER
+  WEBHOOK_RECEIVE
+}
+
+input CreateAPIKeyInput {
+  name: String!
+  workspaceId: ID!
+  scopes: [APIKeyScope!]!
+  expiresAt: String
+}
+
+# ─── Git Config ───────────────────────────────────────────────────────────────
+
+"""Git version control configuration for a resource."""
+type GitConfig {
+  repositoryUrl: String!
+  branch: String!
+  filePath: String
+  commitMessage: String
+  lastSyncedCommit: String
+  lastSyncedAt: String
+}
+
+# ─── Connection Objects ────────────────────────────────────────────────────────
+
+"""Paginated list of sources."""
+type SourceConnection {
+  nodes: [Source!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of destinations."""
+type DestinationConnection {
+  nodes: [Destination!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of models."""
+type ModelConnection {
+  nodes: [Model!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of syncs."""
+type SyncConnection {
+  nodes: [Sync!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of sync runs."""
+type SyncRunConnection {
+  nodes: [SyncRun!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of segments."""
+type SegmentConnection {
+  nodes: [Segment!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of audiences."""
+type AudienceConnection {
+  nodes: [Audience!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of events."""
+type EventConnection {
+  nodes: [Event!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of identities."""
+type IdentityConnection {
+  nodes: [Identity!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of journeys."""
+type JourneyConnection {
+  nodes: [Journey!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of split tests."""
+type SplitTestConnection {
+  nodes: [SplitTest!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of decision engines."""
+type DecisionEngineConnection {
+  nodes: [DecisionEngine!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of schema definitions."""
+type SchemaDefinitionConnection {
+  nodes: [SchemaDefinition!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of alert rules."""
+type AlertRuleConnection {
+  nodes: [AlertRule!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Paginated list of webhooks."""
+type WebhookConnection {
+  nodes: [Webhook!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+"""Cursor-based pagination metadata."""
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalPages: Int
+  currentPage: Int
+}
+
+# ─── Shared Utility Types ─────────────────────────────────────────────────────
+
+"""Result of a delete operation."""
+type DeleteResult {
+  success: Boolean!
+  id: ID!
+}
+
+"""Result of a connection test operation."""
+type ConnectionTestResult {
+  success: Boolean!
+  message: String
+  latencyMs: Int
+}
+
+input InviteUserInput {
+  workspaceId: ID!
+  email: String!
+  role: WorkspaceRole!
+}
+
+"""Arbitrary JSON scalar for flexible config and metadata fields."""
+scalar JSON
