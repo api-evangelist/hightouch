@@ -1,0 +1,245 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hightouch Management API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hightouch.com/api/v1/sources"
+          },
+          "docs": "List sources"
+        },
+        {
+          "info": {
+            "name": "Create a source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hightouch.com/api/v1/sources",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a source"
+        },
+        {
+          "info": {
+            "name": "Get a source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hightouch.com/api/v1/sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a source"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hightouch.com/api/v1/models"
+          },
+          "docs": "List models"
+        },
+        {
+          "info": {
+            "name": "Create a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hightouch.com/api/v1/models",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a model"
+        },
+        {
+          "info": {
+            "name": "Get a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hightouch.com/api/v1/models/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a model"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Destinations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List destinations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hightouch.com/api/v1/destinations"
+          },
+          "docs": "List destinations"
+        },
+        {
+          "info": {
+            "name": "Get a destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hightouch.com/api/v1/destinations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a destination"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Syncs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List syncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hightouch.com/api/v1/syncs"
+          },
+          "docs": "List syncs"
+        },
+        {
+          "info": {
+            "name": "Create a sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hightouch.com/api/v1/syncs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a sync"
+        },
+        {
+          "info": {
+            "name": "Get a sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hightouch.com/api/v1/syncs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a sync"
+        },
+        {
+          "info": {
+            "name": "Trigger a sync run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hightouch.com/api/v1/syncs/:id/trigger",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a sync run"
+        },
+        {
+          "info": {
+            "name": "List sync runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hightouch.com/api/v1/syncs/:id/runs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List sync runs"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
