@@ -8,7 +8,7 @@ description: Hightouch is a composable Customer Data Platform (CDP) and data act
   A Resource API provides programmatic management of the platform with git version
   control and approval workflows.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - CDP
 - Data Activation
