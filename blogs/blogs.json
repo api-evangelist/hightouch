@@ -3,19 +3,12 @@
   "feeds": [
     {
       "source": "https://hightouch.com/blog",
-      "feed_url": "https://hightouch.com/blog",
-      "title": "",
-      "saved": 0,
-      "method": "none"
-    },
-    {
-      "source": "https://hightouch.com/pricing",
-      "feed_url": "https://hightouch.com/pricing",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "feed_url": "",
+      "saved": 3,
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 2,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 7,
+  "fetched": "2026-06-27T12:46:23Z",
+  "agent_pulled": "2026-06-27"
 }

@@ -56,13 +56,13 @@ common:
   url: https://hightouch.com/pricing
 - type: Blog
   url: https://hightouch.com/blog
-- type: SignUp
+- type: Signup
   url: https://app.hightouch.com/signup
 - type: GitHubOrganization
   url: https://github.com/hightouchio
 - type: Integrations
   url: https://hightouch.com/integrations
-- type: LLMsTxt
+- type: LlmsText
   url: https://hightouch.com/llms.txt
 integrations:
 - name: California Consumer Privacy Act (CCPA) Opt-Out
