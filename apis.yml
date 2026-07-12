@@ -44,6 +44,12 @@ apis:
   - url: graphql/hightouch-graphql.md
     type: GraphQL
 common:
+- type: TrustCenter
+  url: security/hightouch-trust-center.yml
+- type: DomainSecurity
+  url: security/hightouch-domain-security.yml
+- type: Authentication
+  url: authentication/hightouch-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/hightouchio
 - type: Website
