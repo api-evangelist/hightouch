@@ -2,13 +2,14 @@
   "repo": "hightouch",
   "feeds": [
     {
-      "source": "https://hightouch.com/blog",
-      "feed_url": "",
-      "saved": 3,
-      "method": "agent-scrape"
+      "source": "https://hightouch.com/pricing",
+      "feed_url": "https://hightouch.com/pricing",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 7,
-  "fetched": "2026-06-27T12:46:23Z",
-  "agent_pulled": "2026-06-27"
+  "post_count": 11,
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
