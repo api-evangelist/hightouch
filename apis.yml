@@ -44,6 +44,8 @@ apis:
   - url: graphql/hightouch-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/hightouch-agentic-access.yml
 - type: TrustCenter
   url: security/hightouch-trust-center.yml
 - type: DomainSecurity
