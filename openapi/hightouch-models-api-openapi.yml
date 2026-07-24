@@ -1,0 +1,82 @@
+openapi: 3.1.0
+info:
+  title: Hightouch Management Destinations Models API
+  description: Minimal OpenAPI description for the Hightouch Management API covering sources, models, destinations, and syncs as documented in the API guide. Authentication is via workspace API key. Generated from public documentation; verify before production use.
+  version: v1
+  contact:
+    name: Hightouch Documentation
+    url: https://hightouch.com/docs/developer-tools/api-guide
+  x-generated-from: https://hightouch.com/docs/developer-tools/api-guide
+  x-generated-by: claude-crawl-2026-05-08
+servers:
+- url: https://api.hightouch.com
+  description: Hightouch production
+security:
+- bearerAuth: []
+tags:
+- name: Models
+  description: Data models
+paths:
+  /api/v1/models:
+    get:
+      operationId: listModels
+      summary: List models
+      tags:
+      - Models
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: createModel
+      summary: Create a model
+      tags:
+      - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model'
+      responses:
+        '201':
+          description: Created
+  /api/v1/models/{id}:
+    get:
+      operationId: getModel
+      summary: Get a model
+      tags:
+      - Models
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+components:
+  schemas:
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        sourceId:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

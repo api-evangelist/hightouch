@@ -1,0 +1,68 @@
+openapi: 3.1.0
+info:
+  title: Hightouch Management Destinations API
+  description: Minimal OpenAPI description for the Hightouch Management API covering sources, models, destinations, and syncs as documented in the API guide. Authentication is via workspace API key. Generated from public documentation; verify before production use.
+  version: v1
+  contact:
+    name: Hightouch Documentation
+    url: https://hightouch.com/docs/developer-tools/api-guide
+  x-generated-from: https://hightouch.com/docs/developer-tools/api-guide
+  x-generated-by: claude-crawl-2026-05-08
+servers:
+- url: https://api.hightouch.com
+  description: Hightouch production
+security:
+- bearerAuth: []
+tags:
+- name: Destinations
+  description: Data destinations
+paths:
+  /api/v1/destinations:
+    get:
+      operationId: listDestinations
+      summary: List destinations
+      tags:
+      - Destinations
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/v1/destinations/{id}:
+    get:
+      operationId: getDestination
+      summary: Get a destination
+      tags:
+      - Destinations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+components:
+  schemas:
+    Destination:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        type:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

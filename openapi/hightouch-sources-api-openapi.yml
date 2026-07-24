@@ -1,0 +1,82 @@
+openapi: 3.1.0
+info:
+  title: Hightouch Management Destinations Sources API
+  description: Minimal OpenAPI description for the Hightouch Management API covering sources, models, destinations, and syncs as documented in the API guide. Authentication is via workspace API key. Generated from public documentation; verify before production use.
+  version: v1
+  contact:
+    name: Hightouch Documentation
+    url: https://hightouch.com/docs/developer-tools/api-guide
+  x-generated-from: https://hightouch.com/docs/developer-tools/api-guide
+  x-generated-by: claude-crawl-2026-05-08
+servers:
+- url: https://api.hightouch.com
+  description: Hightouch production
+security:
+- bearerAuth: []
+tags:
+- name: Sources
+  description: Data sources
+paths:
+  /api/v1/sources:
+    get:
+      operationId: listSources
+      summary: List sources
+      tags:
+      - Sources
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: createSource
+      summary: Create a source
+      tags:
+      - Sources
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Source'
+      responses:
+        '201':
+          description: Created
+  /api/v1/sources/{id}:
+    get:
+      operationId: getSource
+      summary: Get a source
+      tags:
+      - Sources
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+components:
+  schemas:
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        type:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

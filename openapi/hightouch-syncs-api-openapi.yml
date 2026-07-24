@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Hightouch Management Destinations Syncs API
+  description: Minimal OpenAPI description for the Hightouch Management API covering sources, models, destinations, and syncs as documented in the API guide. Authentication is via workspace API key. Generated from public documentation; verify before production use.
+  version: v1
+  contact:
+    name: Hightouch Documentation
+    url: https://hightouch.com/docs/developer-tools/api-guide
+  x-generated-from: https://hightouch.com/docs/developer-tools/api-guide
+  x-generated-by: claude-crawl-2026-05-08
+servers:
+- url: https://api.hightouch.com
+  description: Hightouch production
+security:
+- bearerAuth: []
+tags:
+- name: Syncs
+  description: Data syncs and runs
+paths:
+  /api/v1/syncs:
+    get:
+      operationId: listSyncs
+      summary: List syncs
+      tags:
+      - Syncs
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: createSync
+      summary: Create a sync
+      tags:
+      - Syncs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sync'
+      responses:
+        '201':
+          description: Created
+  /api/v1/syncs/{id}:
+    get:
+      operationId: getSync
+      summary: Get a sync
+      tags:
+      - Syncs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sync'
+  /api/v1/syncs/{id}/trigger:
+    post:
+      operationId: triggerSync
+      summary: Trigger a sync run
+      tags:
+      - Syncs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Triggered
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/v1/syncs/{id}/runs:
+    get:
+      operationId: listSyncRuns
+      summary: List sync runs
+      tags:
+      - Syncs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Sync:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        modelId:
+          type: string
+        destinationId:
+          type: string
+        schedule:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
