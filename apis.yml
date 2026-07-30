@@ -8,7 +8,20 @@ description: Hightouch is a composable Customer Data Platform (CDP) and data act
   A Resource API provides programmatic management of the platform with git version
   control and approval workflows.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/hightouch.png
 tags:
 - CDP
 - Data Activation
@@ -21,28 +34,78 @@ created: '2026-03-27'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- aid: hightouch:hightouch-api
-  name: Hightouch API
-  description: The Hightouch API provides programmatic access to manage data sources,
-    models, destinations, syncs, and audiences. The Resource API enables teams to
-    manage Hightouch resources via git, CI/CD, and approval workflows.
+- aid: hightouch:hightouch-destinations-api
+  name: Hightouch Destinations API
+  description: Data destinations
   humanURL: https://hightouch.com/
   baseURL: https://api.hightouch.com
   tags:
-  - Data Activation
-  - Reverse ETL
-  - Audience Management
+  - Destinations
   properties:
+  - type: OpenAPI
+    url: openapi/hightouch-destinations-api-openapi.yml
   - type: Documentation
     url: https://hightouch.com/docs
   - type: GettingStarted
     url: https://hightouch.com/docs/getting-started
   - type: APIReference
     url: https://hightouch.com/docs/api-reference
+  - type: GraphQL
+    url: graphql/hightouch-graphql.md
+- aid: hightouch:hightouch-models-api
+  name: Hightouch Models API
+  description: Data models
+  humanURL: https://hightouch.com/
+  baseURL: https://api.hightouch.com
+  tags:
+  - Models
+  properties:
   - type: OpenAPI
-    url: openapi/hightouch-openapi.yml
-  - url: graphql/hightouch-graphql.md
-    type: GraphQL
+    url: openapi/hightouch-models-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GraphQL
+    url: graphql/hightouch-graphql.md
+- aid: hightouch:hightouch-sources-api
+  name: Hightouch Sources API
+  description: Data sources
+  humanURL: https://hightouch.com/
+  baseURL: https://api.hightouch.com
+  tags:
+  - Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-sources-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GraphQL
+    url: graphql/hightouch-graphql.md
+- aid: hightouch:hightouch-syncs-api
+  name: Hightouch Syncs API
+  description: Data syncs and runs
+  humanURL: https://hightouch.com/
+  baseURL: https://api.hightouch.com
+  tags:
+  - Syncs
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-syncs-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GraphQL
+    url: graphql/hightouch-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/hightouch-agentic-access.yml
