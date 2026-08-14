@@ -1,12 +1,15 @@
 aid: hightouch
 name: Hightouch
-description: Hightouch is a composable Customer Data Platform (CDP) and data activation
-  platform that syncs data from warehouses such as Snowflake and BigQuery to more
-  than 300 SaaS destinations including Salesforce, HubSpot, Google Ads, and Facebook
-  Ads. The platform supports reverse ETL, audience segmentation, journey orchestration,
-  real-time personalization, AI Decisioning, and an Ad Studio for advertising campaigns.
-  A Resource API provides programmatic management of the platform with git version
-  control and approval workflows.
+description: Hightouch is a composable Customer Data Platform (CDP) and agentic marketing platform that
+  activates data directly from cloud warehouses and lakehouses such as Snowflake, BigQuery, Databricks
+  and Redshift to more than 290 SaaS destinations, without copying or storing customer data. The platform
+  covers Reverse ETL, Customer Studio audience building and journey orchestration, identity resolution,
+  first-party event collection with SDKs for web and mobile, real-time personalization, AI Decisioning,
+  Match Booster and an Ad Studio for advertising creative. Developers get a bearer-authenticated REST
+  API at https://api.hightouch.com/api/v1 covering sources, models, destinations, syncs and runs, campaigns,
+  decision-engine flows, event contracts and identity graphs, plus an `ht` CLI, Git Sync for version-controlled
+  resource YAML, workspace environments with approval flows, a public documentation MCP server, and an
+  A2A agent card for the Hightouch Marketing Agent.
 type: Index
 accessModel:
   pricing: freemium
@@ -27,54 +30,48 @@ tags:
 - Data Activation
 - Reverse ETL
 - Audience Management
-- Unified API
+- Identity Resolution
+- Event Collection
 - Marketing
+- Advertising
+- AI Agents
+- Data Warehouse
 url: https://raw.githubusercontent.com/api-evangelist/hightouch/refs/heads/main/apis.yml
 created: '2026-03-27'
-modified: '2026-05-19'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 apis:
-- aid: hightouch:hightouch-destinations-api
-  name: Hightouch Destinations API
-  description: Data destinations
-  humanURL: https://hightouch.com/
-  baseURL: https://api.hightouch.com
+- aid: hightouch:hightouch-api
+  name: Hightouch API
+  description: The full Hightouch public REST API — sources, models, destinations, syncs and runs, campaigns,
+    AI Decisioning flows and messages, event contracts and domains, and identity resolution. 43 operations,
+    harvested verbatim from the specification the provider's own API reference loads.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
   tags:
-  - Destinations
+  - REST
+  - Reverse ETL
+  - Data Activation
   properties:
   - type: OpenAPI
-    url: openapi/hightouch-destinations-api-openapi.yml
+    url: openapi/_original/hightouch-api-openapi.json
   - type: Documentation
     url: https://hightouch.com/docs
-  - type: GettingStarted
-    url: https://hightouch.com/docs/getting-started
   - type: APIReference
     url: https://hightouch.com/docs/api-reference
-  - type: GraphQL
-    url: graphql/hightouch-graphql.md
-- aid: hightouch:hightouch-models-api
-  name: Hightouch Models API
-  description: Data models
-  humanURL: https://hightouch.com/
-  baseURL: https://api.hightouch.com
-  tags:
-  - Models
-  properties:
-  - type: OpenAPI
-    url: openapi/hightouch-models-api-openapi.yml
-  - type: Documentation
-    url: https://hightouch.com/docs
   - type: GettingStarted
-    url: https://hightouch.com/docs/getting-started
-  - type: APIReference
-    url: https://hightouch.com/docs/api-reference
-  - type: GraphQL
-    url: graphql/hightouch-graphql.md
+    url: https://hightouch.com/docs/getting-started/welcome
+  - type: Overlay
+    url: overlays/hightouch-api-overlay.yaml
+  - type: Collection
+    url: collections/hightouch.opencollection.json
+  - type: ToolCrosswalk
+    url: mcp/hightouch-tool-crosswalk.yml
 - aid: hightouch:hightouch-sources-api
   name: Hightouch Sources API
-  description: Data sources
-  humanURL: https://hightouch.com/
-  baseURL: https://api.hightouch.com
+  description: Warehouse and database sources Hightouch reads from.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
   tags:
   - Sources
   properties:
@@ -82,17 +79,53 @@ apis:
     url: openapi/hightouch-sources-api-openapi.yml
   - type: Documentation
     url: https://hightouch.com/docs
-  - type: GettingStarted
-    url: https://hightouch.com/docs/getting-started
   - type: APIReference
     url: https://hightouch.com/docs/api-reference
-  - type: GraphQL
-    url: graphql/hightouch-graphql.md
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
+  - type: Overlay
+    url: overlays/hightouch-api-overlay.yaml
+- aid: hightouch:hightouch-models-api
+  name: Hightouch Models API
+  description: Model definitions (SQL, table, dbt, visual) over a source.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-models-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
+  - type: Overlay
+    url: overlays/hightouch-api-overlay.yaml
+- aid: hightouch:hightouch-destinations-api
+  name: Hightouch Destinations API
+  description: Destination connectors receiving synced data.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - Destinations
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-destinations-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
+  - type: Overlay
+    url: overlays/hightouch-api-overlay.yaml
 - aid: hightouch:hightouch-syncs-api
   name: Hightouch Syncs API
-  description: Data syncs and runs
-  humanURL: https://hightouch.com/
-  baseURL: https://api.hightouch.com
+  description: Syncs, sync runs, sync sequences and their triggers.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
   tags:
   - Syncs
   properties:
@@ -100,43 +133,181 @@ apis:
     url: openapi/hightouch-syncs-api-openapi.yml
   - type: Documentation
     url: https://hightouch.com/docs
-  - type: GettingStarted
-    url: https://hightouch.com/docs/getting-started
   - type: APIReference
     url: https://hightouch.com/docs/api-reference
-  - type: GraphQL
-    url: graphql/hightouch-graphql.md
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
+  - type: Overlay
+    url: overlays/hightouch-api-overlay.yaml
+- aid: hightouch:hightouch-campaigns-api
+  name: Hightouch Campaigns API
+  description: Trigger a campaign send to handle- or profile-based recipients and read back per-send status.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - Campaigns
+  - Marketing
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
+  - type: Overlay
+    url: overlays/hightouch-api-overlay.yaml
+- aid: hightouch:hightouch-ai-decisioning-api
+  name: Hightouch AI Decisioning API
+  description: Decision-engine flows, their message variants, guardrails and runs.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - AI Decisioning
+  - AI
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-ai-decisioning-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
+  - type: Overlay
+    url: overlays/hightouch-api-overlay.yaml
+- aid: hightouch:hightouch-events-api
+  name: Hightouch Events API
+  description: First-party event governance — event contracts and event domains.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - Events
+  - Governance
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-events-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
+  - type: Overlay
+    url: overlays/hightouch-api-overlay.yaml
+- aid: hightouch:hightouch-identity-resolution-api
+  name: Hightouch Identity Resolution API
+  description: Identity graph runs, reprocessing queues and run statistics.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - Identity Resolution
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-identity-resolution-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
+  - type: Overlay
+    url: overlays/hightouch-api-overlay.yaml
 common:
-- type: AgenticAccess
-  url: agentic-access/hightouch-agentic-access.yml
+- type: Website
+  url: https://hightouch.com/
+- type: DeveloperPortal
+  url: https://hightouch.com/docs/developer-tools/api-guide
+- type: Documentation
+  url: https://hightouch.com/docs
+- type: APIReference
+  url: https://hightouch.com/docs/api-reference
+- type: GettingStarted
+  url: https://hightouch.com/docs/getting-started/welcome
+- type: Blog
+  url: https://hightouch.com/blog
+- type: Pricing
+  url: https://hightouch.com/pricing
+- type: SignUp
+  url: https://app.hightouch.com/signup
+- type: Login
+  url: https://app.hightouch.com/login
+- type: TermsOfService
+  url: https://hightouch.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://hightouch.com/privacy-policy
+- type: GitHubOrganization
+  url: https://github.com/hightouchio
+- type: LinkedIn
+  url: https://www.linkedin.com/company/hightouchio
+- type: Integrations
+  url: https://hightouch.com/integrations
+- type: StatusPage
+  url: https://status.hightouch.io
+- type: Compliance
+  url: https://hightouch.com/platform/security
 - type: TrustCenter
   url: security/hightouch-trust-center.yml
 - type: DomainSecurity
   url: security/hightouch-domain-security.yml
 - type: Authentication
   url: authentication/hightouch-authentication.yml
-- type: LinkedIn
-  url: https://www.linkedin.com/company/hightouchio
-- type: Website
-  url: https://hightouch.com/
-- type: Documentation
-  url: https://hightouch.com/docs
-- type: APIReference
-  url: https://hightouch.com/docs/api-reference
-- type: Pricing
-  url: https://hightouch.com/pricing
-- type: Blog
-  url: https://hightouch.com/blog
-- type: Signup
-  url: https://app.hightouch.com/signup
-- type: GitHubOrganization
-  url: https://github.com/hightouchio
-- type: Integrations
-  url: https://hightouch.com/integrations
-- type: LlmsText
-  url: https://hightouch.com/llms.txt
+- type: OAuthScopes
+  url: scopes/hightouch-scopes.yml
+- type: Conventions
+  url: conventions/hightouch-conventions.yml
+- type: Conformance
+  url: conformance/hightouch-conformance.yml
+- type: ErrorCatalog
+  url: errors/hightouch-problem-types.yml
+- type: ErrorCodes
+  url: errors/hightouch-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/hightouch-lifecycle.yml
+- type: DataModel
+  url: data-model/hightouch-data-model.yml
+- type: Packages
+  url: packages/hightouch-packages.yml
+- type: SDKs
+  url: packages/hightouch-packages.yml
+- type: CLI
+  url: cli/hightouch-cli.yml
+- type: Components
+  url: components/hightouch-components.yml
+- type: Sandbox
+  url: sandbox/hightouch-sandbox.yml
+- type: Webhooks
+  url: asyncapi/hightouch-webhooks.yml
+- type: WellKnown
+  url: well-known/hightouch-well-known.yml
+- type: MCPServer
+  url: mcp/hightouch-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/hightouch-tool-crosswalk.yml
+- type: AgentCard
+  url: a2a/hightouch-a2a.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/hightouch-agentic-access.yml
+- type: LLMsTxt
+  url: llms/hightouch-llms.txt
+- type: Plans
+  url: plans/hightouch-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/hightouch-rate-limits.yml
+- type: FinOps
+  url: finops/hightouch-finops.yml
+- type: Overlay
+  url: overlays/hightouch-api-overlay.yaml
 integrations:
 - name: California Consumer Privacy Act (CCPA) Opt-Out
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 36
+  pass: local-v1
