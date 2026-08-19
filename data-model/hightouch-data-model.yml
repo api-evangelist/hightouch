@@ -1,0 +1,266 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/hightouch-api-openapi.json
+note: Entity graph derived from schema $refs and id-reference fields in the harvested spec. Hightouch's
+  core chain is Source -> Model -> Sync -> Destination, with SyncRun as the execution record.
+entities:
+- name: Source
+  schema: Source
+  id_type: number
+  fields:
+  - id
+  - name
+  - slug
+  - workspaceId
+  - type
+  - configuration
+  - createdAt
+  - updatedAt
+  operations:
+  - ListSource
+  - GetSource
+  - CreateSource
+  - UpdateSource
+  description: A warehouse or database Hightouch reads from.
+- name: Model
+  schema: Model
+  id_type: number
+  fields:
+  - id
+  - name
+  - slug
+  - sourceId
+  - primaryKey
+  - queryType
+  - visual
+  - custom
+  - table
+  - dbt
+  - dbt_cloud
+  - raw
+  - isSchema
+  - folderId
+  - tags
+  - syncs
+  - lastRunSize
+  operations:
+  - ListModel
+  - GetModel
+  - CreateModel
+  - UpdateModel
+  description: The dataset definition (SQL, table, dbt model, or visual segment) on top of a Source.
+- name: Destination
+  schema: Destination
+  id_type: number
+  fields:
+  - id
+  - name
+  - slug
+  - type
+  - configuration
+  - syncs
+  - workspaceId
+  operations:
+  - ListDestination
+  - GetDestination
+  - CreateDestination
+  - UpdateDestination
+  description: A downstream business tool receiving synced data.
+- name: Sync
+  schema: Sync
+  id_type: number (path) / string (run + trigger routes)
+  fields:
+  - id
+  - slug
+  - modelId
+  - destinationId
+  - configuration
+  - schedule
+  - status
+  - disabled
+  - lastRunAt
+  - primaryKey
+  - referencedColumns
+  - externalSegment
+  - tags
+  operations:
+  - ListSync
+  - GetSync
+  - CreateSync
+  - UpdateSync
+  - TriggerRun
+  - TriggerRunCustom
+  description: The pipeline binding a Model to a Destination on a schedule.
+- name: SyncRun
+  schema: SyncRun
+  id_type: number
+  fields:
+  - id
+  - status
+  - startedAt
+  - finishedAt
+  - querySize
+  - plannedRows
+  - successfulRows
+  - failedRows
+  - completionRatio
+  - error
+  operations:
+  - ListSyncRuns
+  description: One execution of a Sync.
+- name: SyncSequenceRun
+  schema: TriggerSequenceRunOutput
+  id_type: string
+  operations:
+  - TriggerSequenceRun
+  - GetSyncSequenceRun
+  description: One execution of an ordered sequence of syncs.
+- name: EventContract
+  schema: EventContract
+  id_type: string
+  fields:
+  - id
+  - name
+  - slug
+  - events
+  - onUndeclaredSchema
+  - eventSources
+  operations:
+  - ListContracts
+  - GetContract
+  - CreateContract
+  - UpdateContract
+  description: Event governance contract declaring the allowed event schema.
+- name: EventDomain
+  schema: EventDomain
+  id_type: string
+  fields:
+  - id
+  - name
+  - slug
+  - events
+  - components
+  - eventSources
+  operations:
+  - ListDomains
+  - GetDomain
+  - CreateDomain
+  - UpdateDomain
+  description: A grouping of event contracts by business domain.
+- name: DecisionEngineFlow
+  schema: DecisionEngineFlow
+  id_type: string
+  fields:
+  - id
+  - name
+  - decisionEngineId
+  - audienceId
+  - status
+  - config
+  operations:
+  - ListFlows
+  - GetFlow
+  - RunFlow
+  description: An AI Decisioning agent/flow bound to an audience.
+- name: DecisionEngineMessage
+  schema: DecisionEngineMessage
+  id_type: string
+  fields:
+  - id
+  - name
+  - channelId
+  - config
+  - guardrails
+  - variables
+  - tags
+  operations:
+  - ListMessages
+  - GetMessage
+  - CreateMessage
+  - UpdateMessage
+  description: A message variant an AI Decisioning flow can select.
+- name: IdrRun
+  schema: IdrRun
+  id_type: string
+  fields:
+  - id
+  - graphId
+  - status
+  - fullRerun
+  - stats
+  - startedAt
+  - finishedAt
+  - error
+  operations:
+  - TriggerIdrRun
+  - ListIdrRuns
+  - TriggerRunIdGraph
+  description: An identity-resolution graph run.
+- name: Campaign
+  schema: StartCampaignRequest / SendStatusResponse
+  id_type: string
+  operations:
+  - TriggerCampaign
+  - GetSendStatus
+  description: A campaign send triggered for one or more recipients.
+relationships:
+- from: Model
+  to: Source
+  type: belongs_to
+  via: sourceId
+- from: Source
+  to: Model
+  type: has_many
+  via: sourceId
+- from: Sync
+  to: Model
+  type: belongs_to
+  via: modelId
+- from: Sync
+  to: Destination
+  type: belongs_to
+  via: destinationId
+- from: Model
+  to: Sync
+  type: has_many
+  via: syncs
+- from: Destination
+  to: Sync
+  type: has_many
+  via: syncs
+- from: Sync
+  to: SyncRun
+  type: has_many
+  via: syncId
+- from: Sync
+  to: Schedule
+  type: has_one
+  via: schedule
+  note: schedule is a union of IntervalSchedule, CronSchedule, VisualCronSchedule, DBTSchedule
+- from: EventDomain
+  to: EventContract
+  type: has_many
+  via: components
+- from: DecisionEngineFlow
+  to: DecisionEngineMessage
+  type: has_many
+  via: flowId
+- from: DecisionEngineFlow
+  to: Audience
+  type: belongs_to
+  via: audienceId
+  note: audienceId references a Customer Studio audience, which the public REST API does not expose
+- from: IdrRun
+  to: IdentityGraph
+  type: belongs_to
+  via: graphId
+  note: identity graphs themselves are not exposed as a REST resource
+- from: every entity
+  to: Workspace
+  type: belongs_to
+  via: workspaceId
+dangling_references:
+- audienceId (DecisionEngineFlow) — no audience resource in the public API
+- graphId (IdrRun) — no identity-graph resource in the public API
+- channelId (DecisionEngineMessage) — no channel resource in the public API
+- workspaceId — no workspace resource in the public API

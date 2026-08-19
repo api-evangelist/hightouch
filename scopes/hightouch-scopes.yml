@@ -1,0 +1,51 @@
+generated: '2026-08-13'
+method: probed
+source: https://api.hightouch.com/.well-known/oauth-authorization-server
+docs: https://hightouch.com/docs/ai-integrations/mcp
+note: 'The management REST API is API-key only and has no scope surface. OAuth exists on Hightouch''s
+  agent surface: the A2A agent card and the workspace MCP server authenticate against https://mcp-auth.hightouch.com.
+  The scopes below are exactly those the authorization server advertises in its RFC 8414 metadata — Hightouch
+  publishes no per-resource scope reference page, and the agent card declares an empty scopes map, so
+  no product-specific scopes are recorded.'
+schemes:
+- name: oauth2
+  source: a2a/hightouch-agent-card.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://mcp-auth.hightouch.com/oauth2/authorize
+    tokenUrl: https://mcp-auth.hightouch.com/oauth2/token
+    refreshUrl: https://mcp-auth.hightouch.com/oauth2/token
+grant_types_supported:
+- authorization_code
+- client_credentials
+- refresh_token
+- urn:ietf:params:oauth:grant-type:device_code
+dynamic_client_registration: https://mcp-auth.hightouch.com/oauth2/register
+scopes:
+- scope: openid
+  description: OpenID Connect sign-in; issues an ID token (RS256).
+  flows:
+  - authorizationCode
+  sources:
+  - /.well-known/oauth-authorization-server
+- scope: profile
+  description: Basic profile claims about the authenticated Hightouch user.
+  flows:
+  - authorizationCode
+  sources:
+  - /.well-known/oauth-authorization-server
+- scope: email
+  description: Email claim for the authenticated Hightouch user.
+  flows:
+  - authorizationCode
+  sources:
+  - /.well-known/oauth-authorization-server
+- scope: offline_access
+  description: Issues a refresh token so an agent can act beyond the initial session.
+  flows:
+  - authorizationCode
+  sources:
+  - /.well-known/oauth-authorization-server
+authorization_model: Beyond OAuth scopes, access is governed by Hightouch workspace RBAC — the agent card
+  states all operations are scoped to the authenticated workspace and respect existing role-based access
+  controls. See https://hightouch.com/docs/workspace-management/roles.

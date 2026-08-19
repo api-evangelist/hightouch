@@ -1,0 +1,249 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/hightouch-api-openapi.json
+format: vendor
+note: 'Hightouch does not use RFC 9457 problem+json. Two envelopes appear in the spec: ValidateErrorJSON
+  {message, details} for 409/422, and TriggerErrorResponse {error} for 400/404/409/429 on the trigger
+  family. 401 responses observed live return {"message":"Authentication error","details":"..."}.'
+envelopes:
+- name: ValidateErrorJSON
+  shape:
+    message: string ("Validation failed")
+    details: object
+  statuses:
+  - 409
+  - 422
+- name: TriggerErrorResponse
+  shape:
+    error: string
+  statuses:
+  - 400
+  - 404
+  - 409
+  - 429
+- name: AuthenticationError
+  shape:
+    message: string
+    details: string
+  statuses:
+  - 401
+  observed: Live GET https://api.hightouch.com/api/v1/sources with no Authorization header returned 401
+    {"message":"Authentication error","details":"No authorization header found"}; with an invalid bearer
+    it returned {"...":"Token is invalid"}. Observed 2026-08-13.
+- name: InternalServerError
+  shape: string enum "Internal Server Error"
+  statuses:
+  - 500
+problems:
+- status: 400
+  title: Bad Request
+  schema: null
+  operations:
+  - ListIdrRuns
+  - QueueForReprocessing
+  - ReprocessStatus
+  - TriggerIdrRun
+  - TriggerRunIdGraph
+- status: 400
+  title: Bad Request
+  schema: TriggerErrorResponse
+  operations:
+  - TriggerCampaign
+- status: 400
+  title: Bad request
+  schema: null
+  operations:
+  - GetSyncSequenceRun
+  - ListContracts
+  - ListDestination
+  - ListDomains
+  - ListModel
+  - ListSource
+  - ListSync
+  - ListSyncRuns
+  - TriggerRun
+  - TriggerRunCustom
+  - TriggerSequenceRun
+- status: 401
+  title: Unauthorized
+  schema: null
+  operations:
+  - CreateContract
+  - CreateDestination
+  - CreateDomain
+  - CreateMessage
+  - CreateModel
+  - CreateSource
+  - CreateSync
+  - GetContract
+  - GetDestination
+  - GetDomain
+  - GetFlow
+  - GetMessage
+  - GetModel
+  - GetSendStatus
+  - GetSource
+  - GetSync
+  - GetSyncSequenceRun
+  - ListContracts
+  - ListDestination
+  - ListDomains
+  - ListFlows
+  - ListIdrRuns
+  - ListMessages
+  - ListModel
+  - ListSource
+  - ListSync
+  - ListSyncRuns
+  - QueueForReprocessing
+  - ReprocessStatus
+  - RunFlow
+  - TriggerCampaign
+  - TriggerIdrRun
+  - TriggerRun
+  - TriggerRunCustom
+  - TriggerRunIdGraph
+  - TriggerSequenceRun
+  - UpdateContract
+  - UpdateDestination
+  - UpdateDomain
+  - UpdateMessage
+  - UpdateModel
+  - UpdateSource
+  - UpdateSync
+- status: 403
+  title: Forbidden
+  schema: null
+  operations:
+  - CreateContract
+  - CreateDomain
+  - CreateMessage
+  - GetFlow
+  - GetMessage
+  - ListFlows
+  - ListIdrRuns
+  - ListMessages
+  - QueueForReprocessing
+  - ReprocessStatus
+  - RunFlow
+  - TriggerIdrRun
+  - TriggerRunIdGraph
+  - UpdateContract
+  - UpdateDomain
+  - UpdateMessage
+  - UpdateSource
+- status: 404
+  title: Campaign not found
+  schema: TriggerErrorResponse
+  operations:
+  - TriggerCampaign
+- status: 404
+  title: Not Found
+  schema: null
+  operations:
+  - ListIdrRuns
+  - QueueForReprocessing
+  - ReprocessStatus
+  - TriggerIdrRun
+  - TriggerRunIdGraph
+- status: 404
+  title: Not found
+  schema: null
+  operations:
+  - CreateMessage
+  - GetContract
+  - GetDestination
+  - GetDomain
+  - GetFlow
+  - GetMessage
+  - GetModel
+  - GetSource
+  - GetSync
+  - ListMessages
+  - RunFlow
+  - UpdateContract
+  - UpdateDestination
+  - UpdateDomain
+  - UpdateMessage
+  - UpdateModel
+  - UpdateSource
+  - UpdateSync
+- status: 404
+  title: Send not found
+  schema: TriggerErrorResponse
+  operations:
+  - GetSendStatus
+- status: 409
+  title: Conflict
+  schema: ValidateErrorJSON
+  operations:
+  - CreateDestination
+  - CreateModel
+  - CreateSource
+  - CreateSync
+- status: 422
+  title: Validation Failed
+  schema: ValidateErrorJSON
+  operations:
+  - CreateContract
+  - CreateDestination
+  - CreateDomain
+  - CreateMessage
+  - CreateModel
+  - CreateSource
+  - CreateSync
+  - GetContract
+  - GetDomain
+  - GetSendStatus
+  - GetSource
+  - GetSyncSequenceRun
+  - ListContracts
+  - ListDestination
+  - ListDomains
+  - ListIdrRuns
+  - ListModel
+  - ListSync
+  - ListSyncRuns
+  - QueueForReprocessing
+  - ReprocessStatus
+  - TriggerCampaign
+  - TriggerIdrRun
+  - TriggerRun
+  - TriggerRunCustom
+  - TriggerRunIdGraph
+  - TriggerSequenceRun
+  - UpdateContract
+  - UpdateDestination
+  - UpdateDomain
+  - UpdateMessage
+  - UpdateModel
+  - UpdateSource
+  - UpdateSync
+- status: 429
+  title: Rate limited
+  schema: TriggerErrorResponse
+  operations:
+  - TriggerCampaign
+- status: 500
+  title: Something went wrong
+  schema: InternalServerError
+  operations:
+  - CreateContract
+  - CreateDestination
+  - CreateDomain
+  - CreateMessage
+  - CreateModel
+  - CreateSource
+  - CreateSync
+  - GetSendStatus
+  - RunFlow
+  - TriggerCampaign
+  - UpdateContract
+  - UpdateDestination
+  - UpdateDomain
+  - UpdateMessage
+  - UpdateModel
+  - UpdateSource
+  - UpdateSync
+documented_remediation: https://hightouch.com/docs/developer-tools/api-guide#tips-and-troubleshooting
+  — 401 bodies are explained there (API key creator deactivated or removed after an SSO migration).

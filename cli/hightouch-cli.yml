@@ -1,0 +1,48 @@
+generated: '2026-08-13'
+method: searched
+source: https://hightouch.com/docs/developer-tools/cli-guide, https://hightouch.com/docs/developer-tools/cli-reference,
+  https://github.com/hightouchio/cli
+name: ht
+description: Hightouch's command line interface for reading resource definitions and triggering sync runs
+  from a terminal or automation script.
+install:
+- method: shell
+  command: curl -sLf https://getcli.hightouch.io | sh -
+  note: Documented install path; getcli.hightouch.io returns HTTP 200.
+- method: shell-pinned
+  command: curl -sLf https://getcli.hightouch.io | INSTALL_HT_VERSION=v0.1.0 sh -
+- method: npm
+  command: npm install -g @hightouch/cli
+  verified: false
+  note: Named in the provider's own skill.md, but @hightouch/cli returns 404 from the npm registry. Recorded
+    as unverified so an agent does not run a command that cannot succeed.
+auth:
+- command: ht login
+  note: Prompts for a workspace API key.
+- env: HIGHTOUCH_APIKEY
+  usage: HIGHTOUCH_APIKEY=${yourkey} ht COMMANDS
+commands:
+- group: auth
+  commands:
+  - ht login
+- group: syncs
+  commands:
+  - ht syncs list
+  - ht syncs trigger <sync-id>
+- group: models
+  commands:
+  - ht models list
+- group: sources
+  commands:
+  - ht sources list
+commands_note: Command surface above is what the provider prints in the CLI guide and skill.md. The full
+  reference at /developer-tools/cli-reference is client-rendered and was not enumerated here rather than
+  guessed.
+repository: https://github.com/hightouchio/cli
+latest_release:
+  tag: v0.1.1
+  date: '2022-07-29'
+  note: Last tagged GitHub release is four years old, while the API it drives has grown to 43 operations
+    across campaigns, decision-engine, events and IDR.
+issues: https://github.com/hightouchio/cli/issues
+packages_artifact: packages/hightouch-packages.yml

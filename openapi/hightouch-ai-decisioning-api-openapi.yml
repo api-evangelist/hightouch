@@ -1,0 +1,626 @@
+openapi: 3.0.0
+info:
+  title: Hightouch AI Decisioning API
+  description: Hightouch Public Rest API to access syncs, models, sources and destinations
+  version: 1.0.0
+  contact:
+    name: Hightouch
+    url: https://hightouch.com
+  x-harvested-from: https://api.hightouch.io/api/swagger.json
+  x-harvested-on: '2026-08-13'
+  x-source-document: openapi/_original/hightouch-api-openapi.json
+servers:
+- url: https://api.hightouch.com/api/v1
+tags:
+- name: AI Decisioning
+paths:
+  /decision-engine/flow/{flowId}:
+    get:
+      operationId: GetFlow
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/DecisionEngineFlow'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+                nullable: true
+              examples:
+                Example 1:
+                  value:
+                    id: 550e8400-e29b-41d4-a716-446655440000
+                    name: My Flow
+                    workspaceId: 1
+                    decisionEngineId: 660e8400-e29b-41d4-a716-446655440001
+                    audienceId: 100
+                    status: active
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      description: Retrieve a decision engine flow by ID
+      summary: Get Decision Engine Flow
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The UUID of the flow
+        in: path
+        name: flowId
+        required: true
+        schema:
+          type: string
+      tags:
+      - AI Decisioning
+  /decision-engine/flows:
+    get:
+      operationId: ListFlows
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - properties:
+                    hasMore:
+                      type: boolean
+                    data:
+                      items:
+                        $ref: '#/components/schemas/DecisionEngineFlow'
+                      type: array
+                  required:
+                  - hasMore
+                  - data
+                  type: object
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+                nullable: true
+              examples:
+                Example 1:
+                  value:
+                    data:
+                    - id: 550e8400-e29b-41d4-a716-446655440000
+                      name: My Flow
+                      workspaceId: 1
+                      decisionEngineId: 660e8400-e29b-41d4-a716-446655440001
+                      audienceId: 100
+                      status: active
+                    hasMore: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      description: List decision engine flows in the workspace
+      summary: List Decision Engine Flows
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: optional filter by flow name
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+      - description: max results (default 100)
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          format: double
+          type: number
+      - description: pagination offset
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: double
+          type: number
+      - description: sort field
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          default: id
+          type: string
+          enum:
+          - id
+          - name
+      tags:
+      - AI Decisioning
+  /decision-engine/flow/{flowId}/messages:
+    get:
+      operationId: ListMessages
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - properties:
+                    hasMore:
+                      type: boolean
+                    data:
+                      items:
+                        $ref: '#/components/schemas/DecisionEngineMessage'
+                      type: array
+                  required:
+                  - hasMore
+                  - data
+                  type: object
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+                nullable: true
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      description: List messages for a flow
+      summary: List Decision Engine Messages
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The UUID of the flow
+        in: path
+        name: flowId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          format: double
+          type: number
+      - in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: double
+          type: number
+      tags:
+      - AI Decisioning
+    post:
+      operationId: CreateMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/DecisionEngineMessage'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+                nullable: true
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      description: Create a message in a flow
+      summary: Create Decision Engine Message
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The UUID of the flow
+        in: path
+        name: flowId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DecisionEngineMessageCreate'
+      tags:
+      - AI Decisioning
+  /decision-engine/flow/{flowId}/messages/{messageId}:
+    get:
+      operationId: GetMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/DecisionEngineMessage'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+                nullable: true
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      description: Get a single message by flow and message ID
+      summary: Get Decision Engine Message
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The UUID of the flow
+        in: path
+        name: flowId
+        required: true
+        schema:
+          type: string
+      - description: The UUID of the message
+        in: path
+        name: messageId
+        required: true
+        schema:
+          type: string
+      tags:
+      - AI Decisioning
+    patch:
+      operationId: UpdateMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/DecisionEngineMessage'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+                nullable: true
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      description: Update a message
+      summary: Update Decision Engine Message
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The UUID of the flow
+        in: path
+        name: flowId
+        required: true
+        schema:
+          type: string
+      - description: The UUID of the message
+        in: path
+        name: messageId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DecisionEngineMessageUpdate'
+      tags:
+      - AI Decisioning
+  /decision-engine/flow/{flowId}/run:
+    post:
+      operationId: RunFlow
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/DecisionEngineRunResponse'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+                nullable: true
+              examples:
+                Example 1:
+                  value:
+                    flowsEnqueued: 1
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      description: Trigger a decision engine run for a specific flow
+      summary: Trigger Decision Engine Flow Run
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The UUID of the flow
+        in: path
+        name: flowId
+        required: true
+        schema:
+          type: string
+      tags:
+      - AI Decisioning
+components:
+  schemas:
+    DecisionEngineFlow:
+      description: Decision Engine Flow (Public API)
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        workspaceId:
+          type: number
+          format: double
+        decisionEngineId:
+          type: string
+        audienceId:
+          type: number
+          format: double
+        status:
+          type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - workspaceId
+      - decisionEngineId
+      - audienceId
+      - status
+      type: object
+      additionalProperties: false
+    DecisionEngineMessage:
+      description: Decision Engine Message (Public API)
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        channelId:
+          type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        tags:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariable'
+          type: array
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - channelId
+      - config
+      type: object
+      additionalProperties: false
+    DecisionEngineMessageCreate:
+      description: Request body for creating a Decision Engine message
+      properties:
+        name:
+          type: string
+        channelId:
+          type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        tags:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariable'
+          type: array
+      required:
+      - name
+      - channelId
+      - config
+      type: object
+      additionalProperties: false
+    DecisionEngineMessageGuardrails:
+      description: Guardrail fields on a message (max sends, eligibility dates, etc.)
+      properties:
+        maxSendsPerUser:
+          type: number
+          format: double
+        maxSendsPerUserWindowDays:
+          type: number
+          format: double
+        minOtherMessagesInBetween:
+          type: number
+          format: double
+        firstEligibleSendDate:
+          type: string
+        lastEligibleSendDate:
+          type: string
+      type: object
+      additionalProperties: false
+    DecisionEngineMessageUpdate:
+      description: Request body for updating a Decision Engine message
+      properties:
+        name:
+          type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        tags:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariable'
+          type: array
+      type: object
+      additionalProperties: false
+    DecisionEngineRunResponse:
+      properties:
+        flowsEnqueued:
+          type: number
+          format: double
+          description: Number of flows that were enqueued for execution
+      required:
+      - flowsEnqueued
+      type: object
+      additionalProperties: false
+    DecisionEngineVariable:
+      description: Message variable (Public API)
+      properties:
+        name:
+          type: string
+          description: The variable name (must be unique within a message)
+        config:
+          properties:
+            localizationEnabled:
+              type: boolean
+              description: 'When true, the Decision Engine uses each variant''s localeValues to select
+
+                locale-appropriate content at runtime. When false or omitted, only the
+
+                default variant value is used, even if localeValues are present.'
+            maxSendsPerUserWindowDays:
+              type: number
+              format: double
+              description: Rolling window in days for the maxSendsPerUser limit
+            maxSendsPerUser:
+              type: number
+              format: double
+              description: Maximum number of times this variable's variants can be sent to a single user
+          type: object
+        variants:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariableVariant'
+          type: array
+      required:
+      - name
+      - variants
+      type: object
+      additionalProperties: false
+    DecisionEngineVariableVariant:
+      description: Variant within a message variable (Public API)
+      properties:
+        value:
+          type: string
+          description: The default (non-localized) value for this variant
+        tags:
+          properties: {}
+          additionalProperties:
+            type: string
+          type: object
+          description: Key-value tags for categorizing this variant
+        firstEligibleSendDate:
+          type: string
+          description: Earliest date this variant is eligible to be sent (ISO 8601)
+        lastEligibleSendDate:
+          type: string
+          description: Latest date this variant is eligible to be sent (ISO 8601)
+        userAudienceFilter: {}
+        localeValues:
+          properties: {}
+          additionalProperties:
+            type: string
+          type: object
+          description: 'Localized values for this variant, keyed by locale code (e.g. "en-US", "de-DE").
+
+            These are only used at runtime when `localizationEnabled` is true on the parent variable.
+
+            You can stage translations by providing localeValues while leaving localizationEnabled unset
+            or false.'
+      required:
+      - value
+      type: object
+      additionalProperties: false
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
+      nullable: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+          nullable: false
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Bearer
+security:
+- bearerAuth: []

@@ -1,0 +1,91 @@
+generated: '2026-08-13'
+method: generated
+source: openapi/_original/hightouch-api-openapi.json, conventions/hightouch-conventions.yml, errors/hightouch-problem-types.yml,
+  https://hightouch.com/docs/developer-tools/api-guide
+note: 'Every operationId referenced below was verified against the harvested spec. hightouch-docs-skill.md
+  is the PROVIDER''s own skill file, saved verbatim from https://hightouch.com/docs/skill.md (method:
+  searched) — it follows the agentskills.io spec.'
+skills:
+- file: hightouch-docs-skill.md
+  name: hightouch-docs
+  description: 'Provider-published Hightouch skill file: REST API, CLI, Events SDK, sync modes and core
+    data model.'
+  method: searched
+  source: https://hightouch.com/docs/skill.md
+  api: null
+  operations: []
+- file: hightouch-build-a-sync.md
+  name: Build a warehouse-to-destination sync
+  description: Stand up the full Hightouch chain — source, model, destination, sync — and run it once.
+  method: generated
+  api: openapi/_original/hightouch-api-openapi.json
+  operations:
+  - ListSource
+  - CreateSource
+  - ListModel
+  - CreateModel
+  - ListDestination
+  - CreateDestination
+  - CreateSync
+  - TriggerRun
+  - ListSyncRuns
+- file: hightouch-trigger-and-monitor-a-run.md
+  name: Trigger a sync run and monitor it to completion
+  description: Kick off a Hightouch sync from an orchestrator by id or slug and poll it safely to a terminal
+    state.
+  method: generated
+  api: openapi/_original/hightouch-api-openapi.json
+  operations:
+  - TriggerRun
+  - TriggerRunCustom
+  - ListSyncRuns
+  - GetSync
+  - TriggerSequenceRun
+  - GetSyncSequenceRun
+- file: hightouch-govern-event-schemas.md
+  name: Govern first-party event schemas
+  description: Create and maintain Hightouch Events contracts and domains so undeclared events are handled
+    deliberately.
+  method: generated
+  api: openapi/_original/hightouch-api-openapi.json
+  operations:
+  - ListContracts
+  - GetContract
+  - CreateContract
+  - UpdateContract
+  - ListDomains
+  - GetDomain
+  - CreateDomain
+  - UpdateDomain
+- file: hightouch-run-ai-decisioning-flow.md
+  name: Operate an AI Decisioning flow
+  description: Inspect, extend and run a Hightouch AI Decisioning flow and its message variants.
+  method: generated
+  api: openapi/_original/hightouch-api-openapi.json
+  operations:
+  - ListFlows
+  - GetFlow
+  - ListMessages
+  - GetMessage
+  - CreateMessage
+  - UpdateMessage
+  - RunFlow
+- file: hightouch-identity-resolution-run.md
+  name: Run and reprocess an identity graph
+  description: Trigger a Hightouch identity-resolution run, watch it, and queue records for reprocessing.
+  method: generated
+  api: openapi/_original/hightouch-api-openapi.json
+  operations:
+  - TriggerIdrRun
+  - ListIdrRuns
+  - TriggerRunIdGraph
+  - QueueForReprocessing
+  - ReprocessStatus
+- file: hightouch-send-campaign.md
+  name: Trigger a campaign send and confirm delivery
+  description: Send a Hightouch campaign to specific recipients and read back the per-send status.
+  method: generated
+  api: openapi/_original/hightouch-api-openapi.json
+  operations:
+  - TriggerCampaign
+  - GetSendStatus

@@ -1,0 +1,48 @@
+generated: '2026-08-13'
+method: probed
+source: https://api.hightouch.com/.well-known/agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: api.hightouch.com
+  also_served_at: https://api.hightouch.io/.well-known/agent-card.json
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: 0.3.0
+  preferred_transport: JSONRPC
+  checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+    preferred_transport_present: true
+    default_input_modes_present: true
+    default_output_modes_present: true
+  deviations: []
+card:
+  name: Hightouch Marketing Agent
+  description: Hightouch's AI marketing agent. Builds and saves audiences and journeys, and answers marketing
+    analytics and strategy questions over your customer data.
+  url: https://api.hightouch.com/api/v1/a2a/messages
+  version: 1.0.0
+  provider: Hightouch
+  skills: 3
+  skill_ids:
+  - audiences
+  - journeys
+  - marketing-analytics
+  extensions:
+  - https://a2ui.org/a2a-extension/a2ui/v0.8
+  security: oauth2 authorizationCode via https://mcp-auth.hightouch.com/oauth2/authorize
+  file: hightouch-agent-card.json
+x-evidence:
+  fetched: '2026-08-13'
+  url: https://api.hightouch.com/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json; charset=utf-8
+  endpoint_probe:
+    url: https://api.hightouch.com/api/v1/a2a/messages
+    http_status: 401
+    www_authenticate: Bearer resource_metadata="https://api.hightouch.com/.well-known/oauth-protected-resource"
+    note: The A2A message endpoint named by the card is live and returns a spec-correct OAuth challenge
+      pointing back at the protected-resource metadata. Not a stub.

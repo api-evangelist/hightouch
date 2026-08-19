@@ -1,12 +1,69 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/hightouch-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: openapi/_original/hightouch-api-openapi.json, https://hightouch.com/docs/developer-tools/api-guide,
+  https://api.hightouch.com/.well-known/oauth-protected-resource, a2a/hightouch-agent-card.json
+docs: https://hightouch.com/docs/developer-tools/api-guide
 summary:
   types:
   - http
+  - oauth2
+  - openIdConnect
+  api_key_in:
+  - header
+  oauth2_flows:
+  - authorizationCode
+  surfaces:
+    rest_management_api: bearer workspace API key
+    a2a_agent: oauth2 authorizationCode (mcp-auth.hightouch.com)
+    workspace_mcp: oauth2 (same authorization server)
+    docs_mcp: none (anonymous)
+    events_ingest: write key (per-source), see https://hightouch.com/docs/events/overview
 schemes:
 - name: bearerAuth
   type: http
   scheme: bearer
+  bearerFormat: Bearer
   sources:
-  - openapi/hightouch-openapi.yml
+  - openapi/_original/hightouch-api-openapi.json
+  applies_to: https://api.hightouch.com/api/v1 (all 43 operations)
+  credential: Workspace API key created by an Admin user under Settings > API keys
+  env_var: HIGHTOUCH_APIKEY (used by the ht CLI)
+  notes:
+  - Keys authenticate AS THEIR CREATING USER. If that user is deactivated, loses workspace access, or
+    is removed during an SSO migration, every key they created stops working — the provider documents
+    this as the most common cause of 401s.
+  - Admin role is required to create an API key.
+  - TLS 1.2 or later is required; the API publishes its accepted cipher suite list.
+  - Keys are revocable individually from the Settings > API keys tab.
+- name: oauth2
+  type: oauth2
+  sources:
+  - a2a/hightouch-agent-card.json
+  - https://api.hightouch.com/.well-known/oauth-authorization-server
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://mcp-auth.hightouch.com/oauth2/authorize
+    tokenUrl: https://mcp-auth.hightouch.com/oauth2/token
+  applies_to: https://api.hightouch.com/api/v1/a2a/messages and the workspace MCP server
+  scopes:
+  - openid
+  - profile
+  - email
+  - offline_access
+  notes:
+  - 'Protected-resource metadata is advertised per RFC 9728; an unauthenticated POST to the A2A endpoint
+    returns 401 with WWW-Authenticate: Bearer resource_metadata="https://api.hightouch.com/.well-known/oauth-protected-resource".'
+  - Dynamic client registration is open at /oauth2/register.
+  - token_endpoint_auth_methods_supported includes `none`, i.e. public PKCE clients are allowed.
+- name: openIdConnect
+  type: openIdConnect
+  openIdConnectUrl: https://api.hightouch.com/.well-known/openid-configuration
+  sources:
+  - well-known/hightouch-openid-configuration.json
+  notes:
+  - Same issuer as the OAuth AS (mcp-auth.hightouch.com); RS256 ID tokens; userinfo endpoint.
+workspace_access_control:
+  sso: SAML 2.0 / Okta / Azure AD / Google — https://hightouch.com/docs/workspace-management/sso
+  rbac: https://hightouch.com/docs/workspace-management/roles
+  approval_flows: https://hightouch.com/docs/workspace-management/approval-flows
+  audit_logs: https://hightouch.com/docs/workspace-management/overview

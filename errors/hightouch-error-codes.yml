@@ -1,0 +1,539 @@
+generated: '2026-08-13'
+method: searched
+source: https://hightouch.com/docs/developer-tools/error-codes
+note: Hightouch's platform error-code registry. These are operational sync/destination error codes surfaced
+  on sync runs and in the UI, not HTTP status codes — the HTTP-level error envelopes for the REST API
+  are in errors/hightouch-problem-types.yml. Third-party API errors are passed through verbatim and are
+  explicitly out of scope of this registry per the provider.
+categories:
+- Destination errors
+- Predictive traits errors
+- Rejected-row errors
+- Sync request errors
+error_count: 101
+errors:
+- code: DUPLICATE_COLUMNS_DETECTED
+  category: Sync request errors
+  destination: null
+  meaning: Your model query returns duplicate column names.
+  action: Alias columns in your model SQL so every selected field has a unique name.
+- code: NON_UNIQUE_PRIMARY_KEY
+  category: Sync request errors
+  destination: null
+  meaning: The selected primary key contains duplicate values.
+  action: Update your model so each row has a unique identifier. If you're using a SQL model, add a `DISTINCT`
+    clause or `GROUP BY` on the key column.
+- code: UNSUPPORTED_PRIMARY_KEY_TYPE
+  category: Sync request errors
+  destination: null
+  meaning: The primary key's data type isn't supported for this sync path.
+  action: Cast the primary key to a supported type (typically `VARCHAR` or `INTEGER`) in your model SQL.
+- code: QUERY_COLUMN_MISSING
+  category: Sync request errors
+  destination: null
+  meaning: A column referenced in your sync configuration no longer exists in the model query results.
+  action: Refresh the model schema in Hightouch and update your field mappings to use valid columns.
+- code: WAREHOUSE_TABLE_MISSING
+  category: Sync request errors
+  destination: null
+  meaning: A warehouse table required for sync planning doesn't exist.
+  action: Confirm the table still exists in your warehouse and that the model points to the correct schema
+    and table name.
+- code: PREVIOUS_SYNC_RUN_OBJECT_MISSING
+  category: Sync request errors
+  destination: null
+  meaning: Stored objects from the previous sync run are missing, usually because cached plan data expired.
+  action: Retry the sync. If it persists, trigger a full resync to rebuild sync state.
+- code: REMOVE_PLAN_INCOMPLETE
+  category: Sync request errors
+  destination: null
+  meaning: Backfill or removal planning couldn't complete during a planner transition.
+  action: Retry the sync after a few minutes. If it continues, contact support.
+- code: REMOVE_RETRY_CHANGED_COLUMN_TYPES
+  category: Sync request errors
+  destination: null
+  meaning: Rejected-row removal retries are unsafe because model column types changed between runs.
+  action: Refresh your model schema and trigger a full resync from a consistent state.
+- code: SORT_RAN_OUT_OF_DISK_SPACE
+  category: Sync request errors
+  destination: null
+  meaning: Sorting rows exhausted available disk space.
+  action: Narrow the model to reduce row volume, or contact support for infrastructure help.
+- code: UNSPECIFIED
+  category: Sync request errors
+  destination: null
+  meaning: Hightouch couldn't classify the failure into a more specific code.
+  action: Use the live debugger and warehouse sync logs to identify the root cause.
+- code: DESTINATION_INVALID_GRANT
+  category: Destination errors
+  destination: null
+  meaning: The destination's authorization grant expired or was revoked.
+  action: Reconnect the destination in Hightouch to refresh authorization.
+- code: DESTINATION_INVALID_CREDENTIALS
+  category: Destination errors
+  destination: null
+  meaning: The destination credentials are invalid.
+  action: Verify the username, password, token, or secret configured for the destination. Reconnect if
+    needed.
+- code: DESTINATION_INVALID_API_KEY
+  category: Destination errors
+  destination: null
+  meaning: The API key is invalid or expired.
+  action: Replace it with a current key that has the required permissions.
+- code: DESTINATION_DEFINITION_NOT_FOUND
+  category: Destination errors
+  destination: null
+  meaning: Hightouch couldn't load the destination type definition.
+  action: Confirm you're using a supported destination type. If the connector appears broken, contact
+    support.
+- code: DESTINATION_INTERNAL_ERROR
+  category: Destination errors
+  destination: null
+  meaning: The destination returned a generic internal failure or timed out.
+  action: Retry the sync. If it continues, check the destination's status page for outages, or contact
+    support.
+- code: DESTINATION_RATE_LIMIT
+  category: Destination errors
+  destination: null
+  meaning: The destination rate-limited the sync.
+  action: Wait for the rate limit window to reset, then retry. To prevent recurrence, reduce sync frequency
+    or batch volume.
+- code: DESTINATION_MISSING_AD_ACCOUNT
+  category: Destination errors
+  destination: null
+  meaning: A required ad account is missing from the destination configuration or inaccessible.
+  action: Re-check the destination setup and confirm your account has access to the selected ad account.
+- code: DESTINATION_PAYLOAD_TOO_LARGE
+  category: Destination errors
+  destination: null
+  meaning: The destination rejected the payload as too large.
+  action: Reduce batch size in your sync configuration, or trim the number of mapped fields.
+- code: SALESFORCE_INACTIVE_USER
+  category: Destination errors
+  destination: Salesforce
+  meaning: The Salesforce integration user is inactive.
+  action: Reconnect the destination with an active Salesforce user.
+- code: SALESFORCE_EXPIRED_TOKEN
+  category: Destination errors
+  destination: Salesforce
+  meaning: The Salesforce access token expired.
+  action: Reauthorize the destination in Hightouch.
+- code: SALESFORCE_INACTIVE_ORG
+  category: Destination errors
+  destination: Salesforce
+  meaning: The Salesforce org is inactive or inaccessible.
+  action: Confirm the org is active and the integration user can log in.
+- code: SALESFORCE_RESOURCE_DOES_NOT_EXIST
+  category: Destination errors
+  destination: Salesforce
+  meaning: A referenced Salesforce object, field, or record doesn't exist.
+  action: Check the object name, field name, or record ID in your sync configuration.
+- code: SALESFORCE_AUTH_FAILURE
+  category: Destination errors
+  destination: Salesforce
+  meaning: Salesforce authentication failed.
+  action: Re-check credentials, connected app settings, and any IP or login restrictions in Salesforce.
+- code: SALESFORCE_REQUESTS_LIMIT_EXCEEDED
+  category: Destination errors
+  destination: Salesforce
+  meaning: Salesforce API limits were exceeded.
+  action: Wait for the limit to reset, or reduce sync frequency and concurrency. See Salesforce API limits.
+- code: SALESFORCE_NETWORK_DIFFICULTY
+  category: Destination errors
+  destination: Salesforce
+  meaning: A network or transport failure prevented the Salesforce request from completing.
+  action: Retry the sync and check for temporary Salesforce outages on Salesforce Status.
+- code: SALESFORCE_MAX_CALL_STACK
+  category: Destination errors
+  destination: Salesforce
+  meaning: Salesforce hit a recursion or call-stack limit during processing.
+  action: 'Review Apex triggers, flows, and automation rules that may be recursively updating records
+    during the sync. See Salesforce: UNABLE_TO_LOCK_ROW for related guidance.'
+- code: SALESFORCE_UNABLE_TO_LOCK_ROW
+  category: Destination errors
+  destination: Salesforce
+  meaning: Salesforce row locking prevented the write because another process is modifying the same record.
+  action: 'Retry later, reduce concurrent updates, or lower your parallelization setting. See Salesforce:
+    UNABLE_TO_LOCK_ROW for detailed steps.'
+- code: SFMC_DATA_EXTENSION_ADD_UPDATE_ONLY
+  category: Destination errors
+  destination: Salesforce Marketing Cloud (SFMC)
+  meaning: This SFMC sync path only supports add and update operations.
+  action: Change the sync mode or target a Data Extension that supports the requested operation.
+- code: SFMC_IMPORT_FAILED_NO_RECORDS
+  category: Destination errors
+  destination: Salesforce Marketing Cloud (SFMC)
+  meaning: The SFMC import failed because no records were present in the batch.
+  action: Confirm that the source model returned rows for this sync run.
+- code: SFMC_INVALID_CLIENT_SECRET
+  category: Destination errors
+  destination: Salesforce Marketing Cloud (SFMC)
+  meaning: The installed package's client secret expired or is invalid, so SFMC rejected authentication.
+    Client secrets expire 180 days after they're generated.
+  action: 'Rotate the client secret in SFMC and update the destination configuration. See SFMC: Client
+    secret rotation.'
+- code: HUBSPOT_RATE_LIMIT_DAILY
+  category: Destination errors
+  destination: HubSpot
+  meaning: HubSpot's daily API limit was reached.
+  action: Wait for the daily limit to reset (typically midnight ET). To prevent recurrence, reduce sync
+    frequency or volume. See HubSpot API usage guidelines.
+- code: HUBSPOT_RATE_LIMIT_TEN_SECONDLY
+  category: Destination errors
+  destination: HubSpot
+  meaning: HubSpot's rolling 10-second rate limit was reached.
+  action: Hightouch automatically retries these. If the error persists across runs, reduce concurrent
+    syncs to HubSpot.
+- code: HUBSPOT_RATE_LIMIT_SECONDLY
+  category: Destination errors
+  destination: HubSpot
+  meaning: HubSpot's per-second rate limit was reached.
+  action: Hightouch automatically retries these. Reduce burst volume if the error recurs.
+- code: HUBSPOT_INVALID_REFRESH_TOKEN
+  category: Destination errors
+  destination: HubSpot
+  meaning: The HubSpot OAuth refresh token is invalid or expired.
+  action: Reconnect the HubSpot destination in Hightouch to generate a new token.
+- code: HUBSPOT_SYNC_ERROR
+  category: Destination errors
+  destination: HubSpot
+  meaning: HubSpot returned a generic sync error.
+  action: Retry the sync. If it continues, check HubSpot-side logs and object validation rules.
+- code: HUBSPOT_CONNECTION_ERROR
+  category: Destination errors
+  destination: HubSpot
+  meaning: A connection failure prevented the HubSpot request from completing.
+  action: Retry and check for temporary HubSpot outages on HubSpot Status.
+- code: HUBSPOT_CONTACT_ALREADY_EXISTS
+  category: Destination errors
+  destination: HubSpot
+  meaning: A contact with this email already exists in HubSpot.
+  action: 'Review your record matching configuration. HubSpot uses email as the primary unique identifier.
+    See HubSpot: 409 - Contact already exists for detailed steps.'
+- code: HUBSPOT_CLOUDFLARE_BLOCKED_IP
+  category: Destination errors
+  destination: HubSpot
+  meaning: HubSpot's Cloudflare proxy blocked the request IP.
+  action: If you use Hightouch's static IPs, confirm they aren't blocked by your HubSpot account's network
+    settings. Contact HubSpot support if needed.
+- code: GOOGLE_ADS_INTERNAL_SERVER_ERROR
+  category: Destination errors
+  destination: Google Ads
+  meaning: Google Ads returned an internal server error.
+  action: Retry the sync after a short delay. Check Google Ads Status for outages.
+- code: GOOGLE_ADS_USER_LIST_NOT_FOUND
+  category: Destination errors
+  destination: Google Ads
+  meaning: The target Google Ads audience doesn't exist.
+  action: Confirm the audience still exists in Google Ads and the connected account has access.
+- code: GOOGLE_ADS_UNAUTHORIZED
+  category: Destination errors
+  destination: Google Ads
+  meaning: Google Ads rejected the request due to missing permissions or invalid authorization.
+  action: Reauthorize the destination and confirm the connected account has the required access level.
+- code: GOOGLE_ADS_USER_LIST_NAME_ALREADY_IN_USE
+  category: Destination errors
+  destination: Google Ads
+  meaning: An audience with this name already exists in Google Ads.
+  action: Use a unique audience name, or connect the sync to the existing audience.
+- code: GOOGLE_ADS_CONCURRENT_MODIFICATION
+  category: Destination errors
+  destination: Google Ads
+  meaning: Google Ads rejected the update because another change is still processing.
+  action: Wait a few minutes and retry. Avoid running multiple syncs to the same audience simultaneously.
+- code: GOOGLE_ADS_STORE_SALES_DIRECT_DATA_NOT_ALLOWED
+  category: Destination errors
+  destination: Google Ads
+  meaning: Store sales direct data isn't enabled for this Google Ads account.
+  action: Confirm account eligibility and enable the feature in Google Ads. See Google Ads Store Sales
+    requirements.
+- code: GOOGLE_ADS_GENERIC_INVALID_ARGUMENT
+  category: Destination errors
+  destination: Google Ads
+  meaning: Google Ads rejected the request as invalid.
+  action: Review required fields, identifiers, and mapped values. Use the live debugger to inspect the
+    rejected payload.
+- code: BRAZE_SERVICE_UNAVAILABLE
+  category: Destination errors
+  destination: Braze
+  meaning: Braze is temporarily unavailable.
+  action: Retry the sync after a short delay. Check Braze Status for outages.
+- code: BRAZE_ACCESS_DENIED
+  category: Destination errors
+  destination: Braze
+  meaning: Braze denied access to the API.
+  action: Confirm the API key has the required permissions in your Braze dashboard.
+- code: BRAZE_INVALID_REQUEST
+  category: Destination errors
+  destination: Braze
+  meaning: Braze rejected the request content or structure.
+  action: Check required fields and value formats. Use the live debugger to inspect the rejected payload.
+- code: TIKTOK_GATEWAY_TIMEOUT
+  category: Destination errors
+  destination: TikTok
+  meaning: TikTok timed out while processing the request.
+  action: Retry the sync after a short delay.
+- code: TIKTOK_REJECTED_REPLACE_OP
+  category: Destination errors
+  destination: TikTok
+  meaning: TikTok rejected a replace operation because another audience job is still processing.
+  action: Wait for the existing job to complete before retrying.
+- code: TIKTOK_AUDIENCE_ERROR
+  category: Destination errors
+  destination: TikTok
+  meaning: The TikTok audience is invalid or not editable.
+  action: Confirm the audience exists in TikTok Ads Manager and supports the requested operation.
+- code: TIKTOK_PERMISSION_DENIED
+  category: Destination errors
+  destination: TikTok
+  meaning: The connected TikTok account lacks the required permissions.
+  action: Reauthorize with a TikTok account that can manage the target advertiser and audience.
+- code: TIKTOK_INVALID_ENCRYPTION_VALUE
+  category: Destination errors
+  destination: TikTok
+  meaning: TikTok rejected the configured encryption or hashing value.
+  action: Verify the expected hashing format in your TikTok sync configuration.
+- code: GOOGLE_SHEETS_INVALID_GRANT
+  category: Destination errors
+  destination: Google Sheets
+  meaning: The Google Sheets authorization grant is invalid.
+  action: Reauthorize the destination in Hightouch.
+- code: GOOGLE_SHEETS_INVALID_DATA_TYPE
+  category: Destination errors
+  destination: Google Sheets
+  meaning: The sync tried to write an unsupported value type to a cell.
+  action: Cast complex values (arrays, objects) to plain text or supported scalar types in your model.
+- code: GOOGLE_SHEETS_INVALID_RANGE
+  category: Destination errors
+  destination: Google Sheets
+  meaning: The configured write range is invalid.
+  action: Check the tab name, cell range, and sheet structure in the destination configuration.
+- code: GOOGLE_SHEETS_EXCEEDS_GRID_LIMITS
+  category: Destination errors
+  destination: Google Sheets
+  meaning: The write would exceed the spreadsheet's grid limits (10 million cells).
+  action: Reduce the number of rows or columns, or write to a new sheet.
+- code: GOOGLE_SHEETS_MISSING_SHEET_ID
+  category: Destination errors
+  destination: Google Sheets
+  meaning: The spreadsheet or sheet identifier is missing from the configuration.
+  action: Reopen the destination setup and confirm the selected sheet.
+- code: GOOGLE_SHEETS_QUOTA_EXCEEDED
+  category: Destination errors
+  destination: Google Sheets
+  meaning: The Google Sheets API quota was exceeded.
+  action: Retry later, or reduce sync frequency. See Google Sheets API limits.
+- code: GOOGLE_SHEETS_ENTITY_NOT_FOUND
+  category: Destination errors
+  destination: Google Sheets
+  meaning: The target spreadsheet or sheet no longer exists.
+  action: Confirm the spreadsheet exists and is shared with the connected Google account.
+- code: SLACK_NOT_IN_CHANNEL
+  category: Destination errors
+  destination: Slack
+  meaning: The Hightouch Slack app isn't a member of the target channel.
+  action: Invite the Hightouch app to the channel, or select a different channel.
+- code: SLACK_IS_ARCHIVED
+  category: Destination errors
+  destination: Slack
+  meaning: The target Slack channel is archived.
+  action: Unarchive the channel or choose a different destination channel.
+- code: SLACK_INVALID_BLOCKS
+  category: Destination errors
+  destination: Slack
+  meaning: Slack rejected the block payload as invalid.
+  action: Validate the Block Kit JSON structure and required fields.
+- code: SLACK_NO_TEXT
+  category: Destination errors
+  destination: Slack
+  meaning: The Slack message is missing required text content.
+  action: Add message text to your sync configuration, even if blocks are also present.
+- code: SLACK_NON_CALLABLE_ITERATOR
+  category: Destination errors
+  destination: Slack
+  meaning: An unexpected payload construction failure occurred.
+  action: Retry once. If it persists, contact support.
+- code: SLACK_UNEXPECTED_TOKEN
+  category: Destination errors
+  destination: Slack
+  meaning: Slack rejected the payload due to invalid syntax.
+  action: Review templated message content and JSON formatting for syntax errors.
+- code: AMPLITUDE_INVALID_JSON_REQUEST
+  category: Destination errors
+  destination: Other destinations
+  meaning: Amplitude rejected the request payload format.
+  action: Review field mappings and ensure the JSON structure matches Amplitude's API requirements.
+- code: CITRUS_AD_INVALID_BASE_URL
+  category: Destination errors
+  destination: Other destinations
+  meaning: The configured CitrusAd base URL is invalid.
+  action: Update the destination with the correct API endpoint.
+- code: ITERABLE_INVALID_LIST_ID
+  category: Destination errors
+  destination: Other destinations
+  meaning: The Iterable list ID is invalid.
+  action: Confirm the list still exists in Iterable and the configured ID is correct.
+- code: ANAPLAN_BAD_MAPPINGS
+  category: Destination errors
+  destination: Other destinations
+  meaning: The Anaplan field mappings are invalid.
+  action: 'Re-check dimension, line-item, and field mapping setup. See Anaplan: Tips and troubleshooting.'
+- code: ANAPLAN_NULL_POINTER
+  category: Destination errors
+  destination: Other destinations
+  meaning: The Anaplan request failed with a null-pointer error.
+  action: Retry first. If it persists, check mapped objects and source values for missing required fields.
+- code: TABOOLA_MISSING_NUMERIC_ACCOUNT_ID
+  category: Destination errors
+  destination: Other destinations
+  meaning: The Taboola account ID is missing or not numeric.
+  action: Update the destination configuration with the correct numeric account ID.
+- code: ELASTICSEARCH_INVALID_METADATA_TYPE
+  category: Destination errors
+  destination: Other destinations
+  meaning: The Elasticsearch metadata type is invalid.
+  action: Check mapping configuration and ensure metadata fields use supported types.
+- code: FRESHDESK_CLOUDFLARE_IP_BLOCKED
+  category: Destination errors
+  destination: Other destinations
+  meaning: Freshdesk's Cloudflare proxy blocked the request IP.
+  action: Confirm Hightouch's static IPs are allowlisted, or contact Freshdesk support.
+- code: NULL_EXTERNAL_ID
+  category: Rejected-row errors
+  destination: null
+  meaning: A required external ID is null for one or more rows.
+  action: Ensure the mapped identifier column is populated for every record. Update your model to filter
+    out rows with null identifiers.
+- code: DUPLICATE_PRIMARY_KEY
+  category: Rejected-row errors
+  destination: null
+  meaning: Multiple source rows share the same primary key value.
+  action: Deduplicate your model so each primary key appears only once per sync run.
+- code: LINKEDIN_INVALID_CONVERSION
+  category: Rejected-row errors
+  destination: LinkedIn
+  meaning: LinkedIn rejected the conversion payload.
+  action: Check that all required conversion fields are present and correctly formatted.
+- code: LINKEDIN_EVENT_TOO_OLD
+  category: Rejected-row errors
+  destination: LinkedIn
+  meaning: The event timestamp is outside LinkedIn's allowed time window.
+  action: Send more recent events. LinkedIn typically requires events within the last 90 days.
+- code: LINKEDIN_MISSING_USER_IDS
+  category: Rejected-row errors
+  destination: LinkedIn
+  meaning: Required LinkedIn user identifiers are missing.
+  action: Map at least one accepted identifier (email, Google Advertising ID, or Apple IDFA) for each
+    row.
+- code: LINKEDIN_MISSING_INVALID_USER_INFO
+  category: Rejected-row errors
+  destination: LinkedIn
+  meaning: LinkedIn user information is missing or invalid.
+  action: Review identifier formatting and required match fields.
+- code: LINKEDIN_MISSING_IDENTIFIER_OR_NAME
+  category: Rejected-row errors
+  destination: LinkedIn
+  meaning: A required identifier or name value is missing from the row.
+  action: Populate the required matching fields before syncing.
+- code: LINKEDIN_INVALID_SEGMENT_VALUE
+  category: Rejected-row errors
+  destination: LinkedIn
+  meaning: A segment value (often email) failed LinkedIn's validation.
+  action: Check email formatting and ensure values meet LinkedIn's requirements.
+- code: LINKEDIN_PERMISSION_DENIED
+  category: Rejected-row errors
+  destination: LinkedIn
+  meaning: The connected LinkedIn account lacks the required permissions.
+  action: Reauthorize with a LinkedIn account that can manage the target audience or conversion action.
+- code: LINKEDIN_API_ERROR
+  category: Rejected-row errors
+  destination: LinkedIn
+  meaning: LinkedIn returned a generic row-level API failure.
+  action: Retry if the issue appears transient. Use the live debugger to inspect LinkedIn's response for
+    the affected rows.
+- code: NO_USERS_IN_INPUT_FILE
+  category: Predictive traits errors
+  destination: null
+  meaning: The training audience returned no users.
+  action: Check that the parent audience or model query returns rows before training starts.
+- code: NO_USER_ROWS_AFTER_FILTERS
+  category: Predictive traits errors
+  destination: null
+  meaning: Users were present initially, but predictive filters removed all of them.
+  action: Loosen the filters or verify that event and property conditions match real data.
+- code: NO_TRAINING_DATA_FILES
+  category: Predictive traits errors
+  destination: null
+  meaning: Hightouch couldn't generate the training dataset.
+  action: Confirm that the configured events return data and the event model is queryable.
+- code: LABEL_FREQUENCY_TOO_LOW
+  category: Predictive traits errors
+  destination: null
+  meaning: There aren't enough examples of the target outcome to train the model reliably.
+  action: Increase the lookback window, reduce filters, or choose a higher-volume outcome event.
+- code: NO_POSITIVE_EXAMPLES
+  category: Predictive traits errors
+  destination: null
+  meaning: The training data contains zero positive examples of the target event.
+  action: Check that the outcome event is occurring for users in scope.
+- code: TRAINING_MATRIX_DOWNLOAD_FAILED
+  category: Predictive traits errors
+  destination: null
+  meaning: An internal failure occurred while retrieving the training artifact.
+  action: Retry the run. If it persists, contact support — this is typically not customer-fixable.
+- code: NO_KEY_EVENTS
+  category: Predictive traits errors
+  destination: null
+  meaning: No feature-generation events are configured.
+  action: Add at least one event input in the predictive trait configuration before retraining.
+- code: EVENT_MODEL_MISCONFIGURED
+  category: Predictive traits errors
+  destination: null
+  meaning: The event model configuration is invalid.
+  action: Confirm the event model exists, has a valid primary key, and includes all referenced columns.
+- code: EVENT_QUERY_FAILED
+  category: Predictive traits errors
+  destination: null
+  meaning: Hightouch couldn't query event data from the warehouse.
+  action: Check warehouse permissions, model SQL, and whether the referenced tables still exist.
+- code: SOURCE_ACCOUNT_LOCKED
+  category: Predictive traits errors
+  destination: null
+  meaning: The warehouse user account is locked.
+  action: Wait for the lockout to clear, or have your warehouse admin re-enable the account.
+- code: UNKNOWN_EVENT_IN_FILTER
+  category: Predictive traits errors
+  destination: null
+  meaning: A predictive filter references an event Hightouch can't resolve.
+  action: Check for renamed, deleted, or misconfigured events in the predictive trait setup.
+- code: INVALID_EVENT_PROPERTY_CONDITION
+  category: Predictive traits errors
+  destination: null
+  meaning: An event-property filter is malformed.
+  action: Verify the filter syntax and confirm you're using valid string property names.
+- code: NO_EVENT_DATA_FILES
+  category: Predictive traits errors
+  destination: null
+  meaning: No event data was produced for training or inference.
+  action: Confirm the configured events have recent data and event pulls are succeeding.
+- code: TRAINING_ERROR
+  category: Predictive traits errors
+  destination: null
+  meaning: An internal training failure occurred.
+  action: Retry once. If it repeats, contact support.
+- code: CACHED_EVENT_PULL_DISABLED
+  category: Predictive traits errors
+  destination: null
+  meaning: A required event pull is disabled.
+  action: Re-enable the event pull in your schema configuration and rerun the predictor.
+- code: MALFORMED_EVENT_DATA
+  category: Predictive traits errors
+  destination: null
+  meaning: Numeric event fields contain invalid values.
+  action: Clean the source data so numeric columns contain only valid numbers (no strings, nulls in numeric-only
+    fields, etc.).
+- code: MODEL_QUERY_FAILED
+  category: Predictive traits errors
+  destination: null
+  meaning: Hightouch couldn't query the parent model data needed for the run.
+  action: Check that the parent model still exists and all referenced columns are present.

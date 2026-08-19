@@ -1,0 +1,45 @@
+generated: '2026-08-13'
+method: searched
+source: https://hightouch.com/docs/syncs/alerting, https://hightouch.com/docs/ai-decisioning/agent-alerting,
+  https://hightouch.com/docs/events/functions/handling-webhooks
+spec_type: null
+asyncapi:
+  published: false
+  note: No AsyncAPI document is published anywhere on Hightouch's docs, GitHub org, or at /asyncapi.yaml.
+    The event surface below is documented in prose only — recorded as a webhook catalog rather than fabricating
+    a spec.
+webhooks:
+  outbound:
+  - name: Sync alert webhook
+    docs: https://hightouch.com/docs/syncs/alerting#webhook-alert-channels
+    trigger: A sync alert fires or recovers (CRITICAL or WARNING state change)
+    delivery: JSON payload POSTed to a customer-specified URL
+    custom_headers: true
+    custom_headers_note: 'Webhook alert channels support arbitrary custom HTTP headers (e.g. Authorization:
+      Bearer <token>, X-Routing-Key), sent on every request for that channel.'
+    semantics: One notification per trigger status change, not per run.
+    default_triggers:
+    - fatal error
+    - rejected rows
+    other_channels:
+    - email
+    - Slack
+    - SMS
+    - PagerDuty
+  - name: AI Decisioning agent alert webhook
+    docs: https://hightouch.com/docs/ai-decisioning/agent-alerting
+    trigger: Agent run failure or recommendation-volume drop
+    delivery: Routed to Slack, Email, PagerDuty, SMS or Webhook; recipients can be scoped to Critical-only
+      or all alerts
+  inbound:
+  - name: Events HTTP API
+    docs: https://hightouch.com/docs/events/sdks/http
+    note: First-party event ingest endpoint (identify/track/page/group) authenticated with a source write
+      key. This is Hightouch's real-time inbound event surface.
+  - name: Event functions — handling webhooks
+    docs: https://hightouch.com/docs/events/functions/handling-webhooks
+    note: Customer-authored functions reshape third-party webhook payloads before Hightouch writes them
+      to the warehouse or forwards them to destinations.
+payload_schema: null
+payload_note: The alert webhook payload shape is not published in the docs; it is described only as 'a
+  JSON payload'. Not reconstructed here.

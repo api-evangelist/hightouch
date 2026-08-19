@@ -1,0 +1,109 @@
+generated: '2026-08-13'
+method: searched
+source: https://hightouch.com/docs/developer-tools/api-guide, openapi/_original/hightouch-api-openapi.json
+base_url: https://api.hightouch.com/api/v1
+authentication:
+  style: bearer API key in Authorization header
+  artifact: authentication/hightouch-authentication.yml
+media_type: application/json
+idempotency:
+  supported: false
+  note: No idempotency key header or parameter appears anywhere in the 43-operation spec, and the docs
+    describe none. Write operations (CreateSync, CreateModel, TriggerRun, TriggerCampaign, RunFlow, TriggerIdrRun)
+    are not idempotent by contract. Retrying a trigger can start a second run. Recorded as absent — no
+    Idempotency pointer is emitted.
+pagination:
+  style: offset-limit
+  parameters:
+  - name: limit
+    in: query
+    type: number
+    default: 100 on ListSyncRuns / ListIdrRuns, 20 on the resource list operations
+  - name: offset
+    in: query
+    type: number
+    default: 0
+  ordering:
+    parameter: orderBy
+    values_by_operation:
+      ListSync:
+      - id
+      - name
+      ListModel:
+      - id
+      - name
+      - createdAt
+      ListSource:
+      - id
+      - name
+      - createdAt
+      ListDestination:
+      - id
+      - name
+      - createdAt
+      ListSyncRuns:
+      - created_at
+      - id
+    note: orderBy enums differ per operation, and ListSyncRuns uses snake_case (`created_at`) while the
+      resource lists use camelCase (`createdAt`). Read the enum on the specific operation.
+  filtering:
+  - name: slug
+    applies: ListSync, ListModel, ListSource, ListDestination
+  - name: name
+    applies: resource list operations
+  - name: tags
+    applies: resource list operations (array of strings)
+  - name: modelId
+    applies: ListSync
+  - name: after / before
+    applies: ListSyncRuns (RFC 3339 date-time window)
+  - name: within
+    applies: ListSyncRuns (relative window, number)
+  - name: runId
+    applies: ListSyncRuns
+  response_envelope: '{ data: [...] } on list operations'
+field_expansion:
+  supported: false
+  note: No expand/fields parameter. GetModel accepts skipColumnQuery=true to skip the warehouse column
+    lookup, which is a cost control rather than sparse fields.
+identifiers:
+  note: 'Identifier types are inconsistent across resources, and this is a real integration hazard: sourceId,
+    modelId, destinationId and syncId are NUMBERS (format double) in path parameters, while campaignId,
+    sendId, flowId, messageId, contractId, domainId, graphId, requestId, syncSequenceId and syncSequenceRunId
+    are STRINGS. `/syncs/{syncId}` takes a number but `/syncs/{syncId}/runs` and the trigger routes take
+    a string.'
+  slugs: Most resources carry both an `id` and a human-readable `slug`; TriggerRunCustom accepts either
+    via the request body so automation can key on a stable slug.
+metadata:
+  tags: Syncs, models, sources and destinations carry a `tags` array usable as a list filter.
+request_tracing:
+  header: null
+  note: No request-id response header is documented. The Live Debugger (https://hightouch.com/docs/syncs/debugger)
+    is the provider's tracing surface for outbound destination requests.
+versioning:
+  scheme: uri-path
+  current: v1
+  artifact: lifecycle/hightouch-lifecycle.yml
+error_envelope:
+  artifact: errors/hightouch-problem-types.yml
+  shapes:
+  - '{message, details}'
+  - '{error}'
+  rfc9457: false
+rate_limit_signaling:
+  artifact: rate-limits/hightouch-rate-limits.yml
+  documented_limit: 200 requests per 10 seconds per workspace
+  response_headers: null
+  note: No RateLimit-* or X-RateLimit-* headers were present on live responses probed on 2026-08-13; a
+    client cannot read remaining quota at runtime.
+tls:
+  minimum: TLS 1.2
+  cipher_suites:
+  - TLS_AES_128_GCM_SHA256
+  - TLS_AES_256_GCM_SHA384
+  - TLS_CHACHA20_POLY1305_SHA256
+  - ECDHE-ECDSA-AES128-GCM-SHA256
+  - ECDHE-RSA-AES128-GCM-SHA256
+  - ECDHE-ECDSA-AES256-GCM-SHA384
+  - ECDHE-RSA-AES256-GCM-SHA384
+  source: https://hightouch.com/docs/developer-tools/api-guide

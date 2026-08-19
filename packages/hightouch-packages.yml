@@ -1,0 +1,179 @@
+generated: '2026-08-13'
+method: searched
+source: https://hightouch.com/docs/developer-tools/cli-guide, https://hightouch.com/docs/events/overview,
+  registry metadata (registry.npmjs.org, pypi.org, rubygems.org, repo.packagist.org, api.nuget.org, repo1.maven.org,
+  proxy.golang.org, pub.dev), github.com/ht-sdks, github.com/hightouchio
+note: 'Hightouch ships no first-party SDK for the management REST API. The first-party client libraries
+  are the Hightouch Events SDKs, published from the github.com/ht-sdks organization, plus the `ht` CLI
+  and orchestration providers from github.com/hightouchio. The Python `hightouch` package on PyPI is a
+  Speakeasy-generated REST SDK living in the speakeasy-sdks org, not in a Hightouch-controlled org, so
+  it is recorded official: false.'
+packages:
+- language: javascript
+  registry: npm
+  name: '@ht-sdks/events-sdk-js-browser'
+  url: https://www.npmjs.com/package/@ht-sdks/events-sdk-js-browser
+  install: npm install @ht-sdks/events-sdk-js-browser
+  official: true
+  version: 1.5.8
+  published: '2026-06-16'
+  repository: https://github.com/ht-sdks/events-sdk-js-mono
+- language: javascript
+  registry: npm
+  name: '@ht-sdks/events-sdk-js-node'
+  url: https://www.npmjs.com/package/@ht-sdks/events-sdk-js-node
+  install: npm install @ht-sdks/events-sdk-js-node
+  official: true
+  version: 1.1.0
+  published: '2026-02-04'
+  repository: https://github.com/ht-sdks/events-sdk-js-mono
+- language: javascript
+  registry: npm
+  name: '@ht-sdks/events-sdk-react-native'
+  url: https://www.npmjs.com/package/@ht-sdks/events-sdk-react-native
+  install: npm install @ht-sdks/events-sdk-react-native
+  official: true
+  version: 2.21.0
+  published: '2026-07-07'
+  repository: https://github.com/ht-sdks/events-sdk-react-native
+- language: javascript
+  registry: cdn
+  name: events.min.js (browser snippet)
+  url: https://cdn.hightouch-events.com/browser/release/v1-latest/events.min.js
+  install: <script> htevents snippet, see https://hightouch.com/docs/events/sdks/browser </script>
+  official: true
+  version: null
+  published: null
+  note: 'CDN distribution is pinned to the floating tag `v1-latest`, so the URL never names a version
+    and a consumer cannot tell which build they load. Recorded null deliberately: checked, nothing to
+    record.'
+- language: javascript
+  registry: npm
+  name: '@ht-sdks/consent-manager'
+  url: https://www.npmjs.com/package/@ht-sdks/consent-manager
+  install: npm install @ht-sdks/consent-manager
+  official: true
+  version: 0.1.0
+  published: '2024-09-09'
+  repository: https://github.com/ht-sdks/consent-manager
+- language: python
+  registry: pypi
+  name: events-sdk-python
+  url: https://pypi.org/project/events-sdk-python/
+  install: python -m pip install events-sdk-python
+  official: true
+  version: 0.0.3
+  published: '2023-11-08'
+  repository: https://github.com/ht-sdks/events-sdk-python
+  note: Repo pushed 2026-02-18 but no release published since 2023-11-08.
+- language: ruby
+  registry: rubygems
+  name: events-sdk-ruby
+  url: https://rubygems.org/gems/events-sdk-ruby
+  install: gem install events-sdk-ruby
+  official: true
+  version: 0.0.2
+  published: '2023-09-20'
+  repository: https://github.com/ht-sdks/events-sdk-ruby
+- language: php
+  registry: packagist
+  name: ht-sdks/events-sdk-php
+  url: https://packagist.org/packages/ht-sdks/events-sdk-php
+  install: composer require ht-sdks/events-sdk-php
+  official: true
+  version: 0.0.1
+  published: '2024-03-27'
+  repository: https://github.com/ht-sdks/events-sdk-php
+- language: csharp
+  registry: nuget
+  name: Hightouch.Events.CSharp
+  url: https://www.nuget.org/packages/Hightouch.Events.CSharp
+  install: dotnet add package Hightouch.Events.CSharp
+  official: true
+  version: 0.0.6
+  published: '2024-10-09'
+  repository: https://github.com/ht-sdks/events-sdk-csharp
+  note: Also distributed for Unity via OpenUPM as com.hightouch.events.csharp.
+- language: java
+  registry: maven
+  name: com.hightouch.analytics.android:analytics
+  url: https://central.sonatype.com/artifact/com.hightouch.analytics.android/analytics
+  install: implementation 'com.hightouch.analytics.android:analytics:0.1.0'
+  official: true
+  version: 0.1.0
+  published: '2026-07-27'
+  repository: https://github.com/ht-sdks/events-sdk-android
+  note: Android Events SDK. The server-side Java SDK (github.com/ht-sdks/events-sdk-java) is distributed
+    via JitPack only (com.github.ht-sdks.events-sdk-java:analytics) and has no Maven Central release.
+- language: go
+  registry: go
+  name: github.com/ht-sdks/events-sdk-go
+  url: https://pkg.go.dev/github.com/ht-sdks/events-sdk-go
+  install: go get github.com/ht-sdks/events-sdk-go
+  official: true
+  version: v0.0.2
+  published: '2024-03-13'
+  repository: https://github.com/ht-sdks/events-sdk-go
+- language: dart
+  registry: pub.dev
+  name: hightouch_events
+  url: https://pub.dev/packages/hightouch_events
+  install: flutter pub add hightouch_events
+  official: true
+  version: 1.1.1
+  published: '2026-08-10'
+  repository: https://github.com/ht-sdks/events-sdk-flutter
+- language: swift
+  registry: swiftpm
+  name: ht-sdks/events-sdk-swift
+  url: https://github.com/ht-sdks/events-sdk-swift
+  install: '.package(url: "https://github.com/ht-sdks/events-sdk-swift", from: "0.1.1")'
+  official: true
+  version: 0.1.1
+  published: null
+  note: SwiftPM resolves from the git tag; there is no package registry metadata endpoint to date the
+    release. Latest tag 0.1.1 read from the GitHub tags API.
+- language: kotlin
+  registry: jitpack
+  name: com.github.ht-sdks.events-sdk-kotlin
+  url: https://github.com/ht-sdks/events-sdk-kotlin
+  install: implementation 'com.github.ht-sdks.events-sdk-kotlin:android:0.0.1'
+  official: true
+  version: 0.0.1
+  published: null
+  note: JitPack builds from tags; the repo publishes no tag list and JitPack exposes no dated metadata
+    endpoint. Version read from the provider README install snippet.
+- language: shell
+  registry: null
+  name: ht (Hightouch CLI)
+  url: https://github.com/hightouchio/cli
+  install: curl -sLf https://getcli.hightouch.io | sh -
+  official: true
+  version: v0.1.1
+  published: '2022-07-29'
+  note: Distributed by install script from getcli.hightouch.io (HTTP 200), not by a package registry.
+    Latest GitHub release v0.1.1 (2022-07-29). Hightouch's own skill.md tells agents to run `npm install
+    -g @hightouch/cli`, but that package does not exist on npm (registry 404) — the shell installer above
+    is the documented path in the CLI guide.
+- language: python
+  registry: pypi
+  name: airflow-provider-hightouch
+  url: https://pypi.org/project/airflow-provider-hightouch/
+  install: pip install airflow-provider-hightouch
+  official: true
+  version: 5.0.0
+  published: '2026-04-24'
+  repository: https://github.com/hightouchio/airflow-provider-hightouch
+- language: python
+  registry: pypi
+  name: hightouch
+  url: https://pypi.org/project/hightouch/
+  install: pip install hightouch
+  official: false
+  version: 1.31.0
+  published: '2023-08-08'
+  repository: https://github.com/speakeasy-sdks/hightouch-python-sdk
+  note: Speakeasy-generated REST SDK published from the speakeasy-sdks org, not a Hightouch-controlled
+    org, and not referenced from Hightouch's own developer docs. Recorded for completeness; the last release
+    (2023-08-08) predates most of the current API surface (campaigns, decision-engine, events contracts/domains,
+    IDR) by two years.

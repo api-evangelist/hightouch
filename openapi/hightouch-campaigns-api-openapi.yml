@@ -1,0 +1,344 @@
+openapi: 3.0.0
+info:
+  title: Hightouch Campaigns API
+  description: Hightouch Public Rest API to access syncs, models, sources and destinations
+  version: 1.0.0
+  contact:
+    name: Hightouch
+    url: https://hightouch.com
+  x-harvested-from: https://api.hightouch.io/api/swagger.json
+  x-harvested-on: '2026-08-13'
+  x-source-document: openapi/_original/hightouch-api-openapi.json
+servers:
+- url: https://api.hightouch.com/api/v1
+tags:
+- name: Campaigns
+paths:
+  /campaigns/{campaignId}/trigger:
+    post:
+      operationId: TriggerCampaign
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/StartCampaignResponse'
+                - $ref: '#/components/schemas/TriggerErrorResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerErrorResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Campaign not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerErrorResponse'
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '429':
+          description: Rate limited
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerErrorResponse'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      description: 'Start an API-triggered campaign: send to the given recipients.'
+      summary: Trigger an API campaign send
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: campaignId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartCampaignRequest'
+      tags:
+      - Campaigns
+  /campaigns/{campaignId}/sends/{sendId}:
+    get:
+      operationId: GetSendStatus
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/SendStatusResponse'
+                - $ref: '#/components/schemas/TriggerErrorResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Send not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerErrorResponse'
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      description: 'Get the delivery status of a single send by the `sendId` returned from the
+
+        start endpoint.'
+      summary: Get send delivery status
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: campaignId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: sendId
+        required: true
+        schema:
+          type: string
+      tags:
+      - Campaigns
+components:
+  schemas:
+    CampaignRecipient:
+      anyOf:
+      - $ref: '#/components/schemas/HandleCampaignRecipient'
+      - $ref: '#/components/schemas/ProfileCampaignRecipient'
+      description: 'A single send target. Provide either `handle` (inline delivery address) or
+
+        `id` (Personalization API profile ID), but not both.'
+    CampaignSendResult:
+      description: 'Per-recipient result returned synchronously after the trigger request.
+
+        Accepted recipients are queued for delivery; check the send status endpoint
+
+        for delivery confirmation.'
+      properties:
+        handle:
+          type: string
+          description: Delivery address of the recipient, present for inline (`handle`) recipients.
+        id:
+          type: string
+          description: 'Primary key of the recipient as configured on the Personalization API sync,
+
+            present for profile (`id`) recipients.'
+        status:
+          type: string
+          enum:
+          - accepted
+          - rejected
+          description: Whether this recipient was accepted for delivery or rejected at validation time.
+        sendId:
+          type: string
+          description: 'Unique identifier for this send, present when `status` is `"accepted"`.
+
+            Use with `GET /campaigns/{id}/sends/{sendId}` to poll for delivery status.'
+        reason:
+          type: string
+          enum:
+          - invalid_handle
+          - missing_variables
+          - invalid_id
+          - missing_handle_or_id
+          description: 'Reason for rejection, present when `status` is `"rejected"`.
+
+            - `invalid_handle` — the delivery address is not a valid email or phone number
+
+            - `missing_variables` — one or more required template variables are absent
+
+            - `invalid_id` — the profile ID is empty or missing
+
+            - `missing_handle_or_id` — the recipient has neither `handle` nor `id`'
+        missingVariables:
+          items:
+            type: string
+          type: array
+          description: 'Names of the required template variables absent from the recipient''s data,
+
+            present when `reason` is `"missing_variables"`.'
+      required:
+      - status
+      type: object
+      additionalProperties: false
+    HandleCampaignRecipient:
+      description: 'A recipient identified by their delivery address (email or phone number).
+
+        Personalization data is provided inline in the request.'
+      properties:
+        handle:
+          type: string
+          description: 'Delivery address for this recipient. Must be a valid email address for
+
+            email campaigns, or an E.164-formatted phone number for SMS campaigns.'
+        properties:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'Per-recipient personalization properties. Keys must match the variable
+
+            names shown in the message editor. These are merged with the top-level
+
+            `properties` and take precedence when a key appears in both.'
+      type: object
+      additionalProperties: false
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
+      nullable: false
+    ProfileCampaignRecipient:
+      description: A recipient identified by their Personalization API Cached profile ID.
+      properties:
+        id:
+          type: string
+          description: 'Primary key of the recipient as configured on the Personalization API sync.
+
+            The delivery address is resolved from the cache at send time.'
+        properties:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'Per-recipient personalization overrides. Merged with the top-level
+
+            `properties` and the cached profile; these values take precedence when a
+
+            key appears in multiple sources.'
+      type: object
+      additionalProperties: false
+    SendStatusResponse:
+      description: Delivery status for a single send, returned by the send status endpoint.
+      properties:
+        status:
+          type: string
+          description: 'Current delivery status.
+
+            - `sent` — accepted by the provider; no delivery receipt yet
+
+            - `delivered` — confirmed delivered by the provider
+
+            - `bounced` — delivery failed with a bounce
+
+            - `failed` — delivery failed
+
+            - `dropped` — dropped before delivery (e.g. unsubscribed, suppressed, or enrichment failure);
+            see `reason`'
+        reason:
+          type: string
+          description: 'Additional explanation for why this send was dropped.
+
+            Only present when `status` is `"dropped"`.'
+      required:
+      - status
+      type: object
+      additionalProperties: false
+    StartCampaignRequest:
+      description: Request body for triggering an API campaign send.
+      properties:
+        properties:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'Shared personalization properties applied to all recipients. Keys must
+
+            match the variable names shown in the message editor. Per-recipient
+
+            `properties` take precedence when a key appears in both.'
+        draft:
+          type: boolean
+          description: 'When `true`, sends the campaign even if it has not been activated.
+
+            Intended for test sends against draft campaigns only.'
+          default: 'false'
+        recipients:
+          items:
+            $ref: '#/components/schemas/CampaignRecipient'
+          type: array
+          description: 'List of recipients to send to. Each entry must include either a `handle`
+
+            (delivery address) or an `id` (Personalization API based profile ID).'
+          minItems: 1
+          maxItems: 100
+      required:
+      - recipients
+      type: object
+      additionalProperties: false
+    StartCampaignResponse:
+      description: 'Response body for a campaign trigger request. Results are returned in the
+
+        same order as the input `recipients` array.'
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/CampaignSendResult'
+          type: array
+          description: 'Per-recipient outcomes. Accepted recipients are queued for delivery;
+
+            rejected recipients were not sent.'
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    TriggerErrorResponse:
+      description: 'Body returned on a request-level failure (400/404/409/429) so the caller
+
+        knows why the request was rejected.'
+      properties:
+        error:
+          type: string
+          description: Human-readable description of why the request failed.
+      required:
+      - error
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+          nullable: false
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Bearer
+security:
+- bearerAuth: []

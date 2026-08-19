@@ -1,0 +1,23 @@
+generated: '2026-08-13'
+method: searched
+source: https://hightouch.com/docs/events/sdks/browser, https://github.com/ht-sdks/consent-manager
+note: Hightouch ships client-side/embeddable pieces for its Events product only; there is no embeddable
+  dashboard or hosted UI widget for the management API.
+families:
+- family: Events browser snippet
+  description: The `htevents` analytics.js-style loader embedded via a script tag; exposes identify, track,
+    page, group, alias and middleware hooks.
+  loader: https://cdn.hightouch-events.com/browser/release/v1-latest/events.min.js
+  package: '@ht-sdks/events-sdk-js-browser'
+  docs: https://hightouch.com/docs/events/sdks/browser
+  note: The CDN URL is unpinned (v1-latest).
+- family: Consent Manager
+  description: Drop-in consent management UI plugin for the Hightouch Events browser SDK — renders the
+    consent banner/preferences surface and gates event collection on the user's choice.
+  package: '@ht-sdks/consent-manager'
+  version: 0.1.0
+  repository: https://github.com/ht-sdks/consent-manager
+- family: First-party tracking proxy
+  description: Serve the browser events endpoint from the customer's own domain to improve client-side
+    event coverage. A deployment surface rather than a component library.
+  docs: https://hightouch.com/docs/events/first-party-tracking

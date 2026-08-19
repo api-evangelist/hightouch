@@ -1,0 +1,554 @@
+# Hightouch Documentation
+
+> Hightouch is a data and AI platform for marketing and personalization. It helps teams activate customer data from their data warehouse to business tools through reverse ETL, audience building, identity resolution, and AI-powered campaign optimization.
+
+**MCP server:** For structured search and page-level read access, connect to the Hightouch Docs MCP endpoint at `https://hightouch.com/docs/api/mcp` (Streamable HTTP, no authentication). See [Docs for AI tools](https://hightouch.com/docs/developer-tools/agent-resources) for setup instructions.
+
+## Getting started
+
+- [Welcome](https://hightouch.com/docs/getting-started/welcome): Learn what Hightouch does, choose the right starting point, and find setup guidance for your team.
+- [Daily usage (Marketers & business teams)](https://hightouch.com/docs/getting-started/business): Learn where marketers work in Hightouch and how to build audiences, run campaigns, and measure results.
+- [Data activation concepts](https://hightouch.com/docs/getting-started/concepts): Learn the foundational concepts in Hightouch—sources, models, schema, syncs, destinations, and change data capture—that power Reverse ETL and the Composable CDP.
+- [Technical setup (Data teams & engineers)](https://hightouch.com/docs/getting-started/data): Connect your data warehouse, configure sync infrastructure, and prepare reusable datasets in Hightouch.
+- [Workspace setup (IT & platform admins)](https://hightouch.com/docs/getting-started/it): Set up secure access, governance, and user roles in your Hightouch workspace so data and marketing teams can activate safely.
+
+## Models
+
+- [Create models with the SQL editor](https://hightouch.com/docs/models/sql-editor): Create Hightouch models using the SQL editor.
+- [Create models with the table selector](https://hightouch.com/docs/models/table-selector): Create Hightouch models using the table selector which queries existing tables and views within your source.
+- [Data types and casting](https://hightouch.com/docs/models/data-types-casting): Third-party APIs require the data you send to be of a specific data type. Unless otherwise specified, Hightouch takes the data from your source and leaves the data type unchanged to send to your destination. You can choose to cast data into different types using SQL.
+- [Match Booster on models](https://hightouch.com/docs/models/match-boosting): Configure Match Booster on a model to enrich your data with additional identifiers.
+- [Models overview](https://hightouch.com/docs/models/creating-models): Create Hightouch models using the SQL editor or the table selector which queries existing tables and views within your source.
+- [Resolve SQL compilation errors](https://hightouch.com/docs/models/sql-compilation-errors): Troubleshoot SQL compilation errors that appear in model previews, Customer Studio audiences and journeys, or sync runs.
+
+## Sources
+
+- [Sources overview](https://hightouch.com/docs/sources/overview): Learn how to connect data sources to Hightouch so you can define models and activate data through syncs.
+- [Athena](https://hightouch.com/docs/sources/amazon-athena): Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
+- [Azure Blob Storage](https://hightouch.com/docs/sources/azure-blob): Azure Blob Storage helps you create data lakes for your analytics needs, and provides storage to build powerful cloud-native and mobile apps. Optimize costs with tiered storage for your long-term data, and flexibly scale up for high-performance computing and machine learning workloads.
+- [Azure Synapse](https://hightouch.com/docs/sources/synapse): Hightouch can turn Azure Synapse into a marketing, sales, success and operational engine.
+- [BigQuery](https://hightouch.com/docs/sources/google-bigquery):  
+- [BigQuery Iceberg](https://hightouch.com/docs/sources/google-bigquery-iceberg): BigQuery is a fully-managed enterprise data warehouse that helps you manage and analyze your data with built-in features like machine learning, geospatial analysis, and business intelligence.
+- [ClickHouse](https://hightouch.com/docs/sources/clickhouse):  
+- [Databricks](https://hightouch.com/docs/sources/databricks): Databricks is a data science and analytics platform built on top of Apache Spark. Databricks implement the Data Lakehouse concept in a single unified, cloud based platform.
+
+
+- [Google Cloud Storage](https://hightouch.com/docs/sources/gcs): Cloud Storage is a managed service for storing unstructured data. Store any amount of data and retrieve it as often as you like.
+- [Google Sheets](https://hightouch.com/docs/sources/google-sheets): Google Sheets is a web-based spreadsheet offered by Google as part of their Drive office services. It makes it easy to create, edit and collaborate with others from any device.
+- [Greenplum Database](https://hightouch.com/docs/sources/greenplum): Greenplum reduces data silos by providing you with a single, scale-out environment for converging analytic and operational workloads, like streaming ingestion.
+- [Lakebase](https://hightouch.com/docs/sources/lakebase): Lakebase is a serverless Postgres-compatible database in the Databricks platform.
+- [Manage warehouse compute](https://hightouch.com/docs/sources/warehouse-compute): Learn how warehouse compute works with Hightouch and how to optimize cost, performance, and governance through warehouse configuration, schema design, and monitoring strategies.
+- [Materialize](https://hightouch.com/docs/sources/materialize): Materialize is a streaming database powered by Timely and Differential Dataflow, purpose-built for low-latency applications. It lets you ask complex questions about your data using SQL, and incrementally maintains the results of these SQL queries as the underlying data changes.
+- [Microsoft Excel](https://hightouch.com/docs/sources/microsoft-excel): Microsoft Excel is the industry leading spreadsheet software program, a powerful data visualization and analysis tool.
+- [Microsoft Fabric](https://hightouch.com/docs/sources/fabric): Microsoft Fabric is a comprehensive analytics and data integration solution that includes cloud-based data warehousing as part of its extensive suite of capabilities.
+- [MySQL](https://hightouch.com/docs/sources/mysql): MySQL is an open source relational database management system (RDBMS) with a client-server model.
+- [Oracle DB](https://hightouch.com/docs/sources/oracle): Power internal tools, in-app experiences, and more
+- [PlanetScale](https://hightouch.com/docs/sources/planetscale): PlanetScale is a MySQL-compatible serverless database that brings you scale, performance, and reliability — without sacrificing developer experience.
+
+With PlanetScale, you get the power of horizontal sharding, non-blocking schema changes, and many more powerful database features without the pain of implementing them.
+- [PostgreSQL](https://hightouch.com/docs/sources/postgresql): PostgreSQL, also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance.
+- [Redshift](https://hightouch.com/docs/sources/amazon-redshift): Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud. It is built on Amazon Web Services
+- [S3](https://hightouch.com/docs/sources/s3): Securely sync CSV or JSON data from any S3 bucket
+- [Sample datasets](https://hightouch.com/docs/sources/sample-data): Explore Hightouch using the B2B SaaS and B2C eCommerce sample data sources—no warehouse setup required.
+- [SFTP](https://hightouch.com/docs/sources/sftp):  
+- [SingleStore](https://hightouch.com/docs/sources/single-store): SingleStore is a modern relational database for cloud and on-premises delivering immediate insights for modern applications and analytical systems.
+- [Snowflake](https://hightouch.com/docs/sources/snowflake): Hundreds of industry leaders use Hightouch to turn Snowflake into a marketing, sales, success and operational engine
+- [Snowflake Iceberg](https://hightouch.com/docs/sources/snowflake-iceberg): Hundreds of industry leaders use Hightouch to turn Snowflake into a marketing, sales, success and operational engine
+- [Snowflake RBAC](https://hightouch.com/docs/sources/snowflake-rbac): Learn how Hightouch honors your Snowflake data governance in in-app previews by mapping user groups to Snowflake roles, so masking policies, row access policies, and role grants apply as they do in Snowflake.
+- [SQL Server](https://hightouch.com/docs/sources/sqlserver): SQL Server is a relational database management system, or RDBMS, developed and marketed by Microsoft.
+- [Teradata Vantage](https://hightouch.com/docs/sources/teradata-vantage): Teradata Corporation is a leading data and analytics company that specializes in providing enterprise-level data warehousing, data management, and advanced analytics solutions
+- [Trino](https://hightouch.com/docs/sources/trino): Trino is an open-source distributed SQL query engine designed to query large data sets distributed over one or more heterogeneous data sources.
+
+## Syncs
+
+- [Syncs](https://hightouch.com/docs/syncs/overview): An overview of your syncs along with their status, which model they use, the destination they write to, the schedule, last run, and when they were created.
+- [Alerting](https://hightouch.com/docs/syncs/alerting): You can set Hightouch alerts to monitor your syncs, including successes and errors, through SMS, Slack, email, and PagerDuty.
+- [Array expansion](https://hightouch.com/docs/syncs/array-expansion): Expand array columns into individual sync rows so each array element is synced as a separate record to your destination.
+- [Change data capture (CDC)](https://hightouch.com/docs/syncs/cdc): Learn how Hightouch uses change data capture (CDC) to detect row-level changes in your models and send only incremental updates to destinations.
+- [Create your first sync](https://hightouch.com/docs/syncs/create-your-first-sync): Learn the steps to creating a Hightouch sync and follow along to run your first one.
+- [Data Extraction](https://hightouch.com/docs/syncs/data-extraction): Write back the data from your ad platforms to your warehouse
+- [Error codes](https://hightouch.com/docs/syncs/error-codes): A reference of all Hightouch error codes, what they mean, and how to resolve them.
+- [Field mapping](https://hightouch.com/docs/syncs/mapping-data): Mapping is the establishment of a one-to-one relationship between a column in your source and a property or field in a destination.
+- [Lightning sync engine](https://hightouch.com/docs/syncs/lightning-sync-engine): Use the Lightning sync engine to speed up sync performance by storing change data capture in your data warehouse rather than on Hightouch managed infrastructure.
+- [Live debugger](https://hightouch.com/docs/syncs/debugger)
+- [Match Booster on syncs](https://hightouch.com/docs/syncs/match-boosting): Enable Match Booster in syncs to send enriched identifiers to advertising destinations.
+- [Record matching](https://hightouch.com/docs/syncs/record-matching): Learn how Hightouch matches records from your model rows to your destination records.
+- [Retry strategy](https://hightouch.com/docs/syncs/retries)
+- [Schedule syncs in the UI](https://hightouch.com/docs/syncs/schedule-sync-ui)
+- [Schedule syncs with Sequences](https://hightouch.com/docs/syncs/schedule-sync-with-sequences)
+- [Sync array identifiers to audience destinations](https://hightouch.com/docs/syncs/array-identifier-fan-out): Automatically expand array-valued identifiers into individual records for audience syncs — maximize match rates across Google Ads, Meta, TikTok, and more.
+- [Sync types and modes](https://hightouch.com/docs/syncs/types-and-modes): Learn more about different types of syncs and update modes, including upsert, update, insert, and more.
+- [Warehouse Sync Logs](https://hightouch.com/docs/syncs/warehouse-sync-logs)
+
+## Destinations
+
+- [Destinations overview](https://hightouch.com/docs/destinations/overview): Learn how to connect destinations in Hightouch so your models can be synced into the tools where teams run campaigns, measure results, and engage customers.
+- [Acoustic](https://hightouch.com/docs/destinations/acoustic): Market better with all of your up-to-date customer data in Acoustic
+- [ActiveCampaign](https://hightouch.com/docs/destinations/active-campaign): Enrich customer experiences by using ActiveCampaign's automation platform with rich customer and product data
+- [Adestra](https://hightouch.com/docs/destinations/adestra): Sync contacts and manage list subscriptions in Adestra (MessageFocus) to power your email marketing campaigns.
+- [Adform](https://hightouch.com/docs/destinations/adform): Adform empowers your marketing team to analyze conversion events and develop real-time feedback on the effectiveness of your campaigns.
+- [Adikteev](https://hightouch.com/docs/destinations/adikteev): Upload mobile advertising identifiers to Adikteev
+- [Adjust](https://hightouch.com/docs/destinations/adjust): Streamline your app growth with Adjust’s mobile marketing platform.
+- [Adobe Analytics](https://hightouch.com/docs/destinations/adobe-analytics): Sync your analytics data from your warehouse to Adobe Analytics
+- [Adobe Campaign Classic](https://hightouch.com/docs/destinations/adobe-campaign-classic): Adobe Campaign pulls together cross-channel customer data into a single view and then puts it to work to create personalized cross-channel campaigns that meet customers where they’re at.
+- [Adobe Experience Platform](https://hightouch.com/docs/destinations/adobe-experience-platform): Deliver personalized experiences at scale requires a centralized and connected data foundation with the Adobe Experience Platform.
+- [Adobe Target](https://hightouch.com/docs/destinations/adobe-target): Sync customer segments to Adobe Target
+- [Agillic](https://hightouch.com/docs/destinations/agillic): Agillic is the trusted Nordic marketing automation platform, enabling personalisation that performs with scalability, operational efficiency, and full GDPR compliance.
+- [Airship](https://hightouch.com/docs/destinations/airship): Build better campaigns on Airship with up-to-date customer data from your data warehouse
+- [Airtable](https://hightouch.com/docs/destinations/airtable): Sync your database or data warehouse to your Airtable bases for DataOps, CRM, and much more
+- [Algolia](https://hightouch.com/docs/destinations/algolia): Build, power, and optimize digital experiences
+- [AlloyDB](https://hightouch.com/docs/destinations/alloydb): AlloyDB combines the best of Google with one of the most popular open-source database engines, PostgreSQL, for superior performance, scale, and availability
+- [Amazon Ads DSP and AMC](https://hightouch.com/docs/destinations/amazon-ads): Ensure that you never serve another irrelevant advertisement with Amazon Ads
+- [Amazon EventBridge](https://hightouch.com/docs/destinations/amazon-eventbridge): Amazon EventBridge is a serverless, fully managed, and scalable event bus that enables integrations between AWS services, Software as a services (SaaS), and your applications.
+- [Amazon Kinesis](https://hightouch.com/docs/destinations/amazon-kinesis): Ingest and process your data via a data stream
+- [Amazon SQS](https://hightouch.com/docs/destinations/amazon-sqs): Connect to your internal microservices via a message queue
+- [Amobee](https://hightouch.com/docs/destinations/amobee): Transfer data from your data warehouse to Amobee via sFTP file drop.
+- [Amplitude](https://hightouch.com/docs/destinations/amplitude): Empower your product teams with richer data from your warehouse to perform deeper analysis and better understand user behavior
+- [Anaplan](https://hightouch.com/docs/destinations/anaplan): Learn how to sync data from your warehouse to Anaplan using Hightouch.
+- [Antavo](https://hightouch.com/docs/destinations/antavo): Attract customers, scope loyalty, and build your dream customer loyalty program with Antavo.
+- [Apache Kafka](https://hightouch.com/docs/destinations/apache-kafka): Connect to your internal microservices via a message queue
+- [Apollo.io](https://hightouch.com/docs/destinations/apollo): Apollo’s comprehensive solution provides the most accurate B2B contact data, built-in engagement tools, and intelligence features that help companies find and convert quality prospects.
+- [Appcues](https://hightouch.com/docs/destinations/appcues): Push user behavior data from your warehouse into Appcues
+- [AppLovin](https://hightouch.com/docs/destinations/applovin): AppLovin is a mobile technology company that provides app developers with tools to grow, monetize, and analyze their apps through user acquisition, in-app bidding, and ad mediation. Its platform uses machine learning to optimize ad delivery and maximize revenue across a global network.
+- [AppsFlyer](https://hightouch.com/docs/destinations/appsflyer): Give your team visibility into campaign performance, scale app installs, and maximize customer LTV with a new standard of privacy-enhancing measurement and deep linking solutions.
+- [Asana](https://hightouch.com/docs/destinations/asana): Keep your team's projects and tasks up-to-date with fresh customer data
+- [Attentive](https://hightouch.com/docs/destinations/attentive): Attentive empowers the most innovative brands to create meaningful interactions through personalized text messaging
+- [Attio](https://hightouch.com/docs/destinations/attio): Push enriched data from your warehouse into Attio
+- [Auth0](https://hightouch.com/docs/destinations/auth0): Sync user lists to Auth0 and automate and manage all of your passwords, grants, and permissions in a single platform
+- [Awin](https://hightouch.com/docs/destinations/awin): Empower advertisers and publishers with Awin's affiliate marketing platform to grow their businesses online.
+- [AWS Lambda](https://hightouch.com/docs/destinations/aws-lambda): Build your own custom destination using a serverless function
+- [Azure Blob Storage](https://hightouch.com/docs/destinations/azure-blob): Transfer data at scale from your warehouse to Azure Blob Storage
+- [Azure Functions](https://hightouch.com/docs/destinations/azure-functions): Build your own custom destination using a serverless function
+- [Batch](https://hightouch.com/docs/destinations/batch): Build smarter CRM campaigns on Batch with real-time customer data from your Data Warehouse
+- [Bazaarvoice](https://hightouch.com/docs/destinations/bazaarvoice): Drive sales with the most trusted network of authentic product reviews.
+- [Beeswax](https://hightouch.com/docs/destinations/beeswax): Combine best-in-breed solutions from across the programmatic ecosystem with your proprietary data, algorithms, and strategies into a seamless whole
+- [BigCommerce](https://hightouch.com/docs/destinations/bigcommerce): Seamlessly create unique storefronts for each facet of your business, all managed through one BigCommerce dashboard.
+- [Bird](https://hightouch.com/docs/destinations/bird): The complete platform for enterprise brands to acquire, convert, and retain customers across every channel—powered by AI that actually understands your business.
+- [Bloomreach](https://hightouch.com/docs/destinations/bloomreach): Bloomreach helps companies personalize customer experiences by targeting the right customers with the right experience at the right time.
+- [Bluecore](https://hightouch.com/docs/destinations/bluecore): Empower e-commerce brands to personalize customer communications with Bluecore, the retail marketing platform.
+
+- [Box](https://hightouch.com/docs/destinations/box): Transfer data at scale to Box
+- [Branch.io](https://hightouch.com/docs/destinations/branchio): Event tracking helps you understand how a user moves through your app and what actions they are taking along the way. Commerce, Content, and User Lifecycle events can all be tracked this way. 
+- [Braze](https://hightouch.com/docs/destinations/braze): Build better campaigns on Braze with up-to-date customer data from your data warehouse
+- [Braze Cohorts](https://hightouch.com/docs/destinations/braze-cohorts): Build better campaigns on Braze with up-to-date customer data from your data warehouse
+- [Brevo](https://hightouch.com/docs/destinations/brevo): Streamline your marketing efforts by syncing data into Brevo
+- [Cadent](https://hightouch.com/docs/destinations/cadent): Activate your data as Conversion events in Cadent 
+- [Campaign Monitor](https://hightouch.com/docs/destinations/campaign-monitor): Run better email campaigns on Campaign Monitor with up-to-date customer data from your data warehouse
+- [Campaigner](https://hightouch.com/docs/destinations/campaigner): Enrich Campaigner with data from your warehouse to build robust email marketing campaigns to drive higher ROI and grow your audience.
+
+- [Cendyn](https://hightouch.com/docs/destinations/cendyn): Capture demand and drive direct bookings by managing your digital ads and metasearch campaigns from one single platform.
+- [Chameleon](https://hightouch.com/docs/destinations/chameleon): Boost product adoption and reduce churn
+- [Chargebee](https://hightouch.com/docs/destinations/chargebee): Enrich Chargebee data with customer data from your warehouse to drive revenue analysis
+- [ChartMogul](https://hightouch.com/docs/destinations/chartmogul): Empower your product teams with richer data from your warehouse to perform deeper analysis on subscription revenue and better understand business performance.
+
+- [ChatGPT Ads (OpenAI)](https://hightouch.com/docs/destinations/open-ai): Advertising in ChatGPT helps advertisers reach people as they explore ideas, evaluate options, and make decisions through relevant ads designed to fit naturally into the experience.
+- [ChurnZero](https://hightouch.com/docs/destinations/churnzero): Fight customer churn with fresh customer data in ChurnZero
+- [CJ Affiliate](https://hightouch.com/docs/destinations/commission-junction): CJ Affiliate's technology powers a partnership ecosystem where over 167K publishers and brands engage billions of consumers worldwide.
+- [CleverTap](https://hightouch.com/docs/destinations/clevertap): Build better campaigns on CleverTap with up-to-date customer data from your data warehouse
+- [ClickUp](https://hightouch.com/docs/destinations/clickup): A productivity team app for storing all essentials such as tasks, documents, goals, chat, and more.
+- [ClientSuccess](https://hightouch.com/docs/destinations/client-success): Improve product adoption and reduce churn by enriching ClientSuccess with rich, up-to-date customer data from your data warehouse
+- [Close](https://hightouch.com/docs/destinations/closeio): Close more deals by keeping your prospect data up-to-date and in sync with data in your warehouse
+- [CockroachDB](https://hightouch.com/docs/destinations/cockroachdb): Power internal tools, in-app experiences, and more
+- [Common Room](https://hightouch.com/docs/destinations/common-room): Get a unified view and automate using every signal across social, community, product, CRM, and more. Initiate conversations, grow adoption, and accelerate pipeline faster than ever before.
+
+- [Contentstack](https://hightouch.com/docs/destinations/contentstack): Contentstack is a modern, headless CMS built for teams that want to ship content faster everywhere. Plug in any front-end and use real-time collaboration and workflow automation to keep content fresh and consistent across all platforms.
+- [Cordial](https://hightouch.com/docs/destinations/cordial): Sync data to Cordial through Contacts API 
+- [Courier](https://hightouch.com/docs/destinations/courier): Power product notifications with your warehouse data in Courier
+- [Criteo](https://hightouch.com/docs/destinations/criteo): Reach the people who will care most about you, whether they’re just discovering you, or have engaged with you before.
+- [CrowdTwist](https://hightouch.com/docs/destinations/crowdtwist): Oracle CrowdTwist is a SaaS based omni-channel loyalty and analytics platform that is designed to allow marketers to acquire, engage and retain customers
+- [Customer.io](https://hightouch.com/docs/destinations/customerio): Deliver exceptional engagement campaigns using the freshest customer data from your warehouse
+- [Digital Turbine](https://hightouch.com/docs/destinations/digital-turbine): Empower advertisers to grow the bottom line by targeting your first-party audiences with in-app ad experiences across mobile devices.
+- [Discord](https://hightouch.com/docs/destinations/discord): Send events so Discord can attribute them to ad campaigns or track player progress on in-game quests.
+- [Drift](https://hightouch.com/docs/destinations/drift): Engage with your leads at the right time with the right context via Drift
+- [Dropbox](https://hightouch.com/docs/destinations/dropbox): Easy to use, reliable, private, and secure. It’s no wonder Dropbox is the choice for storing and sharing your most important files.
+- [Dynamic Yield](https://hightouch.com/docs/destinations/dynamic-yield): Use Dynamic Yield to update product data.
+- [DynamoDB](https://hightouch.com/docs/destinations/dynamodb): Power internal tools, in-app experiences, and more
+- [Dynata](https://hightouch.com/docs/destinations/dynata): Empower your brand, marketing, and advertising teams to make data-driven decisions with Dynata’s data and insight solutions.
+- [Eagle Eye](https://hightouch.com/docs/destinations/eagle-eye): Eagle Eye's AI-powered platform unifies loyalty management and 1-to-1 personalization. Capture first-party data, deliver personalized experiences at scale, and measure results.
+- [Eesii](https://hightouch.com/docs/destinations/eesii): Activate your data as campaign records in Eesii
+- [Elasticsearch](https://hightouch.com/docs/destinations/elasticsearch): Elasticsearch is a distributed, free and open search and analytics engine for all types of data, including textual, numerical, geospatial, structured, and unstructured.
+- [Eloqua](https://hightouch.com/docs/destinations/eloqua): Enhance Eloqua marketing automations for mobile, email, video and search results by bringing enriched customer data into Eloqua from your data warehouse.
+- [Emarsys](https://hightouch.com/docs/destinations/emarsys): Emarsys platform helps marketers deliver personalized, 1:1 experiences across multiple channels and drive business outcomes.
+- [Embedded Destination](https://hightouch.com/docs/destinations/custom): Build a custom connector that looks and feels just like a native destination
+- [EnjoyHQ](https://hightouch.com/docs/destinations/enjoy-hq): Sync data from your warehouse to EnjoyHQ to consolidate all customer feedback and research data into a single platform, providing you with better insights for informed decision-making and enhancing customer experiences
+- [Epsilon Retail Media (CitrusAd)](https://hightouch.com/docs/destinations/citrusad): Reach customers across the open web and drive increased sales both on-site and in-store.
+- [Expedia Group Advertising](https://hightouch.com/docs/destinations/expedia): Get a full picture of your Expedia ad performance with attribution reports that track their impact on direct bookings—both online and offline.
+- [Firestore](https://hightouch.com/docs/destinations/firestore): Power internal tools, in-app experiences, and more
+- [FreeWheel](https://hightouch.com/docs/destinations/free-wheel): FreeWheel gives advertisers direct connections to streaming video inventory from the world's leading publishers.
+- [Freshdesk](https://hightouch.com/docs/destinations/freshdesk): Deliver better support by making contacts, companies, and tickets available in Freshdesk.
+- [Freshsales](https://hightouch.com/docs/destinations/freshsales): Transform your selling experience with Freshsales
+- [Front](https://hightouch.com/docs/destinations/front): Empower your teams to deliver better support and experiences by making customer data available in the tools they live in
+- [FullStory](https://hightouch.com/docs/destinations/fullstory): Sync your user properties into FullStory on your schedule, not only when users are interacting with your properties. This allows you to integrate these platforms and gain a more complete view of your customer experience.
+- [Gainsight](https://hightouch.com/docs/destinations/gainsight): Improve product adoption and reduce churn by enriching Gainsight with rich, up-to-date customer data from your data warehouse
+- [Gainsight PX](https://hightouch.com/docs/destinations/gainsightpx): Powerful data analytics and product engagement platform
+- [Genesys](https://hightouch.com/docs/destinations/genesys): Connect conversations across channels and deliver seamless customer experience with Genesys Cloud.
+- [Gladly](https://hightouch.com/docs/destinations/gladly): Streamline multi-channel customer communication
+- [Gong](https://hightouch.com/docs/destinations/gong)
+- [Google Ad Manager 360](https://hightouch.com/docs/destinations/gam360): Optimize ad delivery with targeted in-sync audiences
+- [Google ADH (BigQuery)](https://hightouch.com/docs/destinations/google-adh-bigquery): Google Ads Data Hub enables customized analysis that aligns with your specific business objectives, while respecting user privacy and upholding Google’s high standards of data security.
+- [Google Ads](https://hightouch.com/docs/destinations/google): Empower your marketing team to run highly granular retargeting and lookalike campaigns on Google
+- [Google Analytics](https://hightouch.com/docs/destinations/google-analytics): Send events directly to Google Analytics from your data warehouse
+- [Google Campaign Manager 360](https://hightouch.com/docs/destinations/google-campaign-manager): Empower your marketing team to dynamically and intelligently serve and view of all of their ad campaigns across all channels
+- [Google Cloud Functions](https://hightouch.com/docs/destinations/google-cloud-functions): Build your own custom destination using a serverless function
+- [Google Cloud Pub/Sub](https://hightouch.com/docs/destinations/google-pubsub): Connect to your internal microservices via a message queue
+- [Google Cloud Storage](https://hightouch.com/docs/destinations/gcs): Transfer data at scale from your warehouse to Google Cloud Storage
+- [Google Data Manager API](https://hightouch.com/docs/destinations/google-data-manager): Fuel AI-powered personalization and support advanced measurement use-cases by connecting first-party audience and conversion data to Google Ads, Google Analytics, and Google Marketing Platform through a single unified API.
+- [Google Display & Video 360](https://hightouch.com/docs/destinations/display-video): Sync customer segments to Display & Video 360
+- [Google Drive](https://hightouch.com/docs/destinations/google-drive): Transfer data at scale from your warehouse to Google Drive
+- [Google Retail](https://hightouch.com/docs/destinations/google-retail): Ensure all of your Google Retail listings match your inventory
+- [Google Search Ads 360](https://hightouch.com/docs/destinations/google-search-ads-360): Search Ads 360 helps you respond to an ever-changing market in real time and at scale.
+- [Google Sheets - User Account](https://hightouch.com/docs/destinations/google-sheets): Sync warehouse data to spreadsheets used by sales, ops, and marketing teams
+- [Great Question](https://hightouch.com/docs/destinations/great-question): Maintain your candidates list to reach the right audience for your Great Question studies.
+- [Heap](https://hightouch.com/docs/destinations/heap): Sync your most recently captured event data to Heap to both measure and dramatically improve your digital experience
+- [Help Scout](https://hightouch.com/docs/destinations/help-scout): Help Scout is a dedicated customer support platform built for growing teams to deliver best-in-class customer service.
+- [HTTP Request](https://hightouch.com/docs/destinations/http-request): Connect to any internal system, third-party API, or other web service.
+- [HubDB](https://hightouch.com/docs/destinations/hubdb): Easily sync data and publish tables to always keep your website or landing page up to date. 
+- [HubSpot](https://hightouch.com/docs/destinations/hubspot): Prioritize & personalize your marketing & sales outreach by adding customer data into HubSpot 
+- [Impact.com](https://hightouch.com/docs/destinations/impact-com): Impact.com - One platform. All partnerships.
+- [InMobi](https://hightouch.com/docs/destinations/inmobi): InMobi help brands understand, identify, engage and acquire consumers.
+- [Insider InOne](https://hightouch.com/docs/destinations/insider): InOne brings together all technologies marketers need to deliver personalized experiences under a single, highly usable platform. InOne makes the technology so seamless that it truly blends into the daily lives of marketers, fully empowering them behind the scenes.
+- [Intercom](https://hightouch.com/docs/destinations/intercom): Sync product and CRM data to Intercom so that your support team has all the information they need about customers
+- [iSpot.tv](https://hightouch.com/docs/destinations/ispot-tv): Empower your brand, marketing, and advertising teams to make data-driven decisions with iSpot.tv’s TV measurement solutions.
+- [Iterable](https://hightouch.com/docs/destinations/iterable): Run better email, push, and SMS campaigns on Iterable with up-to-date customer data from your data warehouse
+- [Jira](https://hightouch.com/docs/destinations/jira): Keep your team's projects and tickets up-to-date with fresh customer data
+- [Kameleoon](https://hightouch.com/docs/destinations/kameleoon): Empower rich personalization
+- [Kayzen](https://hightouch.com/docs/destinations/kayzen): Kayzen is a mobile DSP that enables app developers, agencies, media buyers, and brands to run programmatic acquisition, retargeting, and branding campaigns.
+- [Kevel](https://hightouch.com/docs/destinations/kevel): Onboard your first-party audiences to Kevel Audience to power onsite and retail media campaigns with segments built from your own data.
+- [Klaviyo](https://hightouch.com/docs/destinations/klaviyo): Power e-commerce focused email marketing with your warehouse data in Klaviyo
+- [Knock](https://hightouch.com/docs/destinations/knock): Knock lets you send and manage notifications across email, push, SMS, and in-app from one API—without building the infrastructure yourself.
+- [Kognitiv](https://hightouch.com/docs/destinations/kognitiv): Sync data from your warehouse to Kognitiv's loyalty platform
+- [Kustomer](https://hightouch.com/docs/destinations/kustomer): Manage and contextualize data to deliver hyper-personalized support and drive smarter processes that scale your business.
+- [La Growth Machine](https://hightouch.com/docs/destinations/la-growth-machine): Automate your outreach campaigns to send messages through LinkedIn, Email, Voice Messages, and more with La Growth Machine.
+- [LaunchDarkly](https://hightouch.com/docs/destinations/launchdarkly): Keep your team's feature flags up-to-date with fresh targeting rules and lists of users
+- [LG Ad Solutions](https://hightouch.com/docs/destinations/lg-ad-solutions): Empower your advertising team to run targeted campaigns across LG’s premium Smart TV inventory.
+- [Liftoff](https://hightouch.com/docs/destinations/liftoff): Empower your marketing team to run advertising on Liftoff
+- [LINE Ads](https://hightouch.com/docs/destinations/line-ads): Boost your business growth by finding the right customers on LINE. Reach more audiences and achieve better results by managing campaign objectives, targeting, budget, and measurement anytime through LINE Ads
+- [Linear](https://hightouch.com/docs/destinations/linear): Enrich and create tickets in Linear
+- [LinkedIn Ads](https://hightouch.com/docs/destinations/linkedin): Run campaigns with custom audiences, retargeting, and lookalikes in LinkedIn
+- [LiveIntent](https://hightouch.com/docs/destinations/liveintent): Empower your marketing team to match audiences across LiveIntent's publisher network for targeting and suppression. 
+- [LiveRamp](https://hightouch.com/docs/destinations/liveramp): LiveRamp helps you unify customer data across platforms, activate it securely everywhere you need it, and measure performance with precision—without compromising privacy. It turns fragmented identifiers into actionable insights so you can target smarter and drive higher ROI.
+- [Loops](https://hightouch.com/docs/destinations/loops): Send your product, marketing, and transactional emails for your app with Loops, the email platform built for SaaS. Empower your marketing teams to create, send and track beautiful email campaigns.
+
+- [Magnite](https://hightouch.com/docs/destinations/magnite): Magnite is the world’s largest independent sell-side advertising company. We’ll help you win across every channel, every format and on your terms.
+- [Mailchimp](https://hightouch.com/docs/destinations/mailchimp): Run better email campaigns on Mailchimp with up-to-date customer data from your data warehouse
+- [MariaDB](https://hightouch.com/docs/destinations/mariadb): Power internal tools, in-app experiences, and more
+- [Marigold Engage (Selligent)](https://hightouch.com/docs/destinations/marigold-engage): Targeting marketing to personalize customer experiences.
+- [Marigold Engage+](https://hightouch.com/docs/destinations/marigold-engage-plus): Sync data and run campaigns on Marigold Engage+
+- [Marketo](https://hightouch.com/docs/destinations/marketo): Build robust marketing campaigns on Marketo using rich customer data from your data warehouse
+- [Mattermost](https://hightouch.com/docs/destinations/mattermost): Sync your warehouse with Mattermost and push business metrics and user activity data to Mattermost in real-time 
+- [Maxio](https://hightouch.com/docs/destinations/maxio): Unlock the full potential of your subscription business by syncing data from your data warehouse to Maxio
+- [Medallia](https://hightouch.com/docs/destinations/medallia): The leading experience management platform used by companies around the world to deliver exceptional experiences
+- [Meta Conversions API](https://hightouch.com/docs/destinations/meta-conversions): Optimize campaigns and gain insight into ad performance by sending web, app, phone, and in-store conversion events to Meta from your data warehouse.
+- [Meta Custom Audiences](https://hightouch.com/docs/destinations/meta): Sync first-party audiences to Meta Ads Manager for better targeting, lookalikes, and suppression across your campaigns. 
+- [Meta Product Catalog](https://hightouch.com/docs/destinations/meta-catalog): Power Meta's Advantage+ and dynamic advertising campaigns with up-to-date product data synced directly from your data warehouse.
+- [Microsoft Ads (Bing Ads)](https://hightouch.com/docs/destinations/bingads): Ensure that you never serve another irrelevant advertisement with Bing Ads
+- [Microsoft Dynamics 365](https://hightouch.com/docs/destinations/microsoft-dynamics): Sync data into Dynamics 365 by writing to Dataverse tables.
+- [Microsoft Excel](https://hightouch.com/docs/destinations/microsoft-excel): Sync warehouse data to Excel worksheets used by sales, ops, and marketing teams
+- [Microsoft OneDrive](https://hightouch.com/docs/destinations/onedrive)
+- [Microsoft Sharepoint](https://hightouch.com/docs/destinations/sharepoint): Microsoft SharePoint is a powerful file storage solution that enables seamless document management and collaboration.
+- [Microsoft Teams](https://hightouch.com/docs/destinations/microsoft-teams): Teams is a business communication platform where people can work together more effectively, connect all their software tools and services, and find the information they need to do their best work — all within a secure, enterprise-grade environment.
+- [MinIO](https://hightouch.com/docs/destinations/minio): Transfer data at scale from your warehouse to MinIO
+- [Mixpanel](https://hightouch.com/docs/destinations/mixpanel): Perform deeper analysis and better understand user behavior by bringing enriched customer data from your data warehouse into Mixpanel
+- [MoEngage](https://hightouch.com/docs/destinations/moengage): Build more robust campaigns on MoEngage with up-to-date customer data from your data warehouse
+- [Moloco](https://hightouch.com/docs/destinations/moloco): Moloco is the AI-powered growth engine that unlocks the value of a business's first-party data.
+- [Monday](https://hightouch.com/docs/destinations/monday): Keep your team's projects and tickets up-to-date with updated items for your Monday boards 
+- [MongoDB](https://hightouch.com/docs/destinations/mongodb): Power internal tools, in-app experiences, and more
+- [MovableInk](https://hightouch.com/docs/destinations/movable-ink): The Magic Behind Your Marketing Movable Ink activates data into personalized content in any customer touchpoint.
+- [mParticle](https://hightouch.com/docs/destinations/mparticle): Sync customer attributes and events from your data warehouse to hundreds on integrations through mParticle 
+- [MySQL](https://hightouch.com/docs/destinations/mysql): Power internal tools, in-app experiences, and more
+- [NCR Advanced Marketing Solution](https://hightouch.com/docs/destinations/ams): Manage targeted promotions and loyalty programs for all the stores in your chain, from a central point.
+- [NetSuite (REST)](https://hightouch.com/docs/destinations/netsuite-rest): Sync business-critical data from your data warehouse to Netsuite with Hightouch
+- [NetSuite (SOAP)](https://hightouch.com/docs/destinations/netsuite): Sync business-critical data from your data warehouse to Netsuite with Hightouch
+- [Nextdoor](https://hightouch.com/docs/destinations/nextdoor): Elevate your local marketing efforts with Nextdoor Ads and drive business growth by reaching nearby customers in their communities
+- [Notion](https://hightouch.com/docs/destinations/notion): Power up your Notion databases with data from your data warehouse
+- [Ometria](https://hightouch.com/docs/destinations/ometria): Ometria is a customer data and marketing platform built for retail brands that want to turn fragmented data into revenue. It unifies customer data in real time, uses AI to predict behavior, and lets you trigger highly personalized campaigns across email, SMS, and onsite—so you can send the right message at the right time without duct-taping multiple tools together.
+- [OneSignal](https://hightouch.com/docs/destinations/onesignal): Deliver mobile and web push notifications using OneSignal with fresh data from your data warehouse
+- [OpenSearch](https://hightouch.com/docs/destinations/opensearch): OpenSearch is a distributed, free and open search and analytics engine for all types of data, including textual, numerical, geospatial, structured, and unstructured.
+- [Optimizely](https://hightouch.com/docs/destinations/optimizely): Power digital experiences your customers will love with rich customer data
+- [Oracle DB](https://hightouch.com/docs/destinations/oracle-db): Power internal tools, in-app experiences, and more
+- [Ortto](https://hightouch.com/docs/destinations/ortto): Ortto brings the customer data platform, customer journey marketing, and customer journey analytics together to grow your SaaS business.
+- [Outreach](https://hightouch.com/docs/destinations/outreach): Empower your sales team to act upon customer activity by pushing enriched customer data from your warehouse into Outreach 
+- [PAR Punchh](https://hightouch.com/docs/destinations/punchh): Use PAR Punchh to turn customer data into revenue—personalized offers, seamless loyalty programs, and real-time insights that keep guests coming back and spending more.
+- [PAR Retail Stuzo Open Commerce](https://hightouch.com/docs/destinations/stuzo): Stuzo helps Convenience & Fuel Retailers Know and Activate more customers and data in real-time, leading to more visits, more gallons, and bigger baskets.
+- [Partnerize](https://hightouch.com/docs/destinations/partnerize): Attribute partner- and affiliate-driven sales in real time and commission your partners accurately, with server-to-server conversions sent straight to Partnerize.
+- [PartnerStack](https://hightouch.com/docs/destinations/partnerstack): Empower your partnership programs using Partnerstack with Hightouch
+- [Pendo](https://hightouch.com/docs/destinations/pendo): Perform deeper analysis and better understand user behavior by bringing enriched customer data into Pendo from your data warehouse
+- [Pinterest Ads](https://hightouch.com/docs/destinations/pinterest-ads): Deliver better ads by syncing conversion events and customer list audiences to Pinterest Ads
+- [Pipedrive](https://hightouch.com/docs/destinations/pipedrive): Enable your sales team to engage with prospects better by syncing enriched data from your warehouse to Pipedrive CRM
+- [PlanetScale](https://hightouch.com/docs/destinations/planetscale): Power internal tools, in-app experiences, and more
+- [Planhat](https://hightouch.com/docs/destinations/planhat): Sync real-time analytics and enrich customer data in Planhat to optimize your customer management and growth
+- [Podscribe](https://hightouch.com/docs/destinations/podscribe): Simple, powerful podcast and audio ad analytics + tools that help everyone make better decisions.
+- [Poplar](https://hightouch.com/docs/destinations/poplar): Keep your Poplar audiences and Do Not Mail list up-to-date and trigger campaigns with data from your warehouse
+- [PostgreSQL](https://hightouch.com/docs/destinations/postgres): Power internal tools, in-app experiences, and more
+- [PostHog](https://hightouch.com/docs/destinations/posthog): Push user behavior data from your warehouse into PostHog
+- [Purchasely](https://hightouch.com/docs/destinations/purchasely)
+- [Qualified](https://hightouch.com/docs/destinations/qualified): Convert inbound leads at scale
+- [Qualtrics](https://hightouch.com/docs/destinations/qualtrics): Improve user experiences with rich data by syncing warehouse data to Qualtrics
+- [QuickBooks](https://hightouch.com/docs/destinations/quickbooks): Gain financial visibility and empower your accounting team by keeping your financials up to date
+- [RabbitMQ](https://hightouch.com/docs/destinations/rabbitmq): Connect to your internal microservices via a message queue
+- [Rakuten](https://hightouch.com/docs/destinations/rakuten): Send Ad Conversion Transactions to the Rakuten Transactions API
+- [Reddit Ads](https://hightouch.com/docs/destinations/reddit-ads): Run more targeted ads by syncing conversion events and audiences to Reddit
+- [Redis](https://hightouch.com/docs/destinations/redis): Redis is an in-memory data structure store, used as a distributed, in-memory key–value database, cache and message broker, with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, etc.
+- [Reply.io](https://hightouch.com/docs/destinations/replyio): Supercharge your sales team by syncing your most up-to-date customer and lead data from your warehouse
+- [Resonate](https://hightouch.com/docs/destinations/resonate): Resonate tells you who your highest-value audiences are and what they’ll do next so you can act with precision, before the competition.
+- [Responsys](https://hightouch.com/docs/destinations/responsys): Oracle Responsys is a cross-channel campaign management platform that delivers advanced intelligence at scale so you can create personalized messages based on customers' and prospects' individual interests and preferences.
+- [Retention Science](https://hightouch.com/docs/destinations/retention-science): AI-driven email marketing automation
+- [Rockerbox](https://hightouch.com/docs/destinations/rockerbox): Rockerbox brings clarity to the noise through accurate attribution and marketing mix modeling that helps you make the right optimizations.
+
+- [Rokt](https://hightouch.com/docs/destinations/rokt): Empower your marketing team by delivering up-to-date event data to Rokt straight from your warehouse 
+- [Roku Advertising Direct](https://hightouch.com/docs/destinations/roku-ads): Empower your advertising team to target and suppress first-party audiences across direct buys on Roku’s premium streaming platform inventory.
+- [Rudderstack](https://hightouch.com/docs/destinations/rudderstack): Sync rich customer data from your data warehouse to hundreds of SaaS tools via Rudderstack's large integration library
+- [S3](https://hightouch.com/docs/destinations/s3): Transfer data at scale from your warehouse to S3
+- [Sage Intacct](https://hightouch.com/docs/destinations/sage-intacct): Sync data from your warehouse to Sage Intacct to streamline your financial processes and gain comprehensive insights into your financial data.
+- [Sailthru](https://hightouch.com/docs/destinations/sailthru): Run better marketing campaigns on Sailthru with up-to-date customer data from your data warehouse
+- [Salesforce](https://hightouch.com/docs/destinations/salesforce): Push enriched data from your warehouse into Salesforce CRM for your teams to act upon it
+- [Salesforce Commerce Cloud](https://hightouch.com/docs/destinations/salesforce-commerce-cloud): Keep your storefront up-to-date with the latest customer info from your data warehouse
+- [Salesforce Marketing Cloud](https://hightouch.com/docs/destinations/sfmc): Personalize campaigns in Salesforce Marketing Cloud with rich customer data from your data warehouse
+- [Salesforce Pardot](https://hightouch.com/docs/destinations/pardot): Run better email campaigns on Salesforce Pardot with up-to-date customer data from your data warehouse
+- [Salesloft](https://hightouch.com/docs/destinations/salesloft): Empower your Salesloft usage with up to date data from your data warehouse
+- [Samsung Ads](https://hightouch.com/docs/destinations/samsung-ads): Empower your advertising team to run targeted campaigns across Samsung Ads’ premium inventory.
+- [Sanity](https://hightouch.com/docs/destinations/sanity): Empower your content management through Sanity - a customizable all-code backend for content-driven websites and apps. 
+- [SAP HANA](https://hightouch.com/docs/destinations/sap-hana): Move your data into HANA
+- [SAP IBP](https://hightouch.com/docs/destinations/sap-ibp): Forecast and plan across your business by loading fresh data into SAP IBP
+- [SAP S/4HANA](https://hightouch.com/docs/destinations/sap-s4hana): Explore top predictions for intelligent ERP.
+- [Segment](https://hightouch.com/docs/destinations/segment): Sync rich customer data from your data warehouse to hundreds of SaaS tools via Segment's large integration library
+- [ServiceNow](https://hightouch.com/docs/destinations/servicenow): Improve your ITSM workflow by having your data in ServiceNow
+- [SFTP](https://hightouch.com/docs/destinations/sftp): Transfer data at scale from your warehouse to your apps through SFTP
+- [Shopify](https://hightouch.com/docs/destinations/shopify): Keep your storefront up-to-date with the latest customer and product info from your data warehouse
+- [Sinch Campaigns](https://hightouch.com/docs/destinations/sinch-campaigns): Keep Sinch audiences in step with the latest customer activity, and trigger published Sinch Campaigns to any cohort with per-recipient personalization filled from your customer data.
+- [Sinch MessageMedia](https://hightouch.com/docs/destinations/sinch-messagemedia): Activate your full customer dataset for SMS and WhatsApp campaigns. Keep contacts and audience lists in Sinch MessageMedia in sync with the data your marketing team relies on, so every send is targeted at the right people with the right context.
+- [Singular](https://hightouch.com/docs/destinations/singular): Enrich your analytics in Singular with event data from your warehouse.
+- [Slack](https://hightouch.com/docs/destinations/slack): Sync your warehouse with Slack and push business metrics and user activity data to Slack in real-time 
+- [Smartsheet](https://hightouch.com/docs/destinations/smartsheet): Sync your warehouse data to your Smartsheet sheets
+- [SMTP Email](https://hightouch.com/docs/destinations/email): Sync your warehouse with Email notifications and push marketing campaigns and product updates to customers in real time
+- [Snapchat](https://hightouch.com/docs/destinations/snapchat): Empower your marketing team to run highly granular campaigns on Snapchat
+- [Snowflake Iceberg](https://hightouch.com/docs/destinations/snowflake-iceberg): Hundreds of industry leaders use Hightouch to turn Snowflake into a marketing, sales, success and operational engine
+- [Split](https://hightouch.com/docs/destinations/split): Sync data from your warehouse to Split.io for data-driven feature release and management, enhancing user experience through targeted deployment.
+- [Spotify Ads Manager](https://hightouch.com/docs/destinations/spotify): Sync first-party audiences and conversion events to Spotify Ads Manager for better targeting, suppression, and measurement.
+- [Sprig](https://hightouch.com/docs/destinations/sprig): Empower your team to run surveys with AI feedback.
+- [SQL Server](https://hightouch.com/docs/destinations/sqlserver): Power internal tools, in-app experiences, and more
+- [StackAdapt](https://hightouch.com/docs/destinations/stackadapt): Syncing data from your warehouse to StackAdapt to enable data-driven advertising decisions and optimized targeting by leveraging comprehensive customer insights.
+- [Statsig](https://hightouch.com/docs/destinations/statsig): Sync to Statsig segments and events from your warehouse to analyze product performance and run experiments.
+- [Stripe](https://hightouch.com/docs/destinations/stripe): Enrich Stripe with data from your warehouse to create, manage, and drive revenue analysis from your customers, products, prices, subscriptions, and invoices resources.
+- [SugarCRM](https://hightouch.com/docs/destinations/sugar-crm): Feed the funnel and build the right pipeline when you choose the marketing automation platform built for marketing mavericks. Create campaigns, engage one-to-one at scale, predict needs, and understand what is working. With Market, you can let the platform do the work.
+- [Taboola](https://hightouch.com/docs/destinations/taboola): Reach your audiences in their moment of next, when they finish consuming content and are most likely to convert.
+- [Talon.One](https://hightouch.com/docs/destinations/talon-one): Sync customer data to Talon.One audiences 
+- [The Trade Desk](https://hightouch.com/docs/destinations/tradedesk): Sync audiences and conversion events to The Trade Desk using data from your warehouse for first-party optimization, third-party monetization, and retail media use-cases.
+- [TikTok](https://hightouch.com/docs/destinations/tiktok): Empower your marketing team by utilizing web events in TikTok
+- [Topsort](https://hightouch.com/docs/destinations/topsort): Use Topsort to quickly turn your marketplace into a high-performing ad revenue engine with AI-driven, privacy-first infrastructure.
+- [Totango](https://hightouch.com/docs/destinations/totango): Enrich your customer success platform with rich customer data from your warehouse to improve product adoption and reduce churn
+- [Twilio](https://hightouch.com/docs/destinations/twilio): Send SMS updates to your customers in real time.
+- [Twilio SendGrid](https://hightouch.com/docs/destinations/sendgrid): Run better email campaigns on SendGrid with up-to-date customer data from your data warehouse
+- [Unify](https://hightouch.com/docs/destinations/unify): Capture intent data, run AI agents, and engage every prospect with personalized outbound using Unify.
+- [Upland Waterfall](https://hightouch.com/docs/destinations/upland-waterfall): Elevate your customer experience and drive higher levels of engagement using personalised, targeted SMS/MMS mobile messaging with Waterfall.
+- [User Interviews](https://hightouch.com/docs/destinations/user-interviews): Gain deeper understanding of your custom participants with User Interviews
+- [Userflow](https://hightouch.com/docs/destinations/userflow): Sync your freshest data to Userflow to drastically improve your user onboarding
+- [Vero Cloud](https://hightouch.com/docs/destinations/vero): Enable your sales team to notify users based on events in your warehouse with Vero Cloud.
+- [Viant](https://hightouch.com/docs/destinations/viant): Viant is a pioneer in people-based digital advertising. Use AI to help advertisers plan, execute, and measure their digital advertising campaigns.
+- [Vistar Media](https://hightouch.com/docs/destinations/vistar-media): Empower your advertising team to run digital out-of-home (DOOH) campaigns with data-driven programmatic precision.
+- [Vitally](https://hightouch.com/docs/destinations/vitally)
+- [Vizio Ads](https://hightouch.com/docs/destinations/vizio-ads): Empower your advertising team to run targeted campaigns across Vizio Ad’s premium Smart TV inventory.
+- [Voucherify](https://hightouch.com/docs/destinations/voucherify): Voucherify helps businesses quickly launch and manage promotions, loyalty programs, referrals, and gift cards through a flexible API-first platform, reducing development effort while enabling personalized customer incentives.
+- [VWO Attribute Lists](https://hightouch.com/docs/destinations/vwo): Boost conversions with precise targeting and personalized experiences using VWO's powerful optimization tools.
+- [WebDAV](https://hightouch.com/docs/destinations/webdav): Sync data from your warehouse to a WebDAV server as CSV, JSON, NDJSON, XML, or Parquet files.
+- [Webflow](https://hightouch.com/docs/destinations/webflow): Bring in the power of personalization and dynamic content to your web projects on Webflow using rich customer data from your data warehouse
+- [WhatsApp](https://hightouch.com/docs/destinations/whatsapp): Message your customers when and where it matters most. 
+- [Workday](https://hightouch.com/docs/destinations/workday): Sync enriched data from your warehouse to your Workday instance
+- [Workday Adaptive Planning](https://hightouch.com/docs/destinations/workday-adaptive-planning): Sync data from your warehouse to your Workday Adaptive Planning modeled sheets. 
+- [X Ads (formerly Twitter Ads)](https://hightouch.com/docs/destinations/x): Send conversion web events to X and run campaigns with custom audiences, retargeting, and lookalikes directly from your warehouse
+- [Xandr](https://hightouch.com/docs/destinations/xandr): Enable your marketing team to target granular audiences and measure real-world outcomes
+- [Xero](https://hightouch.com/docs/destinations/xero): Gain financial visibility and empower your accounting team by keeping your financials up to date
+- [Xtremepush](https://hightouch.com/docs/destinations/xtremepush): Sync data to Xtremepush as user profiles, to trigger campaigns, or to maintain user list membership.
+- [Yahoo](https://hightouch.com/docs/destinations/yahoo): Ensure that your campaigns are efficiently reaching the right audiences for the best results with Yahoo DSP.
+- [Yahoo DataX](https://hightouch.com/docs/destinations/yahoo-datax): Yahoo DataX enables partners to seamlessly and securely activate their data and enrich it with Yahoo's robust data assets for more powerful advertising.
+- [Zapier](https://hightouch.com/docs/destinations/zapier): Use Zapier as a destination if you are trying to quickly migrate system or if you need to connect a service we do not yet support.
+- [Zendesk](https://hightouch.com/docs/destinations/zendesk): Deliver better support by making user events and attributes available inside Zendesk
+- [Zeta](https://hightouch.com/docs/destinations/zeta-global): Drive personalized omnichannel engagement in the Zeta Marketing Platform with complete, up-to-date customer profiles.
+- [Zoho CRM](https://hightouch.com/docs/destinations/zohocrm): Push enriched data from your warehouse into Zoho CRM for your teams to act upon it
+- [Zoomd](https://hightouch.com/docs/destinations/zoomd): Target and suppress customers with mobile ads across 300M mobile devices using AI-driven insights, ensuring more effective and personalized campaigns.
+- [Zuora](https://hightouch.com/docs/destinations/zuora): Sync business-critical data from your data warehouse to Zuora with Hightouch
+
+
+## Customer Studio
+
+- [Customer Studio overview](https://hightouch.com/docs/customer-studio/overview): Customer Studio is where you build audiences, coordinate campaigns, and activate customer data from your warehouse — without writing SQL.
+- [Audience insights](https://hightouch.com/docs/customer-studio/insights): Audience insights give marketers deeper understanding of the composition of their audiences.
+- [Audience overviews](https://hightouch.com/docs/customer-studio/audience-overviews): Audience overviews enable visual confirmation of audience construction and health.
+- [Build audiences with AI](https://hightouch.com/docs/customer-studio/agents): Create, refine, and understand audiences using natural language in Customer Studio.
+- [Catalog recommendations](https://hightouch.com/docs/customer-studio/catalog-recommendations): Generate personalized product recommendations for every user from any item catalog in your data warehouse.
+- [Configure Schema Git Sync](https://hightouch.com/docs/customer-studio/schema-setup): Connect your Customer Studio schema to a Git repository for version control, consistency, and collaboration across environments.
+- [Coupon assignment](https://hightouch.com/docs/customer-studio/coupons): Use coupon assignment to attach unique coupons (and related data) to users.
+- [Create audiences](https://hightouch.com/docs/customer-studio/usage): Build audiences in Customer Studio either visually or with the Agent, then preview, refine, and activate them.
+- [Data masking](https://hightouch.com/docs/customer-studio/data-masking): Data masking capabilities to help protect sensitive information, including personally identifiable information.
+- [Define your schema](https://hightouch.com/docs/customer-studio/schema): Create parent, related, and event models so marketers can build audiences in Customer Studio.
+- [Destination rules](https://hightouch.com/docs/customer-studio/destination-rules): Destination rules allow organizations to filter out users from destinations they have not consented to during during syncing.
+- [Experiments](https://hightouch.com/docs/customer-studio/experiments): Audience Experiments unlock seamless management of A/B and multivariate testing efforts by allowing users to create randomized test groups within audiences in Hightouch.
+- [General models](https://hightouch.com/docs/customer-studio/general-models): General models make warehouse tables available for agent queries without adding them to your Customer Studio schema.
+- [How Customer Studio features work together](https://hightouch.com/docs/customer-studio/campaign-workflow): Learn how Customer Studio audiences, journeys, syncs, and experiments help marketers find the right people, run scheduled workflows, send data to marketing tools, and measure outcomes.
+- [Journeys](https://hightouch.com/docs/customer-studio/journeys): Define how audience members progress through a multi-step workflow — delays, branches, exits, and syncs — on a schedule. Hightouch evaluates warehouse data at each run. Syncs pass data to downstream platforms that deliver the message.
+- [Lookalike audiences](https://hightouch.com/docs/customer-studio/lookalike-audiences): Find users who resemble your best-performing audience segments using Hightouch's native lookalike modeling.
+- [OneTrust Snowflake Native App](https://hightouch.com/docs/customer-studio/onetrust): This guide explains how to use consent data collected and stored in OneTrust, and passed to Hightouch via the OneTrust Snowflake Native App. Once the app is configured, Hightouch can reference this data in subsets, destination rules, and sync behavior to enforce consent across downstream tools.
+- [Plan your data model](https://hightouch.com/docs/customer-studio/data-model): Choose the right grain, model topology, naming conventions, and data types before configuring your Customer Studio schema.
+- [Predictive traits](https://hightouch.com/docs/customer-studio/predictive-traits): Predictive traits use machine learning to forecast user behavior, giving you forward-looking signals like purchase propensity or churn risk.
+- [Priority lists](https://hightouch.com/docs/customer-studio/priority-lists): Control which audience takes precedence when users qualify for multiple campaigns, so each person receives only the highest-priority message.
+- [Sampling](https://hightouch.com/docs/customer-studio/sampling): Sampling materializes a subset of a model's rows to make model previews faster.
+- [Snapshots](https://hightouch.com/docs/customer-studio/audience-snapshots): Audience snapshots give data marketers a record of membership history over time.
+- [Subsets](https://hightouch.com/docs/customer-studio/subsets): Subsets allow organizations to segment their total addressable audience data based on its attributes and then grant employees access to that data based on the segment.
+- [Sync audiences](https://hightouch.com/docs/customer-studio/syncs): Sync audiences to downstream destinations using Hightouch's sync templates.
+- [Templates](https://hightouch.com/docs/customer-studio/templates): Templates let you reuse common logic across audiences, syncs, and journeys.
+- [Traits](https://hightouch.com/docs/customer-studio/traits): Create reusable calculated values — like lifetime value, purchase count, or days since last order — and use them in audience filters and sync field mappings.
+
+## AI Decisioning
+
+- [AI Decisioning overview](https://hightouch.com/docs/ai-decisioning/overview): AI Decisioning automates campaign decisions at the individual user level — choosing the best message, channel, and timing for each person based on what's working.
+- [Agent alerting](https://hightouch.com/docs/ai-decisioning/agent-alerting): Set up automated notifications for agent run failures and recommendation volume drops
+- [Agent health](https://hightouch.com/docs/ai-decisioning/agent-health): Monitor agent pipeline runs, channel delivery rates, and outcome data freshness
+- [AI Decisioning agents](https://hightouch.com/docs/ai-decisioning/agents): Define campaign goals, audiences, and messages AID can send
+- [AI Decisioning configuration](https://hightouch.com/docs/ai-decisioning/configuration): Configure shared AI Decisioning settings, individual agents, and messages
+- [AID Tags](https://hightouch.com/docs/ai-decisioning/tags): Plan, apply, analyze, and manage message tags to compare creative performance across AI Decisioning agents.
+- [Braze integration with AID](https://hightouch.com/docs/ai-decisioning/braze): Learn how to connect Hightouch AI Decisioning to Braze to deliver personalized messages in real time via Campaigns and Canvases.
+- [Collections](https://hightouch.com/docs/ai-decisioning/collections): Dynamically recommend personalized products or content
+- [Content Analysis & Suggestions](https://hightouch.com/docs/ai-decisioning/content-analysis): Analyze message structure, similarity, and performance signals to understand why content works and how to improve it.
+- [Insights](https://hightouch.com/docs/ai-decisioning/insights): Analyze, learn, and optimize AI Decisioning performance
+- [Inspector](https://hightouch.com/docs/ai-decisioning/inspector): View and QA delivery behavior for individual users
+- [Iterable integration with AI Decisioning](https://hightouch.com/docs/ai-decisioning/iterable): Learn how to connect Iterable to AI Decisioning in Hightouch to send personalized, real-time messages across email, SMS, push, and in-app channels.
+- [Messages](https://hightouch.com/docs/ai-decisioning/messages): Create, manage, and optimize message variants that AI Decisioning evaluates and improves over time.
+- [Prepare data for AID](https://hightouch.com/docs/ai-decisioning/prepare-data): Learn how to structure your data models and events so AI Decisioning can target users, personalize content, and optimize for real outcomes.
+- [QA guide](https://hightouch.com/docs/ai-decisioning/qa-guide): Step-by-step guide to QA email, SMS, and push messages in AI Decisioning — send test emails with specific variants, verify personalization, and confirm targeting before launch.
+- [Salesforce Marketing Cloud integration with AI Decisioning](https://hightouch.com/docs/ai-decisioning/SFMC): Learn how to connect Salesforce Marketing Cloud (SFMC) to AI Decisioning in Hightouch to send personalized, real-time messages across email, SMS, push, and in-app channels.
+
+## Match Booster
+
+- [Get started with Match Booster](https://hightouch.com/docs/match-booster/quick-start): Set up Match Booster in two steps: configure enrichment on a model, then enable it in your syncs.
+- [Match Booster overview](https://hightouch.com/docs/match-booster/overview): Help ad platforms match more of your customers by safely adding more identifiers to the data you sync from Hightouch.
+- [Configure Match Booster on a model](https://hightouch.com/docs/match-booster/configure-model): Enable Match Booster on a model or parent model, map identifiers, configure enrichment settings, and run the initial enrichment.
+- [Enable Match Booster in syncs](https://hightouch.com/docs/match-booster/enable-in-syncs): Turn on Match Booster in supported destination syncs to send enriched identifiers for higher audience reach.
+- [Match Booster common questions](https://hightouch.com/docs/match-booster/faqs): Answers to common questions about Match Booster identifier formats, enrichment timing, data storage, and match rate behavior.
+- [Match Booster offerings](https://hightouch.com/docs/match-booster/offerings): Learn about the audience boosting, conversion event boosting, anonymous visitor boosting, and CTV device boosting offerings.
+- [Matching methods](https://hightouch.com/docs/match-booster/matching-options): Understand how Match Booster matches consumer data, work data, address data, and anonymous visitor data against its identity graph.
+- [Set up Match Booster](https://hightouch.com/docs/match-booster/implementation): Configure Match Booster to enrich your data with additional identifiers and improve match rates.
+- [Targeting levels](https://hightouch.com/docs/match-booster/targeting-levels): Choose between person-level and household-level targeting in Match Booster to match your campaign goals.
+
+## Hightouch Events
+
+- [Event sources overview](https://hightouch.com/docs/events/sources/overview): Monitor, validate, and govern events as they enter Hightouch.
+- [Events overview](https://hightouch.com/docs/events/overview): Hightouch Events collects customer behavior from websites, mobile apps, and backend systems, then stores it in your warehouse for analytics, activation, and real-time workflows.
+- [Functions overview](https://hightouch.com/docs/events/functions/overview): Transform, validate, or enrich events with custom JavaScript before they sync to a destination.
+- [How to migrate to Hightouch Events](https://hightouch.com/docs/events/migration-guide/overview): Learn how to migrate to Hightouch Events from another event collection solution.
+- [Android SDK](https://hightouch.com/docs/events/sdks/android): Hightouch's Android SDK for collecting events
+- [Browser (Javascript) SDK](https://hightouch.com/docs/events/sdks/browser): Hightouch's browser Javascript SDK for collecting events
+- [C# SDK](https://hightouch.com/docs/events/sdks/csharp): Hightouch's C# SDK for collecting events
+- [Consent Manager](https://hightouch.com/docs/events/consent/consent-manager): Hightouch Events Consent Manager UI
+- [Create a function](https://hightouch.com/docs/events/functions/getting-started): Create, test, and connect a function to transform events before they sync to a destination.
+- [Error handling](https://hightouch.com/docs/events/warehouses/error-handling): Understand how Hightouch handles events that fail to write to your warehouse.
+- [Event streaming](https://hightouch.com/docs/events/event-streaming): Stream events from Hightouch to downstream tools in real time for activation, personalization, and time-sensitive workflows.
+- [First-party tracking](https://hightouch.com/docs/events/first-party-tracking): Send browser events through your own domain to improve client-side event coverage.
+- [Flutter SDK](https://hightouch.com/docs/events/sdks/flutter): Hightouch's Flutter SDK for collecting events
+- [Go SDK](https://hightouch.com/docs/events/sdks/go): Hightouch's Go SDK for collecting events
+- [Google PubSub](https://hightouch.com/docs/events/sources/google-pubsub): Hightouch and Google PubSub integration
+- [Handle violations](https://hightouch.com/docs/events/contracts/violations): Understand the types of contract violations and configure how Hightouch enforces them.
+- [Handling webhooks](https://hightouch.com/docs/events/functions/handling-webhooks): Use functions to reshape webhook payloads before Hightouch writes them to your warehouse or sends them to destinations.
+- [Hightouch Events + OneTrust](https://hightouch.com/docs/events/consent/onetrust): Hightouch Events with OneTrust consent integration
+- [HTTP API](https://hightouch.com/docs/events/sdks/http): Hightouch's HTTP API endpoint for collecting events
+- [iOS SDK](https://hightouch.com/docs/events/sdks/ios): Hightouch's iOS SDK for collecting events
+- [Java SDK](https://hightouch.com/docs/events/sdks/java): Hightouch's Java SDK for collecting events
+- [Kafka (Apache, Confluent, & Redpanda)](https://hightouch.com/docs/events/sources/kafka): Hightouch integration with Apache Kafka, Confluent Cloud, and Redpanda
+- [Manage contracts](https://hightouch.com/docs/events/contracts/management): Define, validate, and version event schemas using contracts to ensure reliable event data.
+- [Monitor events](https://hightouch.com/docs/events/monitoring): Monitor event volume, detect contract violations, and alert on sync issues so you can catch problems in your event tracking setup early.
+- [Node.js SDK](https://hightouch.com/docs/events/sdks/nodejs): Hightouch's Node.js SDK for collecting events
+- [PHP SDK](https://hightouch.com/docs/events/sdks/php): Hightouch's PHP SDK for collecting events
+- [Plan your Events implementation](https://hightouch.com/docs/events/implementation-plan): Decide what to track, how to identify users, how strictly to validate events, how to handle coverage gaps, and where events should go.
+- [Python SDK](https://hightouch.com/docs/events/sdks/python): Hightouch's Python SDK for collecting events
+- [React Native SDK](https://hightouch.com/docs/events/sdks/react-native): Hightouch's React Native SDK for collecting events
+- [Ruby SDK](https://hightouch.com/docs/events/sdks/ruby): Hightouch's Ruby SDK for collecting events
+- [Step 1: Preparing for migration](https://hightouch.com/docs/events/migration-guide/preparing-for-migration): Scope your migration, plan your data model and tracking strategy, work through the data readiness checklist, and estimate the resources needed to migrate to Hightouch Events.
+- [Step 2: Implementing Hightouch Events SDKs](https://hightouch.com/docs/events/migration-guide/implementing-hightouch-events): How to switch to Hightouch SDKs, including a wrapper function that sends events to both tools so you can validate during the migration.
+- [Step 3: Validating your migration](https://hightouch.com/docs/events/migration-guide/validating-your-migration): Compare Hightouch Events data with your previous event tracking platform before cutover.
+- [Step 4: Unifying historical and new data](https://hightouch.com/docs/events/migration-guide/unifying-data): Deduplicate and combine your historical data with new events collected by Hightouch so analytics stay continuous.
+- [Step 5: Updating downstream applications and destinations](https://hightouch.com/docs/events/migration-guide/updating-downstream-applications): How to update the applications that consume your event data so each one reads from Hightouch Events after the migration.
+- [Troubleshoot events](https://hightouch.com/docs/events/troubleshooting): Diagnose common Events problems — missing events, blocked or flagged events, unexpected warehouse columns, rejected writes, and data that doesn't match your previous tool.
+- [Understand event types and payload structure](https://hightouch.com/docs/events/event-spec): Learn how Hightouch Events structures identify, track, page, screen, and group events—including required fields, identity behavior, and example payloads.
+- [Warehouse schema](https://hightouch.com/docs/events/warehouses/schema): How Hightouch structures event data in your warehouse — the tables it creates, how fields become columns, and which timestamps to use.
+- [Write events to your warehouse](https://hightouch.com/docs/events/warehouses/warehouse): Configure an event storage destination so Hightouch can write event data to your warehouse.
+
+## Extensions
+
+- [Connections Overview](https://hightouch.com/docs/extensions/connections): Learn how to use Connections in Hightouch to import data from third-party applications into your data warehouse.
+- [Create models using dbt models and analyses](https://hightouch.com/docs/extensions/dbt-models): Connect Hightouch to your dbt project's Git repository and build Hightouch models using existing dbt models and analyses.
+- [Create models using Looker Looks](https://hightouch.com/docs/extensions/looker-models): Connect Hightouch to your Looker instance and build Hightouch models using existing Looks.
+- [Create models using Sigma](https://hightouch.com/docs/extensions/sigma): Connect Hightouch to your Sigma instance and build Hightouch models using existing workbooks.
+- [Datadog](https://hightouch.com/docs/extensions/datadog): The Datadog extension allows you to receive real-time metrics and events about your syncs
+- [dbt Cloud - Trigger syncs and sync models](https://hightouch.com/docs/extensions/dbt-cloud): The dbt Cloud extension lets you both schedule Hightouch syncs to run as soon as a dbt Cloud job completes, and to sync models from dbt into Hightouch. Relying on dbt Cloud for sync scheduling ensures that Hightouch performs syncs when fresh data is available.
+- [dbt observability layer](https://hightouch.com/docs/extensions/dbt-observability): See which Hightouch syncs are using your dbt models from your dbt docs and lineage graph.
+- [Git Sync](https://hightouch.com/docs/extensions/git-sync): Version-control supported Hightouch resources in a Git repository.
+- [PagerDuty](https://hightouch.com/docs/extensions/pagerduty): The PagerDuty extension lets Hightouch notify your on-call staff about failed queries and syncs.
+- [Trigger syncs with Airflow](https://hightouch.com/docs/extensions/airflow): Learn how to trigger syncs with Hightouch's Airflow Operator.
+- [Trigger syncs with Dagster](https://hightouch.com/docs/extensions/dagster): Learn how to trigger syncs and gain visibility into sync execution trends with Hightouch's Dagster extension.
+- [Trigger syncs with Fivetran](https://hightouch.com/docs/extensions/fivetran): The Fivetran extension lets you schedule Hightouch syncs to run as soon as a Fivetran job completes. Relying on Fivetran dbt transformations and connectors for sync scheduling ensures that Hightouch performs syncs when fresh data is available.
+- [Trigger syncs with Mage](https://hightouch.com/docs/extensions/mage): Learn how to trigger syncs with Mage.ai.
+- [Trigger syncs with Prefect](https://hightouch.com/docs/extensions/prefect): Learn how to trigger syncs with Prefect's Hightouch Tasks.
+
+## Developer tools
+
+- [API overview](https://hightouch.com/docs/developer-tools/api-guide): Hightouch exposes a REST style API that allows users to interact with resources like syncs, models, sources and destinations.
+- [CLI overview](https://hightouch.com/docs/developer-tools/cli-guide): Hightouch provides an intuitive Command Line Interface (CLI) to give users access to resources in the terminal or automation scripts.
+- [CLI Reference](https://hightouch.com/docs/developer-tools/cli-reference)
+- [Docs for AI tools](https://hightouch.com/docs/developer-tools/agent-resources): Search and read Hightouch documentation from AI tools via MCP, plain-text files, and agent skills.
+- [Error codes](https://hightouch.com/docs/developer-tools/error-codes): A reference of all Hightouch error codes, what they mean, and how to resolve them.
+- [Warehouse tables reference](https://hightouch.com/docs/developer-tools/warehouse-tables): A reference for all the tables and schemas Hightouch creates in your data warehouse, with usage guidance and stability expectations.
+
+## Workspace management
+
+- [Core concepts](https://hightouch.com/docs/workspace-management/overview): Understand the core building blocks of Hightouch — organizations, workspaces, user groups, roles, environments, and Spaces.
+- [Approval flows](https://hightouch.com/docs/workspace-management/approval-flows): Require approval before changes to models and syncs are published.
+- [Audit logs](https://hightouch.com/docs/workspace-management/audit-logs): Hightouch offers audit logs so workspace admins can see what actions users took in-app and when.
+- [Environments and deployments](https://hightouch.com/docs/workspace-management/environments): Hightouch supports change management in-app via separate workspaces for different environments, for example, production, staging, development, and sandbox.
+- [Folders, filters, and labels](https://hightouch.com/docs/workspace-management/folders-filters): Hightouch provides folders, filters, and labels to organize your workspace.
+- [Governance best practices](https://hightouch.com/docs/workspace-management/governance): Learn when to use governance controls like roles, subsets, Spaces, destination rules, approval flows, and environments to manage access, collaboration, and activation safely.
+- [Managing users and groups](https://hightouch.com/docs/workspace-management/user-management): Hightouch xxxx
+- [Roles](https://hightouch.com/docs/workspace-management/roles): Learn how role-based access control works in Hightouch, including pre-built and custom roles, permission types, and best practices for managing workspace access.
+- [SSO setup guide](https://hightouch.com/docs/workspace-management/sso): Hightouch helps customers manage access control for large organizations via a third-party identity provider.
+- [Workspaces](https://hightouch.com/docs/workspace-management/workspaces): Learn how to create, manage, and delete Hightouch workspaces — including what each field on the creation form means, how to switch between workspaces, and common setup mistakes to avoid.
+
+## Security and compliance
+
+- [Security](https://hightouch.com/docs/security/overview): Learn about Hightouch's security practices and infrastructure.
+- [Amazon Web Services](https://hightouch.com/docs/security/aws): Grant Hightouch access to resources within your AWS account.
+- [AWS PrivateLink](https://hightouch.com/docs/security/aws/privatelink): Securely connect your warehouse to Hightouch using AWS PrivateLink.
+- [Azure Private Link](https://hightouch.com/docs/security/azure/private-link): Securely connect to Hightouch using Azure Private Link.
+- [Google Cloud Platform](https://hightouch.com/docs/security/gcp): Grant Hightouch access to resources within your Google Cloud project.
+- [Microsoft Azure](https://hightouch.com/docs/security/azure): Grant Hightouch access to resources within your Azure account.
+- [Networking](https://hightouch.com/docs/security/networking): Allow Hightouch to connect to your warehouse, destinations, and other internal services.
+- [Private Service Connect](https://hightouch.com/docs/security/gcp/private-service-connect): Securely connect your warehouse to Hightouch using Google Cloud Private Service Connect.
+- [Regions](https://hightouch.com/docs/security/regions): You can configure Hightouch to run in multiple regions around the world.
+- [SSH Tunneling](https://hightouch.com/docs/security/ssh-tunneling): Hightouch supports self-service SSH tunneling, allowing you to securely connect to your data warehouse.
+- [Storage](https://hightouch.com/docs/security/storage): Learn more about what data Hightouch stores, whether with Hightouch or your own infrastructure, to power your syncs.
+- [Workload Identity Federation](https://hightouch.com/docs/security/gcp/workload-identity-federation): Authenticate Hightouch to a Google Cloud service account you own using AWS Workload Identity Federation, with no service account key.
+
+## Hightouch Real-time
+
+- [Real-Time Personalization overview](https://hightouch.com/docs/real-time/overview): Use live session behavior and warehouse context to personalize website and app experiences in less than a second.
+- [Personalization API](https://hightouch.com/docs/real-time/personalization-api): A fast, flexible API to tailor customer experiences across web, mobile, and email.
+- [Set up realtime audiences](https://hightouch.com/docs/real-time/setup): Create audiences that evaluate live user behavior using realtime events and deliver membership updates instantly.
+
+## Campaign Intelligence
+
+- [Get started with Intelligence](https://hightouch.com/docs/campaign-intelligence/quick-start): Set up Intelligence and learn the end-to-end workflow for defining metrics, building charts, creating dashboards, and measuring experiments.
+- [Intelligence overview](https://hightouch.com/docs/campaign-intelligence/overview): Intelligence gives marketers and analysts self-serve analytics inside the same workspace where they build audiences and run campaigns — metrics, charts, dashboards, and experiment measurement, all from your warehouse data.
+- [Charts Overview](https://hightouch.com/docs/campaign-intelligence/charts): Learn what how to configure, save, and update charts
+- [Copilot](https://hightouch.com/docs/campaign-intelligence/copilot): Hightouch's Campaign Intelligence
+- [Dashboards](https://hightouch.com/docs/campaign-intelligence/dashboards): Hightouch's dashboards feature provides a snapshot of your audience and performance data.
+- [Experiments](https://hightouch.com/docs/campaign-intelligence/experiments): Measure the impact of your marketing campaigns using experiment results from Audience Experiments.
+- [Funnels](https://hightouch.com/docs/campaign-intelligence/funnels): Hightouch's Customer Studio Funnels helps you pinpoint funnel drop-offs and track conversion rates over time.
+- [Insights](https://hightouch.com/docs/campaign-intelligence/insights): Hightouch's Intelligence product provides the Insights feature to measure how your audiences are performing.
+- [Metrics](https://hightouch.com/docs/campaign-intelligence/metrics): Learn how to create custom metrics to use in the Intelligence product.
+
+## Pricing
+
+- [Business tier pricing](https://hightouch.com/docs/pricing/bt-pricing): Learn about Hightouch's Business tier pricing, including platform fees, consumption-based pricing, and feature add-ons.
+- [Self-serve pricing](https://hightouch.com/docs/pricing/ss-pricing): Learn about our self-serve pricing and how Hightouch calculates usage based on active syncs.
+
+## AI integrations
+
+- [Hightouch MCP](https://hightouch.com/docs/ai-integrations/mcp): Connect your AI assistant directly to your marketing stack to build audiences, design journeys, generate creatives, and analyze performance in plain language.
+- [Snowflake CoWork](https://hightouch.com/docs/ai-integrations/snowflake-cowork): Use Snowflake CoWork to understand your Hightouch models

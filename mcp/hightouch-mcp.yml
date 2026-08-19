@@ -1,0 +1,52 @@
+generated: '2026-08-13'
+method: probed
+status: published
+source: https://hightouch.com/docs/developer-tools/agent-resources, https://hightouch.com/docs/ai-integrations/mcp
+deployment:
+  mode: remote
+  endpoint: https://hightouch.com/docs/api/mcp
+  auth: none
+  verified: probed
+  note: Streamable HTTP. Verified by POSTing initialize + tools/list anonymously on 2026-08-13; the server
+    identified itself as hightouch-docs 0.2.0, protocolVersion 2025-03-26, and returned both tools with
+    full inputSchema. Response captured verbatim in hightouch-docs-mcp-tools.json.
+server:
+  name: hightouch-docs
+  version: 0.2.0
+  protocol_version: '2025-03-26'
+  transport: http
+  url: https://hightouch.com/docs/api/mcp
+  scope: documentation search and read only — it does not connect to a Hightouch workspace
+tools:
+- name: search_docs
+  description: Search Hightouch documentation. Returns matching sections with title, heading, URL, content
+    snippet, and section hierarchy.
+  input_schema:
+    required:
+    - query
+    properties:
+    - query
+    - limit
+    - section
+  source_operation: null
+- name: read_doc
+  description: Read the full markdown content of a Hightouch documentation page by path.
+  input_schema:
+    required:
+    - path
+    properties:
+    - path
+  source_operation: null
+other_servers:
+- name: Hightouch MCP (workspace)
+  docs: https://hightouch.com/docs/ai-integrations/mcp
+  status: published-but-endpoint-not-in-public-docs
+  auth: oauth
+  note: 'Hightouch documents a second, product-level MCP server that acts in a customer workspace (build
+    audiences, journeys, syncs, ad creative). Its connect URL is not printed in the public docs — setup
+    is described as adding the connector from the app — so no endpoint is recorded here rather than guessed.
+    Its OAuth surface IS anonymously discoverable: https://api.hightouch.com/.well-known/oauth-protected-resource
+    names https://mcp-auth.hightouch.com as the authorization server (see well-known/ and scopes/). POSTing
+    tools/list to https://api.hightouch.com/api/v1/mcp returns 401 {"message":"Authentication error"}
+    — but so does every unknown path under /api/v1, so that 401 is NOT evidence the endpoint exists. Live
+    tool schemas need an authenticated workspace.'

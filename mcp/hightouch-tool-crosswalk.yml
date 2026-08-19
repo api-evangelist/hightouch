@@ -1,0 +1,137 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/hightouch-mcp.yml, a2a/hightouch-agent-card.json, openapi/_original/hightouch-api-openapi.json
+surfaces:
+  openapi:
+    file: openapi/_original/hightouch-api-openapi.json
+    operations: 43
+    server: https://api.hightouch.com/api/v1
+    gated: false
+  mcp:
+    url: https://hightouch.com/docs/api/mcp
+    tools: 2
+    gated: false
+    scope: documentation only
+  mcp_workspace:
+    url: null
+    gated: true
+    note: Product MCP server; endpoint not published, OAuth-gated at mcp-auth.hightouch.com.
+  a2a:
+    url: https://api.hightouch.com/api/v1/a2a/messages
+    skills: 3
+    gated: true
+    note: OAuth-gated; skills declared in the agent card.
+  graphql:
+    endpoint: null
+    note: No public GraphQL API. https://api.hightouch.com/graphql returns 403 and https://app.hightouch.com/graphql
+      returns 405 to an anonymous introspection POST; neither is documented as a public surface.
+crosswalk:
+- tool: search_docs
+  category: documentation
+  rest: []
+  binding: none
+  confidence: high
+  note: Docs-search tool. No REST counterpart exists in the management API — this is a documentation index,
+    not a workspace resource.
+- tool: read_doc
+  category: documentation
+  rest: []
+  binding: none
+  confidence: high
+  note: As above.
+a2a_skill_crosswalk:
+- skill: audiences
+  rest: []
+  binding: none
+  confidence: medium
+  note: Audience definitions are Customer Studio objects; the public REST API exposes models (ListModel/CreateModel/UpdateModel)
+    but no audience resource, so this agent skill has no public REST equivalent.
+- skill: journeys
+  rest: []
+  binding: none
+  confidence: medium
+  note: Journeys are not represented in the public REST surface. The closest public analogue is the decision-engine
+    flow family (ListFlows/GetFlow/RunFlow), which is AI Decisioning, not journeys.
+- skill: marketing-analytics
+  rest: []
+  binding: none
+  confidence: medium
+  note: Analytics answers are computed over warehouse data; no public REST reporting operation exists.
+mcp_only:
+- tool: search_docs
+  reason: documentation index, no workspace resource behind it
+- tool: read_doc
+  reason: documentation index, no workspace resource behind it
+rest_only:
+- capability: Sources
+  operations:
+  - ListSource
+  - GetSource
+  - CreateSource
+  - UpdateSource
+- capability: Models
+  operations:
+  - ListModel
+  - GetModel
+  - CreateModel
+  - UpdateModel
+- capability: Destinations
+  operations:
+  - ListDestination
+  - GetDestination
+  - CreateDestination
+  - UpdateDestination
+- capability: Syncs and runs
+  operations:
+  - ListSync
+  - GetSync
+  - CreateSync
+  - UpdateSync
+  - ListSyncRuns
+  - TriggerRun
+  - TriggerRunCustom
+  - TriggerSequenceRun
+  - GetSyncSequenceRun
+- capability: Campaigns
+  operations:
+  - TriggerCampaign
+  - GetSendStatus
+- capability: AI Decisioning
+  operations:
+  - ListFlows
+  - GetFlow
+  - RunFlow
+  - ListMessages
+  - CreateMessage
+  - GetMessage
+  - UpdateMessage
+- capability: Event contracts and domains
+  operations:
+  - ListContracts
+  - GetContract
+  - CreateContract
+  - UpdateContract
+  - ListDomains
+  - GetDomain
+  - CreateDomain
+  - UpdateDomain
+- capability: Identity resolution
+  operations:
+  - TriggerIdrRun
+  - ListIdrRuns
+  - QueueForReprocessing
+  - ReprocessStatus
+  - TriggerRunIdGraph
+coverage:
+  tools_named: 2
+  tools_bound_to_rest: 0
+  mcp_only: 2
+  a2a_skills_named: 3
+  a2a_skills_bound_to_rest: 0
+  rest_operations_total: 43
+  rest_operations_with_a_tool: 0
+finding: Hightouch's agent surface and its REST surface are disjoint. The public MCP server serves documentation;
+  the A2A agent works on Customer Studio objects (audiences, journeys) that the public REST API does not
+  expose; and all 43 REST operations (sources, models, destinations, syncs, campaigns, decision-engine,
+  event contracts, identity resolution) have no agent tool bound to them. Nothing is mapped here that
+  does not exist — a zero binding count is the measurement, not a gap in the crosswalk.

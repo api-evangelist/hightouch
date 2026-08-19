@@ -1,0 +1,36 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Hightouch API
+  version: 1.0.0
+extends: openapi/_original/hightouch-api-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: hightouch
+    x-apievangelist-harvested-from: https://api.hightouch.io/api/swagger.json
+    x-apievangelist-harvested-on: '2026-08-13'
+    x-api-base: https://api.hightouch.com/api/v1
+    termsOfService: https://hightouch.com/terms-of-service
+- target: $.info
+  update:
+    x-rate-limit:
+      limit: 200
+      window_seconds: 10
+      scope: workspace
+      docs: https://hightouch.com/docs/developer-tools/api-guide#hightouch-api-rate-limits
+- target: $.components.securitySchemes.bearerAuth
+  update:
+    description: 'Workspace API key created by an Admin user in Settings > API keys, sent as `Authorization:
+      Bearer <key>`. Keys authenticate as their creating user and stop working if that user is deactivated.
+      TLS 1.2+ required.'
+    x-docs: https://hightouch.com/docs/developer-tools/api-guide
+- target: $
+  update:
+    x-artifacts:
+      errors: errors/hightouch-problem-types.yml
+      error_codes: errors/hightouch-error-codes.yml
+      conventions: conventions/hightouch-conventions.yml
+      authentication: authentication/hightouch-authentication.yml
+      rate_limits: rate-limits/hightouch-rate-limits.yml
+      data_model: data-model/hightouch-data-model.yml
+      skills: skills/_index.yml

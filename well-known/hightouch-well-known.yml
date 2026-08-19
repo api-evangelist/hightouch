@@ -1,0 +1,71 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of each /.well-known/ path on every apis.yml host and OpenAPI servers[] host
+hosts_probed:
+- hightouch.com
+- api.hightouch.com
+- api.hightouch.io
+- app.hightouch.com
+host: https://api.hightouch.com
+documents:
+- path: /.well-known/oauth-authorization-server
+  host: api.hightouch.com
+  status: 200
+  file: hightouch-oauth-authorization-server.json
+  note: RFC 8414. Issuer https://mcp-auth.hightouch.com — the authorization server fronting Hightouch's
+    agent/MCP surface. Advertises dynamic client registration.
+- path: /.well-known/oauth-protected-resource
+  host: api.hightouch.com
+  status: 200
+  file: hightouch-oauth-protected-resource.json
+  note: RFC 9728. Declares https://api.hightouch.com as the protected resource, bearer in header.
+- path: /.well-known/openid-configuration
+  host: api.hightouch.com
+  status: 200
+  file: hightouch-openid-configuration.json
+  note: Same document as the OAuth AS metadata; scopes_supported openid/profile/email/offline_access.
+- path: /.well-known/agent-card.json
+  host: api.hightouch.com
+  status: 200
+  file: ../a2a/hightouch-agent-card.json
+  note: A2A Agent Card — see a2a/hightouch-a2a.yml for the grade.
+- path: /.well-known/security.txt
+  host: api.hightouch.com
+  status: 404
+- path: /.well-known/api-catalog
+  host: api.hightouch.com
+  status: 404
+- path: /.well-known/ai-plugin.json
+  host: api.hightouch.com
+  status: 404
+- path: /.well-known/agent.json
+  host: api.hightouch.com
+  status: 404
+- path: /.well-known/security.txt
+  host: hightouch.com
+  status: 404
+- path: /.well-known/openid-configuration
+  host: hightouch.com
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  host: hightouch.com
+  status: 404
+- path: /.well-known/api-catalog
+  host: hightouch.com
+  status: 404
+- path: /.well-known/ai-plugin.json
+  host: hightouch.com
+  status: 404
+- path: /.well-known/agent-card.json
+  host: hightouch.com
+  status: 404
+- path: /.well-known/agent.json
+  host: hightouch.com
+  status: 404
+notes:
+- api.hightouch.io serves byte-identical documents to api.hightouch.com on every path above; hightouch.io
+  is Hightouch's original domain (the GitHub org is github.com/hightouchio) and fronts the same API.
+- app.hightouch.com answers HTTP 200 with the single-page-app HTML shell for EVERY /.well-known/* path,
+  including paths that cannot exist. Treated as a miss, not a document — no pointer emitted from that
+  host.
+- No security.txt is served on any host (RFC 9116 absent).

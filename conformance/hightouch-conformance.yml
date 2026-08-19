@@ -1,0 +1,69 @@
+generated: '2026-08-13'
+method: searched
+source: openapi/_original/hightouch-api-openapi.json, https://api.hightouch.com/.well-known/oauth-authorization-server,
+  https://hightouch.com/platform/security, https://trust.hightouch.com
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Provider publishes OpenAPI 3.0.0 at https://api.hightouch.io/api/swagger.json (43 operations)
+- id: oauth2
+  conforms: true
+  evidence: Agent card securitySchemes.oauth2 authorizationCode; AS metadata at mcp-auth.hightouch.com
+- id: oidc
+  conforms: true
+  evidence: /.well-known/openid-configuration served on api.hightouch.com; RS256, userinfo endpoint
+- id: rfc8414-oauth-as-metadata
+  conforms: true
+  evidence: well-known/hightouch-oauth-authorization-server.json (HTTP 200)
+- id: rfc9728-oauth-protected-resource
+  conforms: true
+  evidence: well-known/hightouch-oauth-protected-resource.json (HTTP 200); WWW-Authenticate on /api/v1/a2a/messages
+    points at it
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint https://mcp-auth.hightouch.com/oauth2/register advertised
+- id: rfc8628-device-authorization-grant
+  conforms: true
+  evidence: device_authorization_endpoint + urn:ietf:params:oauth:grant-type:device_code advertised
+- id: a2a-1.0
+  conforms: true
+  evidence: Conformant agent card at /.well-known/agent-card.json, protocolVersion 0.3.0 — see a2a/
+- id: mcp
+  conforms: true
+  evidence: Streamable HTTP MCP server at https://hightouch.com/docs/api/mcp, protocolVersion 2025-03-26
+- id: agent-skills
+  conforms: true
+  evidence: Provider publishes https://hightouch.com/docs/skill.md and states it follows the agentskills.io
+    spec
+- id: llms-txt
+  conforms: true
+  evidence: https://hightouch.com/llms.txt and https://hightouch.com/docs/llms.txt both HTTP 200
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No application/problem+json in the spec; errors use bespoke {message,details} and {error}
+    envelopes
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every Hightouch host probed
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset/Deprecation header support documented
+- id: soc2-type2
+  conforms: true
+  evidence: SOC 2 Type 2 stated on https://hightouch.com/platform/security and hightouch.com/llms.txt
+- id: iso27001
+  conforms: true
+  evidence: ISO 27001 stated on https://hightouch.com/platform/security
+- id: hipaa
+  conforms: true
+  evidence: HIPAA posture stated on https://hightouch.com/platform/security
+- id: gdpr
+  conforms: true
+  evidence: GDPR stated on https://hightouch.com/platform/security; subprocessor list at https://hightouch.com/subprocessors
+- id: ccpa
+  conforms: true
+  evidence: CCPA opt-out integration published by the provider (apis.yml integrations)
+- id: tls-1.2-minimum
+  conforms: true
+  evidence: 'API guide: REST API requires TLS 1.2+, publishes its supported cipher suite list, and removed
+    four weaker ECDHE SHA-2 suites on 2026-07-10'

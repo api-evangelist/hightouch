@@ -1,0 +1,43 @@
+generated: '2026-08-13'
+method: searched
+source: https://hightouch.com/docs/developer-tools/api-guide, https://status.hightouch.io, openapi/_original/hightouch-api-openapi.json
+versioning:
+  scheme: uri-path
+  current: v1
+  base: https://api.hightouch.com/api/v1
+  docs: https://hightouch.com/docs/developer-tools/api-guide
+  note: The spec declares info.version 1.0.0 and a single /api/v1 server. No version negotiation header,
+    no dated version train.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: 'No general deprecation or sunset policy is published, and the API returns no Sunset/Deprecation
+    headers (RFC 8594). Hightouch DOES publish dated breaking-change notices in the API guide: on 2026-07-10
+    it removed support for four weaker TLS cipher suites (ECDHE-ECDSA-AES128-SHA256, ECDHE-RSA-AES128-SHA256,
+    ECDHE-ECDSA-AES256-SHA384, ECDHE-RSA-AES256-SHA384) with advance notice and a client-upgrade instruction.
+    That is a notice, not a policy, so no Deprecation pointer is emitted.'
+  dated_notices:
+  - date: '2026-07-10'
+    change: Removed four weaker ECDHE SHA-2 cipher suites from the REST API
+    source: https://hightouch.com/docs/developer-tools/api-guide
+sla:
+  url: null
+  note: Custom SLAs are listed as a Composable CDP plan feature on https://hightouch.com/pricing; no public
+    uptime target is published.
+status_page: https://status.hightouch.io
+status_page_api: https://status.hightouch.io/api/v2/status.json
+status_page_note: Atlassian Statuspage (page id tvlyw5gy5wjb), machine-readable at /api/v2/status.json.
+  Hightouch's own skill.md points agents at https://status.hightouch.com, which does not resolve (DNS
+  failure); status.hightouch.io is the working host.
+change_management:
+  git_sync: https://hightouch.com/docs/extensions/git-sync
+  environments: https://hightouch.com/docs/workspace-management/environments
+  approval_flows: https://hightouch.com/docs/workspace-management/approval-flows
+  note: Resource-level change management is delivered in-product (Git Sync of resource YAML, dev/staging/prod
+    workspaces with deploys, approval flows) rather than through API versioning.
+changelog:
+  url: null
+  note: No dated public changelog found. https://hightouch.com/changelog returns 404 even though the provider's
+    own skill.md lists it as the changelog URL; docs search returns no release-notes page. No changelog/
+    artifact written.
+deprecated_operations: []
