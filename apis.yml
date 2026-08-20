@@ -165,6 +165,9 @@ apis:
   baseURL: https://api.hightouch.com/api/v1
   tags:
   - AI Decisioning
+  - Artificial Intelligence
+  tags_raw:
+  - AI Decisioning
   - AI
   properties:
   - type: OpenAPI
@@ -183,6 +186,9 @@ apis:
   humanURL: https://hightouch.com/docs/developer-tools/api-guide
   baseURL: https://api.hightouch.com/api/v1
   tags:
+  - Event
+  - Governance
+  tags_raw:
   - Events
   - Governance
   properties:
