@@ -41,32 +41,6 @@ created: '2026-03-27'
 modified: '2026-08-13'
 specificationVersion: '0.23'
 apis:
-- aid: hightouch:hightouch-api
-  name: Hightouch API
-  description: The full Hightouch public REST API — sources, models, destinations, syncs and runs, campaigns,
-    AI Decisioning flows and messages, event contracts and domains, and identity resolution. 43 operations,
-    harvested verbatim from the specification the provider's own API reference loads.
-  humanURL: https://hightouch.com/docs/developer-tools/api-guide
-  baseURL: https://api.hightouch.com/api/v1
-  tags:
-  - REST
-  - Reverse ETL
-  - Data Activation
-  properties:
-  - type: OpenAPI
-    url: openapi/_original/hightouch-api-openapi.json
-  - type: Documentation
-    url: https://hightouch.com/docs
-  - type: APIReference
-    url: https://hightouch.com/docs/api-reference
-  - type: GettingStarted
-    url: https://hightouch.com/docs/getting-started/welcome
-  - type: Overlay
-    url: overlays/hightouch-api-overlay.yaml
-  - type: Collection
-    url: collections/hightouch.opencollection.json
-  - type: ToolCrosswalk
-    url: mcp/hightouch-tool-crosswalk.yml
 - aid: hightouch:hightouch-sources-api
   name: Hightouch Sources API
   description: Warehouse and database sources Hightouch reads from.
@@ -141,7 +115,8 @@ apis:
     url: overlays/hightouch-api-overlay.yaml
 - aid: hightouch:hightouch-campaigns-api
   name: Hightouch Campaigns API
-  description: Trigger a campaign send to handle- or profile-based recipients and read back per-send status.
+  description: >-
+    Trigger a campaign send to handle- or profile-based recipients and read back per-send status.
   humanURL: https://hightouch.com/docs/developer-tools/api-guide
   baseURL: https://api.hightouch.com/api/v1
   tags:
