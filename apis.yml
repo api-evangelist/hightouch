@@ -11,6 +11,18 @@ description: Hightouch is a composable Customer Data Platform (CDP) and agentic 
   resource YAML, workspace environments with approval flows, a public documentation MCP server, and an
   A2A agent card for the Hightouch Marketing Agent.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
