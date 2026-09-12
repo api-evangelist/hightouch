@@ -2,22 +2,22 @@
   "repo": "hightouch",
   "feeds": [
     {
-      "source": "https://hightouch.com/pricing",
-      "feed_url": "https://hightouch.com/pricing",
+      "source": "https://hightouch.com/docs/getting-started/welcome",
+      "feed_url": "https://hightouch.com/docs/getting-started/welcome",
       "title": "",
       "saved": 0,
       "method": "none"
     },
     {
-      "source": "https://hightouch.com/docs/getting-started/welcome",
-      "feed_url": "https://hightouch.com/docs/getting-started/welcome",
+      "source": "https://hightouch.com/pricing",
+      "feed_url": "https://hightouch.com/pricing",
       "title": "",
       "saved": 0,
       "method": "none"
     }
   ],
   "post_count": 11,
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "agent_pulled": "2026-07-04",
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
