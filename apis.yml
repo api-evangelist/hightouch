@@ -145,28 +145,6 @@ apis:
     url: https://hightouch.com/docs/getting-started/welcome
   - type: Overlay
     url: overlays/hightouch-api-overlay.yaml
-- aid: hightouch:hightouch-ai-decisioning-api
-  name: Hightouch AI Decisioning API
-  description: Decision-engine flows, their message variants, guardrails and runs.
-  humanURL: https://hightouch.com/docs/developer-tools/api-guide
-  baseURL: https://api.hightouch.com/api/v1
-  tags:
-  - AI Decisioning
-  - Artificial Intelligence
-  tags_raw:
-  - AI Decisioning
-  - AI
-  properties:
-  - type: OpenAPI
-    url: openapi/hightouch-ai-decisioning-api-openapi.yml
-  - type: Documentation
-    url: https://hightouch.com/docs
-  - type: APIReference
-    url: https://hightouch.com/docs/api-reference
-  - type: GettingStarted
-    url: https://hightouch.com/docs/getting-started/welcome
-  - type: Overlay
-    url: overlays/hightouch-api-overlay.yaml
 - aid: hightouch:hightouch-events-api
   name: Hightouch Events API
   description: First-party event governance — event contracts and event domains.
@@ -189,24 +167,70 @@ apis:
     url: https://hightouch.com/docs/getting-started/welcome
   - type: Overlay
     url: overlays/hightouch-api-overlay.yaml
-- aid: hightouch:hightouch-identity-resolution-api
-  name: Hightouch Identity Resolution API
-  description: Identity graph runs, reprocessing queues and run statistics.
+- aid: hightouch:hightouch-decision-engine-api
+  name: Hightouch Decision Engine API
+  description: The Decision Engine API from Hightouch — 5 operation(s) for decision engine.
   humanURL: https://hightouch.com/docs/developer-tools/api-guide
   baseURL: https://api.hightouch.com/api/v1
   tags:
-  - Identity Resolution
+  - Decision Engine
   properties:
   - type: OpenAPI
-    url: openapi/hightouch-identity-resolution-api-openapi.yml
+    url: openapi/hightouch-decision-engine-api-openapi.yml
   - type: Documentation
     url: https://hightouch.com/docs
   - type: APIReference
     url: https://hightouch.com/docs/api-reference
   - type: GettingStarted
     url: https://hightouch.com/docs/getting-started/welcome
-  - type: Overlay
-    url: overlays/hightouch-api-overlay.yaml
+- aid: hightouch:hightouch-id-graphs-api
+  name: Hightouch Id Graphs API
+  description: The Id Graphs API from Hightouch — 1 operation(s) for id graphs.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - Id Graphs
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-id-graphs-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
+- aid: hightouch:hightouch-idr-api
+  name: Hightouch Idr API
+  description: The Idr API from Hightouch — 4 operation(s) for idr.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - Idr
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-idr-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
+- aid: hightouch:hightouch-sync-sequences-api
+  name: Hightouch Sync Sequences API
+  description: The Sync Sequences API from Hightouch — 2 operation(s) for sync sequences.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - Sync Sequences
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-sync-sequences-api-openapi.yml
+  - type: Documentation
+    url: https://hightouch.com/docs
+  - type: APIReference
+    url: https://hightouch.com/docs/api-reference
+  - type: GettingStarted
+    url: https://hightouch.com/docs/getting-started/welcome
 common:
 - type: Website
   url: https://hightouch.com/
