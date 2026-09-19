@@ -95,6 +95,8 @@ apis:
   humanURL: https://hightouch.com/docs/developer-tools/api-guide
   baseURL: https://api.hightouch.com/api/v1
   tags:
+  - Destination
+  tags_raw:
   - Destinations
   properties:
   - type: OpenAPI
@@ -113,6 +115,8 @@ apis:
   humanURL: https://hightouch.com/docs/developer-tools/api-guide
   baseURL: https://api.hightouch.com/api/v1
   tags:
+  - Sync
+  tags_raw:
   - Syncs
   properties:
   - type: OpenAPI
