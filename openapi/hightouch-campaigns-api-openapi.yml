@@ -1,14 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: Hightouch Campaigns API
-  description: Hightouch Public Rest API to access syncs, models, sources and destinations
   version: 1.0.0
+  description: Hightouch Public Rest API to access syncs, models, sources and destinations
   contact:
     name: Hightouch
     url: https://hightouch.com
-  x-harvested-from: https://api.hightouch.io/api/swagger.json
-  x-harvested-on: '2026-08-13'
-  x-source-document: openapi/_original/hightouch-api-openapi.json
 servers:
 - url: https://api.hightouch.com/api/v1
 tags:
@@ -129,13 +126,21 @@ paths:
       - Campaigns
 components:
   schemas:
-    CampaignRecipient:
-      anyOf:
-      - $ref: '#/components/schemas/HandleCampaignRecipient'
-      - $ref: '#/components/schemas/ProfileCampaignRecipient'
-      description: 'A single send target. Provide either `handle` (inline delivery address) or
-
-        `id` (Personalization API profile ID), but not both.'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     CampaignSendResult:
       description: 'Per-recipient result returned synchronously after the trigger request.
 
@@ -189,6 +194,35 @@ components:
       - status
       type: object
       additionalProperties: false
+    SendStatusResponse:
+      description: Delivery status for a single send, returned by the send status endpoint.
+      properties:
+        status:
+          type: string
+          description: 'Current delivery status.
+
+            - `sent` — accepted by the provider; no delivery receipt yet
+
+            - `delivered` — confirmed delivered by the provider
+
+            - `bounced` — delivery failed with a bounce
+
+            - `failed` — delivery failed
+
+            - `dropped` — dropped before delivery (e.g. unsubscribed, suppressed, or enrichment failure); see `reason`'
+        reason:
+          type: string
+          description: 'Additional explanation for why this send was dropped.
+
+            Only present when `status` is `"dropped"`.'
+      required:
+      - status
+      type: object
+      additionalProperties: false
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
     HandleCampaignRecipient:
       description: 'A recipient identified by their delivery address (email or phone number).
 
@@ -210,11 +244,6 @@ components:
             `properties` and take precedence when a key appears in both.'
       type: object
       additionalProperties: false
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
-      nullable: false
     ProfileCampaignRecipient:
       description: A recipient identified by their Personalization API Cached profile ID.
       properties:
@@ -234,32 +263,29 @@ components:
             key appears in multiple sources.'
       type: object
       additionalProperties: false
-    SendStatusResponse:
-      description: Delivery status for a single send, returned by the send status endpoint.
+    StartCampaignResponse:
+      description: 'Response body for a campaign trigger request. Results are returned in the
+
+        same order as the input `recipients` array.'
       properties:
-        status:
-          type: string
-          description: 'Current delivery status.
+        results:
+          items:
+            $ref: '#/components/schemas/CampaignSendResult'
+          type: array
+          description: 'Per-recipient outcomes. Accepted recipients are queued for delivery;
 
-            - `sent` — accepted by the provider; no delivery receipt yet
-
-            - `delivered` — confirmed delivered by the provider
-
-            - `bounced` — delivery failed with a bounce
-
-            - `failed` — delivery failed
-
-            - `dropped` — dropped before delivery (e.g. unsubscribed, suppressed, or enrichment failure);
-            see `reason`'
-        reason:
-          type: string
-          description: 'Additional explanation for why this send was dropped.
-
-            Only present when `status` is `"dropped"`.'
+            rejected recipients were not sent.'
       required:
-      - status
+      - results
       type: object
       additionalProperties: false
+    CampaignRecipient:
+      anyOf:
+      - $ref: '#/components/schemas/HandleCampaignRecipient'
+      - $ref: '#/components/schemas/ProfileCampaignRecipient'
+      description: 'A single send target. Provide either `handle` (inline delivery address) or
+
+        `id` (Personalization API profile ID), but not both.'
     StartCampaignRequest:
       description: Request body for triggering an API campaign send.
       properties:
@@ -291,22 +317,6 @@ components:
       - recipients
       type: object
       additionalProperties: false
-    StartCampaignResponse:
-      description: 'Response body for a campaign trigger request. Results are returned in the
-
-        same order as the input `recipients` array.'
-      properties:
-        results:
-          items:
-            $ref: '#/components/schemas/CampaignSendResult'
-          type: array
-          description: 'Per-recipient outcomes. Accepted recipients are queued for delivery;
-
-            rejected recipients were not sent.'
-      required:
-      - results
-      type: object
-      additionalProperties: false
     TriggerErrorResponse:
       description: 'Body returned on a request-level failure (400/404/409/429) so the caller
 
@@ -319,26 +329,8 @@ components:
       - error
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-          nullable: false
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: Bearer
-security:
-- bearerAuth: []

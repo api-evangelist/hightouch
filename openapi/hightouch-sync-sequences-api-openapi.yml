@@ -1,0 +1,196 @@
+openapi: 3.2.0
+info:
+  title: Hightouch Sync Sequences API
+  version: 1.0.0
+  description: Hightouch Public Rest API to access syncs, models, sources and destinations
+  contact:
+    name: Hightouch
+    url: https://hightouch.com
+servers:
+- url: https://api.hightouch.com/api/v1
+tags:
+- name: Sync Sequences
+paths:
+  /sync-sequences/{syncSequenceId}/trigger:
+    post:
+      operationId: TriggerSequenceRun
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerSequenceRunOutput'
+              examples:
+                Example 1:
+                  value:
+                    id: 0cb7da35-1fff-4d4a-bf1b-6534d515e5b5
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+      description: 'Trigger a new run for the given sync sequence.
+
+
+        A sequence never runs concurrently with itself. If a run is already in
+
+        progress, then where run queueing is enabled for the workspace, a single
+
+        follow-up run is queued and starts after the current run completes
+
+        (repeated triggers return the same queued run); otherwise the id of the
+
+        run already in progress is returned.'
+      summary: Trigger Sync sequence
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The id of the sync sequence to trigger a run
+        in: path
+        name: syncSequenceId
+        required: true
+        schema:
+          type: string
+      tags:
+      - Sync Sequences
+  /sync-sequences/runs/{syncSequenceRunId}:
+    get:
+      operationId: GetSyncSequenceRun
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncSequenceStatusOutput'
+              examples:
+                Example 1:
+                  value:
+                    id: 0cb7da35-1fff-4d4a-bf1b-6534d515e5b5
+                    status: done
+                    syncRuns:
+                    - syncId: 3093
+                      status: success
+                      finishedAt: '2023-10-17T11:06:01.713+00:00'
+                      syncRunId: 6134
+                    - syncId: 1960
+                      status: warning
+                      finishedAt: '2023-10-17T11:06:10.567+00:00'
+                      syncRunId: 6148
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+      description: Get the status of a sync sequence run.
+      summary: Sync sequence status
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The id of the sync sequence run
+        in: path
+        name: syncSequenceRunId
+        required: true
+        schema:
+          type: string
+      tags:
+      - Sync Sequences
+components:
+  schemas:
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SyncRunStatus:
+      description: The status of sync runs
+      enum:
+      - cancelled
+      - failed
+      - queued
+      - success
+      - warning
+      - querying
+      - processing
+      - reporting
+      - interrupted
+      type: string
+    SyncSequenceStatusOutput:
+      description: 'The status of a given sync sequence run at both a high level and the individual
+
+        sync-run level.'
+      properties:
+        id:
+          type: string
+        status:
+          $ref: '#/components/schemas/SyncSequenceRequestStatus'
+        syncRuns:
+          items:
+            properties:
+              finishedAt:
+                type: string
+              syncId:
+                type: number
+                format: double
+              status:
+                $ref: '#/components/schemas/SyncRunStatus'
+              syncRunId:
+                type: number
+                format: double
+            required:
+            - finishedAt
+            - syncId
+            - status
+            - syncRunId
+            type: object
+          type: array
+      required:
+      - id
+      - status
+      - syncRuns
+      type: object
+      additionalProperties: false
+    SyncSequenceRequestStatus:
+      enum:
+      - pending
+      - running
+      - done
+      - failed
+      - cancelled
+      type: string
+    TriggerSequenceRunOutput:
+      description: The output of a trigger action to run sync sequences
+      properties:
+        id:
+          type: string
+          description: The id of the triggered sync sequence run.
+      required:
+      - id
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Bearer

@@ -1,14 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: Hightouch Destinations API
-  description: Hightouch Public Rest API to access syncs, models, sources and destinations
   version: 1.0.0
+  description: Hightouch Public Rest API to access syncs, models, sources and destinations
   contact:
     name: Hightouch
     url: https://hightouch.com
-  x-harvested-from: https://api.hightouch.io/api/swagger.json
-  x-harvested-on: '2026-08-13'
-  x-source-document: openapi/_original/hightouch-api-openapi.json
 servers:
 - url: https://api.hightouch.com/api/v1
 tags:
@@ -302,6 +299,82 @@ paths:
       - Destinations
 components:
   schemas:
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DestinationUpdate:
+      description: The input for updating a Destination
+      properties:
+        name:
+          type: string
+          description: The destination's name
+        configuration:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'The destination''s configuration. This specifies general metadata about destination, like hostname and username.
+
+            Hightouch will be using this configuration to connect to destination.
+
+
+            The schema depends on the destination type.
+
+
+            Consumers should NOT make assumptions on the contents of the
+
+            configuration. It may change as Hightouch updates its internal code.'
+      type: object
+      additionalProperties: false
+    DestinationCreate:
+      description: The input for creating a Destination
+      properties:
+        name:
+          type: string
+          description: The destination's name
+        slug:
+          type: string
+          description: The destination's slug
+        type:
+          type: string
+          description: The destination's type (e.g. salesforce or hubspot).
+        configuration:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'The destination''s configuration. This specifies general metadata about destination, like hostname and username.
+
+            Hightouch will be using this configuration to connect to destination.
+
+
+            The schema depends on the destination type.
+
+
+            Consumers should NOT make assumptions on the contents of the
+
+            configuration. It may change as Hightouch updates its internal code.'
+      required:
+      - name
+      - slug
+      - type
+      - configuration
+      type: object
+      additionalProperties: false
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
     Destination:
       description: 'The service receiving your data (e.g. Salesforce, Hubspot, Customer.io, or a
 
@@ -336,8 +409,7 @@ components:
           properties: {}
           additionalProperties: {}
           type: object
-          description: 'The destination''s configuration. This specifies general metadata about destination,
-            like hostname and username.
+          description: 'The destination''s configuration. This specifies general metadata about destination, like hostname and username.
 
             Hightouch will be using this configuration to connect to destination.
 
@@ -366,90 +438,8 @@ components:
       - syncs
       type: object
       additionalProperties: false
-    DestinationCreate:
-      description: The input for creating a Destination
-      properties:
-        name:
-          type: string
-          description: The destination's name
-        slug:
-          type: string
-          description: The destination's slug
-        type:
-          type: string
-          description: The destination's type (e.g. salesforce or hubspot).
-        configuration:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'The destination''s configuration. This specifies general metadata about destination,
-            like hostname and username.
-
-            Hightouch will be using this configuration to connect to destination.
-
-
-            The schema depends on the destination type.
-
-
-            Consumers should NOT make assumptions on the contents of the
-
-            configuration. It may change as Hightouch updates its internal code.'
-      required:
-      - name
-      - slug
-      - type
-      - configuration
-      type: object
-      additionalProperties: false
-    DestinationUpdate:
-      description: The input for updating a Destination
-      properties:
-        name:
-          type: string
-          description: The destination's name
-        configuration:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'The destination''s configuration. This specifies general metadata about destination,
-            like hostname and username.
-
-            Hightouch will be using this configuration to connect to destination.
-
-
-            The schema depends on the destination type.
-
-
-            Consumers should NOT make assumptions on the contents of the
-
-            configuration. It may change as Hightouch updates its internal code.'
-      type: object
-      additionalProperties: false
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
-      nullable: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-          nullable: false
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: Bearer
-security:
-- bearerAuth: []

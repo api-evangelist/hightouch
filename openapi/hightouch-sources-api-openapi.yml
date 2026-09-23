@@ -1,14 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: Hightouch Sources API
-  description: Hightouch Public Rest API to access syncs, models, sources and destinations
   version: 1.0.0
+  description: Hightouch Public Rest API to access syncs, models, sources and destinations
   contact:
     name: Hightouch
     url: https://hightouch.com
-  x-harvested-from: https://api.hightouch.io/api/swagger.json
-  x-harvested-on: '2026-08-13'
-  x-source-document: openapi/_original/hightouch-api-openapi.json
 servers:
 - url: https://api.hightouch.com/api/v1
 tags:
@@ -299,11 +296,48 @@ paths:
       - Sources
 components:
   schemas:
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SourceUpdate:
+      description: The input for updating a Source
+      properties:
+        name:
+          type: string
+          description: The source's name
+        configuration:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'The source''s configuration. This specifies general metadata about sources, like connection details
+
+            Hightouch will use this configuration to connect to underlying source.
+
+
+            The schema depends on the source type.
+
+
+            Consumers should NOT make assumptions on the contents of the
+
+            configuration. It may change as Hightouch updates its internal code.'
+      type: object
+      additionalProperties: false
     InternalServerError:
       type: string
       enum:
       - Internal Server Error
-      nullable: false
     Source:
       description: 'The database or warehouse where your data is stored. The starting point for
 
@@ -335,8 +369,7 @@ components:
           properties: {}
           additionalProperties: {}
           type: object
-          description: 'The source''s configuration. This specifies general metadata about sources, like
-            connection details
+          description: 'The source''s configuration. This specifies general metadata about sources, like connection details
 
             Hightouch will use this configuration to connect to underlying source.
 
@@ -377,8 +410,7 @@ components:
           properties: {}
           additionalProperties: {}
           type: object
-          description: 'The source''s configuration. This specifies general metadata about sources, like
-            connection details
+          description: 'The source''s configuration. This specifies general metadata about sources, like connection details
 
             Hightouch will use this configuration to connect to underlying source.
 
@@ -396,50 +428,8 @@ components:
       - configuration
       type: object
       additionalProperties: false
-    SourceUpdate:
-      description: The input for updating a Source
-      properties:
-        name:
-          type: string
-          description: The source's name
-        configuration:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'The source''s configuration. This specifies general metadata about sources, like
-            connection details
-
-            Hightouch will use this configuration to connect to underlying source.
-
-
-            The schema depends on the source type.
-
-
-            Consumers should NOT make assumptions on the contents of the
-
-            configuration. It may change as Hightouch updates its internal code.'
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-          nullable: false
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: Bearer
-security:
-- bearerAuth: []

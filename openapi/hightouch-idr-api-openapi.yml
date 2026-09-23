@@ -1,18 +1,15 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Hightouch Identity Resolution API
-  description: Hightouch Public Rest API to access syncs, models, sources and destinations
+  title: Hightouch Idr API
   version: 1.0.0
+  description: Hightouch Public Rest API to access syncs, models, sources and destinations
   contact:
     name: Hightouch
     url: https://hightouch.com
-  x-harvested-from: https://api.hightouch.io/api/swagger.json
-  x-harvested-on: '2026-08-13'
-  x-source-document: openapi/_original/hightouch-api-openapi.json
 servers:
 - url: https://api.hightouch.com/api/v1
 tags:
-- name: Identity Resolution
+- name: Idr
 paths:
   /idr/{graphId}/trigger:
     post:
@@ -55,7 +52,7 @@ paths:
             schema:
               $ref: '#/components/schemas/TriggerRunIdrInput'
       tags:
-      - Identity Resolution
+      - Idr
   /idr/{graphId}/runs:
     get:
       operationId: ListIdrRuns
@@ -156,14 +153,13 @@ paths:
           - started_at
           - finished_at
       tags:
-      - Identity Resolution
+      - Idr
   /idr/{graphId}/queue-for-reprocessing:
     post:
       operationId: QueueForReprocessing
       responses:
         '200':
-          description: ID associated with the reprocessing request. This can be used to query the status
-            of the request.
+          description: ID associated with the reprocessing request. This can be used to query the status of the request.
           content:
             application/json:
               schema:
@@ -182,11 +178,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidateErrorJSON'
-      description: 'Trigger an async job to queue identifier values for reprocessing, optionally adding
-        them to the blocklist.
+      description: 'Trigger an async job to queue identifier values for reprocessing, optionally adding them to the blocklist.
 
-        If `block` is true (the default), identifier values will be added to the blocklist and ignored
-        in future runs.
+        If `block` is true (the default), identifier values will be added to the blocklist and ignored in future runs.
 
         Clusters containing these identifier values will be queued for reprocessing.'
       summary: Queue identifier values for reprocessing
@@ -213,7 +207,7 @@ paths:
                 value: '1234567890'
               block: true
       tags:
-      - Identity Resolution
+      - Idr
   /idr/{graphId}/reprocess-status/{requestId}:
     get:
       operationId: ReprocessStatus
@@ -284,136 +278,24 @@ paths:
         schema:
           type: string
       tags:
-      - Identity Resolution
-  /id_graphs/{graphId}/trigger:
-    post:
-      operationId: TriggerRunIdGraph
-      responses:
-        '200':
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TriggerRunIdrOutput'
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '422':
-          description: Validation Failed
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidateErrorJSON'
-      description: 'DEPRECATED: use `/idr/{graphId}/trigger` instead'
-      deprecated: true
-      security:
-      - bearerAuth: []
-      parameters:
-      - in: path
-        name: graphId
-        required: true
-        schema:
-          type: string
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TriggerRunIdrInput'
-      tags:
-      - Identity Resolution
+      - Idr
+      summary: Reprocess status
+      x-summary-source: derived
 components:
   schemas:
-    IdrQueueForReprocessingInput:
+    ValidateErrorJSON:
       properties:
-        identifiers:
-          items:
-            properties:
-              value:
-                type: string
-              identifier:
-                type: string
-            required:
-            - value
-            - identifier
-            type: object
-          type: array
-          description: 'e.g. [{ identifier: "email", value: "a@b.com" }]
-
-            Identifier values will be queued for reprocessing.
-
-            Clusters containing these identifiers will be reprocessed on the next run.'
-        block:
-          type: boolean
-          description: If true, identifier values will also be added to the blocklist and ignored in future
-            runs.
-          default: 'true'
-      required:
-      - identifiers
-      type: object
-      additionalProperties: false
-    IdrQueueForReprocessingOutput:
-      properties:
-        requestId:
-          type: string
-          description: ID associated with the reprocessing request. This can be used to query the status
-            of the request.
-      required:
-      - requestId
-      type: object
-      additionalProperties: false
-    IdrReprocessStatusOutput:
-      properties:
-        status:
+        message:
           type: string
           enum:
-          - queueing
-          - queued
-          - reprocessed
-          - failed
-          - cancelled
-          description: '"queueing": The identifiers are being queued for reprocessing.
-
-            "queued": The identifiers have been queued and added to the blocklist. Their associated clusters
-            will be reprocessed next time the graph runs.
-
-            "reprocessed": The identifiers'' clusters have been reprocessed during a run.
-
-            "failed": We failed to queue the identifiers for reprocessing.
-
-            "cancelled": The reprocessing request has been cancelled.'
-        queuedAt:
-          type: string
-          format: date-time
-          nullable: true
-          description: Set if the status is "queued" or "reprocessed". The timestamp when the identifiers
-            were queued for reprocessing.
-        reprocessedAt:
-          type: string
-          format: date-time
-          nullable: true
-          description: Set if the status is "reprocessed". The timestamp when the identifiers' clusters
-            were reprocessed.
-        reprocessedRunId:
-          type: string
-          nullable: true
-          description: Set if the status is "reprocessed". The ID of the run that reprocessed the identifiers'
-            clusters.
-        error:
-          type: string
-          nullable: true
-          description: If available, the error message from failing to queue the identifiers for reprocessing.
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
       required:
-      - status
-      - queuedAt
-      - reprocessedAt
-      - reprocessedRunId
-      - error
+      - message
+      - details
       type: object
       additionalProperties: false
     IdrRun:
@@ -456,48 +338,31 @@ components:
       - graphId
       - id
       type: object
-    IdrRunStats:
+    IdrQueueForReprocessingInput:
       properties:
-        numSourceRows:
-          type: number
-          format: double
-          description: The exact number of rows processed from sources in this run.
-        numNewUniqueProfiles:
-          type: number
-          format: double
-          description: The exact number of unique profiles in the graph created during this run.
-        numUniqueProfiles:
-          type: number
-          format: double
-          description: The exact number of unique profiles in the graph at the end of the run.
-      required:
-      - numSourceRows
-      - numNewUniqueProfiles
-      - numUniqueProfiles
-      type: object
-    IdrRunStatsByThreshold:
-      properties:
-        probabilistic-loose:
-          $ref: '#/components/schemas/IdrRunStats'
-        probabilistic-strict:
-          $ref: '#/components/schemas/IdrRunStats'
-        deterministic:
-          $ref: '#/components/schemas/IdrRunStats'
-      additionalProperties:
-        $ref: '#/components/schemas/IdrRunStats'
-      type: object
-    ListIdrRunsOutput:
-      description: The output of a request to list runs for an IDR graph.
-      properties:
-        data:
+        identifiers:
           items:
-            $ref: '#/components/schemas/IdrRun'
+            properties:
+              value:
+                type: string
+              identifier:
+                type: string
+            required:
+            - value
+            - identifier
+            type: object
           type: array
-        hasMore:
+          description: 'e.g. [{ identifier: "email", value: "a@b.com" }]
+
+            Identifier values will be queued for reprocessing.
+
+            Clusters containing these identifiers will be reprocessed on the next run.'
+        block:
           type: boolean
+          description: If true, identifier values will also be added to the blocklist and ignored in future runs.
+          default: 'true'
       required:
-      - data
-      - hasMore
+      - identifiers
       type: object
       additionalProperties: false
     TriggerRunIdrInput:
@@ -517,26 +382,110 @@ components:
       - id
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    IdrRunStats:
       properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-          nullable: false
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
+        numSourceRows:
+          type: number
+          format: double
+          description: The exact number of rows processed from sources in this run.
+        numNewUniqueProfiles:
+          type: number
+          format: double
+          description: The exact number of unique profiles in the graph created during this run.
+        numUniqueProfiles:
+          type: number
+          format: double
+          description: The exact number of unique profiles in the graph at the end of the run.
       required:
-      - message
-      - details
+      - numSourceRows
+      - numNewUniqueProfiles
+      - numUniqueProfiles
+      type: object
+    ListIdrRunsOutput:
+      description: The output of a request to list runs for an IDR graph.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/IdrRun'
+          type: array
+        hasMore:
+          type: boolean
+      required:
+      - data
+      - hasMore
       type: object
       additionalProperties: false
+    IdrReprocessStatusOutput:
+      properties:
+        status:
+          type: string
+          enum:
+          - queueing
+          - queued
+          - reprocessed
+          - failed
+          - cancelled
+          description: '"queueing": The identifiers are being queued for reprocessing.
+
+            "queued": The identifiers have been queued and added to the blocklist. Their associated clusters will be reprocessed next time the graph runs.
+
+            "reprocessed": The identifiers'' clusters have been reprocessed during a run.
+
+            "failed": We failed to queue the identifiers for reprocessing.
+
+            "cancelled": The reprocessing request has been cancelled.'
+        queuedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Set if the status is "queued" or "reprocessed". The timestamp when the identifiers were queued for reprocessing.
+        reprocessedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Set if the status is "reprocessed". The timestamp when the identifiers' clusters were reprocessed.
+        reprocessedRunId:
+          type:
+          - string
+          - 'null'
+          description: Set if the status is "reprocessed". The ID of the run that reprocessed the identifiers' clusters.
+        error:
+          type:
+          - string
+          - 'null'
+          description: If available, the error message from failing to queue the identifiers for reprocessing.
+      required:
+      - status
+      - queuedAt
+      - reprocessedAt
+      - reprocessedRunId
+      - error
+      type: object
+      additionalProperties: false
+    IdrQueueForReprocessingOutput:
+      properties:
+        requestId:
+          type: string
+          description: ID associated with the reprocessing request. This can be used to query the status of the request.
+      required:
+      - requestId
+      type: object
+      additionalProperties: false
+    IdrRunStatsByThreshold:
+      properties:
+        probabilistic-loose:
+          $ref: '#/components/schemas/IdrRunStats'
+        probabilistic-strict:
+          $ref: '#/components/schemas/IdrRunStats'
+        deterministic:
+          $ref: '#/components/schemas/IdrRunStats'
+      additionalProperties:
+        $ref: '#/components/schemas/IdrRunStats'
+      type: object
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: Bearer
-security:
-- bearerAuth: []

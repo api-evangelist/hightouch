@@ -1,14 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: Hightouch Events API
-  description: Hightouch Public Rest API to access syncs, models, sources and destinations
   version: 1.0.0
+  description: Hightouch Public Rest API to access syncs, models, sources and destinations
   contact:
     name: Hightouch
     url: https://hightouch.com
-  x-harvested-from: https://api.hightouch.io/api/swagger.json
-  x-harvested-on: '2026-08-13'
-  x-source-document: openapi/_original/hightouch-api-openapi.json
 servers:
 - url: https://api.hightouch.com/api/v1
 tags:
@@ -548,259 +545,6 @@ paths:
       - Events
 components:
   schemas:
-    EventContract:
-      description: A collection of schemas that are used for validating your events.
-      properties:
-        id:
-          type: string
-          description: The contract's id
-        name:
-          type: string
-          description: The contract's name
-        slug:
-          type: string
-          description: The contract's slug. If not specified, one will be generated.
-        description:
-          type: string
-          description: The contract's description
-        onUndeclaredSchema:
-          type: string
-          enum:
-          - ALLOW_EVENT
-          - BLOCK_EVENT
-          description: 'What happens to events that aren''t defined in the contract.
-
-            One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to ALLOW_EVENT.'
-        events:
-          items:
-            properties:
-              schema:
-                properties: {}
-                additionalProperties: {}
-                type: object
-                description: The JSON schema that validates the event. Required.
-              onUndeclaredFields:
-                type: string
-                enum:
-                - ALLOW_EVENT
-                - BLOCK_EVENT
-                - OMIT_FIELDS
-                description: 'What happens to events that contain fields not in the schema.
-
-                  One of ALLOW_EVENT, BLOCK_EVENT, or OMIT_FIELDS. Optional, defaults to OMIT_FIELDS.'
-              onSchemaViolation:
-                type: string
-                enum:
-                - ALLOW_EVENT
-                - BLOCK_EVENT
-                description: 'What happens to events that violate the schema.
-
-                  One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to BLOCK_EVENT.'
-              version:
-                type: string
-                description: The event version. Defaults to "default", optional. You probably don't need
-                  to set this.
-              slug:
-                type: string
-                description: The event's slug. If not specified, one will be generated.
-              name:
-                type: string
-                description: The event's name. Required for track events.
-              type:
-                type: string
-                enum:
-                - track
-                - identify
-                - page
-                - screen
-                - group
-                description: The event's type. One of track, identify, page, screen, or group. Required.
-            required:
-            - schema
-            - type
-            type: object
-          type: array
-          description: The definitions for the events in the contract.
-        workspaceId:
-          type: number
-          format: double
-          description: The id of the workspace that the contract belongs to
-        createdAt:
-          type: string
-          format: date-time
-          description: The timestamp when the contract was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: The timestamp when the contract was last updated
-        eventSources:
-          items:
-            properties:
-              name:
-                type: string
-              id:
-                type: string
-            required:
-            - name
-            - id
-            type: object
-          type: array
-          description: The Event Sources linked to the Contract.
-      required:
-      - id
-      - name
-      - workspaceId
-      - createdAt
-      - updatedAt
-      - eventSources
-      type: object
-      additionalProperties: false
-    EventContractCreate:
-      description: The input for creating a Contract
-      properties:
-        name:
-          type: string
-          description: The contract's name
-        slug:
-          type: string
-          description: The contract's slug. If not specified, one will be generated.
-        description:
-          type: string
-          description: The contract's description
-        onUndeclaredSchema:
-          type: string
-          enum:
-          - ALLOW_EVENT
-          - BLOCK_EVENT
-          description: 'What happens to events that aren''t defined in the contract.
-
-            One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to ALLOW_EVENT.'
-        events:
-          items:
-            properties:
-              schema:
-                properties: {}
-                additionalProperties: {}
-                type: object
-                description: The JSON schema that validates the event. Required.
-              onUndeclaredFields:
-                type: string
-                enum:
-                - ALLOW_EVENT
-                - BLOCK_EVENT
-                - OMIT_FIELDS
-                description: 'What happens to events that contain fields not in the schema.
-
-                  One of ALLOW_EVENT, BLOCK_EVENT, or OMIT_FIELDS. Optional, defaults to OMIT_FIELDS.'
-              onSchemaViolation:
-                type: string
-                enum:
-                - ALLOW_EVENT
-                - BLOCK_EVENT
-                description: 'What happens to events that violate the schema.
-
-                  One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to BLOCK_EVENT.'
-              version:
-                type: string
-                description: The event version. Defaults to "default", optional. You probably don't need
-                  to set this.
-              slug:
-                type: string
-                description: The event's slug. If not specified, one will be generated.
-              name:
-                type: string
-                description: The event's name. Required for track events.
-              type:
-                type: string
-                enum:
-                - track
-                - identify
-                - page
-                - screen
-                - group
-                description: The event's type. One of track, identify, page, screen, or group. Required.
-            required:
-            - schema
-            - type
-            type: object
-          type: array
-          description: The definitions for the events in the contract.
-      required:
-      - name
-      type: object
-      additionalProperties: false
-    EventContractUpdate:
-      description: The input for updating a Contract
-      properties:
-        name:
-          type: string
-          description: The contract's name
-        slug:
-          type: string
-          description: The contract's slug. If not specified, one will be generated.
-        description:
-          type: string
-          description: The contract's description
-        onUndeclaredSchema:
-          type: string
-          enum:
-          - ALLOW_EVENT
-          - BLOCK_EVENT
-          description: 'What happens to events that aren''t defined in the contract.
-
-            One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to ALLOW_EVENT.'
-        events:
-          items:
-            properties:
-              schema:
-                properties: {}
-                additionalProperties: {}
-                type: object
-                description: The JSON schema that validates the event. Required.
-              onUndeclaredFields:
-                type: string
-                enum:
-                - ALLOW_EVENT
-                - BLOCK_EVENT
-                - OMIT_FIELDS
-                description: 'What happens to events that contain fields not in the schema.
-
-                  One of ALLOW_EVENT, BLOCK_EVENT, or OMIT_FIELDS. Optional, defaults to OMIT_FIELDS.'
-              onSchemaViolation:
-                type: string
-                enum:
-                - ALLOW_EVENT
-                - BLOCK_EVENT
-                description: 'What happens to events that violate the schema.
-
-                  One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to BLOCK_EVENT.'
-              version:
-                type: string
-                description: The event version. Defaults to "default", optional. You probably don't need
-                  to set this.
-              slug:
-                type: string
-                description: The event's slug. If not specified, one will be generated.
-              name:
-                type: string
-                description: The event's name. Required for track events.
-              type:
-                type: string
-                enum:
-                - track
-                - identify
-                - page
-                - screen
-                - group
-                description: The event's type. One of track, identify, page, screen, or group. Required.
-            required:
-            - schema
-            - type
-            type: object
-          type: array
-          description: The definitions for the events in the contract.
-      type: object
-      additionalProperties: false
     EventDomain:
       description: A collection of event and component schemas used for validating events.
       properties:
@@ -831,8 +575,7 @@ components:
                 properties: {}
                 additionalProperties: {}
                 type: object
-                description: The JSON schema that validates the event. Required. May contain component
-                  `$ref`s.
+                description: The JSON schema that validates the event. Required. May contain component `$ref`s.
               onUndeclaredFields:
                 type: string
                 enum:
@@ -852,8 +595,7 @@ components:
                   One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to BLOCK_EVENT.'
               version:
                 type: string
-                description: The event version. Defaults to "default", optional. You probably don't need
-                  to set this.
+                description: The event version. Defaults to "default", optional. You probably don't need to set this.
               slug:
                 type: string
                 description: The event's slug. If not specified, one will be generated.
@@ -914,66 +656,42 @@ components:
       - eventSources
       type: object
       additionalProperties: false
-    EventDomainComponent:
-      description: Reusable schema fragments that can be imported by event schemas.
+    ValidateErrorJSON:
       properties:
-        id:
+        message:
           type: string
-          description: The component's id. Omit when creating. On update, a component matches an existing
-            one by id when supplied, otherwise by (name, version); include the id to rename a component
-            in place.
-        slug:
-          type: string
-          description: The component's slug. Optional when creating; generated from the name if omitted.
-            Immutable after creation; an update that sends a different slug for an existing component
-            is rejected.
-        name:
-          type: string
-          description: The component's name. Required.
-        version:
-          type: string
-          description: The component's version. Defaults to "default", optional. On update, an omitted
-            version keeps the stored value when the component is matched by id; without an id, an omitted
-            version only matches the stored "default" version, and the request is rejected if the name
-            exists only under other versions.
-        description:
-          type: string
-          description: The component's description. On update, an omitted description keeps the stored
-            value; send an empty string to clear it.
-        schema:
+          enum:
+          - Validation failed
+        details:
           properties: {}
           additionalProperties: {}
           type: object
-          description: The JSON schema fragment the component contributes. Required.
-        imports:
-          items:
-            type: string
-          type: array
-          description: 'Read-only: the slugs of the components this component imports (derived from its
-            `$ref`s).'
       required:
-      - name
-      - schema
+      - message
+      - details
       type: object
       additionalProperties: false
-    EventDomainCreate:
-      description: The input for creating a Domain
+    EventContract:
+      description: A collection of schemas that are used for validating your events.
       properties:
+        id:
+          type: string
+          description: The contract's id
         name:
           type: string
-          description: The domain's name
+          description: The contract's name
         slug:
           type: string
-          description: The domain's slug. If not specified, one will be generated.
+          description: The contract's slug. If not specified, one will be generated.
         description:
           type: string
-          description: The domain's description
+          description: The contract's description
         onUndeclaredSchema:
           type: string
           enum:
           - ALLOW_EVENT
           - BLOCK_EVENT
-          description: 'What happens to events that aren''t defined in the domain.
+          description: 'What happens to events that aren''t defined in the contract.
 
             One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to ALLOW_EVENT.'
         events:
@@ -983,8 +701,7 @@ components:
                 properties: {}
                 additionalProperties: {}
                 type: object
-                description: The JSON schema that validates the event. Required. May contain component
-                  `$ref`s.
+                description: The JSON schema that validates the event. Required.
               onUndeclaredFields:
                 type: string
                 enum:
@@ -1004,8 +721,7 @@ components:
                   One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to BLOCK_EVENT.'
               version:
                 type: string
-                description: The event version. Defaults to "default", optional. You probably don't need
-                  to set this.
+                description: The event version. Defaults to "default", optional. You probably don't need to set this.
               slug:
                 type: string
                 description: The event's slug. If not specified, one will be generated.
@@ -1026,14 +742,110 @@ components:
             - type
             type: object
           type: array
-          description: The definitions for the events in the domain.
-        components:
+          description: The definitions for the events in the contract.
+        workspaceId:
+          type: number
+          format: double
+          description: The id of the workspace that the contract belongs to
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the contract was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the contract was last updated
+        eventSources:
           items:
-            $ref: '#/components/schemas/EventDomainComponent'
+            properties:
+              name:
+                type: string
+              id:
+                type: string
+            required:
+            - name
+            - id
+            type: object
           type: array
-          description: The reusable components defined in the domain.
+          description: The Event Sources linked to the Contract.
       required:
+      - id
       - name
+      - workspaceId
+      - createdAt
+      - updatedAt
+      - eventSources
+      type: object
+      additionalProperties: false
+    EventContractUpdate:
+      description: The input for updating a Contract
+      properties:
+        name:
+          type: string
+          description: The contract's name
+        slug:
+          type: string
+          description: The contract's slug. If not specified, one will be generated.
+        description:
+          type: string
+          description: The contract's description
+        onUndeclaredSchema:
+          type: string
+          enum:
+          - ALLOW_EVENT
+          - BLOCK_EVENT
+          description: 'What happens to events that aren''t defined in the contract.
+
+            One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to ALLOW_EVENT.'
+        events:
+          items:
+            properties:
+              schema:
+                properties: {}
+                additionalProperties: {}
+                type: object
+                description: The JSON schema that validates the event. Required.
+              onUndeclaredFields:
+                type: string
+                enum:
+                - ALLOW_EVENT
+                - BLOCK_EVENT
+                - OMIT_FIELDS
+                description: 'What happens to events that contain fields not in the schema.
+
+                  One of ALLOW_EVENT, BLOCK_EVENT, or OMIT_FIELDS. Optional, defaults to OMIT_FIELDS.'
+              onSchemaViolation:
+                type: string
+                enum:
+                - ALLOW_EVENT
+                - BLOCK_EVENT
+                description: 'What happens to events that violate the schema.
+
+                  One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to BLOCK_EVENT.'
+              version:
+                type: string
+                description: The event version. Defaults to "default", optional. You probably don't need to set this.
+              slug:
+                type: string
+                description: The event's slug. If not specified, one will be generated.
+              name:
+                type: string
+                description: The event's name. Required for track events.
+              type:
+                type: string
+                enum:
+                - track
+                - identify
+                - page
+                - screen
+                - group
+                description: The event's type. One of track, identify, page, screen, or group. Required.
+            required:
+            - schema
+            - type
+            type: object
+          type: array
+          description: The definitions for the events in the contract.
       type: object
       additionalProperties: false
     EventDomainUpdate:
@@ -1063,8 +875,7 @@ components:
                 properties: {}
                 additionalProperties: {}
                 type: object
-                description: The JSON schema that validates the event. Required. May contain component
-                  `$ref`s.
+                description: The JSON schema that validates the event. Required. May contain component `$ref`s.
               onUndeclaredFields:
                 type: string
                 enum:
@@ -1084,8 +895,7 @@ components:
                   One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to BLOCK_EVENT.'
               version:
                 type: string
-                description: The event version. Defaults to "default", optional. You probably don't need
-                  to set this.
+                description: The event version. Defaults to "default", optional. You probably don't need to set this.
               slug:
                 type: string
                 description: The event's slug. If not specified, one will be generated.
@@ -1118,21 +928,188 @@ components:
       type: string
       enum:
       - Internal Server Error
-      nullable: false
-    ValidateErrorJSON:
+    EventDomainComponent:
+      description: Reusable schema fragments that can be imported by event schemas.
       properties:
-        message:
+        id:
           type: string
-          enum:
-          - Validation failed
-          nullable: false
-        details:
+          description: The component's id. Omit when creating. On update, a component matches an existing one by id when supplied, otherwise by (name, version); include the id to rename a component in place.
+        slug:
+          type: string
+          description: The component's slug. Optional when creating; generated from the name if omitted. Immutable after creation; an update that sends a different slug for an existing component is rejected.
+        name:
+          type: string
+          description: The component's name. Required.
+        version:
+          type: string
+          description: The component's version. Defaults to "default", optional. On update, an omitted version keeps the stored value when the component is matched by id; without an id, an omitted version only matches the stored "default" version, and the request is rejected if the name exists only under other versions.
+        description:
+          type: string
+          description: The component's description. On update, an omitted description keeps the stored value; send an empty string to clear it.
+        schema:
           properties: {}
           additionalProperties: {}
           type: object
+          description: The JSON schema fragment the component contributes. Required.
+        imports:
+          items:
+            type: string
+          type: array
+          description: 'Read-only: the slugs of the components this component imports (derived from its `$ref`s).'
       required:
-      - message
-      - details
+      - name
+      - schema
+      type: object
+      additionalProperties: false
+    EventDomainCreate:
+      description: The input for creating a Domain
+      properties:
+        name:
+          type: string
+          description: The domain's name
+        slug:
+          type: string
+          description: The domain's slug. If not specified, one will be generated.
+        description:
+          type: string
+          description: The domain's description
+        onUndeclaredSchema:
+          type: string
+          enum:
+          - ALLOW_EVENT
+          - BLOCK_EVENT
+          description: 'What happens to events that aren''t defined in the domain.
+
+            One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to ALLOW_EVENT.'
+        events:
+          items:
+            properties:
+              schema:
+                properties: {}
+                additionalProperties: {}
+                type: object
+                description: The JSON schema that validates the event. Required. May contain component `$ref`s.
+              onUndeclaredFields:
+                type: string
+                enum:
+                - ALLOW_EVENT
+                - BLOCK_EVENT
+                - OMIT_FIELDS
+                description: 'What happens to events that contain fields not in the schema.
+
+                  One of ALLOW_EVENT, BLOCK_EVENT, or OMIT_FIELDS. Optional, defaults to OMIT_FIELDS.'
+              onSchemaViolation:
+                type: string
+                enum:
+                - ALLOW_EVENT
+                - BLOCK_EVENT
+                description: 'What happens to events that violate the schema.
+
+                  One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to BLOCK_EVENT.'
+              version:
+                type: string
+                description: The event version. Defaults to "default", optional. You probably don't need to set this.
+              slug:
+                type: string
+                description: The event's slug. If not specified, one will be generated.
+              name:
+                type: string
+                description: The event's name. Required for track events.
+              type:
+                type: string
+                enum:
+                - track
+                - identify
+                - page
+                - screen
+                - group
+                description: The event's type. One of track, identify, page, screen, or group. Required.
+            required:
+            - schema
+            - type
+            type: object
+          type: array
+          description: The definitions for the events in the domain.
+        components:
+          items:
+            $ref: '#/components/schemas/EventDomainComponent'
+          type: array
+          description: The reusable components defined in the domain.
+      required:
+      - name
+      type: object
+      additionalProperties: false
+    EventContractCreate:
+      description: The input for creating a Contract
+      properties:
+        name:
+          type: string
+          description: The contract's name
+        slug:
+          type: string
+          description: The contract's slug. If not specified, one will be generated.
+        description:
+          type: string
+          description: The contract's description
+        onUndeclaredSchema:
+          type: string
+          enum:
+          - ALLOW_EVENT
+          - BLOCK_EVENT
+          description: 'What happens to events that aren''t defined in the contract.
+
+            One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to ALLOW_EVENT.'
+        events:
+          items:
+            properties:
+              schema:
+                properties: {}
+                additionalProperties: {}
+                type: object
+                description: The JSON schema that validates the event. Required.
+              onUndeclaredFields:
+                type: string
+                enum:
+                - ALLOW_EVENT
+                - BLOCK_EVENT
+                - OMIT_FIELDS
+                description: 'What happens to events that contain fields not in the schema.
+
+                  One of ALLOW_EVENT, BLOCK_EVENT, or OMIT_FIELDS. Optional, defaults to OMIT_FIELDS.'
+              onSchemaViolation:
+                type: string
+                enum:
+                - ALLOW_EVENT
+                - BLOCK_EVENT
+                description: 'What happens to events that violate the schema.
+
+                  One of ALLOW_EVENT or BLOCK_EVENT. Optional, defaults to BLOCK_EVENT.'
+              version:
+                type: string
+                description: The event version. Defaults to "default", optional. You probably don't need to set this.
+              slug:
+                type: string
+                description: The event's slug. If not specified, one will be generated.
+              name:
+                type: string
+                description: The event's name. Required for track events.
+              type:
+                type: string
+                enum:
+                - track
+                - identify
+                - page
+                - screen
+                - group
+                description: The event's type. One of track, identify, page, screen, or group. Required.
+            required:
+            - schema
+            - type
+            type: object
+          type: array
+          description: The definitions for the events in the contract.
+      required:
+      - name
       type: object
       additionalProperties: false
   securitySchemes:
@@ -1140,5 +1117,3 @@ components:
       type: http
       scheme: bearer
       bearerFormat: Bearer
-security:
-- bearerAuth: []
