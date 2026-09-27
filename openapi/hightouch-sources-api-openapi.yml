@@ -296,19 +296,38 @@ paths:
       - Sources
 components:
   schemas:
-    ValidateErrorJSON:
+    SourceCreate:
+      description: The input for creating a Source
       properties:
-        message:
+        name:
           type: string
-          enum:
-          - Validation failed
-        details:
+          description: The source's name
+        slug:
+          type: string
+          description: The source's slug
+        type:
+          type: string
+          description: The source's type (e.g. snowflake or postgres).
+        configuration:
           properties: {}
           additionalProperties: {}
           type: object
+          description: 'The source''s configuration. This specifies general metadata about sources, like connection details
+
+            Hightouch will use this configuration to connect to underlying source.
+
+
+            The schema depends on the source type.
+
+
+            Consumers should NOT make assumptions on the contents of the
+
+            configuration. It may change as Hightouch updates its internal code.'
       required:
-      - message
-      - details
+      - name
+      - slug
+      - type
+      - configuration
       type: object
       additionalProperties: false
     SourceUpdate:
@@ -338,6 +357,21 @@ components:
       type: string
       enum:
       - Internal Server Error
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     Source:
       description: 'The database or warehouse where your data is stored. The starting point for
 
@@ -392,40 +426,6 @@ components:
       - updatedAt
       - configuration
       - type
-      type: object
-      additionalProperties: false
-    SourceCreate:
-      description: The input for creating a Source
-      properties:
-        name:
-          type: string
-          description: The source's name
-        slug:
-          type: string
-          description: The source's slug
-        type:
-          type: string
-          description: The source's type (e.g. snowflake or postgres).
-        configuration:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'The source''s configuration. This specifies general metadata about sources, like connection details
-
-            Hightouch will use this configuration to connect to underlying source.
-
-
-            The schema depends on the source type.
-
-
-            Consumers should NOT make assumptions on the contents of the
-
-            configuration. It may change as Hightouch updates its internal code.'
-      required:
-      - name
-      - slug
-      - type
-      - configuration
       type: object
       additionalProperties: false
   securitySchemes:

@@ -283,21 +283,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ValidateErrorJSON:
+    TriggerRunIdrInput:
       properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
+        fullRerun:
+          type: boolean
+          description: Whether to resync the entire Identity Graph or process incrementally.
+          default: 'false'
       type: object
-      additionalProperties: false
+      description: The input of a trigger action to run IDR.
+    IdrRunStatsByThreshold:
+      properties:
+        probabilistic-loose:
+          $ref: '#/components/schemas/IdrRunStats'
+        probabilistic-strict:
+          $ref: '#/components/schemas/IdrRunStats'
+        deterministic:
+          $ref: '#/components/schemas/IdrRunStats'
+      additionalProperties:
+        $ref: '#/components/schemas/IdrRunStats'
+      type: object
     IdrRun:
       properties:
         fullRerun:
@@ -365,23 +369,6 @@ components:
       - identifiers
       type: object
       additionalProperties: false
-    TriggerRunIdrInput:
-      properties:
-        fullRerun:
-          type: boolean
-          description: Whether to resync the entire Identity Graph or process incrementally.
-          default: 'false'
-      type: object
-      description: The input of a trigger action to run IDR.
-    TriggerRunIdrOutput:
-      properties:
-        id:
-          type: string
-          description: The id of the triggered run.
-      required:
-      - id
-      type: object
-      additionalProperties: false
     IdrRunStats:
       properties:
         numSourceRows:
@@ -401,6 +388,30 @@ components:
       - numNewUniqueProfiles
       - numUniqueProfiles
       type: object
+    IdrQueueForReprocessingOutput:
+      properties:
+        requestId:
+          type: string
+          description: ID associated with the reprocessing request. This can be used to query the status of the request.
+      required:
+      - requestId
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ListIdrRunsOutput:
       description: The output of a request to list runs for an IDR graph.
       properties:
@@ -464,26 +475,15 @@ components:
       - error
       type: object
       additionalProperties: false
-    IdrQueueForReprocessingOutput:
+    TriggerRunIdrOutput:
       properties:
-        requestId:
+        id:
           type: string
-          description: ID associated with the reprocessing request. This can be used to query the status of the request.
+          description: The id of the triggered run.
       required:
-      - requestId
+      - id
       type: object
       additionalProperties: false
-    IdrRunStatsByThreshold:
-      properties:
-        probabilistic-loose:
-          $ref: '#/components/schemas/IdrRunStats'
-        probabilistic-strict:
-          $ref: '#/components/schemas/IdrRunStats'
-        deterministic:
-          $ref: '#/components/schemas/IdrRunStats'
-      additionalProperties:
-        $ref: '#/components/schemas/IdrRunStats'
-      type: object
   securitySchemes:
     bearerAuth:
       type: http

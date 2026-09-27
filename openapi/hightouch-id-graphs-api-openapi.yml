@@ -57,6 +57,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    TriggerRunIdrInput:
+      properties:
+        fullRerun:
+          type: boolean
+          description: Whether to resync the entire Identity Graph or process incrementally.
+          default: 'false'
+      type: object
+      description: The input of a trigger action to run IDR.
     ValidateErrorJSON:
       properties:
         message:
@@ -72,14 +80,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    TriggerRunIdrInput:
-      properties:
-        fullRerun:
-          type: boolean
-          description: Whether to resync the entire Identity Graph or process incrementally.
-          default: 'false'
-      type: object
-      description: The input of a trigger action to run IDR.
     TriggerRunIdrOutput:
       properties:
         id:
