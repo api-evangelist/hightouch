@@ -371,78 +371,6 @@ paths:
       - Decision Engine
 components:
   schemas:
-    DecisionEngineFlow:
-      description: Decision Engine Flow (Public API)
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        workspaceId:
-          type: number
-          format: double
-        decisionEngineId:
-          type: string
-        audienceId:
-          type: number
-          format: double
-        status:
-          type: string
-        config:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - workspaceId
-      - decisionEngineId
-      - audienceId
-      - status
-      type: object
-      additionalProperties: false
-    DecisionEngineMessage:
-      description: Decision Engine Message (Public API)
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        channelId:
-          type: string
-        config:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        tags:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        guardrails:
-          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
-        variables:
-          items:
-            $ref: '#/components/schemas/DecisionEngineVariable'
-          type: array
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - channelId
-      - config
-      type: object
-      additionalProperties: false
     DecisionEngineVariableVariant:
       description: Variant within a message variable (Public API)
       properties:
@@ -476,22 +404,37 @@ components:
       - value
       type: object
       additionalProperties: false
-    DecisionEngineMessageGuardrails:
-      description: Guardrail fields on a message (max sends, eligibility dates, etc.)
+    DecisionEngineVariable:
+      description: Message variable (Public API)
       properties:
-        maxSendsPerUser:
-          type: number
-          format: double
-        maxSendsPerUserWindowDays:
-          type: number
-          format: double
-        minOtherMessagesInBetween:
-          type: number
-          format: double
-        firstEligibleSendDate:
+        name:
           type: string
-        lastEligibleSendDate:
-          type: string
+          description: The variable name (must be unique within a message)
+        config:
+          properties:
+            localizationEnabled:
+              type: boolean
+              description: 'When true, the Decision Engine uses each variant''s localeValues to select
+
+                locale-appropriate content at runtime. When false or omitted, only the
+
+                default variant value is used, even if localeValues are present.'
+            maxSendsPerUserWindowDays:
+              type: number
+              format: double
+              description: Rolling window in days for the maxSendsPerUser limit
+            maxSendsPerUser:
+              type: number
+              format: double
+              description: Maximum number of times this variable's variants can be sent to a single user
+          type: object
+        variants:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariableVariant'
+          type: array
+      required:
+      - name
+      - variants
       type: object
       additionalProperties: false
     DecisionEngineRunResponse:
@@ -504,31 +447,6 @@ components:
       - flowsEnqueued
       type: object
       additionalProperties: false
-    DecisionEngineMessageUpdate:
-      description: Request body for updating a Decision Engine message
-      properties:
-        name:
-          type: string
-        config:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        tags:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        guardrails:
-          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
-        variables:
-          items:
-            $ref: '#/components/schemas/DecisionEngineVariable'
-          type: array
-      type: object
-      additionalProperties: false
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
     DecisionEngineMessageCreate:
       description: Request body for creating a Decision Engine message
       properties:
@@ -571,37 +489,119 @@ components:
       - details
       type: object
       additionalProperties: false
-    DecisionEngineVariable:
-      description: Message variable (Public API)
+    DecisionEngineMessageUpdate:
+      description: Request body for updating a Decision Engine message
       properties:
         name:
           type: string
-          description: The variable name (must be unique within a message)
         config:
-          properties:
-            localizationEnabled:
-              type: boolean
-              description: 'When true, the Decision Engine uses each variant''s localeValues to select
-
-                locale-appropriate content at runtime. When false or omitted, only the
-
-                default variant value is used, even if localeValues are present.'
-            maxSendsPerUserWindowDays:
-              type: number
-              format: double
-              description: Rolling window in days for the maxSendsPerUser limit
-            maxSendsPerUser:
-              type: number
-              format: double
-              description: Maximum number of times this variable's variants can be sent to a single user
+          properties: {}
+          additionalProperties: {}
           type: object
-        variants:
+        tags:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
           items:
-            $ref: '#/components/schemas/DecisionEngineVariableVariant'
+            $ref: '#/components/schemas/DecisionEngineVariable'
           type: array
+      type: object
+      additionalProperties: false
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
+    DecisionEngineMessage:
+      description: Decision Engine Message (Public API)
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        channelId:
+          type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        tags:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariable'
+          type: array
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
       required:
+      - id
       - name
-      - variants
+      - channelId
+      - config
+      type: object
+      additionalProperties: false
+    DecisionEngineMessageGuardrails:
+      description: Guardrail fields on a message (max sends, eligibility dates, etc.)
+      properties:
+        maxSendsPerUser:
+          type: number
+          format: double
+        maxSendsPerUserWindowDays:
+          type: number
+          format: double
+        minOtherMessagesInBetween:
+          type: number
+          format: double
+        firstEligibleSendDate:
+          type: string
+        lastEligibleSendDate:
+          type: string
+      type: object
+      additionalProperties: false
+    DecisionEngineFlow:
+      description: Decision Engine Flow (Public API)
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        workspaceId:
+          type: number
+          format: double
+        decisionEngineId:
+          type: string
+        audienceId:
+          type: number
+          format: double
+        status:
+          type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - workspaceId
+      - decisionEngineId
+      - audienceId
+      - status
       type: object
       additionalProperties: false
   securitySchemes:

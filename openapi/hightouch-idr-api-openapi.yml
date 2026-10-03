@@ -283,6 +283,34 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    IdrQueueForReprocessingOutput:
+      properties:
+        requestId:
+          type: string
+          description: ID associated with the reprocessing request. This can be used to query the status of the request.
+      required:
+      - requestId
+      type: object
+      additionalProperties: false
+    IdrRunStats:
+      properties:
+        numSourceRows:
+          type: number
+          format: double
+          description: The exact number of rows processed from sources in this run.
+        numNewUniqueProfiles:
+          type: number
+          format: double
+          description: The exact number of unique profiles in the graph created during this run.
+        numUniqueProfiles:
+          type: number
+          format: double
+          description: The exact number of unique profiles in the graph at the end of the run.
+      required:
+      - numSourceRows
+      - numNewUniqueProfiles
+      - numUniqueProfiles
+      type: object
     TriggerRunIdrInput:
       properties:
         fullRerun:
@@ -291,17 +319,6 @@ components:
           default: 'false'
       type: object
       description: The input of a trigger action to run IDR.
-    IdrRunStatsByThreshold:
-      properties:
-        probabilistic-loose:
-          $ref: '#/components/schemas/IdrRunStats'
-        probabilistic-strict:
-          $ref: '#/components/schemas/IdrRunStats'
-        deterministic:
-          $ref: '#/components/schemas/IdrRunStats'
-      additionalProperties:
-        $ref: '#/components/schemas/IdrRunStats'
-      type: object
     IdrRun:
       properties:
         fullRerun:
@@ -369,34 +386,6 @@ components:
       - identifiers
       type: object
       additionalProperties: false
-    IdrRunStats:
-      properties:
-        numSourceRows:
-          type: number
-          format: double
-          description: The exact number of rows processed from sources in this run.
-        numNewUniqueProfiles:
-          type: number
-          format: double
-          description: The exact number of unique profiles in the graph created during this run.
-        numUniqueProfiles:
-          type: number
-          format: double
-          description: The exact number of unique profiles in the graph at the end of the run.
-      required:
-      - numSourceRows
-      - numNewUniqueProfiles
-      - numUniqueProfiles
-      type: object
-    IdrQueueForReprocessingOutput:
-      properties:
-        requestId:
-          type: string
-          description: ID associated with the reprocessing request. This can be used to query the status of the request.
-      required:
-      - requestId
-      type: object
-      additionalProperties: false
     ValidateErrorJSON:
       properties:
         message:
@@ -412,18 +401,13 @@ components:
       - details
       type: object
       additionalProperties: false
-    ListIdrRunsOutput:
-      description: The output of a request to list runs for an IDR graph.
+    TriggerRunIdrOutput:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/IdrRun'
-          type: array
-        hasMore:
-          type: boolean
+        id:
+          type: string
+          description: The id of the triggered run.
       required:
-      - data
-      - hasMore
+      - id
       type: object
       additionalProperties: false
     IdrReprocessStatusOutput:
@@ -475,13 +459,29 @@ components:
       - error
       type: object
       additionalProperties: false
-    TriggerRunIdrOutput:
+    IdrRunStatsByThreshold:
       properties:
-        id:
-          type: string
-          description: The id of the triggered run.
+        probabilistic-loose:
+          $ref: '#/components/schemas/IdrRunStats'
+        probabilistic-strict:
+          $ref: '#/components/schemas/IdrRunStats'
+        deterministic:
+          $ref: '#/components/schemas/IdrRunStats'
+      additionalProperties:
+        $ref: '#/components/schemas/IdrRunStats'
+      type: object
+    ListIdrRunsOutput:
+      description: The output of a request to list runs for an IDR graph.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/IdrRun'
+          type: array
+        hasMore:
+          type: boolean
       required:
-      - id
+      - data
+      - hasMore
       type: object
       additionalProperties: false
   securitySchemes:

@@ -657,6 +657,142 @@ paths:
       - Syncs
 components:
   schemas:
+    SyncRunStatus:
+      description: The status of sync runs
+      enum:
+      - cancelled
+      - failed
+      - queued
+      - success
+      - warning
+      - querying
+      - processing
+      - reporting
+      - interrupted
+      type: string
+    SyncRun:
+      properties:
+        id:
+          type: number
+          format: double
+          description: The sync run's id
+        createdAt:
+          type: string
+          format: date-time
+          description: 'The timestamp when sync run was created. In most cases this will be
+
+            equivalent to `startedAt`, but it may be earlier if the sync was triggered
+
+            while a run was already in progress, and the new run didn''t start for
+
+            a while.'
+        startedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the sync run started
+        finishedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the sync run finished
+        querySize:
+          type: number
+          format: double
+          description: The number of rows in the query.
+        status:
+          $ref: '#/components/schemas/SyncRunStatus'
+          description: The status of sync run
+        completionRatio:
+          type: number
+          format: double
+          description: The completion ratio of sync run, showing the progress of a sync run
+        plannedRows:
+          properties:
+            removedCount:
+              type: number
+              format: double
+              description: The number of removed rows.
+            changedCount:
+              type: number
+              format: double
+              description: The number of changed rows.
+            addedCount:
+              type: number
+              format: double
+              description: The number of added rows.
+          required:
+          - removedCount
+          - changedCount
+          - addedCount
+          type: object
+          description: 'The number of planned rows that this sync run was supposed to execute.
+
+
+            Note that the counts for `successfulRows` and `failedRows` may not add up
+
+            to `plannedRows` if the sync was cancelled.'
+        successfulRows:
+          properties:
+            removedCount:
+              type: number
+              format: double
+              description: The number of successful removes.
+            changedCount:
+              type: number
+              format: double
+              description: The number of successful changes.
+            addedCount:
+              type: number
+              format: double
+              description: The number of successful adds.
+          required:
+          - removedCount
+          - changedCount
+          - addedCount
+          type: object
+          description: The number of rows that were successfully processed by the destination.
+        failedRows:
+          properties:
+            removedCount:
+              type: number
+              format: double
+              description: The number of failed removes.
+            changedCount:
+              type: number
+              format: double
+              description: The number of failed changes.
+            addedCount:
+              type: number
+              format: double
+              description: The number of failed adds.
+          required:
+          - removedCount
+          - changedCount
+          - addedCount
+          type: object
+          description: 'The number of rows that we attempted to sync, but were rejected by the
+
+            destination.
+
+
+            This does not include rows that weren''t attempted due to the sync being
+
+            cancelled.'
+        error:
+          type: string
+          description: Error message if the sync run didn't finish successfully
+      required:
+      - id
+      - createdAt
+      - startedAt
+      - finishedAt
+      - querySize
+      - status
+      - completionRatio
+      - plannedRows
+      - successfulRows
+      - failedRows
+      type: object
+      additionalProperties: false
     Sync:
       description: 'Syncs define how data from models are mapped to destinations. Each time a
 
@@ -786,21 +922,6 @@ components:
       - tags
       type: object
       additionalProperties: false
-    SyncStatus:
-      description: SyncStatus
-      enum:
-      - disabled
-      - pending
-      - cancelled
-      - failed
-      - queued
-      - success
-      - warning
-      - querying
-      - processing
-      - reporting
-      - interrupted
-      type: string
     VisualCronSchedule:
       properties:
         expressions:
@@ -819,41 +940,11 @@ components:
       - expressions
       type: object
       additionalProperties: false
-    TriggerRunCustomInput:
-      properties:
-        syncSlug:
-          type: string
-          description: Trigger run based on sync slug
-        syncId:
-          type: string
-          description: Trigger run based on sync id
-          pattern: ^[0-9]+$
-        clearAndFill:
-          type: boolean
-          description: Whether to clear the audience and then sync the full query to the destination
-          default: 'false'
-        resetCDC:
-          type: boolean
-          description: Whether to sync all the rows in the query without executing changes on the destination.
-          default: 'false'
-        fullResync:
-          type: boolean
-          description: 'Whether to resync all the rows in the query (i.e. ignoring previously
-
-            synced rows).'
-          default: 'false'
-      type: object
-      description: The input of a trigger action to run syncs based on sync ID, slug or other filters
-    IntervalUnit:
+    SyncStatus:
+      description: SyncStatus
       enum:
-      - minute
-      - hour
-      - day
-      - week
-      type: string
-    SyncRunStatus:
-      description: The status of sync runs
-      enum:
+      - disabled
+      - pending
       - cancelled
       - failed
       - queued
@@ -885,98 +976,19 @@ components:
       - job
       type: object
       additionalProperties: false
-    Interval:
+    ValidateErrorJSON:
       properties:
-        unit:
-          $ref: '#/components/schemas/IntervalUnit'
-        quantity:
-          type: number
-          format: double
-      required:
-      - unit
-      - quantity
-      type: object
-      additionalProperties: false
-    Record_Day.boolean-or-undefined_:
-      properties:
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-        sunday:
-          type: boolean
-      type: object
-      description: Construct a type with a set of properties K of type T
-    TriggerRunOutput:
-      description: The output of a trigger action to run syncs
-      properties:
-        id:
+        message:
           type: string
-          description: 'The id of the triggered sync run. This can be passed to `/sync/runs` to
-
-            get the run''s status.'
-      required:
-      - id
-      type: object
-      additionalProperties: false
-    SyncUpdate:
-      description: The input for updating a Sync
-      properties:
-        configuration:
+          enum:
+          - Validation failed
+        details:
           properties: {}
           additionalProperties: {}
           type: object
-          description: 'The sync''s configuration. This specifies how data is mapped, among other
-
-            configuration.
-
-
-            The schema depends on the destination type.
-
-
-            Consumers should NOT make assumptions on the contents of the
-
-            configuration. It may change as Hightouch updates its internal code.'
-        schedule:
-          properties:
-            schedule:
-              anyOf:
-              - $ref: '#/components/schemas/IntervalSchedule'
-              - $ref: '#/components/schemas/CronSchedule'
-              - $ref: '#/components/schemas/VisualCronSchedule'
-              - $ref: '#/components/schemas/DBTSchedule'
-            type:
-              type: string
-          required:
-          - schedule
-          - type
-          type:
-          - object
-          - 'null'
-          description: 'The scheduling configuration. It can be triggered based on several ways:
-
-
-            Interval: the sync will be triggered based on certain interval(minutes/hours/days/weeks)
-
-
-            Cron: the sync will be triggered based on cron expression https://en.wikipedia.org/wiki/Cron.
-
-
-            Visual: the sync will be triggered based a visual cron configuration on UI
-
-
-            DBT-cloud: the sync will be triggered based on a dbt cloud job'
-        disabled:
-          type: boolean
-          description: Whether the sync has been disabled by the user.
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     CronSchedule:
@@ -987,145 +999,16 @@ components:
       - expression
       type: object
       additionalProperties: false
-    TriggerRunInput:
+    Interval:
       properties:
-        clearAndFill:
-          type: boolean
-          description: Whether to clear the audience and then sync the full query to the destination
-          default: 'false'
-        resetCDC:
-          type: boolean
-          description: Whether to sync all the rows in the query without executing changes on the destination.
-          default: 'false'
-        fullResync:
-          type: boolean
-          description: 'Whether to resync all the rows in the query (i.e. ignoring previously
-
-            synced rows).'
-          default: 'false'
-      type: object
-      description: The input of a trigger action to run syncs
-    SyncRun:
-      properties:
-        id:
+        unit:
+          $ref: '#/components/schemas/IntervalUnit'
+        quantity:
           type: number
           format: double
-          description: The sync run's id
-        createdAt:
-          type: string
-          format: date-time
-          description: 'The timestamp when sync run was created. In most cases this will be
-
-            equivalent to `startedAt`, but it may be earlier if the sync was triggered
-
-            while a run was already in progress, and the new run didn''t start for
-
-            a while.'
-        startedAt:
-          type: string
-          format: date-time
-          description: The timestamp when the sync run started
-        finishedAt:
-          type: string
-          format: date-time
-          description: The timestamp when the sync run finished
-        querySize:
-          type: number
-          format: double
-          description: The number of rows in the query.
-        status:
-          $ref: '#/components/schemas/SyncRunStatus'
-          description: The status of sync run
-        completionRatio:
-          type: number
-          format: double
-          description: The completion ratio of sync run, showing the progress of a sync run
-        plannedRows:
-          properties:
-            removedCount:
-              type: number
-              format: double
-              description: The number of removed rows.
-            changedCount:
-              type: number
-              format: double
-              description: The number of changed rows.
-            addedCount:
-              type: number
-              format: double
-              description: The number of added rows.
-          required:
-          - removedCount
-          - changedCount
-          - addedCount
-          type: object
-          description: 'The number of planned rows that this sync run was supposed to execute.
-
-
-            Note that the counts for `successfulRows` and `failedRows` may not add up
-
-            to `plannedRows` if the sync was cancelled.'
-        successfulRows:
-          properties:
-            removedCount:
-              type: number
-              format: double
-              description: The number of successful removes.
-            changedCount:
-              type: number
-              format: double
-              description: The number of successful changes.
-            addedCount:
-              type: number
-              format: double
-              description: The number of successful adds.
-          required:
-          - removedCount
-          - changedCount
-          - addedCount
-          type: object
-          description: The number of rows that were successfully processed by the destination.
-        failedRows:
-          properties:
-            removedCount:
-              type: number
-              format: double
-              description: The number of failed removes.
-            changedCount:
-              type: number
-              format: double
-              description: The number of failed changes.
-            addedCount:
-              type: number
-              format: double
-              description: The number of failed adds.
-          required:
-          - removedCount
-          - changedCount
-          - addedCount
-          type: object
-          description: 'The number of rows that we attempted to sync, but were rejected by the
-
-            destination.
-
-
-            This does not include rows that weren''t attempted due to the sync being
-
-            cancelled.'
-        error:
-          type: string
-          description: Error message if the sync run didn't finish successfully
       required:
-      - id
-      - createdAt
-      - startedAt
-      - finishedAt
-      - querySize
-      - status
-      - completionRatio
-      - plannedRows
-      - successfulRows
-      - failedRows
+      - unit
+      - quantity
       type: object
       additionalProperties: false
     SyncCreate:
@@ -1198,31 +1081,148 @@ components:
       - disabled
       type: object
       additionalProperties: false
+    TriggerRunInput:
+      properties:
+        clearAndFill:
+          type: boolean
+          description: Whether to clear the audience and then sync the full query to the destination
+          default: 'false'
+        resetCDC:
+          type: boolean
+          description: Whether to sync all the rows in the query without executing changes on the destination.
+          default: 'false'
+        fullResync:
+          type: boolean
+          description: 'Whether to resync all the rows in the query (i.e. ignoring previously
+
+            synced rows).'
+          default: 'false'
+      type: object
+      description: The input of a trigger action to run syncs
+    SyncUpdate:
+      description: The input for updating a Sync
+      properties:
+        configuration:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'The sync''s configuration. This specifies how data is mapped, among other
+
+            configuration.
+
+
+            The schema depends on the destination type.
+
+
+            Consumers should NOT make assumptions on the contents of the
+
+            configuration. It may change as Hightouch updates its internal code.'
+        schedule:
+          properties:
+            schedule:
+              anyOf:
+              - $ref: '#/components/schemas/IntervalSchedule'
+              - $ref: '#/components/schemas/CronSchedule'
+              - $ref: '#/components/schemas/VisualCronSchedule'
+              - $ref: '#/components/schemas/DBTSchedule'
+            type:
+              type: string
+          required:
+          - schedule
+          - type
+          type:
+          - object
+          - 'null'
+          description: 'The scheduling configuration. It can be triggered based on several ways:
+
+
+            Interval: the sync will be triggered based on certain interval(minutes/hours/days/weeks)
+
+
+            Cron: the sync will be triggered based on cron expression https://en.wikipedia.org/wiki/Cron.
+
+
+            Visual: the sync will be triggered based a visual cron configuration on UI
+
+
+            DBT-cloud: the sync will be triggered based on a dbt cloud job'
+        disabled:
+          type: boolean
+          description: Whether the sync has been disabled by the user.
+      type: object
+      additionalProperties: false
+    IntervalUnit:
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      type: string
+    TriggerRunCustomInput:
+      properties:
+        syncSlug:
+          type: string
+          description: Trigger run based on sync slug
+        syncId:
+          type: string
+          description: Trigger run based on sync id
+          pattern: ^[0-9]+$
+        clearAndFill:
+          type: boolean
+          description: Whether to clear the audience and then sync the full query to the destination
+          default: 'false'
+        resetCDC:
+          type: boolean
+          description: Whether to sync all the rows in the query without executing changes on the destination.
+          default: 'false'
+        fullResync:
+          type: boolean
+          description: 'Whether to resync all the rows in the query (i.e. ignoring previously
+
+            synced rows).'
+          default: 'false'
+      type: object
+      description: The input of a trigger action to run syncs based on sync ID, slug or other filters
     InternalServerError:
       type: string
       enum:
       - Internal Server Error
-    ValidateErrorJSON:
+    Record_Day.boolean-or-undefined_:
       properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
+        sunday:
+          type: boolean
       type: object
-      additionalProperties: false
+      description: Construct a type with a set of properties K of type T
     IntervalSchedule:
       properties:
         interval:
           $ref: '#/components/schemas/Interval'
       required:
       - interval
+      type: object
+      additionalProperties: false
+    TriggerRunOutput:
+      description: The output of a trigger action to run syncs
+      properties:
+        id:
+          type: string
+          description: 'The id of the triggered sync run. This can be passed to `/sync/runs` to
+
+            get the run''s status.'
+      required:
+      - id
       type: object
       additionalProperties: false
   securitySchemes:

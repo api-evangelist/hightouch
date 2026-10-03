@@ -108,27 +108,6 @@ paths:
       - Sync Sequences
 components:
   schemas:
-    SyncSequenceRequestStatus:
-      enum:
-      - pending
-      - running
-      - done
-      - failed
-      - cancelled
-      type: string
-    SyncRunStatus:
-      description: The status of sync runs
-      enum:
-      - cancelled
-      - failed
-      - queued
-      - success
-      - warning
-      - querying
-      - processing
-      - reporting
-      - interrupted
-      type: string
     SyncSequenceStatusOutput:
       description: 'The status of a given sync sequence run at both a high level and the individual
 
@@ -164,16 +143,27 @@ components:
       - syncRuns
       type: object
       additionalProperties: false
-    TriggerSequenceRunOutput:
-      description: The output of a trigger action to run sync sequences
-      properties:
-        id:
-          type: string
-          description: The id of the triggered sync sequence run.
-      required:
-      - id
-      type: object
-      additionalProperties: false
+    SyncSequenceRequestStatus:
+      enum:
+      - pending
+      - running
+      - done
+      - failed
+      - cancelled
+      type: string
+    SyncRunStatus:
+      description: The status of sync runs
+      enum:
+      - cancelled
+      - failed
+      - queued
+      - success
+      - warning
+      - querying
+      - processing
+      - reporting
+      - interrupted
+      type: string
     ValidateErrorJSON:
       properties:
         message:
@@ -187,6 +177,16 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    TriggerSequenceRunOutput:
+      description: The output of a trigger action to run sync sequences
+      properties:
+        id:
+          type: string
+          description: The id of the triggered sync sequence run.
+      required:
+      - id
       type: object
       additionalProperties: false
   securitySchemes:

@@ -126,6 +126,50 @@ paths:
       - Campaigns
 components:
   schemas:
+    SendStatusResponse:
+      description: Delivery status for a single send, returned by the send status endpoint.
+      properties:
+        status:
+          type: string
+          description: 'Current delivery status.
+
+            - `sent` — accepted by the provider; no delivery receipt yet
+
+            - `delivered` — confirmed delivered by the provider
+
+            - `bounced` — delivery failed with a bounce
+
+            - `failed` — delivery failed
+
+            - `dropped` — dropped before delivery (e.g. unsubscribed, suppressed, or enrichment failure); see `reason`'
+        reason:
+          type: string
+          description: 'Additional explanation for why this send was dropped.
+
+            Only present when `status` is `"dropped"`.'
+      required:
+      - status
+      type: object
+      additionalProperties: false
+    ProfileCampaignRecipient:
+      description: A recipient identified by their Personalization API Cached profile ID.
+      properties:
+        id:
+          type: string
+          description: 'Primary key of the recipient as configured on the Personalization API sync.
+
+            The delivery address is resolved from the cache at send time.'
+        properties:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'Per-recipient personalization overrides. Merged with the top-level
+
+            `properties` and the cached profile; these values take precedence when a
+
+            key appears in multiple sources.'
+      type: object
+      additionalProperties: false
     CampaignSendResult:
       description: 'Per-recipient result returned synchronously after the trigger request.
 
@@ -179,125 +223,6 @@ components:
       - status
       type: object
       additionalProperties: false
-    StartCampaignResponse:
-      description: 'Response body for a campaign trigger request. Results are returned in the
-
-        same order as the input `recipients` array.'
-      properties:
-        results:
-          items:
-            $ref: '#/components/schemas/CampaignSendResult'
-          type: array
-          description: 'Per-recipient outcomes. Accepted recipients are queued for delivery;
-
-            rejected recipients were not sent.'
-      required:
-      - results
-      type: object
-      additionalProperties: false
-    HandleCampaignRecipient:
-      description: 'A recipient identified by their delivery address (email or phone number).
-
-        Personalization data is provided inline in the request.'
-      properties:
-        handle:
-          type: string
-          description: 'Delivery address for this recipient. Must be a valid email address for
-
-            email campaigns, or an E.164-formatted phone number for SMS campaigns.'
-        properties:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'Per-recipient personalization properties. Keys must match the variable
-
-            names shown in the message editor. These are merged with the top-level
-
-            `properties` and take precedence when a key appears in both.'
-      type: object
-      additionalProperties: false
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
-    TriggerErrorResponse:
-      description: 'Body returned on a request-level failure (400/404/409/429) so the caller
-
-        knows why the request was rejected.'
-      properties:
-        error:
-          type: string
-          description: Human-readable description of why the request failed.
-      required:
-      - error
-      type: object
-      additionalProperties: false
-    CampaignRecipient:
-      anyOf:
-      - $ref: '#/components/schemas/HandleCampaignRecipient'
-      - $ref: '#/components/schemas/ProfileCampaignRecipient'
-      description: 'A single send target. Provide either `handle` (inline delivery address) or
-
-        `id` (Personalization API profile ID), but not both.'
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    SendStatusResponse:
-      description: Delivery status for a single send, returned by the send status endpoint.
-      properties:
-        status:
-          type: string
-          description: 'Current delivery status.
-
-            - `sent` — accepted by the provider; no delivery receipt yet
-
-            - `delivered` — confirmed delivered by the provider
-
-            - `bounced` — delivery failed with a bounce
-
-            - `failed` — delivery failed
-
-            - `dropped` — dropped before delivery (e.g. unsubscribed, suppressed, or enrichment failure); see `reason`'
-        reason:
-          type: string
-          description: 'Additional explanation for why this send was dropped.
-
-            Only present when `status` is `"dropped"`.'
-      required:
-      - status
-      type: object
-      additionalProperties: false
-    ProfileCampaignRecipient:
-      description: A recipient identified by their Personalization API Cached profile ID.
-      properties:
-        id:
-          type: string
-          description: 'Primary key of the recipient as configured on the Personalization API sync.
-
-            The delivery address is resolved from the cache at send time.'
-        properties:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'Per-recipient personalization overrides. Merged with the top-level
-
-            `properties` and the cached profile; these values take precedence when a
-
-            key appears in multiple sources.'
-      type: object
-      additionalProperties: false
     StartCampaignRequest:
       description: Request body for triggering an API campaign send.
       properties:
@@ -327,6 +252,81 @@ components:
           maxItems: 100
       required:
       - recipients
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
+    HandleCampaignRecipient:
+      description: 'A recipient identified by their delivery address (email or phone number).
+
+        Personalization data is provided inline in the request.'
+      properties:
+        handle:
+          type: string
+          description: 'Delivery address for this recipient. Must be a valid email address for
+
+            email campaigns, or an E.164-formatted phone number for SMS campaigns.'
+        properties:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'Per-recipient personalization properties. Keys must match the variable
+
+            names shown in the message editor. These are merged with the top-level
+
+            `properties` and take precedence when a key appears in both.'
+      type: object
+      additionalProperties: false
+    CampaignRecipient:
+      anyOf:
+      - $ref: '#/components/schemas/HandleCampaignRecipient'
+      - $ref: '#/components/schemas/ProfileCampaignRecipient'
+      description: 'A single send target. Provide either `handle` (inline delivery address) or
+
+        `id` (Personalization API profile ID), but not both.'
+    StartCampaignResponse:
+      description: 'Response body for a campaign trigger request. Results are returned in the
+
+        same order as the input `recipients` array.'
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/CampaignSendResult'
+          type: array
+          description: 'Per-recipient outcomes. Accepted recipients are queued for delivery;
+
+            rejected recipients were not sent.'
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    TriggerErrorResponse:
+      description: 'Body returned on a request-level failure (400/404/409/429) so the caller
+
+        knows why the request was rejected.'
+      properties:
+        error:
+          type: string
+          description: Human-readable description of why the request failed.
+      required:
+      - error
       type: object
       additionalProperties: false
   securitySchemes:

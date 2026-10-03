@@ -296,67 +296,6 @@ paths:
       - Sources
 components:
   schemas:
-    SourceCreate:
-      description: The input for creating a Source
-      properties:
-        name:
-          type: string
-          description: The source's name
-        slug:
-          type: string
-          description: The source's slug
-        type:
-          type: string
-          description: The source's type (e.g. snowflake or postgres).
-        configuration:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'The source''s configuration. This specifies general metadata about sources, like connection details
-
-            Hightouch will use this configuration to connect to underlying source.
-
-
-            The schema depends on the source type.
-
-
-            Consumers should NOT make assumptions on the contents of the
-
-            configuration. It may change as Hightouch updates its internal code.'
-      required:
-      - name
-      - slug
-      - type
-      - configuration
-      type: object
-      additionalProperties: false
-    SourceUpdate:
-      description: The input for updating a Source
-      properties:
-        name:
-          type: string
-          description: The source's name
-        configuration:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'The source''s configuration. This specifies general metadata about sources, like connection details
-
-            Hightouch will use this configuration to connect to underlying source.
-
-
-            The schema depends on the source type.
-
-
-            Consumers should NOT make assumptions on the contents of the
-
-            configuration. It may change as Hightouch updates its internal code.'
-      type: object
-      additionalProperties: false
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
     ValidateErrorJSON:
       properties:
         message:
@@ -372,6 +311,10 @@ components:
       - details
       type: object
       additionalProperties: false
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
     Source:
       description: 'The database or warehouse where your data is stored. The starting point for
 
@@ -426,6 +369,63 @@ components:
       - updatedAt
       - configuration
       - type
+      type: object
+      additionalProperties: false
+    SourceUpdate:
+      description: The input for updating a Source
+      properties:
+        name:
+          type: string
+          description: The source's name
+        configuration:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'The source''s configuration. This specifies general metadata about sources, like connection details
+
+            Hightouch will use this configuration to connect to underlying source.
+
+
+            The schema depends on the source type.
+
+
+            Consumers should NOT make assumptions on the contents of the
+
+            configuration. It may change as Hightouch updates its internal code.'
+      type: object
+      additionalProperties: false
+    SourceCreate:
+      description: The input for creating a Source
+      properties:
+        name:
+          type: string
+          description: The source's name
+        slug:
+          type: string
+          description: The source's slug
+        type:
+          type: string
+          description: The source's type (e.g. snowflake or postgres).
+        configuration:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'The source''s configuration. This specifies general metadata about sources, like connection details
+
+            Hightouch will use this configuration to connect to underlying source.
+
+
+            The schema depends on the source type.
+
+
+            Consumers should NOT make assumptions on the contents of the
+
+            configuration. It may change as Hightouch updates its internal code.'
+      required:
+      - name
+      - slug
+      - type
+      - configuration
       type: object
       additionalProperties: false
   securitySchemes:
