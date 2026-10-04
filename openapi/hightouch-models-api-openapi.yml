@@ -347,6 +347,72 @@ paths:
       - Models
 components:
   schemas:
+    ModelUpdate:
+      description: The input for updating a Model
+      properties:
+        name:
+          type: string
+          description: The name of the model
+        isSchema:
+          type: boolean
+          description: 'If is_schema is true, the model is just used to build other models.
+
+            Either as part of visual querying, or as the root of a visual query.'
+        primaryKey:
+          type: string
+          description: The primary key will be null if the query doesn't get directly synced (e.g. a relationship table for visual querying)
+        visual:
+          properties:
+            secondaryLabel:
+              type: string
+            primaryLabel:
+              type: string
+            filter: {}
+            parentId:
+              type: number
+              format: double
+              description: Parent id of the schema that visual query is based on
+          required:
+          - filter
+          - parentId
+          type: object
+          description: Visual query, used by audience
+        custom:
+          properties:
+            query: {}
+          required:
+          - query
+          type: object
+          description: Custom query for sources that doesn't support sql. For example, Airtable.
+        table:
+          properties:
+            name:
+              type: string
+          required:
+          - name
+          type: object
+          description: Table-based query that fetches on a table instead of SQL
+        raw:
+          properties:
+            sql:
+              type: string
+          required:
+          - sql
+          type: object
+          description: Standard raw SQL query
+        folderId:
+          type: string
+        dbt:
+          properties:
+            modelId:
+              type: number
+              format: double
+              description: Model id that refers to a dbt model
+          required:
+          - modelId
+          type: object
+      type: object
+      additionalProperties: false
     ModelCreate:
       description: The input for creating a Model
       properties:
@@ -437,21 +503,6 @@ components:
       - sourceId
       - isSchema
       - primaryKey
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     InternalServerError:
@@ -639,70 +690,19 @@ components:
       - lastRunSize
       type: object
       additionalProperties: false
-    ModelUpdate:
-      description: The input for updating a Model
+    ValidateErrorJSON:
       properties:
-        name:
+        message:
           type: string
-          description: The name of the model
-        isSchema:
-          type: boolean
-          description: 'If is_schema is true, the model is just used to build other models.
-
-            Either as part of visual querying, or as the root of a visual query.'
-        primaryKey:
-          type: string
-          description: The primary key will be null if the query doesn't get directly synced (e.g. a relationship table for visual querying)
-        visual:
-          properties:
-            secondaryLabel:
-              type: string
-            primaryLabel:
-              type: string
-            filter: {}
-            parentId:
-              type: number
-              format: double
-              description: Parent id of the schema that visual query is based on
-          required:
-          - filter
-          - parentId
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
           type: object
-          description: Visual query, used by audience
-        custom:
-          properties:
-            query: {}
-          required:
-          - query
-          type: object
-          description: Custom query for sources that doesn't support sql. For example, Airtable.
-        table:
-          properties:
-            name:
-              type: string
-          required:
-          - name
-          type: object
-          description: Table-based query that fetches on a table instead of SQL
-        raw:
-          properties:
-            sql:
-              type: string
-          required:
-          - sql
-          type: object
-          description: Standard raw SQL query
-        folderId:
-          type: string
-        dbt:
-          properties:
-            modelId:
-              type: number
-              format: double
-              description: Model id that refers to a dbt model
-          required:
-          - modelId
-          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

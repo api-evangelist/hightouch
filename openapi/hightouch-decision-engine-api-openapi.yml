@@ -404,116 +404,6 @@ components:
       - value
       type: object
       additionalProperties: false
-    DecisionEngineVariable:
-      description: Message variable (Public API)
-      properties:
-        name:
-          type: string
-          description: The variable name (must be unique within a message)
-        config:
-          properties:
-            localizationEnabled:
-              type: boolean
-              description: 'When true, the Decision Engine uses each variant''s localeValues to select
-
-                locale-appropriate content at runtime. When false or omitted, only the
-
-                default variant value is used, even if localeValues are present.'
-            maxSendsPerUserWindowDays:
-              type: number
-              format: double
-              description: Rolling window in days for the maxSendsPerUser limit
-            maxSendsPerUser:
-              type: number
-              format: double
-              description: Maximum number of times this variable's variants can be sent to a single user
-          type: object
-        variants:
-          items:
-            $ref: '#/components/schemas/DecisionEngineVariableVariant'
-          type: array
-      required:
-      - name
-      - variants
-      type: object
-      additionalProperties: false
-    DecisionEngineRunResponse:
-      properties:
-        flowsEnqueued:
-          type: number
-          format: double
-          description: Number of flows that were enqueued for execution
-      required:
-      - flowsEnqueued
-      type: object
-      additionalProperties: false
-    DecisionEngineMessageCreate:
-      description: Request body for creating a Decision Engine message
-      properties:
-        name:
-          type: string
-        channelId:
-          type: string
-        config:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        tags:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        guardrails:
-          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
-        variables:
-          items:
-            $ref: '#/components/schemas/DecisionEngineVariable'
-          type: array
-      required:
-      - name
-      - channelId
-      - config
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    DecisionEngineMessageUpdate:
-      description: Request body for updating a Decision Engine message
-      properties:
-        name:
-          type: string
-        config:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        tags:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        guardrails:
-          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
-        variables:
-          items:
-            $ref: '#/components/schemas/DecisionEngineVariable'
-          type: array
-      type: object
-      additionalProperties: false
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
     DecisionEngineMessage:
       description: Decision Engine Message (Public API)
       properties:
@@ -550,22 +440,31 @@ components:
       - config
       type: object
       additionalProperties: false
-    DecisionEngineMessageGuardrails:
-      description: Guardrail fields on a message (max sends, eligibility dates, etc.)
+    DecisionEngineMessageCreate:
+      description: Request body for creating a Decision Engine message
       properties:
-        maxSendsPerUser:
-          type: number
-          format: double
-        maxSendsPerUserWindowDays:
-          type: number
-          format: double
-        minOtherMessagesInBetween:
-          type: number
-          format: double
-        firstEligibleSendDate:
+        name:
           type: string
-        lastEligibleSendDate:
+        channelId:
           type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        tags:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariable'
+          type: array
+      required:
+      - name
+      - channelId
+      - config
       type: object
       additionalProperties: false
     DecisionEngineFlow:
@@ -602,6 +501,107 @@ components:
       - decisionEngineId
       - audienceId
       - status
+      type: object
+      additionalProperties: false
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
+    DecisionEngineRunResponse:
+      properties:
+        flowsEnqueued:
+          type: number
+          format: double
+          description: Number of flows that were enqueued for execution
+      required:
+      - flowsEnqueued
+      type: object
+      additionalProperties: false
+    DecisionEngineMessageUpdate:
+      description: Request body for updating a Decision Engine message
+      properties:
+        name:
+          type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        tags:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariable'
+          type: array
+      type: object
+      additionalProperties: false
+    DecisionEngineMessageGuardrails:
+      description: Guardrail fields on a message (max sends, eligibility dates, etc.)
+      properties:
+        maxSendsPerUser:
+          type: number
+          format: double
+        maxSendsPerUserWindowDays:
+          type: number
+          format: double
+        minOtherMessagesInBetween:
+          type: number
+          format: double
+        firstEligibleSendDate:
+          type: string
+        lastEligibleSendDate:
+          type: string
+      type: object
+      additionalProperties: false
+    DecisionEngineVariable:
+      description: Message variable (Public API)
+      properties:
+        name:
+          type: string
+          description: The variable name (must be unique within a message)
+        config:
+          properties:
+            localizationEnabled:
+              type: boolean
+              description: 'When true, the Decision Engine uses each variant''s localeValues to select
+
+                locale-appropriate content at runtime. When false or omitted, only the
+
+                default variant value is used, even if localeValues are present.'
+            maxSendsPerUserWindowDays:
+              type: number
+              format: double
+              description: Rolling window in days for the maxSendsPerUser limit
+            maxSendsPerUser:
+              type: number
+              format: double
+              description: Maximum number of times this variable's variants can be sent to a single user
+          type: object
+        variants:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariableVariant'
+          type: array
+      required:
+      - name
+      - variants
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

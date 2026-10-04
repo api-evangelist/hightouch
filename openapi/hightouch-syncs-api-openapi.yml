@@ -657,9 +657,210 @@ paths:
       - Syncs
 components:
   schemas:
-    SyncRunStatus:
-      description: The status of sync runs
+    TriggerRunInput:
+      properties:
+        clearAndFill:
+          type: boolean
+          description: Whether to clear the audience and then sync the full query to the destination
+          default: 'false'
+        resetCDC:
+          type: boolean
+          description: Whether to sync all the rows in the query without executing changes on the destination.
+          default: 'false'
+        fullResync:
+          type: boolean
+          description: 'Whether to resync all the rows in the query (i.e. ignoring previously
+
+            synced rows).'
+          default: 'false'
+      type: object
+      description: The input of a trigger action to run syncs
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TriggerRunOutput:
+      description: The output of a trigger action to run syncs
+      properties:
+        id:
+          type: string
+          description: 'The id of the triggered sync run. This can be passed to `/sync/runs` to
+
+            get the run''s status.'
+      required:
+      - id
+      type: object
+      additionalProperties: false
+    Sync:
+      description: 'Syncs define how data from models are mapped to destinations. Each time a
+
+        sync runs, Hightouch calculates the rows that have changed since the last
+
+        run, and syncs them to Sync''s destination.'
+      properties:
+        id:
+          type: number
+          format: double
+          description: The sync's id
+        slug:
+          type: string
+          description: The sync's slug
+        workspaceId:
+          type: number
+          format: double
+          description: The id of the workspace that the sync belongs to
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the sync was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the sync was last updated
+        destinationId:
+          type: number
+          format: double
+          description: The id of the Destination that sync is connected to
+        modelId:
+          type: number
+          format: double
+          description: The id of the Model that sync is connected to
+        configuration:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'The sync''s configuration. This specifies how data is mapped, among other
+
+            configuration.
+
+
+            The schema depends on the destination type.
+
+
+            Consumers should NOT make assumptions on the contents of the
+
+            configuration. It may change as Hightouch updates its internal code.'
+        schedule:
+          properties:
+            schedule:
+              anyOf:
+              - $ref: '#/components/schemas/IntervalSchedule'
+              - $ref: '#/components/schemas/CronSchedule'
+              - $ref: '#/components/schemas/VisualCronSchedule'
+              - $ref: '#/components/schemas/DBTSchedule'
+            type:
+              type: string
+          required:
+          - schedule
+          - type
+          type:
+          - object
+          - 'null'
+          description: 'The scheduling configuration. It can be triggered based on several ways:
+
+
+            Interval: the sync will be triggered based on certain interval(minutes/hours/days/weeks)
+
+
+            Cron: the sync will be triggered based on cron expression https://en.wikipedia.org/wiki/Cron.
+
+
+            Visual: the sync will be triggered based a visual cron configuration on UI
+
+
+            DBT-cloud: the sync will be triggered based on a dbt cloud job'
+        status:
+          $ref: '#/components/schemas/SyncStatus'
+          description: The overall status of the sync
+        disabled:
+          type: boolean
+          description: Whether the sync has been disabled by the user.
+        lastRunAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The timestamp of the last sync run
+        referencedColumns:
+          items:
+            type: string
+          type: array
+          description: The reference column that sync depends on to sync data from source
+        primaryKey:
+          type: string
+          description: The primary key that sync uses to identify data from source
+        externalSegment:
+          properties:
+            id:
+              type: string
+          type: object
+          description: The user facing ID for any created lists or audiences in the sync destination
+        tags:
+          properties: {}
+          additionalProperties:
+            type: string
+          type: object
+          description: The tags of the sync
+      required:
+      - id
+      - slug
+      - workspaceId
+      - createdAt
+      - updatedAt
+      - destinationId
+      - modelId
+      - configuration
+      - schedule
+      - status
+      - disabled
+      - lastRunAt
+      - referencedColumns
+      - primaryKey
+      - externalSegment
+      - tags
+      type: object
+      additionalProperties: false
+    IntervalUnit:
       enum:
+      - minute
+      - hour
+      - day
+      - week
+      type: string
+    VisualCronSchedule:
+      properties:
+        expressions:
+          items:
+            properties:
+              days:
+                $ref: '#/components/schemas/Record_Day.boolean-or-undefined_'
+              time:
+                type: string
+            required:
+            - days
+            - time
+            type: object
+          type: array
+      required:
+      - expressions
+      type: object
+      additionalProperties: false
+    SyncStatus:
+      description: SyncStatus
+      enum:
+      - disabled
+      - pending
       - cancelled
       - failed
       - queued
@@ -793,158 +994,76 @@ components:
       - failedRows
       type: object
       additionalProperties: false
-    Sync:
-      description: 'Syncs define how data from models are mapped to destinations. Each time a
-
-        sync runs, Hightouch calculates the rows that have changed since the last
-
-        run, and syncs them to Sync''s destination.'
+    Interval:
       properties:
-        id:
+        unit:
+          $ref: '#/components/schemas/IntervalUnit'
+        quantity:
           type: number
           format: double
-          description: The sync's id
-        slug:
+      required:
+      - unit
+      - quantity
+      type: object
+      additionalProperties: false
+    TriggerRunCustomInput:
+      properties:
+        syncSlug:
           type: string
-          description: The sync's slug
-        workspaceId:
-          type: number
-          format: double
-          description: The id of the workspace that the sync belongs to
-        createdAt:
+          description: Trigger run based on sync slug
+        syncId:
           type: string
-          format: date-time
-          description: The timestamp when the sync was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: The timestamp when the sync was last updated
-        destinationId:
-          type: number
-          format: double
-          description: The id of the Destination that sync is connected to
-        modelId:
-          type: number
-          format: double
-          description: The id of the Model that sync is connected to
-        configuration:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'The sync''s configuration. This specifies how data is mapped, among other
-
-            configuration.
-
-
-            The schema depends on the destination type.
-
-
-            Consumers should NOT make assumptions on the contents of the
-
-            configuration. It may change as Hightouch updates its internal code.'
-        schedule:
-          properties:
-            schedule:
-              anyOf:
-              - $ref: '#/components/schemas/IntervalSchedule'
-              - $ref: '#/components/schemas/CronSchedule'
-              - $ref: '#/components/schemas/VisualCronSchedule'
-              - $ref: '#/components/schemas/DBTSchedule'
-            type:
-              type: string
-          required:
-          - schedule
-          - type
-          type:
-          - object
-          - 'null'
-          description: 'The scheduling configuration. It can be triggered based on several ways:
-
-
-            Interval: the sync will be triggered based on certain interval(minutes/hours/days/weeks)
-
-
-            Cron: the sync will be triggered based on cron expression https://en.wikipedia.org/wiki/Cron.
-
-
-            Visual: the sync will be triggered based a visual cron configuration on UI
-
-
-            DBT-cloud: the sync will be triggered based on a dbt cloud job'
-        status:
-          $ref: '#/components/schemas/SyncStatus'
-          description: The overall status of the sync
-        disabled:
+          description: Trigger run based on sync id
+          pattern: ^[0-9]+$
+        clearAndFill:
           type: boolean
-          description: Whether the sync has been disabled by the user.
-        lastRunAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The timestamp of the last sync run
-        referencedColumns:
-          items:
-            type: string
-          type: array
-          description: The reference column that sync depends on to sync data from source
-        primaryKey:
-          type: string
-          description: The primary key that sync uses to identify data from source
-        externalSegment:
-          properties:
-            id:
-              type: string
-          type: object
-          description: The user facing ID for any created lists or audiences in the sync destination
-        tags:
-          properties: {}
-          additionalProperties:
-            type: string
-          type: object
-          description: The tags of the sync
-      required:
-      - id
-      - slug
-      - workspaceId
-      - createdAt
-      - updatedAt
-      - destinationId
-      - modelId
-      - configuration
-      - schedule
-      - status
-      - disabled
-      - lastRunAt
-      - referencedColumns
-      - primaryKey
-      - externalSegment
-      - tags
+          description: Whether to clear the audience and then sync the full query to the destination
+          default: 'false'
+        resetCDC:
+          type: boolean
+          description: Whether to sync all the rows in the query without executing changes on the destination.
+          default: 'false'
+        fullResync:
+          type: boolean
+          description: 'Whether to resync all the rows in the query (i.e. ignoring previously
+
+            synced rows).'
+          default: 'false'
       type: object
-      additionalProperties: false
-    VisualCronSchedule:
-      properties:
-        expressions:
-          items:
-            properties:
-              days:
-                $ref: '#/components/schemas/Record_Day.boolean-or-undefined_'
-              time:
-                type: string
-            required:
-            - days
-            - time
-            type: object
-          type: array
-      required:
-      - expressions
-      type: object
-      additionalProperties: false
-    SyncStatus:
-      description: SyncStatus
+      description: The input of a trigger action to run syncs based on sync ID, slug or other filters
+    InternalServerError:
+      type: string
       enum:
-      - disabled
-      - pending
+      - Internal Server Error
+    Record_Day.boolean-or-undefined_:
+      properties:
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
+        sunday:
+          type: boolean
+      type: object
+      description: Construct a type with a set of properties K of type T
+    CronSchedule:
+      properties:
+        expression:
+          type: string
+      required:
+      - expression
+      type: object
+      additionalProperties: false
+    SyncRunStatus:
+      description: The status of sync runs
+      enum:
       - cancelled
       - failed
       - queued
@@ -976,39 +1095,12 @@ components:
       - job
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    IntervalSchedule:
       properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
+        interval:
+          $ref: '#/components/schemas/Interval'
       required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    CronSchedule:
-      properties:
-        expression:
-          type: string
-      required:
-      - expression
-      type: object
-      additionalProperties: false
-    Interval:
-      properties:
-        unit:
-          $ref: '#/components/schemas/IntervalUnit'
-        quantity:
-          type: number
-          format: double
-      required:
-      - unit
-      - quantity
+      - interval
       type: object
       additionalProperties: false
     SyncCreate:
@@ -1081,24 +1173,6 @@ components:
       - disabled
       type: object
       additionalProperties: false
-    TriggerRunInput:
-      properties:
-        clearAndFill:
-          type: boolean
-          description: Whether to clear the audience and then sync the full query to the destination
-          default: 'false'
-        resetCDC:
-          type: boolean
-          description: Whether to sync all the rows in the query without executing changes on the destination.
-          default: 'false'
-        fullResync:
-          type: boolean
-          description: 'Whether to resync all the rows in the query (i.e. ignoring previously
-
-            synced rows).'
-          default: 'false'
-      type: object
-      description: The input of a trigger action to run syncs
     SyncUpdate:
       description: The input for updating a Sync
       properties:
@@ -1149,80 +1223,6 @@ components:
         disabled:
           type: boolean
           description: Whether the sync has been disabled by the user.
-      type: object
-      additionalProperties: false
-    IntervalUnit:
-      enum:
-      - minute
-      - hour
-      - day
-      - week
-      type: string
-    TriggerRunCustomInput:
-      properties:
-        syncSlug:
-          type: string
-          description: Trigger run based on sync slug
-        syncId:
-          type: string
-          description: Trigger run based on sync id
-          pattern: ^[0-9]+$
-        clearAndFill:
-          type: boolean
-          description: Whether to clear the audience and then sync the full query to the destination
-          default: 'false'
-        resetCDC:
-          type: boolean
-          description: Whether to sync all the rows in the query without executing changes on the destination.
-          default: 'false'
-        fullResync:
-          type: boolean
-          description: 'Whether to resync all the rows in the query (i.e. ignoring previously
-
-            synced rows).'
-          default: 'false'
-      type: object
-      description: The input of a trigger action to run syncs based on sync ID, slug or other filters
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
-    Record_Day.boolean-or-undefined_:
-      properties:
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-        sunday:
-          type: boolean
-      type: object
-      description: Construct a type with a set of properties K of type T
-    IntervalSchedule:
-      properties:
-        interval:
-          $ref: '#/components/schemas/Interval'
-      required:
-      - interval
-      type: object
-      additionalProperties: false
-    TriggerRunOutput:
-      description: The output of a trigger action to run syncs
-      properties:
-        id:
-          type: string
-          description: 'The id of the triggered sync run. This can be passed to `/sync/runs` to
-
-            get the run''s status.'
-      required:
-      - id
       type: object
       additionalProperties: false
   securitySchemes:

@@ -299,48 +299,10 @@ paths:
       - Destinations
 components:
   schemas:
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     InternalServerError:
       type: string
       enum:
       - Internal Server Error
-    DestinationUpdate:
-      description: The input for updating a Destination
-      properties:
-        name:
-          type: string
-          description: The destination's name
-        configuration:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'The destination''s configuration. This specifies general metadata about destination, like hostname and username.
-
-            Hightouch will be using this configuration to connect to destination.
-
-
-            The schema depends on the destination type.
-
-
-            Consumers should NOT make assumptions on the contents of the
-
-            configuration. It may change as Hightouch updates its internal code.'
-      type: object
-      additionalProperties: false
     DestinationCreate:
       description: The input for creating a Destination
       properties:
@@ -436,6 +398,44 @@ components:
       - type
       - configuration
       - syncs
+      type: object
+      additionalProperties: false
+    DestinationUpdate:
+      description: The input for updating a Destination
+      properties:
+        name:
+          type: string
+          description: The destination's name
+        configuration:
+          properties: {}
+          additionalProperties: {}
+          type: object
+          description: 'The destination''s configuration. This specifies general metadata about destination, like hostname and username.
+
+            Hightouch will be using this configuration to connect to destination.
+
+
+            The schema depends on the destination type.
+
+
+            Consumers should NOT make assumptions on the contents of the
+
+            configuration. It may change as Hightouch updates its internal code.'
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:
