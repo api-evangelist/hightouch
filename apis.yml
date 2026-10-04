@@ -49,6 +49,7 @@ tags:
 - AI Agents
 - Data Warehouse
 - A2A
+- Customer Data Platform
 url: https://raw.githubusercontent.com/api-evangelist/hightouch/refs/heads/main/apis.yml
 created: '2026-03-27'
 modified: '2026-08-13'
@@ -237,6 +238,9 @@ apis:
   - type: GettingStarted
     url: https://hightouch.com/docs/getting-started/welcome
 common:
+- type: CapabilityMap
+  url: capabilities/hightouch-capability-edges.yml
+  name: Hightouch Business Capability Map
 - type: Website
   url: https://hightouch.com/
 - type: DeveloperPortal

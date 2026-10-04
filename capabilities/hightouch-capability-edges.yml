@@ -1,0 +1,49 @@
+slug: hightouch
+provider: Hightouch
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Id Graphs
+  spec_file: hightouch-id-graphs-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.78
+  evidence: POST /id_graphs/{graphId}/trigger  Trigger run id graph; vendor description cites 'identity
+    resolution'
+  reason: Identity graph runs perform customer identity resolution to build unified customer profiles
+    — customer data management / golden record. Only one operation, so evidence is thin but the vendor
+    description corroborates.
+- tag: Idr
+  spec_file: hightouch-idr-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.78
+  evidence: POST /idr/{graphId}/trigger  TriggerIdrRun  Trigger IDR run; POST /idr/{graphId}/queue-for-reprocessing  Queue
+    identifier values for reprocessing
+  reason: IDR = identity resolution runs over an identity graph, reprocessing identifier values. The vendor
+    description confirms 'identity resolution' as a platform pillar. BC-420.10 explicitly covers customer
+    master, identity resolution and golden record. Some ambiguity with Master Data Management (BC-610.20),
+    but the identity graph here is customer identity for CDP activation.
+- tag: Campaigns
+  spec_file: hightouch-campaigns-api-openapi.yml
+  capability_id: BC-400.40
+  capability_id_l1: BC-400
+  capability_name: Demand Generation Management
+  confidence: 0.75
+  evidence: POST /campaigns/{campaignId}/trigger  Trigger an API campaign send; schemas CampaignRecipient,
+    CampaignSendResult, SendStatusResponse
+  reason: Operations trigger marketing campaign sends to recipients and track delivery status on a CDP/marketing
+    activation platform — lifecycle/demand-generation campaign execution. Some ambiguity between BC-400.40
+    and BC-400.60 (marketing automation).
