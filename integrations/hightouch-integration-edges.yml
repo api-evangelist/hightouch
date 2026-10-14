@@ -2,7 +2,22 @@ generated: '2026-10-13'
 method: searched
 checked:
 - https://azuremarketplace.microsoft.com/
-marketplace_apps: []
+- https://hightouch.com/docs/destinations/overview
+- https://hightouch.com/docs/sources/overview
+marketplace_apps:
+- marketplace: coverage
+  channel: coverage-list
+  app: hightouch
+  url: https://hightouch.com/docs/destinations/overview
+  app_count: 321
+  adapter: sweep-cdp.py:src_hightouch
+  listed: 321
+  destinations: 294
+  sources: 27
+  linked: 196
+  unlinked: 98
+  identity: domain (vendorUrl in the catalog record)
+  status: ok
 edges:
 - partner_name: Microsoft Azure Marketplace
   partner: microsoft-azure
@@ -19,3 +34,4828 @@ edges:
   seller_name: Hightouch
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Acoustic
+  partner: acoustic
+  partner_match: domain
+  partner_url: https://www.acoustic.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/acoustic
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - acoustic
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: ActiveCampaign
+  partner: activecampaign
+  partner_match: domain
+  partner_url: https://www.activecampaign.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/active-campaign
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - active-campaign
+      status: released
+      sync_types:
+      - Contacts
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Adobe Analytics
+  partner: adobe-analytics
+  partner_match: domain+name-among-holders
+  partner_url: https://business.adobe.com/products/adobe-analytics.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/adobe-analytics
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - adobe-analytics
+      status: released
+      sync_types:
+      - Events
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Adobe Campaign Classic
+  partner: adobe-campaign
+  partner_match: domain+name-among-holders
+  partner_url: https://business.adobe.com/products/campaign/adobe-campaign.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/adobe-campaign-classic
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - adobe-campaign-classic
+      status: released
+      sync_types:
+      - Custom Resources
+      - Recipients
+      sync_modes:
+      - all
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Adobe Experience Platform
+  partner: adobe
+  partner_match: domain+name-among-holders
+  partner_url: https://business.adobe.com/products/experience-platform/adobe-experience-platform.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/adobe-experience-platform
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - adobe-experience-platform
+      - adobe-target
+      status: released
+      sync_types:
+      - Adobe Journey Optimizer campaign trigger
+      - Datasets
+      - Profiles
+      sync_modes:
+      - --
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Airship
+  partner: airship
+  partner_match: domain
+  partner_url: https://www.airship.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/airship
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - airship
+      status: released
+      sync_types:
+      - Attribute Lists
+      - Channels
+      - Custom Events
+      - Named Users
+      - Push Notification
+      - Static Lists
+      - Subscription Lists
+      - Tags
+      - Templated Push
+      sync_modes:
+      - add
+      - all
+      - insert
+      - message
+      - remove
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Airtable
+  partner: airtable
+  partner_match: domain
+  partner_url: https://airtable.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/airtable
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - airtable
+      status: released
+      sync_types:
+      - Object fields
+      - Objects
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Algolia
+  partner: algolia
+  partner_match: domain
+  partner_url: https://www.algolia.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/algolia
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - algolia
+      status: released
+      sync_types:
+      - Index records
+      - Insight events
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amazon Ads DSP and AMC
+  partner: amazon
+  partner_match: domain+name-among-holders
+  partner_url: https://advertising.amazon.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/amazon-ads
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazon-ads
+      status: released
+      sync_types:
+      - Events (deprecated)
+      - Events V2
+      - Segment
+      sync_modes:
+      - add
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amazon EventBridge
+  partner: amazon-eventbridge
+  partner_match: domain+name-among-holders
+  partner_url: https://aws.amazon.com/eventbridge/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/amazon-eventbridge
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazon-eventbridge
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amazon Kinesis
+  partner: kinesis
+  partner_match: domain+name-among-holders
+  partner_url: https://aws.amazon.com/kinesis/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/amazon-kinesis
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazon-kinesis
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amobee
+  partner: amobee
+  partner_match: domain
+  partner_url: https://www.amobee.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/amobee
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amobee
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - insert only
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amplitude
+  partner: amplitude
+  partner_match: domain
+  partner_url: https://amplitude.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/amplitude
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amplitude
+      status: released
+      sync_types:
+      - Cohorts
+      - Events
+      - Objects
+      sync_modes:
+      - add
+      - insert
+      - remove
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Anaplan
+  partner: anaplan
+  partner_match: domain
+  partner_url: https://www.anaplan.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/anaplan
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - anaplan
+      status: released
+      sync_types:
+      - Records
+      sync_modes:
+      - all
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Antavo
+  partner: antavo
+  partner_match: domain
+  partner_url: https://antavo.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/antavo
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - antavo
+      status: released
+      sync_types:
+      - Customer Lists
+      - Events
+      sync_modes:
+      - add
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Apollo.io
+  partner: apollo-io
+  partner_match: domain
+  partner_url: https://www.apollo.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/apollo
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - apollo
+      status: released
+      sync_types:
+      - Accounts
+      - Contacts
+      - Sequences
+      sync_modes:
+      - insert
+      - remove
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: AppLovin
+  partner: applovin
+  partner_match: domain
+  partner_url: https://www.applovin.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/applovin
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - applovin
+      status: released
+      sync_types:
+      - Suppressions
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: AppsFlyer
+  partner: appsflyer
+  partner_match: domain
+  partner_url: https://www.appsflyer.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/appsflyer
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - appsflyer
+      status: released
+      sync_types:
+      - Audiences
+      - Server-to-server events
+      sync_modes:
+      - add
+      - insert
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Asana
+  partner: asana
+  partner_match: domain
+  partner_url: https://asana.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/asana
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - asana
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Attentive
+  partner: attentive
+  partner_match: domain
+  partner_url: https://www.attentive.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/attentive
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - attentive
+      status: released
+      sync_types:
+      - Custom Attributes
+      - Custom Events
+      - Identity
+      - Message
+      - Subscribers
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Attio
+  partner: attio
+  partner_match: domain
+  partner_url: https://attio.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/attio
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - attio
+      status: released
+      sync_types:
+      - Companies
+      - Custom objects
+      - Deals
+      - People
+      - Users
+      - Workspaces
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Auth0
+  partner: auth0
+  partner_match: domain
+  partner_url: https://auth0.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/auth0
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - auth0
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Awin
+  partner: awin-affiliate
+  partner_match: domain
+  partner_url: https://www.awin.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/awin
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - awin
+      status: released
+      sync_types:
+      - Orders
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Azure Blob Storage
+  partner: microsoft-azure-blob-storage
+  partner_match: domain+name-among-holders
+  partner_url: https://azure.microsoft.com/en-us/products/storage/blobs
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/azure-blob-destination
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - azure-blob-destination
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - all
+      - diff
+      - insert
+    source:
+      catalog_entries:
+      - azure-blob-source
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Bazaarvoice
+  partner: bazaarvoice
+  partner_match: domain
+  partner_url: https://bazaarvoice.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/bazaarvoice
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bazaarvoice
+      status: released
+      sync_types:
+      - Objects
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: BigCommerce
+  partner: bigcommerce
+  partner_match: domain
+  partner_url: https://bigcommerce.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/bigcommerce
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bigcommerce
+      status: released
+      sync_types:
+      - Customers
+      - Orders
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: BigQuery
+  partner: google-bigquery
+  partner_match: domain+name-among-holders
+  partner_url: https://cloud.google.com/bigquery
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/google-bigquery-destination
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-bigquery-destination
+      - google-adh-bigquery
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - insert
+    source:
+      catalog_entries:
+      - google-bigquery
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Bird
+  partner: bird
+  partner_match: domain
+  partner_url: https://bird.com/en-us/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/bird
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bird
+      status: released
+      sync_types:
+      - Contacts
+      - Segments
+      sync_modes:
+      - add
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Bloomreach
+  partner: bloomreach
+  partner_match: domain
+  partner_url: https://www.bloomreach.com/en/products/engagement?utm_term=campaignid=18798490511:tid=dsa-1876355353176:dev=c:adp=:gclid=Cj0KCQiA1sucBhDgARIsAFoytUuy4sCMX98P5cz1s_4fBIRBAs8wfoFu_c7l5v0No7cm7ayR8P7syCIaAkSQEALw_wcB&utm_campaign=Engagement-DSA_Engagement_New-Business_NA_EN_Search&utm_source=adwords&utm_medium=ppc&utm_content=632383118613&hsa_acc=3874528946&hsa_cam=18798490511&hsa_grp=142355147759&hsa_ad=632383118613&hsa_src=g&hsa_tgt=dsa-1876355353176&hsa_kw=&hsa_mt=&hsa_net=adwords&hsa_ver=3&gclid=Cj0KCQiA1sucBhDgARIsAFoytUuy4sCMX98P5cz1s_4fBIRBAs8wfoFu_c7l5v0No7cm7ayR8P7syCIaAkSQEALw_wcB
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/bloomreach
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bloomreach
+      status: released
+      sync_types:
+      - Catalogs
+      - Customers
+      - Events
+      sync_modes:
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Bluecore
+  partner: bluecore
+  partner_match: domain
+  partner_url: https://www.bluecore.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/bluecore
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bluecore
+      status: released
+      sync_types:
+      - Batch File Delivery
+      sync_modes:
+      - all
+      - diff
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Box
+  partner: box
+  partner_match: domain
+  partner_url: https://app.box.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/box
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - box
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - all
+      - diff
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Braze
+  partner: braze
+  partner_match: domain
+  partner_url: https://www.braze.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/braze
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - braze
+      - braze-cohorts
+      status: released
+      sync_types:
+      - Campaign Trigger
+      - Canvas Trigger
+      - Catalog
+      - Event
+      - Object
+      - Subscription Status
+      - User Identify
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Brevo
+  partner: brevo
+  partner_match: domain
+  partner_url: https://www.brevo.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/brevo
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - brevo
+      status: released
+      sync_types:
+      - Contact Lists
+      - Contacts
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Campaign Monitor
+  partner: campaignmonitor
+  partner_match: domain
+  partner_url: https://www.campaignmonitor.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/campaign-monitor
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - campaign-monitor
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Chameleon
+  partner: chameleon
+  partner_match: domain
+  partner_url: https://www.chameleon.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/chameleon
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - chameleon
+      status: released
+      sync_types:
+      - Companies
+      - Events
+      - Users
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Chargebee
+  partner: chargebee
+  partner_match: domain
+  partner_url: https://www.chargebee.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/chargebee
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - chargebee
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: ChartMogul
+  partner: chartmogul
+  partner_match: domain
+  partner_url: https://chartmogul.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/chartmogul
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - chartmogul
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: ChatGPT Ads (OpenAI)
+  partner: openai
+  partner_match: domain+name-among-holders
+  partner_url: https://openai.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/open-ai
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - open-ai
+      status: released
+      sync_types:
+      - Events
+      - Segments
+      sync_modes:
+      - add
+      - insert
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: CJ Affiliate
+  partner: cj-affiliate
+  partner_match: domain
+  partner_url: https://www.cj.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/commission-junction
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - commission-junction
+      status: released
+      sync_types:
+      - Orders
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: CleverTap
+  partner: clevertap
+  partner_match: domain
+  partner_url: https://clevertap.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/clevertap
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - clevertap
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: ClickUp
+  partner: clickup
+  partner_match: domain
+  partner_url: https://clickup.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/clickup
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - clickup
+      status: released
+      sync_types:
+      - Tasks
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Close
+  partner: close
+  partner_match: domain
+  partner_url: https://close.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/closeio
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - closeio
+      status: released
+      sync_types:
+      - Contact
+      - Custom Activity
+      - Lead
+      - Note Activity
+      - Opportunity
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Common Room
+  partner: common-room
+  partner_match: domain
+  partner_url: https://www.commonroom.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/common-room
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - common-room
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Contentstack
+  partner: contentstack
+  partner_match: domain
+  partner_url: https://www.contentstack.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/contentstack
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - contentstack
+      status: released
+      sync_types:
+      - Users
+      sync_modes:
+      - update
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Cordial
+  partner: cordial
+  partner_match: domain
+  partner_url: https://cordial.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/cordial
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - cordial
+      status: released
+      sync_types:
+      - Contacts
+      - Supplements
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Courier
+  partner: courier
+  partner_match: domain
+  partner_url: https://www.courier.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/courier
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - courier
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Criteo
+  partner: criteo
+  partner_match: domain+name-among-holders
+  partner_url: https://www.criteo.com/solutions/audiences/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/criteo
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - criteo
+      status: released
+      sync_types:
+      - Audiences
+      sync_modes:
+      - add
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Customer.io
+  partner: customer-io
+  partner_match: domain
+  partner_url: https://customer.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/customerio
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - customerio
+      status: released
+      sync_types:
+      - Customers
+      - Events
+      - Objects
+      - Segments
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Databricks
+  partner: databricks
+  partner_match: domain+name-among-holders
+  partner_url: https://www.databricks.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/databricks-destination
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - databricks-destination
+      status: released
+    source:
+      catalog_entries:
+      - databricks
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Discord
+  partner: discord
+  partner_match: domain
+  partner_url: https://discord.com/ads/quests
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/discord
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - discord
+      status: released
+      sync_types:
+      - Events
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Drift
+  partner: drift-com
+  partner_match: domain
+  partner_url: https://www.drift.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/drift
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - drift
+      status: released
+      sync_types:
+      - Accounts
+      - Contacts
+      - Users
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Dropbox
+  partner: dropbox
+  partner_match: domain+name-among-holders
+  partner_url: https://www.dropbox.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/dropbox
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - dropbox
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - all
+      - diff
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Dynamic Yield
+  partner: dynamic-yield
+  partner_match: domain
+  partner_url: https://dynamicyield.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/dynamic-yield
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - dynamic-yield
+      status: released
+      sync_types:
+      - Product Feed
+      - User Data Feed
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: DynamoDB
+  partner: amazon-dynamodb
+  partner_match: domain+name-among-holders
+  partner_url: https://aws.amazon.com/dynamodb/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/dynamodb
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - dynamodb
+      status: released
+      sync_types:
+      - Items
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Elasticsearch
+  partner: elasticsearch
+  partner_match: domain+name-among-holders
+  partner_url: https://www.elastic.co/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/elasticsearch-destination
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - elasticsearch-destination
+      status: released
+      sync_types:
+      - Index documents
+      sync_modes:
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Eloqua
+  partner: eloqua
+  partner_match: domain+name-among-holders
+  partner_url: https://www.oracle.com/cx/marketing/automation/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/eloqua
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - eloqua
+      status: released
+      sync_types:
+      - Accounts
+      - Contact Lists
+      - Contacts
+      - Custom Objects
+      - Email Trigger
+      sync_modes:
+      - --
+      - add
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Emarsys
+  partner: emarsys
+  partner_match: domain
+  partner_url: https://emarsys.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/emarsys
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - emarsys
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: EnjoyHQ
+  partner: enjoyhq
+  partner_match: domain
+  partner_url: https://getenjoyhq.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/enjoy-hq
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - enjoy-hq
+      status: released
+      sync_types:
+      - Documents
+      - Users
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Epsilon Retail Media (CitrusAd)
+  partner: epsilon
+  partner_match: domain
+  partner_url: https://www.epsilon.com/us/products-and-services/retail-media-network
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/citrusad
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - citrusad
+      status: released
+      sync_types:
+      - Customers
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Expedia Group Advertising
+  partner: expedia-group
+  partner_match: domain
+  partner_url: https://partner.expediagroup.com/en-us/solutions/advertise-with-us
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/expedia
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - expedia
+      status: released
+      sync_types:
+      - Conversion Data
+      sync_modes:
+      - mirror
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Firestore
+  partner: google-cloud-firestore
+  partner_match: domain+name-among-holders
+  partner_url: https://firebase.google.com/docs/firestore
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/firestore
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - firestore
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Freshdesk
+  partner: freshdesk
+  partner_match: domain
+  partner_url: https://www.freshdesk.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/freshdesk
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - freshdesk
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Freshsales
+  partner: freshsales
+  partner_match: domain+name-among-holders
+  partner_url: https://www.freshworks.com/crm/sales/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/freshsales
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - freshsales
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Front
+  partner: frontapp
+  partner_match: domain
+  partner_url: https://frontapp.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/front
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - front
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: FullStory
+  partner: fullstory
+  partner_match: domain
+  partner_url: https://www.fullstory.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/fullstory
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - fullstory
+      status: released
+      sync_types:
+      - Users
+      sync_modes:
+      - update
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Gainsight
+  partner: gainsight
+  partner_match: domain
+  partner_url: https://www.gainsight.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/gainsight
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - gainsight
+      - gainsightpx
+      status: released
+      sync_types:
+      - Company
+      - Custom Objects
+      - Person
+      sync_modes:
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Genesys
+  partner: genesys
+  partner_match: domain
+  partner_url: https://www.genesys.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/genesys
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - genesys
+      status: released
+      sync_types:
+      - External contacts
+      - Organizations
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Gladly
+  partner: gladly
+  partner_match: domain
+  partner_url: https://www.gladly.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/gladly
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - gladly
+      status: released
+      sync_types:
+      - Customers
+      - Tasks
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Gong
+  partner: gong
+  partner_match: domain
+  partner_url: https://www.gong.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/gong
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - gong
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Ad Manager 360
+  partner: google-ad-manager
+  partner_match: domain+name-among-holders
+  partner_url: https://admanager.google.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/gam360
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - gam360
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - all
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Ads
+  partner: google-ads
+  partner_match: domain+name-among-holders
+  partner_url: https://ads.google.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/google
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google
+      status: released
+      sync_types:
+      - Call Conversions
+      - Click Conversion Adjustments
+      - Click Conversions
+      - Customer Match User List
+      - Offline Store Conversions
+      sync_modes:
+      - add
+      - insert
+      - remove
+      - update
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Analytics
+  partner: google-analytics
+  partner_match: domain+name-among-holders
+  partner_url: https://analytics.google.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/google-analytics
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-analytics
+      status: released
+      sync_types:
+      - Anonymous Audiences
+      - Events
+      sync_modes:
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: 'Google Audience Partner Display & Video 360 '
+  partner: google-display-video-360
+  partner_match: domain+name-among-holders
+  partner_url: https://marketingplatform.google.com/about/display-video-360/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/google-partner-audiences
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-partner-audiences
+      - display-video
+      status: released
+      sync_types:
+      - Audiences
+      sync_modes:
+      - add
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Campaign Manager 360
+  partner: google-campaign-manager
+  partner_match: domain+name-among-holders
+  partner_url: https://campaignmanager.google.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/google-campaign-manager
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-campaign-manager
+      status: released
+      sync_types:
+      - Conversion Adjustments
+      - Conversions
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Cloud Storage
+  partner: google
+  partner_match: domain+name-among-holders
+  partner_url: https://cloud.google.com/storage/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/gcs
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - gcs
+      - google-retail
+      status: released
+      sync_types:
+      - Any data set
+      - Products
+      sync_modes:
+      - all
+      - diff
+      - insert
+      - upsert
+    source:
+      catalog_entries:
+      - gcs-source
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Drive
+  partner: google-drive
+  partner_match: domain+name-among-holders
+  partner_url: https://www.google.com/drive/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/google-drive
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-drive
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - all
+      - diff
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Search Ads 360
+  partner: google-search-ads-360
+  partner_match: domain+name-among-holders
+  partner_url: https://marketingplatform.google.com/about/search-ads-360/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/google-search-ads-360
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-search-ads-360
+      status: released
+      sync_types:
+      - Conversions
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Sheets - User Account
+  partner: google-sheets
+  partner_match: domain+name-among-holders
+  partner_url: https://www.google.com/sheets/about/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/google-sheets
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-sheets
+      status: released
+      sync_types:
+      - Sheets
+      sync_modes:
+      - append
+      - mirror
+      - snapshot
+    source:
+      catalog_entries:
+      - google-sheets-source
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Heap
+  partner: heap
+  partner_match: domain
+  partner_url: https://heap.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/heap
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - heap
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Help Scout
+  partner: helpscout
+  partner_match: domain
+  partner_url: https://www.helpscout.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/help-scout
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - help-scout
+      status: released
+      sync_types:
+      - Customers
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Impact.com
+  partner: impact
+  partner_match: domain
+  partner_url: https://impact.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/impact-com
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - impact-com
+      status: released
+      sync_types:
+      - Conversion Events
+      - Objects (Catalogs / Actions)
+      sync_modes:
+      - insert
+      - update
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: InMobi
+  partner: inmobi
+  partner_match: domain
+  partner_url: https://advertising.inmobi.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/inmobi
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - inmobi
+      status: released
+      sync_types:
+      - Audiences
+      sync_modes:
+      - all
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Intercom
+  partner: intercom
+  partner_match: domain
+  partner_url: https://www.intercom.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/intercom
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - intercom
+      status: released
+      sync_types:
+      - Company objects
+      - Contact objects
+      - Events
+      sync_modes:
+      - archive
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: iSpot.tv
+  partner: ispottv
+  partner_match: domain
+  partner_url: https://www.ispot.tv/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/ispot-tv
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - ispot-tv
+      status: released
+      sync_types:
+      - Audiences
+      - Conversions
+      sync_modes:
+      - all
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Iterable
+  partner: iterable
+  partner_match: domain
+  partner_url: 'https://iterable.com/form/demo/request-demo/?utm_source=hightouch&utm_medium=partners&utm_campaign=composable-cdp-hub_hightouch '
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/iterable
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - iterable
+      status: released
+      sync_types:
+      - Catalog items
+      - Events
+      - Merge users
+      - Other user actions
+      - Register device tokens
+      - Static list
+      - Subscriptions
+      - Trigger SMS
+      - Trigger email
+      - Trigger in-app
+      - Trigger journey (formerly workflow)
+      - Trigger push
+      - Update email address
+      - User shopping cart items
+      - Users
+      sync_modes:
+      - --
+      - add
+      - insert
+      - remove
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Jira
+  partner: jira
+  partner_match: domain+name-among-holders
+  partner_url: https://www.atlassian.com/software/jira
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/jira
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - jira
+      status: released
+      sync_types:
+      - Issues
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Kameleoon
+  partner: kameleoon
+  partner_match: domain
+  partner_url: https://www.kameleoon.com/en
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/kameleoon
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - kameleoon
+      status: released
+      sync_types:
+      - Visitor properties
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Kevel
+  partner: kevel
+  partner_match: domain
+  partner_url: https://www.kevel.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/kevel
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - kevel
+      status: released
+      sync_types:
+      - Segment members
+      sync_modes:
+      - all
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Klaviyo
+  partner: klaviyo
+  partner_match: domain
+  partner_url: https://www.klaviyo.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/klaviyo
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - klaviyo
+      status: released
+      sync_types:
+      - Events
+      - Lists
+      - Profiles
+      - Subscription Lists
+      sync_modes:
+      - add
+      - insert
+      - remove
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Knock
+  partner: knock-app
+  partner_match: domain
+  partner_url: https://docs.knock.app/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/knock
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - knock
+      status: released
+      sync_types:
+      - Audiences
+      - Objects
+      - Users
+      sync_modes:
+      - add
+      - remove
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Kustomer
+  partner: kustomer
+  partner_match: domain
+  partner_url: https://www.kustomer.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/kustomer
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - kustomer
+      status: released
+      sync_types:
+      - Companies
+      - Customers
+      sync_modes:
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: LaunchDarkly
+  partner: launchdarkly
+  partner_match: domain
+  partner_url: https://launchdarkly.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/launchdarkly
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - launchdarkly
+      status: released
+      sync_types:
+      - Segment rules
+      - Synced segments
+      sync_modes:
+      - add
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Linear
+  partner: linear-app
+  partner_match: domain
+  partner_url: https://linear.app/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/linear
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - linear
+      status: released
+      sync_types:
+      - Issues
+      sync_modes:
+      - delete
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: LinkedIn Ads
+  partner: linkedin-ads
+  partner_match: domain+name-among-holders
+  partner_url: https://business.linkedin.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/linkedin
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - linkedin
+      status: released
+      sync_types:
+      - Audiences
+      - Conversions
+      sync_modes:
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: LiveIntent
+  partner: liveintent
+  partner_match: domain
+  partner_url: https://www.liveintent.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/liveintent
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - liveintent
+      status: released
+      sync_types:
+      - Custom Audiences
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: LiveRamp
+  partner: liveramp
+  partner_match: domain
+  partner_url: https://liveramp.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/liveramp
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - liveramp
+      status: released
+      sync_types:
+      - SFTP file upload
+      sync_modes:
+      - all
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Loops
+  partner: loops
+  partner_match: domain
+  partner_url: https://loops.so/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/loops
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - loops
+      status: released
+      sync_types:
+      - Contacts
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Magnite
+  partner: magnite
+  partner_match: domain
+  partner_url: https://www.magnite.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/magnite
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - magnite
+      status: released
+      sync_types:
+      - Access Data Audiences
+      - Match Audiences
+      sync_modes:
+      - all
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Mailchimp
+  partner: mailchimp
+  partner_match: domain+name-among-holders
+  partner_url: https://mailchimp.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/mailchimp
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mailchimp
+      status: released
+      sync_types:
+      - Object
+      - Tag
+      sync_modes:
+      - add
+      - remove
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Mattermost
+  partner: mattermost
+  partner_match: domain
+  partner_url: https://mattermost.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/mattermost
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mattermost
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Maxio
+  partner: maxio
+  partner_match: domain
+  partner_url: https://www.maxio.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/maxio
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - maxio
+      status: released
+      sync_types:
+      - Customers
+      - Events
+      - Subscriptions
+      - Usage
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Meta Custom Audiences
+  partner: meta
+  partner_match: domain+name-among-holders
+  partner_url: https://business.facebook.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/facebook
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - facebook
+      status: released
+      sync_types:
+      - Audiences
+      sync_modes:
+      - add
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Microsoft Ads (Bing Ads)
+  partner: microsoft-bing
+  partner_match: domain+name-among-holders
+  partner_url: https://ads.microsoft.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/bingads
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bingads
+      status: released
+      sync_types:
+      - Audiences
+      - Events
+      sync_modes:
+      - add
+      - insert
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Microsoft Dynamics 365
+  partner: microsoft-dynamics-365
+  partner_match: domain+name-among-holders
+  partner_url: https://dynamics.microsoft.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/microsoft-dynamics
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - microsoft-dynamics
+      status: released
+      sync_types:
+      - Objects
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Microsoft Excel
+  partner: microsoft-excel
+  partner_match: domain+name-among-holders
+  partner_url: https://www.microsoft.com/en-us/microsoft-365/excel
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/microsoft-excel
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - microsoft-excel
+      status: released
+      sync_types:
+      - Mirror
+      - Snapshot
+      sync_modes:
+      - all
+    source:
+      catalog_entries:
+      - microsoft-excel-source
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Microsoft Sharepoint
+  partner: sharepoint
+  partner_match: domain+name-among-holders
+  partner_url: https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sharepoint
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sharepoint
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - all
+      - diff
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Microsoft Teams
+  partner: microsoft-teams
+  partner_match: domain+name-among-holders
+  partner_url: https://www.microsoft.com/en-us/microsoft-teams/group-chat-software
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/microsoft-teams
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - microsoft-teams
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: MinIO
+  partner: minio
+  partner_match: domain
+  partner_url: https://min.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/minio
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - minio
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - all
+      - diff
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Mixpanel
+  partner: mixpanel
+  partner_match: domain
+  partner_url: https://mixpanel.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/mixpanel
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mixpanel
+      status: released
+      sync_types:
+      - Events
+      - Lookup tables
+      - Objects
+      sync_modes:
+      - all
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: MoEngage
+  partner: moengage
+  partner_match: domain
+  partner_url: https://www.moengage.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/moengage
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - moengage
+      status: released
+      sync_types:
+      - Events
+      - Segments
+      - Users
+      sync_modes:
+      - add
+      - insert
+      - remove
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Moloco
+  partner: moloco
+  partner_match: domain
+  partner_url: https://www.moloco.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/moloco
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - moloco
+      status: released
+      sync_types:
+      - Customer Sets
+      sync_modes:
+      - add
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Monday
+  partner: monday-com
+  partner_match: domain
+  partner_url: https://monday.com/p/about/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/monday
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - monday
+      status: released
+      sync_types:
+      - Items
+      sync_modes:
+      - insert
+      - update
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: MongoDB
+  partner: mongodb
+  partner_match: domain+name-among-holders
+  partner_url: https://www.mongodb.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/mongodb
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mongodb
+      status: released
+      sync_types:
+      - Documents
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: MovableInk
+  partner: movable-ink
+  partner_match: domain
+  partner_url: https://movableink.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/movable-ink
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - movable-ink
+      status: released
+      sync_types:
+      - Event
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: domain
+  partner_url: https://www.mparticle.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/mparticle
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mparticle
+      status: released
+      sync_types:
+      - Events
+      - Users
+      sync_modes:
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: MySQL
+  partner: mysql
+  partner_match: domain
+  partner_url: https://www.mysql.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/mysql-destination
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mysql-destination
+      status: released
+      sync_types:
+      - Table
+      sync_modes:
+      - upsert
+    source:
+      catalog_entries:
+      - mysql
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: NetSuite (REST)
+  partner: netsuite
+  partner_match: domain
+  partner_url: https://www.netsuite.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/netsuite-rest
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - netsuite-rest
+      - netsuite
+      status: released
+      sync_types:
+      - Entities
+      - Transforms
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Nextdoor
+  partner: nextdoor
+  partner_match: domain
+  partner_url: https://ads.nextdoor.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/nextdoor
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - nextdoor
+      status: released
+      sync_types:
+      - Events
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: OfferFit
+  partner: offerfit
+  partner_match: domain
+  partner_url: https://offerfit.ai/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/offerfit
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - offerfit
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: OneSignal
+  partner: onesignal
+  partner_match: domain
+  partner_url: https://onesignal.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/onesignal
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - onesignal
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: OpenSearch
+  partner: opensearch
+  partner_match: domain
+  partner_url: https://opensearch.org/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/opensearch
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - opensearch
+      status: released
+      sync_types:
+      - Index documents
+      sync_modes:
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: OpenX
+  partner: openx
+  partner_match: domain
+  partner_url: https://www.openx.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/openx
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - openx
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Optimizely
+  partner: optimizely
+  partner_match: domain+name-among-holders
+  partner_url: https://www.optimizely.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/optimizely
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - optimizely
+      status: released
+      sync_types:
+      - Log Events
+      - ODP Audiences
+      - Visitor Attributes
+      sync_modes:
+      - add
+      - remove
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Oracle DB
+  partner: oracle
+  partner_match: domain+name-among-holders
+  partner_url: https://www.oracle.com/database/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/oracle-db
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - oracle-db
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - upsert
+    source:
+      catalog_entries:
+      - oracle
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Ortto
+  partner: ortto
+  partner_match: domain
+  partner_url: https://ortto.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/ortto
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - ortto
+      status: released
+      sync_types:
+      - Audience
+      - Organization
+      - Person
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: PAR Punchh
+  partner: punchh
+  partner_match: domain
+  partner_url: https://punchh.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/punchh
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - punchh
+      status: released
+      sync_types:
+      - Segments
+      sync_modes:
+      - add
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Partnerize
+  partner: partnerize
+  partner_match: domain
+  partner_url: https://partnerize.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/partnerize
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - partnerize
+      status: released
+      sync_types:
+      - Events
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: PartnerStack
+  partner: partnerstack
+  partner_match: domain
+  partner_url: https://partnerstack.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/partnerstack
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - partnerstack
+      status: released
+      sync_types:
+      - Customers
+      - Events
+      - Transactions
+      sync_modes:
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Pendo
+  partner: pendoio
+  partner_match: domain
+  partner_url: https://www.pendo.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/pendo
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - pendo
+      status: released
+      sync_types:
+      - Events
+      - Objects
+      sync_modes:
+      - insert
+      - update
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Pinterest Ads
+  partner: pinterest
+  partner_match: domain
+  partner_url: https://ads.pinterest.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/pinterest-ads
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - pinterest-ads
+      status: released
+      sync_types:
+      - Conversion Events
+      - Customer List Audiences
+      sync_modes:
+      - add
+      - insert
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Pipedrive
+  partner: pipedrive
+  partner_match: domain
+  partner_url: https://www.pipedrive.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/pipedrive
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - pipedrive
+      status: released
+      sync_types:
+      - Deal
+      - Lead
+      - Organization
+      - Person
+      sync_modes:
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: PlanetScale
+  partner: planetscale
+  partner_match: domain
+  partner_url: https://planetscale.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/planetscale-destination
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - planetscale-destination
+      status: released
+      sync_types:
+      - Table
+      sync_modes:
+      - upsert
+    source:
+      catalog_entries:
+      - planetscale
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Planhat
+  partner: planhat
+  partner_match: domain
+  partner_url: https://www.planhat.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/planhat
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - planhat
+      status: released
+      sync_types:
+      - Assets
+      - Campaigns
+      - Company
+      - Conversations
+      - Endusers
+      - Invoices
+      - Issues
+      - Licenses
+      - Metrics
+      - Notes
+      - Opportunities
+      - Projects
+      - Sales
+      - User Activities
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: PostgreSQL
+  partner: postgresql
+  partner_match: domain
+  partner_url: https://www.postgresql.org/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/postgres
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - postgres
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - insert
+      - upsert
+    source:
+      catalog_entries:
+      - postgresql
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: PostHog
+  partner: posthog
+  partner_match: domain
+  partner_url: https://posthog.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/posthog
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - posthog
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: PubMatic
+  partner: pubmatic
+  partner_match: domain
+  partner_url: https://pubmatic.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/pubmatic
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - pubmatic
+      status: released
+      sync_types:
+      - Audience data
+      - Hashed email (HEM) audience
+      sync_modes:
+      - incremental
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Qualified
+  partner: qualified-com
+  partner_match: domain
+  partner_url: https://qualified.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/qualified
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - qualified
+      status: released
+      sync_types:
+      - Companies
+      - Leads
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Qualtrics
+  partner: qualtrics
+  partner_match: domain
+  partner_url: https://www.qualtrics.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/qualtrics
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - qualtrics
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: QuickBooks
+  partner: quickbooks
+  partner_match: domain+name-among-holders
+  partner_url: https://quickbooks.intuit.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/quickbooks
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - quickbooks
+      status: released
+      sync_types:
+      - Account
+      - Bill
+      - Class
+      - Customer
+      - Deposit
+      - Invoice
+      - JournalEntry
+      - Payment
+      - PaymentMethod
+      - RecurringTransaction
+      - TimeActivits
+      - Vendor
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: RabbitMQ
+  partner: rabbitmq
+  partner_match: domain
+  partner_url: https://www.rabbitmq.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/rabbitmq
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - rabbitmq
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Rakuten
+  partner: rakuten
+  partner_match: domain+name-among-holders
+  partner_url: https://www.rakuten.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/rakuten
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - rakuten
+      status: released
+      sync_types:
+      - Events
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Responsys
+  partner: responsys
+  partner_match: domain+name-among-holders
+  partner_url: https://www.oracle.com/cx/marketing/campaign-management/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/responsys
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - responsys
+      status: released
+      sync_types:
+      - Custom / REI Events
+      - Profile Extension Tables
+      - Profile Lists
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Rockerbox
+  partner: rockerbox
+  partner_match: domain
+  partner_url: https://www.rockerbox.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/rockerbox
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - rockerbox
+      status: released
+      sync_types:
+      - Batch File Delivery
+      sync_modes:
+      - all
+      - diff
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Rokt
+  partner: rokt
+  partner_match: domain
+  partner_url: https://docs.rokt.com/docs/developers/api-reference/event/overview
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/rokt
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - rokt
+      status: released
+      sync_types:
+      - Event
+      - Segment
+      sync_modes:
+      - add
+      - insert
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Roku Advertising Direct
+  partner: roku
+  partner_match: domain
+  partner_url: https://advertising.roku.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/roku-ads
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - roku-ads
+      status: released
+      sync_types:
+      - Audiences
+      sync_modes:
+      - all
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Rudderstack
+  partner: rudderstack
+  partner_match: domain
+  partner_url: https://rudderstack.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/rudderstack
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - rudderstack
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: S3
+  partner: amazon-s3
+  partner_match: domain+name-among-holders
+  partner_url: https://aws.amazon.com/s3/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/s3
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - s3
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - all
+      - diff
+      - insert
+    source:
+      catalog_entries:
+      - s3-source
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Sage Intacct
+  partner: sage-intacct
+  partner_match: domain+name-among-holders
+  partner_url: https://www.sage.com/en-us/sage-business-cloud/intacct
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sage-intacct
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sage-intacct
+      status: released
+      sync_types:
+      - AR Adjustment
+      - AR Payment
+      - Contact
+      - Customer
+      - Invoice
+      - Journal Entry
+      - Transaction
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Salesforce
+  partner: salesforce
+  partner_match: domain+name-among-holders
+  partner_url: https://www.salesforce.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/salesforce
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - salesforce
+      status: released
+      sync_types:
+      - Metadata for picklist fields
+      - Platform events
+      - Standard and custom objects
+      sync_modes:
+      - all
+      - archive
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Salesforce Commerce Cloud
+  partner: salesforce-commerce-cloud
+  partner_match: domain+name-among-holders
+  partner_url: https://www.salesforce.com/products/commerce/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/salesforce-commerce-cloud
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - salesforce-commerce-cloud
+      status: released
+      sync_types:
+      - Customers
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Salesforce Marketing Cloud
+  partner: salesforce-marketing-cloud
+  partner_match: domain+name-among-holders
+  partner_url: https://www.salesforce.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sfmc
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sfmc
+      status: released
+      sync_types:
+      - Contacts
+      - Data Extensions
+      - Journeys
+      - Triggered send
+      sync_modes:
+      - add
+      - mirror
+      - remove
+      - trigger
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Salesloft
+  partner: salesloft
+  partner_match: domain
+  partner_url: https://salesloft.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/salesloft
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - salesloft
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Sanity
+  partner: sanity
+  partner_match: domain
+  partner_url: https://www.sanity.io
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sanity
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sanity
+      status: released
+      sync_types:
+      - Documents
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: SAP HANA
+  partner: sap-hana
+  partner_match: domain+name-among-holders
+  partner_url: https://www.sap.com/products/technology-platform/hana.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sap-hana
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sap-hana
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: SAP IBP
+  partner: sap
+  partner_match: domain+name-among-holders
+  partner_url: https://www.sap.com/products/scm/integrated-business-planning.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sap-ibp
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sap-ibp
+      - sap-s4hana
+      status: released
+      sync_types:
+      - Entities
+      - Sales Orders
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Segment
+  partner: segment
+  partner_match: domain
+  partner_url: https://segment.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/segment
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - segment
+      status: released
+      sync_types:
+      - Group events
+      - Identify events
+      - Track (Generic) events
+      - Track (Segment Entered / Exited) events
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: ServiceNow
+  partner: servicenow
+  partner_match: domain+name-among-holders
+  partner_url: https://www.servicenow.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/servicenow
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - servicenow
+      status: released
+      sync_types:
+      - Standard Objects
+      sync_modes:
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Shopify
+  partner: shopify
+  partner_match: domain
+  partner_url: https://www.shopify.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/shopify
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - shopify
+      status: released
+      sync_types:
+      - Actions
+      - Events
+      - Objects
+      sync_modes:
+      - insert
+      - varies depending on object
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Sinch Campaigns
+  partner: sinch
+  partner_match: domain+name-among-holders
+  partner_url: https://sinch.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sinch-campaigns
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sinch-campaigns
+      - sinch-messagemedia
+      status: released
+      sync_types:
+      - Audience
+      - Campaign trigger
+      - Contact lists
+      - Contacts
+      sync_modes:
+      - add
+      - insert
+      - mirror
+      - remove
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Singular
+  partner: singular
+  partner_match: domain
+  partner_url: https://www.singular.net/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/singular
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - singular
+      status: released
+      sync_types:
+      - Events
+      sync_modes:
+      - insert only
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Smartsheet
+  partner: smartsheet
+  partner_match: domain
+  partner_url: https://www.smartsheet.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/smartsheet
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - smartsheet
+      status: released
+      sync_types:
+      - Sheets
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Snowflake
+  partner: snowflake
+  partner_match: domain
+  partner_url: https://www.snowflake.com/en/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/snowflake-destination
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - snowflake-destination
+      - snowflake-data-clean-room
+      - snowflake-data-share
+      - snowflake-iceberg-destination
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - insert
+      - mirror
+      - upsert
+    source:
+      catalog_entries:
+      - snowflake
+      - snowflake-iceberg
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Split
+  partner: split
+  partner_match: domain
+  partner_url: https://www.split.io
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/split
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - split
+      status: released
+      sync_types:
+      - Segments
+      - Users
+      sync_modes:
+      - add
+      - insert
+      - remove
+      - update
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Spotify Ads Manager
+  partner: spotify
+  partner_match: domain+name-among-holders
+  partner_url: https://ads.spotify.com/en-US/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/spotify
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - spotify
+      status: released
+      sync_types:
+      - Audiences
+      - Conversions
+      sync_modes:
+      - all
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Sprig
+  partner: sprig
+  partner_match: domain
+  partner_url: https://sprig.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sprig
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sprig
+      status: released
+      sync_types:
+      - Users
+      sync_modes:
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: SQL Server
+  partner: microsoft-sql-server
+  partner_match: domain+name-among-holders
+  partner_url: https://www.microsoft.com/en-in/sql-server
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sqlserver-destination
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sqlserver-destination
+      status: released
+    source:
+      catalog_entries:
+      - sqlserver
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: StackAdapt
+  partner: stackadapt
+  partner_match: domain
+  partner_url: https://stackadapt.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/stackadapt
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - stackadapt
+      status: released
+      sync_types:
+      - CRM Segments
+      - Device Audience
+      - Pixel API
+      sync_modes:
+      - add
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Statsig
+  partner: statsig
+  partner_match: domain
+  partner_url: https://statsig.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/statsig
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - statsig
+      status: released
+      sync_types:
+      - Events
+      - Segments
+      sync_modes:
+      - add
+      - insert
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Stripe
+  partner: stripe
+  partner_match: domain
+  partner_url: https://stripe.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/stripe
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - stripe
+      status: released
+      sync_types:
+      - Customers
+      - Invoice items
+      - Invoices
+      - Meter events
+      - Prices
+      - Products
+      - Quotes
+      - Subscriptions
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Taboola
+  partner: taboola
+  partner_match: domain
+  partner_url: https://www.taboola.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/taboola
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - taboola
+      status: released
+      sync_types:
+      - Audiences
+      - Conversions
+      sync_modes:
+      - add
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Talon.One
+  partner: talon-one
+  partner_match: domain
+  partner_url: https://www.talon.one/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/talon-one
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - talon-one
+      status: released
+      sync_types:
+      - Customer Profile
+      - Events
+      sync_modes:
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: The Trade Desk
+  partner: trade-desk
+  partner_match: domain
+  partner_url: https://www.thetradedesk.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/tradedesk
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - tradedesk
+      status: released
+      sync_types:
+      - CRM data conversions
+      - CRM data segments
+      - Event opt-out or deletion
+      - First-party data segments
+      - Offline conversion events
+      - Postback events
+      - Real-time conversion events
+      - Third-party data segments
+      sync_modes:
+      - add
+      - insert
+      - remove
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: TikTok
+  partner: tiktok
+  partner_match: domain+name-among-holders
+  partner_url: https://ads.tiktok.com/marketing_api/homepage
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/tiktok
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - tiktok
+      status: released
+      sync_types:
+      - App events
+      - Custom audiences
+      - Offline events
+      - Web events
+      sync_modes:
+      - add
+      - all (file upload)
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Twilio
+  partner: twilio
+  partner_match: domain
+  partner_url: https://twilio.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/twilio
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - twilio
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Twilio SendGrid
+  partner: sendgrid
+  partner_match: domain
+  partner_url: https://sendgrid.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sendgrid
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sendgrid
+      status: released
+      sync_types:
+      - Contacts
+      - Mail
+      sync_modes:
+      - triggered sends (one row = one email)
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Unify
+  partner: unify
+  partner_match: domain
+  partner_url: https://www.unifygtm.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/unify
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - unify
+      status: released
+      sync_types:
+      - Records
+      sync_modes:
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Userflow
+  partner: userflow
+  partner_match: domain
+  partner_url: https://userflow.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/userflow
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - userflow
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Vitally
+  partner: vitally
+  partner_match: domain
+  partner_url: https://www.vitally.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/vitally
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - vitally
+      status: released
+      sync_types:
+      - Analytics Objects
+      - Events
+      - REST Objects
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: VWO Attribute Lists
+  partner: vwo
+  partner_match: domain
+  partner_url: https://vwo.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/vwo
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - vwo
+      status: released
+      sync_types:
+      - Attribute Lists
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Webflow
+  partner: webflow
+  partner_match: domain+name-among-holders
+  partner_url: https://webflow.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/webflow
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - webflow
+      status: released
+      sync_types:
+      - Collections
+      sync_modes:
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: WhatsApp
+  partner: whatsapp
+  partner_match: domain
+  partner_url: https://www.whatsapp.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/whatsapp
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - whatsapp
+      status: released
+      sync_types:
+      - Message Templates
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Workday
+  partner: workday
+  partner_match: domain+name-among-holders
+  partner_url: https://www.workday.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/workday
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - workday
+      - workday-adaptive-planning
+      status: released
+      sync_types:
+      - Modeled sheets
+      - Organizations
+      - Positions
+      - Workers
+      sync_modes:
+      - insert
+      - mirror
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Xero
+  partner: xero
+  partner_match: domain
+  partner_url: https://www.xero.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/xero
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - xero
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Zapier
+  partner: zapier
+  partner_match: domain
+  partner_url: https://zapier.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/zapier
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - zapier
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Zendesk
+  partner: zendesk
+  partner_match: domain+name-among-holders
+  partner_url: https://www.zendesk.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/zendesk
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - zendesk
+      status: released
+      sync_types:
+      - Custom objects
+      - Legacy custom objects
+      - Organization Memberships
+      - Organizations
+      - Tickets
+      - Users
+      sync_modes:
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Zoho CRM
+  partner: zoho-crm
+  partner_match: domain+name-among-holders
+  partner_url: https://www.zoho.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/zohocrm
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - zohocrm
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Zuora
+  partner: zuora
+  partner_match: domain
+  partner_url: https://www.zuora.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/zuora
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - zuora
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Athena
+  partner: amazon-athena
+  partner_match: domain+name-among-holders
+  partner_url: https://aws.amazon.com/athena/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/sources/amazon-athena
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - amazon-athena
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Azure Synapse
+  partner: microsoft-azure-synapse-analytics
+  partner_match: domain+name-among-holders
+  partner_url: https://azure.microsoft.com/en-us/products/synapse-analytics/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/sources/synapse
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - synapse
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: ClickHouse
+  partner: clickhouse
+  partner_match: domain
+  partner_url: https://clickhouse.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/sources/clickhouse
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - clickhouse
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Materialize
+  partner: materialize
+  partner_match: domain
+  partner_url: https://materialize.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/sources/materialize
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - materialize
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Microsoft Fabric
+  partner: microsoft-fabric
+  partner_match: domain+name-among-holders
+  partner_url: https://www.microsoft.com/en-us/microsoft-fabric
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/sources/fabric
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - fabric
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Redshift
+  partner: amazon-redshift
+  partner_match: domain+name-among-holders
+  partner_url: https://aws.amazon.com/redshift/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/sources/amazon-redshift
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - amazon-redshift
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: SingleStore
+  partner: singlestore
+  partner_match: domain
+  partner_url: https://www.singlestore.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/sources/single-store
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - single-store
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Teradata Vantage
+  partner: teradata
+  partner_match: domain
+  partner_url: https://www.teradata.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/sources/teradata-vantage
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - teradata-vantage
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Trino
+  partner: trino
+  partner_match: domain
+  partner_url: https://trino.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/sources/trino
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - trino
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+source:
+- https://hightouch.com/docs/destinations/overview
+- https://hightouch.com/docs/sources/overview
