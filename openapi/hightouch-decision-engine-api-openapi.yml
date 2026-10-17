@@ -371,6 +371,24 @@ paths:
       - Decision Engine
 components:
   schemas:
+    DecisionEngineMessageGuardrails:
+      description: Guardrail fields on a message (max sends, eligibility dates, etc.)
+      properties:
+        maxSendsPerUser:
+          type: number
+          format: double
+        maxSendsPerUserWindowDays:
+          type: number
+          format: double
+        minOtherMessagesInBetween:
+          type: number
+          format: double
+        firstEligibleSendDate:
+          type: string
+        lastEligibleSendDate:
+          type: string
+      type: object
+      additionalProperties: false
     DecisionEngineVariableVariant:
       description: Variant within a message variable (Public API)
       properties:
@@ -404,69 +422,20 @@ components:
       - value
       type: object
       additionalProperties: false
-    DecisionEngineMessage:
-      description: Decision Engine Message (Public API)
+    DecisionEngineRunResponse:
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        channelId:
-          type: string
-        config:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        tags:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        guardrails:
-          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
-        variables:
-          items:
-            $ref: '#/components/schemas/DecisionEngineVariable'
-          type: array
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
+        flowsEnqueued:
+          type: number
+          format: double
+          description: Number of flows that were enqueued for execution
       required:
-      - id
-      - name
-      - channelId
-      - config
+      - flowsEnqueued
       type: object
       additionalProperties: false
-    DecisionEngineMessageCreate:
-      description: Request body for creating a Decision Engine message
-      properties:
-        name:
-          type: string
-        channelId:
-          type: string
-        config:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        tags:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        guardrails:
-          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
-        variables:
-          items:
-            $ref: '#/components/schemas/DecisionEngineVariable'
-          type: array
-      required:
-      - name
-      - channelId
-      - config
-      type: object
-      additionalProperties: false
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
     DecisionEngineFlow:
       description: Decision Engine Flow (Public API)
       properties:
@@ -503,24 +472,12 @@ components:
       - status
       type: object
       additionalProperties: false
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
-    DecisionEngineRunResponse:
-      properties:
-        flowsEnqueued:
-          type: number
-          format: double
-          description: Number of flows that were enqueued for execution
-      required:
-      - flowsEnqueued
-      type: object
-      additionalProperties: false
-    DecisionEngineMessageUpdate:
-      description: Request body for updating a Decision Engine message
+    DecisionEngineMessageCreate:
+      description: Request body for creating a Decision Engine message
       properties:
         name:
+          type: string
+        channelId:
           type: string
         config:
           properties: {}
@@ -536,24 +493,10 @@ components:
           items:
             $ref: '#/components/schemas/DecisionEngineVariable'
           type: array
-      type: object
-      additionalProperties: false
-    DecisionEngineMessageGuardrails:
-      description: Guardrail fields on a message (max sends, eligibility dates, etc.)
-      properties:
-        maxSendsPerUser:
-          type: number
-          format: double
-        maxSendsPerUserWindowDays:
-          type: number
-          format: double
-        minOtherMessagesInBetween:
-          type: number
-          format: double
-        firstEligibleSendDate:
-          type: string
-        lastEligibleSendDate:
-          type: string
+      required:
+      - name
+      - channelId
+      - config
       type: object
       additionalProperties: false
     DecisionEngineVariable:
@@ -589,6 +532,27 @@ components:
       - variants
       type: object
       additionalProperties: false
+    DecisionEngineMessageUpdate:
+      description: Request body for updating a Decision Engine message
+      properties:
+        name:
+          type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        tags:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariable'
+          type: array
+      type: object
+      additionalProperties: false
     ValidateErrorJSON:
       properties:
         message:
@@ -602,6 +566,42 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    DecisionEngineMessage:
+      description: Decision Engine Message (Public API)
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        channelId:
+          type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        tags:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariable'
+          type: array
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - channelId
+      - config
       type: object
       additionalProperties: false
   securitySchemes:

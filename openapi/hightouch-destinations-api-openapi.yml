@@ -303,18 +303,12 @@ components:
       type: string
       enum:
       - Internal Server Error
-    DestinationCreate:
-      description: The input for creating a Destination
+    DestinationUpdate:
+      description: The input for updating a Destination
       properties:
         name:
           type: string
           description: The destination's name
-        slug:
-          type: string
-          description: The destination's slug
-        type:
-          type: string
-          description: The destination's type (e.g. salesforce or hubspot).
         configuration:
           properties: {}
           additionalProperties: {}
@@ -330,11 +324,21 @@ components:
             Consumers should NOT make assumptions on the contents of the
 
             configuration. It may change as Hightouch updates its internal code.'
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
       required:
-      - name
-      - slug
-      - type
-      - configuration
+      - message
+      - details
       type: object
       additionalProperties: false
     Destination:
@@ -400,12 +404,18 @@ components:
       - syncs
       type: object
       additionalProperties: false
-    DestinationUpdate:
-      description: The input for updating a Destination
+    DestinationCreate:
+      description: The input for creating a Destination
       properties:
         name:
           type: string
           description: The destination's name
+        slug:
+          type: string
+          description: The destination's slug
+        type:
+          type: string
+          description: The destination's type (e.g. salesforce or hubspot).
         configuration:
           properties: {}
           additionalProperties: {}
@@ -421,21 +431,11 @@ components:
             Consumers should NOT make assumptions on the contents of the
 
             configuration. It may change as Hightouch updates its internal code.'
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
       required:
-      - message
-      - details
+      - name
+      - slug
+      - type
+      - configuration
       type: object
       additionalProperties: false
   securitySchemes:
