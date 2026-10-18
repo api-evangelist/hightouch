@@ -6,6 +6,7 @@ checked:
 - https://azuremarketplace.microsoft.com/
 - https://hightouch.com/docs/destinations/overview
 - https://hightouch.com/docs/sources/overview
+- slack/integrations/slack-integration-edges.yml
 marketplace_apps:
 - marketplace: coverage
   channel: coverage-list
@@ -4907,6 +4908,23 @@ edges:
   detected: '2026-10-18'
   detected_by: mirror-platform-listings.py
   category: dbt package
+- partner_name: Slack (own)
+  partner: slack
+  partner_match: mirror
+  mirror_match: domain+product
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://slack.com/marketplace/A010ZEEB44R-hightouch
+  mirror_of: slack/integrations/slack-integration-edges.yml
+  apps:
+  - Hightouch
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Slack app
 source:
 - https://hightouch.com/docs/destinations/overview
 - https://hightouch.com/docs/sources/overview
