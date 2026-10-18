@@ -1,6 +1,7 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- dbt/integrations/dbt-integration-edges.yml
 - https://a2aregistry.org/api/agents
 - https://azuremarketplace.microsoft.com/
 - https://hightouch.com/docs/destinations/overview
@@ -4889,6 +4890,23 @@ edges:
     detected: '2026-10-15'
   detected_by: sweep-ai-agents.py
   first_seen: '2026-10-15'
+- partner_name: dbt (dbt-package-hub)
+  partner: dbt
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: dbt-package-hub
+  evidence: https://hub.getdbt.com/hightouchio/dbt_hightouch/latest/
+  mirror_of: dbt/integrations/dbt-integration-edges.yml
+  apps:
+  - Hightouch
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: dbt package
 source:
 - https://hightouch.com/docs/destinations/overview
 - https://hightouch.com/docs/sources/overview
