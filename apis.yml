@@ -237,6 +237,26 @@ apis:
     url: https://hightouch.com/docs/api-reference
   - type: GettingStarted
     url: https://hightouch.com/docs/getting-started/welcome
+- aid: hightouch:hightouch-signups-api
+  name: Hightouch Signups API
+  description: The Signups API from Hightouch — 1 operation(s) for signups.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - Signups
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-signups-api-openapi.yml
+- aid: hightouch:hightouch-sync-templates-api
+  name: Hightouch Sync Templates API
+  description: The Sync Templates API from Hightouch — 2 operation(s) for sync templates.
+  humanURL: https://hightouch.com/docs/developer-tools/api-guide
+  baseURL: https://api.hightouch.com/api/v1
+  tags:
+  - Sync Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/hightouch-sync-templates-api-openapi.yml
 common:
 - type: CapabilityMap
   url: capabilities/hightouch-capability-edges.yml

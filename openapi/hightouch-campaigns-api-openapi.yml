@@ -73,26 +73,18 @@ paths:
               $ref: '#/components/schemas/StartCampaignRequest'
       tags:
       - Campaigns
-  /campaigns/{campaignId}/sends/{sendId}:
-    get:
-      operationId: GetSendStatus
+  /campaigns/{campaignId}/sends/batch-get:
+    post:
+      operationId: GetSendStatuses
       responses:
         '200':
           description: Ok
           content:
             application/json:
               schema:
-                anyOf:
-                - $ref: '#/components/schemas/SendStatusResponse'
-                - $ref: '#/components/schemas/TriggerErrorResponse'
+                $ref: '#/components/schemas/BatchSendStatusResponse'
         '401':
           description: Unauthorized
-        '404':
-          description: Send not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TriggerErrorResponse'
         '422':
           description: Validation Failed
           content:
@@ -105,10 +97,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
-      description: 'Get the delivery status of a single send by the `sendId` returned from the
+      description: 'Get the delivery status of up to 100 sends in a single request, using the
 
-        start endpoint.'
-      summary: Get send delivery status
+        `sendId` values returned from the start endpoint. Prefer this over polling
+
+        the single-send endpoint once per `sendId`.'
+      summary: Get send delivery statuses
       security:
       - bearerAuth: []
       parameters:
@@ -117,15 +111,23 @@ paths:
         required: true
         schema:
           type: string
-      - in: path
-        name: sendId
+      requestBody:
         required: true
-        schema:
-          type: string
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchSendStatusRequest'
       tags:
       - Campaigns
 components:
   schemas:
+    CampaignRecipient:
+      anyOf:
+      - $ref: '#/components/schemas/HandleCampaignRecipient'
+      - $ref: '#/components/schemas/ProfileCampaignRecipient'
+      description: 'A single send target. Provide either `handle` (inline delivery address) or
+
+        `id` (Personalization API profile ID), but not both.'
     StartCampaignResponse:
       description: 'Response body for a campaign trigger request. Results are returned in the
 
@@ -142,61 +144,6 @@ components:
       - results
       type: object
       additionalProperties: false
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
-    SendStatusResponse:
-      description: Delivery status for a single send, returned by the send status endpoint.
-      properties:
-        status:
-          type: string
-          description: 'Current delivery status.
-
-            - `sent` — accepted by the provider; no delivery receipt yet
-
-            - `delivered` — confirmed delivered by the provider
-
-            - `bounced` — delivery failed with a bounce
-
-            - `failed` — delivery failed
-
-            - `dropped` — dropped before delivery (e.g. unsubscribed, suppressed, or enrichment failure); see `reason`'
-        reason:
-          type: string
-          description: 'Additional explanation for why this send was dropped.
-
-            Only present when `status` is `"dropped"`.'
-      required:
-      - status
-      type: object
-      additionalProperties: false
-    ProfileCampaignRecipient:
-      description: A recipient identified by their Personalization API Cached profile ID.
-      properties:
-        id:
-          type: string
-          description: 'Primary key of the recipient as configured on the Personalization API sync.
-
-            The delivery address is resolved from the cache at send time.'
-        properties:
-          properties: {}
-          additionalProperties: {}
-          type: object
-          description: 'Per-recipient personalization overrides. Merged with the top-level
-
-            `properties` and the cached profile; these values take precedence when a
-
-            key appears in multiple sources.'
-      type: object
-      additionalProperties: false
-    CampaignRecipient:
-      anyOf:
-      - $ref: '#/components/schemas/HandleCampaignRecipient'
-      - $ref: '#/components/schemas/ProfileCampaignRecipient'
-      description: 'A single send target. Provide either `handle` (inline delivery address) or
-
-        `id` (Personalization API profile ID), but not both.'
     TriggerErrorResponse:
       description: 'Body returned on a request-level failure (400/404/409/429) so the caller
 
@@ -207,6 +154,43 @@ components:
           description: Human-readable description of why the request failed.
       required:
       - error
+      type: object
+      additionalProperties: false
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
+    SendStatusReasonCode:
+      type: string
+      enum:
+      - suppression_list
+      - role_based_address_suppression
+      - suspicious_domain_suppression
+      - frequency_cap
+      - quiet_hours
+      - missing_channel_data
+      - no_locale
+      - unsubscribed
+      - render_error
+      - other
+      - send_failed
+      - delivery_failed
+      description: 'Stable machine-readable reason a send was dropped or failed. Branch on this
+
+        value; the wording of `reason` may change.'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     CampaignSendResult:
@@ -234,7 +218,9 @@ components:
           type: string
           description: 'Unique identifier for this send, present when `status` is `"accepted"`.
 
-            Use with `GET /campaigns/{id}/sends/{sendId}` to poll for delivery status.'
+            Use with `POST /campaigns/{id}/sends/batch-get` to poll for delivery
+
+            status; it accepts up to 100 `sendId` values per request.'
         reason:
           type: string
           enum:
@@ -242,15 +228,9 @@ components:
           - missing_variables
           - invalid_id
           - missing_handle_or_id
-          description: 'Reason for rejection, present when `status` is `"rejected"`.
-
-            - `invalid_handle` — the delivery address is not a valid email or phone number
-
-            - `missing_variables` — one or more required template variables are absent
-
-            - `invalid_id` — the profile ID is empty or missing
-
-            - `missing_handle_or_id` — the recipient has neither `handle` nor `id`'
+          - invalid_locale
+          - whatsapp_marketing_us_number
+          description: "Reason for rejection, present when `status` is `\"rejected\"`.\n- `invalid_handle` — the delivery address is not a valid email or phone number\n- `missing_variables` — one or more required template variables are absent\n  (`handle` recipients only; `id` recipients are checked at send time)\n- `invalid_id` — the profile ID is empty or missing\n- `missing_handle_or_id` — the recipient has neither `handle` nor `id`\n- `invalid_locale` — the `locale` is empty or longer than 7 characters\n- `whatsapp_marketing_us_number` — the message uses a marketing WhatsApp template, which Meta does not deliver to US phone numbers"
         missingVariables:
           items:
             type: string
@@ -293,21 +273,110 @@ components:
       - recipients
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ProfileCampaignRecipient:
+      description: 'A recipient identified by their Personalization API Cached profile ID.
+
+        Template variables are checked at send time, after the cached profile is
+
+        merged with `properties`. A required variable (one without a Liquid default)
+
+        missing from both drops the send, which the send status endpoint reports as
+
+        `dropped`. A variable present with a null or empty value renders blank.'
       properties:
-        message:
+        id:
           type: string
-          enum:
-          - Validation failed
-        details:
+          description: 'Primary key of the recipient as configured on the Personalization API sync.
+
+            The delivery address is resolved from the cache at send time.'
+        properties:
           properties: {}
           additionalProperties: {}
           type: object
-      required:
-      - message
-      - details
+          description: 'Per-recipient personalization overrides. Merged with the top-level
+
+            `properties` and the cached profile; these values take precedence when a
+
+            key appears in multiple sources.'
+        locale:
+          type: string
+          description: 'The recipient''s locale as a BCP 47 language tag, such as `es-ES`, matched
+
+            against the locales the message is localized into (case-insensitive). When
+
+            omitted, the recipient gets the message''s source language. A locale the
+
+            message is not localized into follows the workspace''s localization fallback
+
+            setting. At most 7 characters.'
       type: object
       additionalProperties: false
+    BatchSendStatusResponse:
+      description: 'Response body for the batch send status endpoint. Results are returned in the
+
+        same order as the requested `sendIds`.'
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/BatchSendStatusResult'
+          type: array
+          description: Per-send outcomes, in request order.
+      required:
+      - results
+      type: object
+      additionalProperties: false
+    BatchSendStatusResult:
+      description: Delivery status for one requested send.
+      properties:
+        sendId:
+          type: string
+          description: The `sendId` this result is for, echoed from the request.
+        status:
+          $ref: '#/components/schemas/SendStatus'
+        reason:
+          type: string
+          description: 'Readable explanation for why this send was dropped or failed. Present
+
+            when `status` is `"dropped"` or `"failed"`.'
+        reasonCode:
+          $ref: '#/components/schemas/SendStatusReasonCode'
+          description: Stable code for `reason`. Present whenever `reason` is.
+        updatedAt:
+          type: string
+          description: 'ISO 8601 time the status last changed. Absent when `status` is
+
+            `"not_found"`.'
+      required:
+      - sendId
+      - status
+      type: object
+      additionalProperties: false
+    BatchSendStatusRequest:
+      description: Request body for the batch send status endpoint.
+      properties:
+        sendIds:
+          items:
+            type: string
+          type: array
+          description: '`sendId` values returned by the trigger endpoint.'
+          minItems: 1
+          maxItems: 100
+      required:
+      - sendIds
+      type: object
+      additionalProperties: false
+    SendStatus:
+      type: string
+      enum:
+      - sent
+      - delivered
+      - bounced
+      - failed
+      - dropped
+      - not_found
+      description: 'Delivery status of a send. `not_found` means no send with this id exists on
+
+        the campaign, including a send that has not been processed yet.'
     HandleCampaignRecipient:
       description: 'A recipient identified by their delivery address (email or phone number).
 
@@ -317,7 +386,7 @@ components:
           type: string
           description: 'Delivery address for this recipient. Must be a valid email address for
 
-            email campaigns, or an E.164-formatted phone number for SMS campaigns.'
+            email campaigns, or an E.164-formatted phone number for SMS and WhatsApp campaigns.'
         properties:
           properties: {}
           additionalProperties: {}
@@ -327,6 +396,17 @@ components:
             names shown in the message editor. These are merged with the top-level
 
             `properties` and take precedence when a key appears in both.'
+        locale:
+          type: string
+          description: 'The recipient''s locale as a BCP 47 language tag, such as `es-ES`, matched
+
+            against the locales the message is localized into (case-insensitive). When
+
+            omitted, the recipient gets the message''s source language. A locale the
+
+            message is not localized into follows the workspace''s localization fallback
+
+            setting. At most 7 characters.'
       type: object
       additionalProperties: false
   securitySchemes:

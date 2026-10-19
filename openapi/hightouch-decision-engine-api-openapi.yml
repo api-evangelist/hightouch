@@ -327,6 +327,125 @@ paths:
               $ref: '#/components/schemas/DecisionEngineMessageUpdate'
       tags:
       - Decision Engine
+    delete:
+      operationId: DeleteMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - {}
+                - $ref: '#/components/schemas/DecisionEngineErrorResponse'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionEngineErrorResponse'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/DecisionEngineErrorResponse'
+                - $ref: '#/components/schemas/InternalServerError'
+      description: 'Delete a message. The message is soft-deleted and disabled in the flow,
+
+        so it is no longer returned by the API and is ineligible for future sends.'
+      summary: Delete Decision Engine Message
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The UUID of the flow
+        in: path
+        name: flowId
+        required: true
+        schema:
+          type: string
+      - description: The UUID of the message
+        in: path
+        name: messageId
+        required: true
+        schema:
+          type: string
+      tags:
+      - Decision Engine
+  /decision-engine/flow/{flowId}/messages/{messageId}/clone:
+    post:
+      operationId: CloneMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/DecisionEngineMessage'
+                - $ref: '#/components/schemas/DecisionEngineErrorResponse'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionEngineErrorResponse'
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/DecisionEngineErrorResponse'
+                - $ref: '#/components/schemas/InternalServerError'
+      description: 'Clone a message within a flow. The copy keeps the source message''s
+
+        config, tags, guardrails, and variables, and is created disabled.'
+      summary: Clone Decision Engine Message
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The UUID of the flow
+        in: path
+        name: flowId
+        required: true
+        schema:
+          type: string
+      - description: The UUID of the message to clone
+        in: path
+        name: messageId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DecisionEngineMessageClone'
+      tags:
+      - Decision Engine
   /decision-engine/flow/{flowId}/run:
     post:
       operationId: RunFlow
@@ -371,71 +490,42 @@ paths:
       - Decision Engine
 components:
   schemas:
-    DecisionEngineMessageGuardrails:
-      description: Guardrail fields on a message (max sends, eligibility dates, etc.)
+    DecisionEngineMessageCreate:
+      description: Request body for creating a Decision Engine message
       properties:
-        maxSendsPerUser:
-          type: number
-          format: double
-        maxSendsPerUserWindowDays:
-          type: number
-          format: double
-        minOtherMessagesInBetween:
-          type: number
-          format: double
-        firstEligibleSendDate:
+        name:
           type: string
-        lastEligibleSendDate:
+        channelId:
           type: string
-      type: object
-      additionalProperties: false
-    DecisionEngineVariableVariant:
-      description: Variant within a message variable (Public API)
-      properties:
-        value:
-          type: string
-          description: The default (non-localized) value for this variant
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
         tags:
           properties: {}
-          additionalProperties:
-            type: string
+          additionalProperties: {}
           type: object
-          description: Key-value tags for categorizing this variant
-        firstEligibleSendDate:
-          type: string
-          description: Earliest date this variant is eligible to be sent (ISO 8601)
-        lastEligibleSendDate:
-          type: string
-          description: Latest date this variant is eligible to be sent (ISO 8601)
-        userAudienceFilter: {}
-        localeValues:
-          properties: {}
-          additionalProperties:
-            type: string
-          type: object
-          description: 'Localized values for this variant, keyed by locale code (e.g. "en-US", "de-DE").
-
-            These are only used at runtime when `localizationEnabled` is true on the parent variable.
-
-            You can stage translations by providing localeValues while leaving localizationEnabled unset or false.'
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariable'
+          type: array
       required:
-      - value
+      - name
+      - channelId
+      - config
       type: object
       additionalProperties: false
-    DecisionEngineRunResponse:
+    DecisionEngineErrorResponse:
       properties:
-        flowsEnqueued:
-          type: number
-          format: double
-          description: Number of flows that were enqueued for execution
+        message:
+          type: string
+          description: Why the request failed.
       required:
-      - flowsEnqueued
+      - message
       type: object
       additionalProperties: false
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
     DecisionEngineFlow:
       description: Decision Engine Flow (Public API)
       properties:
@@ -472,33 +562,6 @@ components:
       - status
       type: object
       additionalProperties: false
-    DecisionEngineMessageCreate:
-      description: Request body for creating a Decision Engine message
-      properties:
-        name:
-          type: string
-        channelId:
-          type: string
-        config:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        tags:
-          properties: {}
-          additionalProperties: {}
-          type: object
-        guardrails:
-          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
-        variables:
-          items:
-            $ref: '#/components/schemas/DecisionEngineVariable'
-          type: array
-      required:
-      - name
-      - channelId
-      - config
-      type: object
-      additionalProperties: false
     DecisionEngineVariable:
       description: Message variable (Public API)
       properties:
@@ -532,25 +595,41 @@ components:
       - variants
       type: object
       additionalProperties: false
-    DecisionEngineMessageUpdate:
-      description: Request body for updating a Decision Engine message
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
+    DecisionEngineVariableVariant:
+      description: Variant within a message variable (Public API)
       properties:
-        name:
+        value:
           type: string
-        config:
-          properties: {}
-          additionalProperties: {}
-          type: object
+          description: The default (non-localized) value for this variant
         tags:
           properties: {}
-          additionalProperties: {}
+          additionalProperties:
+            type: string
           type: object
-        guardrails:
-          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
-        variables:
-          items:
-            $ref: '#/components/schemas/DecisionEngineVariable'
-          type: array
+          description: Key-value tags for categorizing this variant
+        firstEligibleSendDate:
+          type: string
+          description: Earliest date this variant is eligible to be sent (ISO 8601)
+        lastEligibleSendDate:
+          type: string
+          description: Latest date this variant is eligible to be sent (ISO 8601)
+        userAudienceFilter: {}
+        localeValues:
+          properties: {}
+          additionalProperties:
+            type: string
+          type: object
+          description: 'Localized values for this variant, keyed by locale code (e.g. "en-US", "de-DE").
+
+            These are only used at runtime when `localizationEnabled` is true on the parent variable.
+
+            You can stage translations by providing localeValues while leaving localizationEnabled unset or false.'
+      required:
+      - value
       type: object
       additionalProperties: false
     ValidateErrorJSON:
@@ -566,6 +645,24 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    DecisionEngineRunResponse:
+      properties:
+        flowsEnqueued:
+          type: number
+          format: double
+          description: Number of flows that were enqueued for execution
+      required:
+      - flowsEnqueued
+      type: object
+      additionalProperties: false
+    DecisionEngineMessageClone:
+      description: Request body for cloning a Decision Engine message
+      properties:
+        name:
+          type: string
+          description: Name for the copy. Defaults to "Copy of <source message name>".
       type: object
       additionalProperties: false
     DecisionEngineMessage:
@@ -602,6 +699,45 @@ components:
       - name
       - channelId
       - config
+      type: object
+      additionalProperties: false
+    DecisionEngineMessageGuardrails:
+      description: Guardrail fields on a message (max sends, eligibility dates, etc.)
+      properties:
+        maxSendsPerUser:
+          type: number
+          format: double
+        maxSendsPerUserWindowDays:
+          type: number
+          format: double
+        minOtherMessagesInBetween:
+          type: number
+          format: double
+        firstEligibleSendDate:
+          type: string
+        lastEligibleSendDate:
+          type: string
+      type: object
+      additionalProperties: false
+    DecisionEngineMessageUpdate:
+      description: Request body for updating a Decision Engine message
+      properties:
+        name:
+          type: string
+        config:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        tags:
+          properties: {}
+          additionalProperties: {}
+          type: object
+        guardrails:
+          $ref: '#/components/schemas/DecisionEngineMessageGuardrails'
+        variables:
+          items:
+            $ref: '#/components/schemas/DecisionEngineVariable'
+          type: array
       type: object
       additionalProperties: false
   securitySchemes:

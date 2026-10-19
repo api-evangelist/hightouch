@@ -225,6 +225,7 @@ paths:
                     queuedAt: null
                     reprocessedAt: null
                     reprocessedRunId: null
+                    recordFound: null
                     error: null
                 queued:
                   value:
@@ -232,6 +233,7 @@ paths:
                     queuedAt: '2025-10-07T01:23:45.678Z'
                     reprocessedAt: null
                     reprocessedRunId: null
+                    recordFound: null
                     error: null
                 reprocessed:
                   value:
@@ -239,6 +241,9 @@ paths:
                     queuedAt: '2025-10-07T01:23:45.678Z'
                     reprocessedAt: '2025-10-07T01:23:45.678Z'
                     reprocessedRunId: 123e4567-e89b-12d3-a456-426614174000
+                    recordFound:
+                    - true
+                    - false
                     error: null
                 failed:
                   value:
@@ -246,6 +251,7 @@ paths:
                     queuedAt: null
                     reprocessedAt: null
                     reprocessedRunId: null
+                    recordFound: null
                     error: Failed to write identifiers to data warehouse
         '400':
           description: Bad Request
@@ -283,98 +289,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TriggerRunIdrOutput:
-      properties:
-        id:
-          type: string
-          description: The id of the triggered run.
-      required:
-      - id
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    IdrRunStats:
-      properties:
-        numSourceRows:
-          type: number
-          format: double
-          description: The exact number of rows processed from sources in this run.
-        numNewUniqueProfiles:
-          type: number
-          format: double
-          description: The exact number of unique profiles in the graph created during this run.
-        numUniqueProfiles:
-          type: number
-          format: double
-          description: The exact number of unique profiles in the graph at the end of the run.
-      required:
-      - numSourceRows
-      - numNewUniqueProfiles
-      - numUniqueProfiles
-      type: object
-    IdrReprocessStatusOutput:
-      properties:
-        status:
-          type: string
-          enum:
-          - queueing
-          - queued
-          - reprocessed
-          - failed
-          - cancelled
-          description: '"queueing": The identifiers are being queued for reprocessing.
-
-            "queued": The identifiers have been queued and added to the blocklist. Their associated clusters will be reprocessed next time the graph runs.
-
-            "reprocessed": The identifiers'' clusters have been reprocessed during a run.
-
-            "failed": We failed to queue the identifiers for reprocessing.
-
-            "cancelled": The reprocessing request has been cancelled.'
-        queuedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Set if the status is "queued" or "reprocessed". The timestamp when the identifiers were queued for reprocessing.
-        reprocessedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Set if the status is "reprocessed". The timestamp when the identifiers' clusters were reprocessed.
-        reprocessedRunId:
-          type:
-          - string
-          - 'null'
-          description: Set if the status is "reprocessed". The ID of the run that reprocessed the identifiers' clusters.
-        error:
-          type:
-          - string
-          - 'null'
-          description: If available, the error message from failing to queue the identifiers for reprocessing.
-      required:
-      - status
-      - queuedAt
-      - reprocessedAt
-      - reprocessedRunId
-      - error
-      type: object
-      additionalProperties: false
     IdrRun:
       properties:
         fullRerun:
@@ -415,6 +329,25 @@ components:
       - graphId
       - id
       type: object
+    IdrRunStats:
+      properties:
+        numSourceRows:
+          type: number
+          format: double
+          description: The exact number of rows processed from sources in this run.
+        numNewUniqueProfiles:
+          type: number
+          format: double
+          description: The exact number of unique profiles in the graph created during this run.
+        numUniqueProfiles:
+          type: number
+          format: double
+          description: The exact number of unique profiles in the graph at the end of the run.
+      required:
+      - numSourceRows
+      - numNewUniqueProfiles
+      - numUniqueProfiles
+      type: object
     ListIdrRunsOutput:
       description: The output of a request to list runs for an IDR graph.
       properties:
@@ -429,13 +362,89 @@ components:
       - hasMore
       type: object
       additionalProperties: false
-    IdrQueueForReprocessingOutput:
+    ValidateErrorJSON:
       properties:
-        requestId:
+        message:
           type: string
-          description: ID associated with the reprocessing request. This can be used to query the status of the request.
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
       required:
-      - requestId
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TriggerRunIdrOutput:
+      properties:
+        id:
+          type: string
+          description: The id of the triggered run.
+      required:
+      - id
+      type: object
+      additionalProperties: false
+    IdrReprocessStatusOutput:
+      properties:
+        status:
+          type: string
+          enum:
+          - queueing
+          - queued
+          - reprocessed
+          - failed
+          - cancelled
+          description: '"queueing": The identifiers are being queued for reprocessing.
+
+            "queued": The identifiers have been queued and added to the blocklist. Their associated clusters will be reprocessed next time the graph runs.
+
+            "reprocessed": The identifiers'' clusters have been reprocessed during a run.
+
+            "failed": We failed to queue the identifiers for reprocessing.
+
+            "cancelled": The reprocessing request has been cancelled.'
+        queuedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Set if the status is "queued" or "reprocessed". The timestamp when the identifiers were queued for reprocessing.
+        reprocessedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Set if the status is "reprocessed". The timestamp when the identifiers' clusters were reprocessed.
+        reprocessedRunId:
+          type:
+          - string
+          - 'null'
+          description: Set if the status is "reprocessed". The ID of the run that reprocessed the identifiers' clusters.
+        recordFound:
+          items:
+            type: boolean
+          type:
+          - array
+          - 'null'
+          description: 'One result per identifier, in the order they were submitted.
+
+            True if the identifier was found in the graph at the start of the run that processed the request.
+
+            Null until the request is processed, and on requests submitted before this field existed on the API.'
+        error:
+          type:
+          - string
+          - 'null'
+          description: If available, the error message from failing to queue the identifiers for reprocessing.
+      required:
+      - status
+      - queuedAt
+      - reprocessedAt
+      - reprocessedRunId
+      - recordFound
+      - error
       type: object
       additionalProperties: false
     IdrRunStatsByThreshold:
@@ -468,6 +477,7 @@ components:
             Identifier values will be queued for reprocessing.
 
             Clusters containing these identifiers will be reprocessed on the next run.'
+          maxItems: 1000
         block:
           type: boolean
           description: If true, identifier values will also be added to the blocklist and ignored in future runs.
@@ -484,6 +494,15 @@ components:
           default: 'false'
       type: object
       description: The input of a trigger action to run IDR.
+    IdrQueueForReprocessingOutput:
+      properties:
+        requestId:
+          type: string
+          description: ID associated with the reprocessing request. This can be used to query the status of the request.
+      required:
+      - requestId
+      type: object
+      additionalProperties: false
   securitySchemes:
     bearerAuth:
       type: http

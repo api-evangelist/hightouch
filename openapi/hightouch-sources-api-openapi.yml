@@ -296,6 +296,25 @@ paths:
       - Sources
 components:
   schemas:
+    InternalServerError:
+      type: string
+      enum:
+      - Internal Server Error
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     SourceUpdate:
       description: The input for updating a Source
       properties:
@@ -319,10 +338,6 @@ components:
             configuration. It may change as Hightouch updates its internal code.'
       type: object
       additionalProperties: false
-    InternalServerError:
-      type: string
-      enum:
-      - Internal Server Error
     Source:
       description: 'The database or warehouse where your data is stored. The starting point for
 
@@ -377,21 +392,6 @@ components:
       - updatedAt
       - configuration
       - type
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     SourceCreate:

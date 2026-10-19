@@ -11,6 +11,272 @@ servers:
 tags:
 - name: Models
 paths:
+  /models/{modelId}/size:
+    post:
+      operationId: StartAudienceSizeJob
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/StartAudienceSizeJobOutput'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+              examples:
+                Example 1:
+                  value:
+                    jobId: 7e54c0ff-1710-454f-a25b-d44f8319fc3e
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      description: Start a background job to compute audience size.
+      summary: Start an audience size job
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The id of the audience
+        in: path
+        name: modelId
+        required: true
+        schema:
+          format: double
+          type: number
+      tags:
+      - Models
+  /models/{modelId}/size/{jobId}:
+    get:
+      operationId: GetAudienceSize
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AudienceSizeJob'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+              examples:
+                pending:
+                  value:
+                    jobId: 7e54c0ff-1710-454f-a25b-d44f8319fc3e
+                    status: pending
+                    size: null
+                    evaluatedAt: null
+                    error: null
+                success:
+                  value:
+                    jobId: 7e54c0ff-1710-454f-a25b-d44f8319fc3e
+                    status: success
+                    size: 141421
+                    evaluatedAt: '2026-09-09T12:00:00.000Z'
+                    error: null
+                failed:
+                  value:
+                    jobId: 7e54c0ff-1710-454f-a25b-d44f8319fc3e
+                    status: failed
+                    size: null
+                    evaluatedAt: null
+                    error: relation "analytics.users" does not exist
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      description: Get the state of an audience size job.
+      summary: Get an audience size
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The id of the audience
+        in: path
+        name: modelId
+        required: true
+        schema:
+          format: double
+          type: number
+      - description: The id returned when the size job was started
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+      tags:
+      - Models
+  /models/{modelId}/match-booster/trigger:
+    post:
+      operationId: TriggerEnrichment
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/MatchBoosterTriggerOutput'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+              examples:
+                Example 1:
+                  value:
+                    id: '42'
+                    status: processing
+                    createdAt: '2026-08-19T00:00:00.000Z'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      description: 'Trigger a Match Booster enrichment run for a model. The model must have
+
+        Match Booster enabled.'
+      summary: Trigger Match Booster enrichment
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The id of the model to enrich
+        in: path
+        name: modelId
+        required: true
+        schema:
+          format: double
+          type: number
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchBoosterTriggerInput'
+            example:
+              forceFullEnrichment: false
+      tags:
+      - Models
+  /models/{modelId}/match-booster/runs:
+    get:
+      operationId: ListEnrichmentRuns
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ListMatchBoosterRunsOutput'
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+              examples:
+                Example 1:
+                  value:
+                    data:
+                    - id: 715eba82-2097-4c1b-91c0-ae7c279c763a
+                      status: success
+                      region: us
+                      error: null
+                      enrichedRows: 100000
+                      isFullEnrichment: false
+                      durationMs: 360000
+                      enrichedAt: '2026-08-19T00:00:00.000Z'
+                    hasMore: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      description: List Match Booster enrichment runs for a model, most recent first.
+      summary: List Match Booster enrichment runs
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The id of the model
+        in: path
+        name: modelId
+        required: true
+        schema:
+          format: double
+          type: number
+      - description: Filter runs to a Match Booster region
+        in: query
+        name: region
+        required: false
+        schema:
+          type: string
+          enum:
+          - us
+          - eu
+      - description: limit the number of objects returned (default is 100)
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          format: double
+          type: number
+      - description: set the offset on results (for pagination)
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: double
+          type: number
+      tags:
+      - Models
   /models/{modelId}:
     get:
       operationId: GetModel
@@ -32,11 +298,20 @@ paths:
                     primaryKey: id
                     createdAt: '2022-02-16T21:37:58.510Z'
                     updatedAt: '2022-02-16T21:37:58.510Z'
+                    createdBy:
+                      id: 1
+                      name: Jane Doe
+                      email: jane.doe@example.com
+                    updatedBy:
+                      id: 1
+                      name: Jane Doe
+                      email: jane.doe@example.com
                     sourceId: 1
                     queryType: raw_sql
                     tags:
                       foo: bar
                     isSchema: false
+                    isGeneralModel: false
                     raw:
                       sql: select * from users
                     syncs:
@@ -79,16 +354,25 @@ paths:
                     id: 1
                     name: testModel
                     slug: testModel
-                    description: ''
+                    description: Names of all users
                     workspaceId: 1
                     primaryKey: id
                     createdAt: '2022-02-16T21:37:58.510Z'
                     updatedAt: '2022-02-17T23:19:05.000Z'
+                    createdBy:
+                      id: 1
+                      name: Jane Doe
+                      email: jane.doe@example.com
+                    updatedBy:
+                      id: 1
+                      name: Jane Doe
+                      email: jane.doe@example.com
                     sourceId: 1
                     queryType: raw_sql
                     tags:
                       foo: bar
                     isSchema: false
+                    isGeneralModel: false
                     raw:
                       sql: select name from users
                     syncs:
@@ -134,9 +418,71 @@ paths:
               $ref: '#/components/schemas/ModelUpdate'
             example:
               name: testmodel
+              description: Names of all users
               primaryKey: id
               raw:
                 sql: select name from users
+      tags:
+      - Models
+    delete:
+      operationId: DeleteModel
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - {}
+                - $ref: '#/components/schemas/ValidateErrorJSON'
+                - $ref: '#/components/schemas/InternalServerError'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      description: 'Delete a model
+
+
+        Deletes a model based on its Hightouch ID. Any syncs that use the model are
+
+        deleted as well. Deleting a parent model also deletes every audience built
+
+        on it. A model that is still referenced by a journey, priority list,
+
+        decision engine agent, dynamic content condition, saved chart, or identity
+
+        resolution graph cannot be deleted until those references are removed.'
+      summary: Delete Model
+      security:
+      - bearerAuth: []
+      parameters:
+      - description: The model's ID
+        in: path
+        name: modelId
+        required: true
+        schema:
+          format: double
+          type: number
       tags:
       - Models
   /models:
@@ -168,11 +514,20 @@ paths:
                       primaryKey: id
                       createdAt: '2022-02-16T21:37:58.510Z'
                       updatedAt: '2022-02-16T21:37:58.510Z'
+                      createdBy:
+                        id: 1
+                        name: Jane Doe
+                        email: jane.doe@example.com
+                      updatedBy:
+                        id: 1
+                        name: Jane Doe
+                        email: jane.doe@example.com
                       sourceId: 1
                       queryType: raw_sql
                       tags:
                         foo: bar
                       isSchema: false
+                      isGeneralModel: false
                       raw:
                         sql: select * from users
                       syncs:
@@ -187,11 +542,20 @@ paths:
                       primaryKey: id
                       createdAt: '2022-02-16T21:37:58.510Z'
                       updatedAt: '2022-02-16T21:37:58.510Z'
+                      createdBy:
+                        id: 1
+                        name: Jane Doe
+                        email: jane.doe@example.com
+                      updatedBy:
+                        id: 1
+                        name: Jane Doe
+                        email: jane.doe@example.com
                       sourceId: 1
                       queryType: raw_sql
                       tags:
                         foo: baz
                       isSchema: false
+                      isGeneralModel: false
                       raw:
                         sql: select * from accounts
                       syncs:
@@ -284,21 +648,32 @@ paths:
                     id: 3
                     name: testModel3
                     slug: testModel3
-                    description: ''
+                    description: Users with their last names
                     workspaceId: 1
                     primaryKey: id
                     createdAt: '2022-02-16T21:37:58.510Z'
                     updatedAt: '2022-02-16T21:37:58.510Z'
+                    createdBy:
+                      id: 1
+                      name: Jane Doe
+                      email: jane.doe@example.com
+                    updatedBy:
+                      id: 1
+                      name: Jane Doe
+                      email: jane.doe@example.com
                     sourceId: 1
                     queryType: raw_sql
                     tags: {}
                     isSchema: false
+                    isGeneralModel: false
                     raw:
                       sql: select id, last_name from users
                     syncs: []
                     lastRunSize: null
         '401':
           description: Unauthorized
+        '403':
+          description: Forbidden
         '409':
           description: Conflict
           content:
@@ -334,19 +709,63 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ModelCreate'
-            example:
-              name: testModel3
-              slug: testModel3
-              primaryKey: id
-              sourceId: 1
-              queryType: raw_sql
-              isSchema: false
-              raw:
-                sql: select id, last_name from users
+            examples:
+              Example 1:
+                value:
+                  name: testModel3
+                  slug: testModel3
+                  description: Users with their last names
+                  primaryKey: id
+                  sourceId: 1
+                  queryType: raw_sql
+                  isSchema: false
+                  raw:
+                    sql: select id, last_name from users
+              Example 2:
+                value:
+                  name: West coast fans
+                  slug: west-coast-fans
+                  description: Fans located in CA, OR, or WA
+                  primaryKey: id
+                  sourceId: 1
+                  queryType: visual
+                  isSchema: false
+                  visual:
+                    parentId: 2
+                    filter:
+                      conditions: []
+                  spaceId: 3f2b1c8e-6d4a-4f0e-9b7c-2a1d5e8f0c3b
+                  rowLevelAccessRuleIds:
+                  - 7c0e7f1d-2a3b-4c5d-8e9f-0a1b2c3d4e5f
       tags:
       - Models
 components:
   schemas:
+    MatchBoosterTriggerOutput:
+      description: The output of a trigger action to run a Match Booster enrichment.
+      properties:
+        id:
+          type: string
+          description: The id of the triggered enrichment job.
+        status:
+          type: string
+          description: The status of the triggered enrichment job.
+        createdAt:
+          type: string
+          description: Timestamp when the enrichment job was created.
+      required:
+      - id
+      - status
+      - createdAt
+      type: object
+      additionalProperties: false
+    AudienceSizeStatus:
+      type: string
+      enum:
+      - pending
+      - success
+      - failed
+      - cancelled
     InternalServerError:
       type: string
       enum:
@@ -367,8 +786,10 @@ components:
           type: string
           description: The slug of the model
         description:
-          type: string
-          description: The description of the model
+          type:
+          - string
+          - 'null'
+          description: The description of the model. Null when no description has been set.
         workspaceId:
           type: number
           format: double
@@ -384,6 +805,14 @@ components:
           type: string
           format: date-time
           description: The timestamp when model was lastly updated
+        createdBy:
+          allOf:
+          - $ref: '#/components/schemas/UserReference'
+          description: The user who created the model, or null if no user was recorded
+        updatedBy:
+          allOf:
+          - $ref: '#/components/schemas/UserReference'
+          description: The user who last updated the model, or null if no user was recorded
         sourceId:
           type: number
           format: double
@@ -402,6 +831,11 @@ components:
           description: 'If is_schema is true, the model is just used to build other models.
 
             Either as part of visual querying, or as the root of a visual query.'
+        isGeneralModel:
+          type: boolean
+          description: 'If is_general_model is true, the model is not synced. It exposes warehouse
+
+            data to Hightouch AI agents and is managed from the schema section.'
         syncs:
           items:
             type: number
@@ -515,6 +949,28 @@ components:
           description: 'The number of rows returned by the most recent successful sync run of this model.
 
             Null if the model has never been synced successfully.'
+        spaceId:
+          type: string
+          description: 'The Space this audience belongs to. Applies only to workspaces with Spaces enabled;
+
+            contact Hightouch to enable Spaces and to obtain Space ids.
+
+            Only valid when queryType is "visual". Omitted for models that are not in a Space.
+
+            An API key scoped to a Space must set it on create. Read-only after creation.'
+        rowLevelAccessRuleIds:
+          items:
+            type: string
+          type: array
+          description: 'Row-level access rules attached to this audience. Applies only to workspaces with
+
+            Spaces enabled. Only valid when queryType is "visual"; always present on an audience.
+
+            When creating an audience in a Space, include one rule from each required row-level
+
+            access group on the parent model. Rule ids come from the Spaces governance API.
+
+            Read-only after creation.'
       required:
       - id
       - name
@@ -524,38 +980,195 @@ components:
       - primaryKey
       - createdAt
       - updatedAt
+      - createdBy
+      - updatedBy
       - sourceId
       - queryType
       - tags
       - isSchema
+      - isGeneralModel
       - syncs
       - lastRunSize
       type: object
       additionalProperties: false
-    ModelCreate:
-      description: The input for creating a Model
+    ListMatchBoosterRunsOutput:
+      description: The output of a request to list Match Booster enrichment runs for a model.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/MatchBoosterRun'
+          type: array
+        hasMore:
+          type: boolean
+      required:
+      - data
+      - hasMore
+      type: object
+      additionalProperties: false
+    MatchBoosterRun:
+      description: A completed Match Booster enrichment run.
+      properties:
+        id:
+          type: string
+          description: The id of the enrichment run.
+        status:
+          type: string
+        region:
+          type: string
+          description: The Match Booster region the enrichment ran in.
+        error:
+          type:
+          - string
+          - 'null'
+          description: If available, the error associated with a failed run.
+        enrichedRows:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: The number of rows enriched during the run.
+        isFullEnrichment:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the run enriched all rows or only new/changed rows.
+        durationMs:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: The duration of the enrichment in milliseconds.
+        enrichedAt:
+          type: string
+          format: date-time
+          description: Timestamp of the run's completion.
+      required:
+      - id
+      - status
+      - region
+      - error
+      - enrichedRows
+      - isFullEnrichment
+      - durationMs
+      - enrichedAt
+      type: object
+      additionalProperties: false
+    StartAudienceSizeJobOutput:
+      properties:
+        jobId:
+          type: string
+      required:
+      - jobId
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties: {}
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    UserReference:
+      description: 'The Hightouch user who created or last updated a resource. Changes made with
+
+        an API key are attributed to the user who created the key.'
+      properties:
+        id:
+          type: number
+          format: double
+          description: The user's id
+        name:
+          type: string
+          description: The user's name
+        email:
+          type: string
+          description: The user's email address
+      required:
+      - id
+      - name
+      - email
+      type: object
+      additionalProperties: false
+    AudienceSizeJob:
+      description: The status of an audience size job.
+      properties:
+        jobId:
+          type: string
+        status:
+          $ref: '#/components/schemas/AudienceSizeStatus'
+          description: '"pending": The job is running
+
+            "success": The job is finished
+
+            "failed": The job could not be completed
+
+            "cancelled": The job was cancelled before it finished'
+        size:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: The size of the audience. Set if `status` is "success".
+        evaluatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The timestamp when the job finished. Set if `status` is "success".
+        error:
+          type:
+          - string
+          - 'null'
+          description: The reason the job failed. Set if `status` is "failed".
+      required:
+      - jobId
+      - status
+      - size
+      - evaluatedAt
+      - error
+      type: object
+      additionalProperties: false
+    MatchBoosterTriggerInput:
+      description: The input of a trigger action to run a Match Booster enrichment.
+      properties:
+        forceFullEnrichment:
+          type: boolean
+          description: Whether to re-enrich all rows instead of only new/changed rows.
+          default: 'false'
+        region:
+          type: string
+          enum:
+          - us
+          - eu
+          description: 'The Match Booster region to run the enrichment in. Defaults to the
+
+            model''s configured region.'
+      type: object
+      additionalProperties: false
+    ModelUpdate:
+      description: The input for updating a Model
       properties:
         name:
           type: string
           description: The name of the model
-        slug:
-          type: string
-          description: The slug of the model
-        queryType:
-          type: string
-          description: 'The type of the query. Available options: custom, raw_sql, tabel, dbt and visual.'
-        sourceId:
-          type: number
-          format: double
-          description: The id of the source that model is connected to
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the model. Null when no description has been set.
         isSchema:
           type: boolean
           description: 'If is_schema is true, the model is just used to build other models.
 
             Either as part of visual querying, or as the root of a visual query.'
-        primaryKey:
-          type: string
-          description: The primary key will be null if the query doesn't get directly synced (e.g. a relationship table for visual querying)
         visual:
           properties:
             secondaryLabel:
@@ -597,6 +1210,123 @@ components:
           description: Standard raw SQL query
         folderId:
           type: string
+        primaryKey:
+          type: string
+          description: The primary key will be null if the query doesn't get directly synced (e.g. a relationship table for visual querying)
+        dbt:
+          properties:
+            modelId:
+              type: number
+              format: double
+              description: Model id that refers to a dbt model
+          required:
+          - modelId
+          type: object
+      type: object
+      additionalProperties: false
+    ModelCreate:
+      description: The input for creating a Model
+      properties:
+        name:
+          type: string
+          description: The name of the model
+        slug:
+          type: string
+          description: The slug of the model
+        queryType:
+          type: string
+          description: 'The type of the query. Available options: custom, raw_sql, tabel, dbt and visual.'
+        sourceId:
+          type: number
+          format: double
+          description: The id of the source that model is connected to
+        isSchema:
+          type: boolean
+          description: 'If is_schema is true, the model is just used to build other models.
+
+            Either as part of visual querying, or as the root of a visual query.'
+        visual:
+          properties:
+            secondaryLabel:
+              type: string
+            primaryLabel:
+              type: string
+            filter: {}
+            parentId:
+              type: number
+              format: double
+              description: Parent id of the schema that visual query is based on
+          required:
+          - filter
+          - parentId
+          type: object
+          description: Visual query, used by audience
+        custom:
+          properties:
+            query: {}
+          required:
+          - query
+          type: object
+          description: Custom query for sources that doesn't support sql. For example, Airtable.
+        table:
+          properties:
+            name:
+              type: string
+          required:
+          - name
+          type: object
+          description: Table-based query that fetches on a table instead of SQL
+        raw:
+          properties:
+            sql:
+              type: string
+          required:
+          - sql
+          type: object
+          description: Standard raw SQL query
+        folderId:
+          type: string
+        spaceId:
+          type: string
+          description: 'The Space this audience belongs to. Applies only to workspaces with Spaces enabled;
+
+            contact Hightouch to enable Spaces and to obtain Space ids.
+
+            Only valid when queryType is "visual". Omitted for models that are not in a Space.
+
+            An API key scoped to a Space must set it on create. Read-only after creation.'
+        rowLevelAccessRuleIds:
+          items:
+            type: string
+          type: array
+          description: 'Row-level access rules attached to this audience. Applies only to workspaces with
+
+            Spaces enabled. Only valid when queryType is "visual"; always present on an audience.
+
+            When creating an audience in a Space, include one rule from each required row-level
+
+            access group on the parent model. Rule ids come from the Spaces governance API.
+
+            Read-only after creation.'
+        primaryKey:
+          type: string
+          description: 'The primary key will be null if the query doesn''t get directly synced (e.g. a relationship table for visual querying).
+
+            Optional here but actually conditionally required: every model except a
+
+            general model must supply one.'
+        isGeneralModel:
+          type: boolean
+          description: 'Create a general model: a model that exposes warehouse data to Hightouch AI
+
+            agents instead of being synced. Takes no primaryKey and no folderId, and
+
+            cannot be a schema model, and only supports certain query types.'
+        description:
+          type: string
+          description: 'The description of the model. On a general model this is the context AI
+
+            agents read to decide when to use it.'
         dbt:
           properties:
             modelId:
@@ -621,88 +1351,6 @@ components:
       - queryType
       - sourceId
       - isSchema
-      - primaryKey
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties: {}
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ModelUpdate:
-      description: The input for updating a Model
-      properties:
-        name:
-          type: string
-          description: The name of the model
-        isSchema:
-          type: boolean
-          description: 'If is_schema is true, the model is just used to build other models.
-
-            Either as part of visual querying, or as the root of a visual query.'
-        primaryKey:
-          type: string
-          description: The primary key will be null if the query doesn't get directly synced (e.g. a relationship table for visual querying)
-        visual:
-          properties:
-            secondaryLabel:
-              type: string
-            primaryLabel:
-              type: string
-            filter: {}
-            parentId:
-              type: number
-              format: double
-              description: Parent id of the schema that visual query is based on
-          required:
-          - filter
-          - parentId
-          type: object
-          description: Visual query, used by audience
-        custom:
-          properties:
-            query: {}
-          required:
-          - query
-          type: object
-          description: Custom query for sources that doesn't support sql. For example, Airtable.
-        table:
-          properties:
-            name:
-              type: string
-          required:
-          - name
-          type: object
-          description: Table-based query that fetches on a table instead of SQL
-        raw:
-          properties:
-            sql:
-              type: string
-          required:
-          - sql
-          type: object
-          description: Standard raw SQL query
-        folderId:
-          type: string
-        dbt:
-          properties:
-            modelId:
-              type: number
-              format: double
-              description: Model id that refers to a dbt model
-          required:
-          - modelId
-          type: object
       type: object
       additionalProperties: false
   securitySchemes:
