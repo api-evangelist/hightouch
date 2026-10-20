@@ -1,5 +1,8 @@
-generated: '2026-10-13'
+generated: '2026-10-20'
 method: searched
+source:
+- https://hightouch.com/docs/destinations/overview
+- https://hightouch.com/docs/sources/overview
 checked:
 - dbt/integrations/dbt-integration-edges.yml
 - https://a2aregistry.org/api/agents
@@ -7,6 +10,11 @@ checked:
 - https://hightouch.com/docs/destinations/overview
 - https://hightouch.com/docs/sources/overview
 - slack/integrations/slack-integration-edges.yml
+- https://composio.dev/toolkits/hightouch
+- https://monid.ai/tools/hightouch
+- https://n8n.io/integrations/hightouch/
+- https://zapier.com/apps/hightouch/integrations
+summary: null
 marketplace_apps:
 - marketplace: coverage
   channel: coverage-list
@@ -4972,6 +4980,4 @@ edges:
       status: released
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
-source:
-- https://hightouch.com/docs/destinations/overview
-- https://hightouch.com/docs/sources/overview
+templates: []
