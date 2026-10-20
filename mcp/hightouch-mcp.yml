@@ -20,7 +20,7 @@ server:
 tools:
 - name: search_docs
   description: Search Hightouch documentation. Returns matching sections with title, heading, URL, content
-    snippet, and section hierarchy.
+    snippet, and section hierarchy. Use this to find relevant docs before reading full pages.
   input_schema:
     required:
     - query
@@ -30,7 +30,8 @@ tools:
     - section
   source_operation: null
 - name: read_doc
-  description: Read the full markdown content of a Hightouch documentation page by path.
+  description: Read the full markdown content of a Hightouch documentation page. Use the path from search
+    results (e.g., '/syncs/overview'). Returns the complete page content in clean markdown.
   input_schema:
     required:
     - path
@@ -75,3 +76,4 @@ tool_quality:
   scored: false
   note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
     from Glimind's agent-readiness audit.
+tools_count: 2
