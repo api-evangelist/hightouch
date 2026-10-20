@@ -12,12 +12,12 @@ marketplace_apps:
   channel: coverage-list
   app: hightouch
   url: https://hightouch.com/docs/destinations/overview
-  app_count: 321
+  app_count: 323
   adapter: sweep-cdp.py:src_hightouch
-  listed: 321
-  destinations: 294
+  listed: 323
+  destinations: 296
   sources: 27
-  linked: 196
+  linked: 198
   unlinked: 98
   identity: domain (vendorUrl in the catalog record)
   status: ok
@@ -37,6 +37,72 @@ edges:
   seller_name: Hightouch
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: dbt (dbt-package-hub)
+  partner: dbt
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: dbt-package-hub
+  evidence: https://hub.getdbt.com/hightouchio/dbt_hightouch/latest/
+  mirror_of: dbt/integrations/dbt-integration-edges.yml
+  apps:
+  - Hightouch
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: dbt package
+- partner_name: Slack (own)
+  partner: slack
+  partner_match: mirror
+  mirror_match: domain+product
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://slack.com/marketplace/A010ZEEB44R-hightouch
+  mirror_of: slack/integrations/slack-integration-edges.yml
+  apps:
+  - Hightouch
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Slack app
+- partner_name: A2A protocol (own Agent Card)
+  partner: null
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: A2A agent
+  evidence: https://api.hightouch.com/.well-known/agent-card.json
+  channel: provider-built
+  relationship: compatible
+  shape: a2a
+  evidence_kind: own-wellknown
+  degree: conformant
+  report_only: true
+  a2a_card:
+    grade: conformant
+    verdict: live
+    protocol_version: 0.3.0
+    deviations: []
+    card_subject: api
+  contract_reference:
+    register: provider's own /.well-known/agent-card.json
+    spec_file: null
+    standard: A2A
+    role: a2a-agent-card
+    registered_name: Hightouch Marketing Agent
+    organization: Hightouch
+    matched_domain: hightouch.com
+    matched_by: own-domain
+    detected_by: sweep-ai-agents.py
+    detected: '2026-10-19'
+  detected_by: sweep-ai-agents.py
+  first_seen: '2026-10-15'
 - partner_name: Acoustic
   partner: acoustic
   partner_match: domain
@@ -1298,7 +1364,7 @@ edges:
   first_seen: '2026-10-14'
 - partner_name: Dropbox
   partner: dropbox
-  partner_match: domain+name-among-holders
+  partner_match: domain
   partner_url: https://www.dropbox.com/
   marketplace: coverage
   channel: provider-built
@@ -2730,6 +2796,25 @@ edges:
       - upsert
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: MNTN
+  partner: mntn
+  partner_match: domain
+  partner_url: https://mountain.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/mntn
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mntn
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-19'
 - partner_name: MoEngage
   partner: moengage
   partner_match: domain
@@ -3708,6 +3793,34 @@ edges:
       - upsert
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: Sailthru
+  partner: sailthru
+  partner_match: domain
+  partner_url: https://www.sailthru.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/sailthru
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sailthru
+      status: released
+      sync_types:
+      - Custom events
+      - Purchases
+      - Returns
+      - Users
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-19'
 - partner_name: Salesforce
   partner: salesforce
   partner_match: domain+name-among-holders
@@ -4859,72 +4972,6 @@ edges:
       status: released
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
-- partner_name: A2A protocol (own Agent Card)
-  partner: null
-  partner_match: register
-  type: register
-  direction: provider-built
-  category: A2A agent
-  evidence: https://api.hightouch.com/.well-known/agent-card.json
-  channel: provider-built
-  relationship: compatible
-  shape: a2a
-  evidence_kind: own-wellknown
-  degree: conformant
-  report_only: true
-  a2a_card:
-    grade: conformant
-    verdict: live
-    protocol_version: 0.3.0
-    deviations: []
-    card_subject: api
-  contract_reference:
-    register: provider's own /.well-known/agent-card.json
-    spec_file: null
-    standard: A2A
-    role: a2a-agent-card
-    registered_name: Hightouch Marketing Agent
-    organization: Hightouch
-    matched_domain: hightouch.com
-    matched_by: own-domain
-    detected_by: sweep-ai-agents.py
-    detected: '2026-10-15'
-  detected_by: sweep-ai-agents.py
-  first_seen: '2026-10-15'
-- partner_name: dbt (dbt-package-hub)
-  partner: dbt
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: dbt-package-hub
-  evidence: https://hub.getdbt.com/hightouchio/dbt_hightouch/latest/
-  mirror_of: dbt/integrations/dbt-integration-edges.yml
-  apps:
-  - Hightouch
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: dbt package
-- partner_name: Slack (own)
-  partner: slack
-  partner_match: mirror
-  mirror_match: domain+product
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://slack.com/marketplace/A010ZEEB44R-hightouch
-  mirror_of: slack/integrations/slack-integration-edges.yml
-  apps:
-  - Hightouch
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: Slack app
 source:
 - https://hightouch.com/docs/destinations/overview
 - https://hightouch.com/docs/sources/overview

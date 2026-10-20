@@ -15,6 +15,54 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: hightouch-dbt-dbt-package-hub
+  label: dbt (dbt-package-hub)
+  partner: dbt
+  partner_name: dbt (dbt-package-hub)
+  category: dbt package
+  type: marketplace
+  marketplace: dbt-package-hub
+  channel: partner-built
+  evidence: https://hub.getdbt.com/hightouchio/dbt_hightouch/latest/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: hightouch-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A010ZEEB44R-hightouch
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: hightouch-a2a-protocol-own-agent-card
+  label: A2A protocol (own Agent Card)
+  partner_name: A2A protocol (own Agent Card)
+  category: A2A agent
+  type: register
+  channel: provider-built
+  evidence: https://api.hightouch.com/.well-known/agent-card.json
+  source: edge
+  relationship: compatible
+  contract_reference:
+    register: provider's own /.well-known/agent-card.json
+    spec_file: null
+    standard: A2A
+    role: a2a-agent-card
+    registered_name: Hightouch Marketing Agent
+    organization: Hightouch
+    matched_domain: hightouch.com
+    matched_by: own-domain
+    detected_by: sweep-ai-agents.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
 - slug: hightouch-acoustic
   label: Acoustic
   partner: acoustic
@@ -1323,6 +1371,18 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: hightouch-mntn
+  label: MNTN
+  partner: mntn
+  partner_name: MNTN
+  type: coverage
+  marketplace: coverage
+  channel: provider-built
+  evidence: https://hightouch.com/docs/destinations/mntn
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
 - slug: hightouch-moengage
   label: MoEngage
   partner: moengage
@@ -1787,6 +1847,18 @@
   marketplace: coverage
   channel: provider-built
   evidence: https://hightouch.com/docs/destinations/sage-intacct
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: hightouch-sailthru
+  label: Sailthru
+  partner: sailthru
+  partner_name: Sailthru
+  type: coverage
+  marketplace: coverage
+  channel: provider-built
+  evidence: https://hightouch.com/docs/destinations/sailthru
   source: edge
   relationship: connector-coverage
   status: not-a-workflow
@@ -2365,53 +2437,5 @@
   evidence: https://hightouch.com/docs/sources/trino
   source: edge
   relationship: connector-coverage
-  status: not-a-workflow
-  arazzo: null
-- slug: hightouch-a2a-protocol-own-agent-card
-  label: A2A protocol (own Agent Card)
-  partner_name: A2A protocol (own Agent Card)
-  category: A2A agent
-  type: register
-  channel: provider-built
-  evidence: https://api.hightouch.com/.well-known/agent-card.json
-  source: edge
-  relationship: compatible
-  contract_reference:
-    register: provider's own /.well-known/agent-card.json
-    spec_file: null
-    standard: A2A
-    role: a2a-agent-card
-    registered_name: Hightouch Marketing Agent
-    organization: Hightouch
-    matched_domain: hightouch.com
-    matched_by: own-domain
-    detected_by: sweep-ai-agents.py
-    detected: '2026-10-15'
-  status: not-a-workflow
-  arazzo: null
-- slug: hightouch-dbt-dbt-package-hub
-  label: dbt (dbt-package-hub)
-  partner: dbt
-  partner_name: dbt (dbt-package-hub)
-  category: dbt package
-  type: marketplace
-  marketplace: dbt-package-hub
-  channel: partner-built
-  evidence: https://hub.getdbt.com/hightouchio/dbt_hightouch/latest/
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: hightouch-slack-own
-  label: Slack (own)
-  partner: slack
-  partner_name: Slack (own)
-  category: Slack app
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://slack.com/marketplace/A010ZEEB44R-hightouch
-  source: edge
-  relationship: platform-app
   status: not-a-workflow
   arazzo: null
