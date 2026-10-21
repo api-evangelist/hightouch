@@ -15,32 +15,6 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
-- slug: hightouch-dbt-dbt-package-hub
-  label: dbt (dbt-package-hub)
-  partner: dbt
-  partner_name: dbt (dbt-package-hub)
-  category: dbt package
-  type: marketplace
-  marketplace: dbt-package-hub
-  channel: partner-built
-  evidence: https://hub.getdbt.com/hightouchio/dbt_hightouch/latest/
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: hightouch-slack-own
-  label: Slack (own)
-  partner: slack
-  partner_name: Slack (own)
-  category: Slack app
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://slack.com/marketplace/A010ZEEB44R-hightouch
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: hightouch-a2a-protocol-own-agent-card
   label: A2A protocol (own Agent Card)
   partner_name: A2A protocol (own Agent Card)
@@ -2437,5 +2411,107 @@
   evidence: https://hightouch.com/docs/sources/trino
   source: edge
   relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: hightouch-hubspot-app-certification
+  label: HubSpot App Certification
+  partner: hubspot
+  partner_name: HubSpot App Certification
+  category: HubSpot certified app publisher
+  type: register
+  channel: standard-directory
+  evidence: https://ecosystem.hubspot.com/marketplace/explore?eco_PRODUCT_TYPE=APP&eco_CERTIFIED=true
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: HubSpot App Marketplace Certified Apps (CERTIFIED filter on the storefront's public search JSON)
+    standard: HubSpot App Certification
+    spec_file: null
+    role: certified-app-publisher
+    registered_name: Hightouch
+    matched_domain: hightouch.com
+    matched_by: domain
+    identity_source: the listing's own companyUrl (no lookup)
+    certified_products:
+    - product: HubSpot Certified App
+      product_type: APP
+      certifier: HubSpot (App Certification)
+      listings: 1
+      example_listing: https://ecosystem.hubspot.com/marketplace/listing/hightouch-227127
+      lapsed: false
+      lapsed_note: the certified flag is printed on a LIVE public listing card (CERTIFIED filter); HubSpot prints
+        no certification date, so the badge reads as current
+    signal_note: certified_products = ONE entry per product type (HubSpot Certified App), never per listing; listing
+      counts are context
+    detected_by: sweep-hubspot-app-marketplace.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: hightouch-dbt-dbt-package-hub
+  label: dbt (dbt-package-hub)
+  partner: dbt
+  partner_name: dbt (dbt-package-hub)
+  category: dbt package
+  type: marketplace
+  marketplace: dbt-package-hub
+  channel: partner-built
+  evidence: https://hub.getdbt.com/hightouchio/dbt_hightouch/latest/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: hightouch-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A010ZEEB44R-hightouch
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: hightouch-hubspot-own
+  label: HubSpot (own)
+  partner: hubspot
+  partner_name: HubSpot (own)
+  category: ETL
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://ecosystem.hubspot.com/marketplace/listing/hightouch-227127
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: hightouch-amazon-ads-partner-directory-technology
+  label: Amazon Ads (partner directory, technology)
+  partner: amazon
+  partner_name: Amazon Ads (partner directory, technology)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://advertising.amazon.com/partners/directory
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Amazon Ads Partner Directory (advertising.amazon.com/partners/directory, GetPartners)
+    registered_name: Hightouch
+    register_id: amzn1.ads1.ma1.8wt54rb5cy92hdawcn2cbk7rg
+    matched_domain: hightouch.com
+    matched_by: domain
+    services:
+    - DATA_INTEGRATION
+    ads_products:
+    - AMAZON_DSP
+    service_models:
+    - SELF_SERVICE
+    - SERVICE
+    signal_note: listing = participation; accreditation recorded as partner_tier; ads_certifications are Amazon
+      Ads LEARNING certifications held by staff, not product conformance, never certified_products
+    detected_by: sweep-amazon-sp-api-appstore.py
+    detected: '2026-10-21'
   status: not-a-workflow
   arazzo: null
