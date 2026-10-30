@@ -1,4 +1,4 @@
-# Hightouch (hightouch)
+# Hightouch
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,66 +64,181 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Hightouch is a composable Customer Data Platform (CDP) and data activation platform that syncs data from warehouses such as Snowflake and BigQuery to more than 300 SaaS destinations including Salesforce, HubSpot, Google Ads, and Facebook Ads. The platform supports reverse ETL, audience segmentation, journey orchestration, real-time personalization, AI Decisioning, and an Ad Studio for advertising campaigns. A Resource API provides programmatic management of the platform with git version control and approval workflows.
+Hightouch is a composable Customer Data Platform (CDP) and agentic marketing platform that activates data directly from cloud warehouses and lakehouses such as Snowflake, BigQuery, Databricks and Redshift to more than 290 SaaS destinations, without copying or storing customer data. The platform covers Reverse ETL, Customer Studio audience building and journey orchestration, identity resolution, first-party event collection with SDKs for web and mobile, real-time personalization, AI Decisioning, Match Booster and an Ad Studio for advertising creative. Developers get a bearer-authenticated REST API at https://api.hightouch.com/api/v1 covering sources, models, destinations, syncs and runs, campaigns, decision-engine flows, event contracts and identity graphs, plus an `ht` CLI, Git Sync for version-controlled resource YAML, workspace environments with approval flows, a public documentation MCP server, and an A2A agent card for the Hightouch Marketing Agent.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/hightouch/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/hightouch/refs/heads/main/apis.yml)
+**Areas:** CDP · Data Activation · Reverse ETL · Audience Management · Identity Resolution · Event Collection · Marketing · Advertising · AI Agents · Data Warehouse · A2A · Customer Data Platform
 
-## Scope
+## Hightouch on APIs.io
 
-- **Type:** Index
+Everything profiled for Hightouch is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/hightouch/](https://apis.io/providers/hightouch/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (10)
 
-- CDP
-- Data Activation
-- Reverse ETL
-- Audience Management
-- Unified API
-- Marketing
+- [Hightouch Sources API](https://apis.io/apis/hightouch/hightouch-sources-api/) — Warehouse and database sources Hightouch reads from.
+- [Hightouch Models API](https://apis.io/apis/hightouch/hightouch-models-api/) — Model definitions (SQL, table, dbt, visual) over a source.
+- [Hightouch Destinations API](https://apis.io/apis/hightouch/hightouch-destinations-api/) — Destination connectors receiving synced data.
+- [Hightouch Syncs API](https://apis.io/apis/hightouch/hightouch-syncs-api/) — Syncs, sync runs, sync sequences and their triggers.
+- [Hightouch Campaigns API](https://apis.io/apis/hightouch/hightouch-campaigns-api/) — Trigger a campaign send to handle- or profile-based recipients and read back per-send status.
+- [Hightouch Events API](https://apis.io/apis/hightouch/hightouch-events-api/) — First-party event governance — event contracts and event domains.
+- [Hightouch Decision Engine API](https://apis.io/apis/hightouch/hightouch-decision-engine-api/) — The Decision Engine API from Hightouch — 5 operation(s) for decision engine.
+- [Hightouch Id Graphs API](https://apis.io/apis/hightouch/hightouch-id-graphs-api/) — The Id Graphs API from Hightouch — 1 operation(s) for id graphs.
+- [Hightouch Idr API](https://apis.io/apis/hightouch/hightouch-idr-api/) — The Idr API from Hightouch — 4 operation(s) for idr.
+- [Hightouch Sync Sequences API](https://apis.io/apis/hightouch/hightouch-sync-sequences-api/) — The Sync Sequences API from Hightouch — 2 operation(s) for sync sequences.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-27
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Hightouch API
+Event-driven and webhook contracts.
 
-The Hightouch API provides programmatic access to manage data sources, models, destinations, syncs, and audiences. The Resource API enables teams to manage Hightouch resources via git, CI/CD, and approval workflows.
+- [Hightouch Webhooks](https://apis.io/asyncapis/hightouch/hightouch-webhooks/)
 
-- **Human URL:** [https://hightouch.com/](https://hightouch.com/)
-- **Base URL:** `https://api.hightouch.com`
+#### GraphQL (1)
 
-#### Tags
+GraphQL schemas.
 
-- Data Activation
-- Reverse ETL
-- Audience Management
+- [Moved to /providers/hightouch/](https://apis.io/graphqls/hightouch/hightouch-graphql/)
 
-#### Properties
+#### MCP servers (1)
 
-- [Documentation](https://hightouch.com/docs)
-- [Getting Started](https://hightouch.com/docs/getting-started)
-- [API Reference](https://hightouch.com/docs/api-reference)
-- [OpenAPI](openapi/hightouch-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/hightouch.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hightouch.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Model Context Protocol servers that expose the API to agents.
 
-## Common Properties
+- [hightouch-docs](https://apis.io/servers/hightouch/hightouch-docs/)
 
-- [LinkedIn](https://www.linkedin.com/company/hightouchio)
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Hightouch Agentic Access](https://apis.io/agentic-access/hightouch/hightouch-agentic-access/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Hightouch Management API](https://apis.io/collections/hightouch/open-hightouch/)
+- [Hightouch Management Destinations API](https://apis.io/collections/hightouch/open-hightouch-destinations-api/)
+- [Hightouch Management Destinations Models API](https://apis.io/collections/hightouch/open-hightouch-models-api/)
+- [Hightouch Management Destinations Sources API](https://apis.io/collections/hightouch/open-hightouch-sources-api/)
+- [Hightouch Management Destinations Syncs API](https://apis.io/collections/hightouch/open-hightouch-syncs-api/)
+
+#### Overlays (11)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Hightouch Api Overlay](https://apis.io/overlays/hightouch/hightouch-api-overlay/)
+- [Hightouch Campaigns Api Phrasing Overlay](https://apis.io/overlays/hightouch/hightouch-campaigns-api-phrasing-overlay/)
+- [Hightouch Decision Engine Api Phrasing Overlay](https://apis.io/overlays/hightouch/hightouch-decision-engine-api-phrasing-overlay/)
+- [Hightouch Destinations Api Phrasing Overlay](https://apis.io/overlays/hightouch/hightouch-destinations-api-phrasing-overlay/)
+- [Hightouch Events Api Phrasing Overlay](https://apis.io/overlays/hightouch/hightouch-events-api-phrasing-overlay/)
+- [Hightouch Id Graphs Api Phrasing Overlay](https://apis.io/overlays/hightouch/hightouch-id-graphs-api-phrasing-overlay/)
+- [Hightouch Idr Api Phrasing Overlay](https://apis.io/overlays/hightouch/hightouch-idr-api-phrasing-overlay/)
+- [Hightouch Models Api Phrasing Overlay](https://apis.io/overlays/hightouch/hightouch-models-api-phrasing-overlay/)
+- [Hightouch Sources Api Phrasing Overlay](https://apis.io/overlays/hightouch/hightouch-sources-api-phrasing-overlay/)
+- [Hightouch Sync Sequences Api Phrasing Overlay](https://apis.io/overlays/hightouch/hightouch-sync-sequences-api-phrasing-overlay/)
+- [Hightouch Syncs Api Phrasing Overlay](https://apis.io/overlays/hightouch/hightouch-syncs-api-phrasing-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Hightouch Authentication](https://apis.io/security/hightouch/hightouch-authentication/)
+- [Hightouch Domain Security](https://apis.io/security/hightouch/hightouch-domain-security/)
+- [Hightouch Trust Center](https://apis.io/security/hightouch/hightouch-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Hightouch Scopes](https://apis.io/scopes/hightouch/hightouch-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Hightouch Plans Pricing](https://apis.io/plans/hightouch/hightouch-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Hightouch Rate Limits](https://apis.io/rate-limits/hightouch/hightouch-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Hightouch Finops](https://apis.io/finops/hightouch/hightouch-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://hightouch.com/)
 - [Documentation](https://hightouch.com/docs)
-- [API Reference](https://hightouch.com/docs/api-reference)
+- [Getting started](https://hightouch.com/docs/getting-started/welcome)
+- [API reference](https://hightouch.com/docs/api-reference)
 - [Pricing](https://hightouch.com/pricing)
+- [Sign up](https://app.hightouch.com/signup)
 - [Blog](https://hightouch.com/blog)
-- [Sign Up](https://app.hightouch.com/signup)
-- [GitHub Organization](https://github.com/hightouchio)
-- [Integrations](https://hightouch.com/integrations)
-- [L L Ms Txt](https://hightouch.com/llms.txt)
+- [Compliance](https://hightouch.com/platform/security)
+- [Terms of service](https://hightouch.com/terms-of-service)
+- [Privacy policy](https://hightouch.com/privacy-policy)
+- [GitHub](https://github.com/hightouchio)
+- [Status](https://status.hightouch.io)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 66.4** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 61.8 |
+| Contract governance | 18.2 |
+| Operational transparency | 47.4 |
+| Developer ergonomics | 75.6 |
+| Access clarity | 85.5 |
+
+**Agent readiness 63.3** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | conformant |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 39.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/hightouch/](https://apis.io/providers/hightouch/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Hightouch: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/hightouch/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
