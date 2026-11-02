@@ -1,0 +1,86 @@
+generated: '2026-08-13'
+method: searched
+source: https://hightouch.com/pricing
+modified: '2026-08-13'
+provider: Hightouch
+providerId: hightouch
+note: Hightouch publishes a named free tier and two usage-based commercial products, but no list prices,
+  no per-unit rates and no published overage schedule — paid tiers are 'get a demo'. Figures below are
+  quoted from the pricing page; nothing is inferred.
+pricing_model: usage-based, modular (buy only the products you need)
+public_prices: false
+plan_count: 3
+plans:
+- id: hightouch-basic-reverse-etl
+  name: Basic Reverse ETL
+  type: freemium
+  price: '0'
+  currency: USD
+  billing_period: monthly
+  included:
+  - Up to 2 active syncs
+  - Unlimited destination count
+  - Unlimited user seats
+  overage: null
+  source: https://hightouch.com/pricing
+- id: hightouch-composable-cdp
+  name: Composable CDP
+  type: usage-based
+  price: null
+  currency: USD
+  billing_period: monthly
+  included:
+  - Unlimited user seats
+  - Premium extensions
+  - Advanced observability
+  - Enterprise security
+  - Advanced access management
+  - Dedicated expert support
+  - Custom SLAs
+  - Data Agents
+  overage: null
+  quote_required: true
+  source: https://hightouch.com/pricing
+- id: hightouch-agentic-marketing-platform
+  name: Agentic Marketing Platform
+  type: usage-based
+  price: null
+  currency: USD
+  billing_period: monthly
+  included:
+  - Pre-set amount of monthly personalized actions
+  - Integrations with any marketing platform
+  - Enterprise security
+  - Observability
+  overage: null
+  quote_required: true
+  source: https://hightouch.com/pricing
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  units: []
+  plans:
+  - name: Basic Reverse ETL
+    access: freemium
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Composable CDP
+    access: other
+    model: metered
+    model_how: stated
+    units: []
+    periods: []
+  - name: Agentic Marketing Platform
+    access: other
+    model: metered
+    model_how: stated
+    units: []
+    periods: []
